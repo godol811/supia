@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.supia.NetworkTask.NetworkTaskQnA;
 import com.example.supia.NetworkTask.Product.NetworkTaskProduct;
 import com.example.supia.R;
 
@@ -117,7 +118,7 @@ public class WriteQnAActivity extends AppCompatActivity {
 
     private void connectInsertData() {
         try {
-            NetworkTaskProduct insertworkTask = new NetworkTaskProduct(WriteQnAActivity.this, urlAddr, "insert");
+            NetworkTaskQnA insertworkTask = new NetworkTaskQnA(WriteQnAActivity.this, urlAddr, "insert");
             insertworkTask.execute().get();
         } catch (Exception e) {
             e.printStackTrace();
