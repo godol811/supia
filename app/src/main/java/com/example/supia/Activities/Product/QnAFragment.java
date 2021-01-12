@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.example.supia.R;
 
-class QnAFragment extends Fragment {
+public class QnAFragment extends Fragment {
 
     Button btnQnaWrite;
     ImageButton ibQna1down, ibQna1up, ibQna2down, ibQna2up, ibQna3down, ibQna3up, ibQna4down, ibQna4up;

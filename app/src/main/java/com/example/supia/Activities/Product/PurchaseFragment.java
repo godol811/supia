@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.example.supia.R;
 
-class PurchaseFragment extends Fragment {
+public class PurchaseFragment extends Fragment {
 
     ImageButton ibDeliverydown, ibDeliveryup ,ibExchangeup, ibExchangedown;
     LinearLayout llDeliverytext, llExchangetext;

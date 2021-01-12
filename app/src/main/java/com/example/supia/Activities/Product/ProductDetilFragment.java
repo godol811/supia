@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.R;
 
-class ProductDetilFragment extends Fragment {
+public class ProductDetilFragment extends Fragment {
 
     private final String TAG = "스크롤 1";
     TextView text10, text20, text30, text40, text50;

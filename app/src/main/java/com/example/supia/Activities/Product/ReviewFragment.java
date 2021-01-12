@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.example.supia.R;
 
-class ReviewFragment extends Fragment {
+public class ReviewFragment extends Fragment {
 
     String urlIp;
     int productNo;
