@@ -7,26 +7,36 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.supia.Activities.ui.main.SectionsPagerAdapter;
+import com.example.supia.Adapter.Product.CartAdapter;
+import com.example.supia.Dto.Product.CartDto;
+import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 
 public class ProductDetailActivity extends AppCompatActivity {
 
     TextView tvMinusBottomsheet, tvProductQuantityNumBottomsheet, tvPlusBottomsheet;
+    Button  btnCartAdd, btnBuy;
 
 
     int productNo;
+    int productQuantity;
     String productName;
     String productPrice;
     String productBrand;
     String productImagePath;
     String urlIp;
+    String urlAddr = null;
 
 
     private ViewPager mViewPager;
@@ -93,25 +103,19 @@ public class ProductDetailActivity extends AppCompatActivity {
 // set hideable or not
         bottomSheetBehavior.setHideable(false);
 
-// set callback for changes
-//        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-//            @Override
-//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//
-//            }
-//
-//            @Override
-//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-//
-//            }
-//        });
 
+        //바텀시트 안에 버튼
+        btnCartAdd = findViewById(R.id.cart_bottomsheet);
+        btnCartAdd.setOnClickListener(cartClick);
+
+        btnBuy = findViewById(R.id.buy_bottomsheet);
+        btnBuy.setOnClickListener(buyClcick);
 
 
 
     }
 
-    View.OnClickListener plusClick = new View.OnClickListener() {
+    View.OnClickListener plusClick = new View.OnClickListener() { //수량 더하기
         @Override
         public void onClick(View v) {
             int quan = Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
@@ -137,7 +141,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     };
 
-    View.OnClickListener minusClick = new View.OnClickListener() {
+    View.OnClickListener minusClick = new View.OnClickListener() { // 수량 뺴기
         @Override
         public void onClick(View v) {
 
@@ -161,6 +165,42 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         }
     };
+
+    View.OnClickListener cartClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+//
+//            productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
+//            urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
+//            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
+//                    +"&productImagePath=" + productImagePath;
+//            connectGetData();
+//
+//            Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
+//            intent.putExtra("strBtnCategory", ShareVar.strBtnCategory);
+//            startActivity(intent);
+//
+
+        }
+    };
+
+    View.OnClickListener buyClcick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
+//    private void connectGetData() {
+//        try {
+//            NetworkTaskCart networkTaskCart = new NetworkTaskCart(ProductDetailActivity.this, urlAddr, "insert");
+//            networkTaskCart.execute().get();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }//끄읕
