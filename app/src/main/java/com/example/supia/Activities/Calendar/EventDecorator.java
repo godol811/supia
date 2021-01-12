@@ -13,12 +13,12 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class EventDecorator implements DayViewDecorator {
-    private final Drawable drawable;
+    //private final Drawable drawable;
     private int color;
     private HashSet<CalendarDay> dates;
     private TextView textView;
     public EventDecorator(){
-        drawable = context.getResources().getDrawable(R.drawable.cart);
+        //drawable = context.getResources().getDrawable(R.drawable.cart);
 
         this.dates = new HashSet<>(dates);
         this.textView = textView;
