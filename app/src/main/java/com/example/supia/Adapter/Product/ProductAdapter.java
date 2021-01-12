@@ -184,7 +184,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     intent.putExtra("productNo", productNo);
                     intent.putExtra("productPrice", productPrice);
                     intent.putExtra("productName", productName);
-                    intent.putExtra("ProductImagePath", ProductImagePath);
+                    intent.putExtra("productImagePath", ProductImagePath);
                     v.getContext().startActivity(intent);
 
                 }
