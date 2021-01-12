@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="30dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="암호 찾기"
+        android:textColor="#BAD23A"
+        android:textSize="50dp" />
+
+
+    <EditText
+        android:id="@+id/authEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:hint="인증 받을 이메일 계정을 입력하세요." />
+
+    <Button
+        android:id="@+id/authBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#BAD23A"
+        android:gravity="center"
+        android:text="이메일 인증하기" />
+
+
+    <EditText
+        android:id="@+id/authCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="인증번호를 입력해주세요"/>
+
+    <Button
+        android:id="@+id/authCheckBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#BAD23A"
+        android:gravity="center"
+        android:text="제출" />
+
+    <Button
+        android:id="@+id/btn_back_findpw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#BAD23A"
+        android:gravity="center"
+        android:text="뒤로가기" />
+
+
+</LinearLayout>

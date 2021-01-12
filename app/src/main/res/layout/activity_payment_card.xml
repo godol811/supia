@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Payment.PaymentCardActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="주문/결제"
+        android:layout_marginTop="15dp"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textColor="#bad23a"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카드 번호 입력"
+            android:textSize="20dp"
+            />
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="카드사"
+            android:background="#bad23a"
+            android:gravity="center|top"
+            android:id="@+id/tv_itemselected_paymentCard"
+            />
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/cardNumberEditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="-0.25dp"
+            android:drawableRight="@drawable/ic_card_number"
+            android:hint="Card number"
+            android:inputType="phone"
+            android:padding="16dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="#bad23a"
+            android:textSize="14sp"
+            tools:ignore="LabelFor,NegativeMargin"
+            android:maxLength="19"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-0.25dp"
+            android:orientation="horizontal"
+            tools:ignore="NegativeMargin">
+
+            <EditText
+                android:id="@+id/cardDateEditText"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="-0.25dp"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_card_date"
+                android:hint="MM/YY"
+                android:inputType="date"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#bad23a"
+                android:textSize="14sp"
+                tools:ignore="LabelFor,RtlHardcoded"
+                android:maxLength="4"
+                />
+
+            <EditText
+                android:id="@+id/cardCVCEditText"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="-0.25dp"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_card_cvc"
+                android:hint="CVC"
+                android:inputType="number"
+                android:maxLength="3"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#bad23a"
+                android:textSize="14sp"
+                tools:ignore="LabelFor,RtlHardcoded" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="380dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="확인"
+        android:backgroundTint="#bad23a"
+        android:id="@+id/btn_paymentNext_Cardpayment"/>
+
+
+
+
+</LinearLayout>

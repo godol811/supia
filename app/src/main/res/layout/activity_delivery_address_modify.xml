@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="18"
+    tools:context=".Activities.Payment.DeliveryAddressModifyActivity"
+    android:layout_margin="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="배송지 변경"
+        android:textSize="40dp"
+        android:textColor="#bad23a"/>
+
+
+
+
+    <EditText
+        android:id="@+id/et_deliveryname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:hint="받는 사람"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:textColor="#000000" />
+
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/input_layout_address_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="6dp"
+            android:hint="주소를 입력하세요"
+            android:textSize="20dp"
+            android:gravity="center|left"
+            android:layout_weight="20"
+            android:inputType="text"
+            android:minLines="2"
+            android:enabled="true"
+            tools:ignore="RtlHardcoded" />
+
+        <EditText
+            android:id="@+id/et_address_detail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="20dp"
+            android:inputType="text"
+            android:background="@color/white"
+            android:minLines="2"/>
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/et_TelNumber"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:hint="Phone"
+            android:inputType="phone"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/btn_changeDeliveryAddr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="주소 변경하기 "
+        android:backgroundTint="#bad23a"/>
+
+    <Button
+        android:id="@+id/btn_deleteDeliveryAddr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="주소 삭제하기 "
+        android:backgroundTint="#bad23a"/>
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="뒤로가기 "
+        android:backgroundTint="#bad23a"/>
+
+
+
+</LinearLayout>

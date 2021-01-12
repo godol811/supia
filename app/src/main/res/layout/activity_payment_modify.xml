@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:orientation="vertical"
+    android:weightSum="18"
+    tools:context=".Activities.Payment.PaymentModifyActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="결제 수단"
+        android:textColor="#bad23a"
+        android:textSize="40dp" />
+
+
+    <RadioGroup
+        android:id="@+id/paymentRadio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioButtonBank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="계좌이체/무통장입금" />
+
+        <LinearLayout
+            android:id="@+id/rb1_Layout_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B4D8DD"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/rb1_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="15dp"
+                android:background="@color/white"
+                android:entries="@array/bank"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#bad23a"
+                android:text="선택완료"
+                android:id="@+id/btnBank"/>
+
+
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/radioButtonCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="신용/체크카드" />
+
+        <LinearLayout
+            android:id="@+id/rb2_Layout_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B4D8DD"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/rb2_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="15dp"
+                android:background="@color/white"
+                android:entries="@array/card"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#bad23a"
+                android:text="선택완료"
+                android:id="@+id/btnCard"/>
+
+
+        </LinearLayout>
+
+
+        <RadioButton
+            android:id="@+id/radioButtonPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="휴대폰" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:id="@+id/rb3_Layout_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B4D8DD"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/rb3_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:background="@color/white"
+            android:entries="@array/phone"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#bad23a"
+            android:text="선택완료"
+            android:id="@+id/btnPhone"/>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_cancel_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="#bad23a"
+        android:text="뒤로가기 " />
+
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="bank">
+        <item>농협은행</item>
+        <item>국민은행</item>
+        <item>신한은행</item>
+        <item>우리은행</item>
+        <item>기업은행</item>
+        <item>KEB하나은행</item>
+        <item>카카오뱅크</item>
+        <item>새마을금고</item>
+        <item>우체국</item>
+        <item>SC제일은행</item>
+        <item>대구은행</item>
+        <item>부산은행</item>
+        <item>경남은행</item>
+        <item>광주은행</item>
+        <item>신협</item>
+        <item>산업은행</item>
+        <item>전북은행</item>
+        <item>제주은행</item>
+        <item>씨티은행</item>
+        <item>케이뱅크</item>
+    </string-array>
+    <string-array name="card">
+        <item>삼성카드</item>
+        <item>KB국민카드</item>
+        <item>신한카드</item>
+        <item>현대카드</item>
+        <item>BC카드</item>
+        <item>롯데카드</item>
+        <item>하나카드</item>
+        <item>씨티카드</item>
+        <item>우리카드</item>
+        <item>카카오뱅크</item>
+        <item>기타(은행/증권)카드</item>
+    </string-array>
+    <string-array name="phone">
+        <item>SKT</item>
+        <item>KT</item>
+        <item>헬로모바일</item>
+        <item>KCT</item>
+        <item>LGU+</item>
+    </string-array>
+    <string-array name="Category">
+        <item>최신순</item>
+        <item>인기순</item>
+        <item>낮은가격순</item>
+        <item>높은가격순</item>
+    </string-array>
+    <string-array name="Quantity">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+
+</resources>
+
+
