@@ -170,17 +170,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-//
-//            productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
-//            urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
-//            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
-//                    +"&productImagePath=" + productImagePath;
-//            connectGetData();
-//
-//            Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
-//            intent.putExtra("strBtnCategory", ShareVar.strBtnCategory);
-//            startActivity(intent);
-//
+
+            productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
+            urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
+            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
+                    +"&productImagePath=" + productImagePath;
+            connectGetData();
+
+            Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
+            intent.putExtra("strBtnCategory", ShareVar.strBtnCategory);
+            startActivity(intent);
+
 
         }
     };
@@ -192,15 +192,15 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     };
 
-//    private void connectGetData() {
-//        try {
-//            NetworkTaskCart networkTaskCart = new NetworkTaskCart(ProductDetailActivity.this, urlAddr, "insert");
-//            networkTaskCart.execute().get();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void connectGetData() {
+        try {
+            NetworkTaskCart networkTaskCart = new NetworkTaskCart(ProductDetailActivity.this, urlAddr, "insert");
+            networkTaskCart.execute().get();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }//끄읕
