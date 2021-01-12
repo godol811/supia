@@ -89,7 +89,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
         holder.onBind(mDataset.get(position));
 
-        final int pos = position;
+//        final int pos = position;
 
 
         Glide.with(holder.productImg)
@@ -162,6 +162,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
             }
         });
+
+
+        /**
+         * 체크박스 부분
+         */
 
 
         //in some cases, it will prevent unwanted situations
@@ -276,6 +281,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         public CheckBox cbSelect;
         int count = 1;
 
+
+        private CheckBox[] cb;
+
+
         MyViewHolder(View v) {
 
             super(v);
@@ -336,12 +345,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         try {
 
             NetworkTaskCart networkTask = new NetworkTaskCart(mContext, urlAddr,"like");
+
             Object obj = networkTask.execute().get();
 
 
-            cart = (ArrayList<CartDto>) obj;
-            adapter = new CartAdapter(mContext, R.layout.listlayout_cart, cart);
-            recyclerView.setAdapter(adapter);
+//            cart = (ArrayList<CartDto>) obj;
+//            adapter = new CartAdapter(mContext, R.layout.listlayout_cart, cart);
+//            recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
             e.printStackTrace();

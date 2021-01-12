@@ -43,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     String likeCheck;
 
     ProductAdapter adapter = null;
-    ArrayList<ProductDto> product;
+
     private RecyclerView recyclerView = null;
 
 
@@ -87,6 +87,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         holder.onBind(mDataset.get(position));
+
+
+
 
 //      상품넘버 저장
         ShareVar.productId = mDataset.get(position).getProductNo();
@@ -286,6 +289,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             DecimalFormat myFormatter = new DecimalFormat("###,###");
             String formattedStringPrice = myFormatter.format(Integer.parseInt( productDto.getProductPrice()));
             productPrice.setText(formattedStringPrice);
+
+
         }
 
 

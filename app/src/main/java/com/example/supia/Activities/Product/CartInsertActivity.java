@@ -53,6 +53,7 @@ public class CartInsertActivity extends Activity {
         urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
         urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
                 +"&productImagePath=" + productImagePath;
+
         connectGetData();
 
         intent = new Intent(CartInsertActivity.this, CategoryActivity.class);
@@ -66,12 +67,15 @@ public class CartInsertActivity extends Activity {
     private void connectGetData() {
         try {
             NetworkTaskCart networkTaskCart = new NetworkTaskCart(CartInsertActivity.this, urlAddr, "like");
-            Object obj = networkTaskCart.execute().get();
+            networkTaskCart.execute().get();
+//            Object obj = networkTaskCart.execute().get();
 
-            cart = (ArrayList<CartDto>) obj;
-            adapter = new CartAdapter(CartInsertActivity.this, R.layout.listlayout_cart, cart);
-            recyclerView.setAdapter(adapter);
+//            cart = (ArrayList<CartDto>) obj;
+//            adapter = new CartAdapter(CartInsertActivity.this, R.layout.listlayout_cart, cart);
+//            recyclerView.setAdapter(adapter);
+
         } catch (Exception e) {
+
             e.printStackTrace();
         }
     }
