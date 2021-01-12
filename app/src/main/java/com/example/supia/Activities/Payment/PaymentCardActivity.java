@@ -41,6 +41,7 @@ public class PaymentCardActivity extends Activity {
     String productId;
     String strItem;
     String strOrderTel;
+    String strWay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class PaymentCardActivity extends Activity {
 
         Intent intent = getIntent();
         strItem = intent.getStringExtra("ITEM");
-        userId = intent.getStringExtra("userId");
+        strWay = intent.getStringExtra("way");
         strOrderAddr = intent.getStringExtra("orderAddr");
         strOrderAddrDetail = intent.getStringExtra("orderAddrDetail");
         strOrderQuantity = "1";//intent.getStringExtra("orderQuantity");

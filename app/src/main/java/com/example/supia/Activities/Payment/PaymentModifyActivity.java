@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.R;
 
 public class PaymentModifyActivity extends AppCompatActivity {
@@ -20,11 +21,15 @@ public class PaymentModifyActivity extends AppCompatActivity {
     RadioGroup rgPayment;
     Button btnBank, btnCard, btnPhone;
     LinearLayout llBank, llCard, llPhone;
+    String strWay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_modify);
+
+        Intent intent = getIntent();
+        strWay = intent.getStringExtra("way");
 
         rbBank = findViewById(R.id.radioButtonBank);
         rbCard = findViewById(R.id.radioButtonCard);
@@ -83,26 +88,53 @@ public class PaymentModifyActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnBank:
-                    String strBank = spinnerBank.getSelectedItem().toString().trim();
-                    Intent intent1 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
-                    intent1.putExtra("ITEM",strBank);
-                    intent1.putExtra("PAYMETHOD","계좌이체/무통장입금");
-                    startActivity(intent1);
+                    if (strWay.equals("normal")) {
+                        String strBank = spinnerBank.getSelectedItem().toString().trim();
+                        Intent intent1 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
+                        intent1.putExtra("ITEM", strBank);
+                        intent1.putExtra("PAYMETHOD", "계좌이체/무통장입금");
+                        startActivity(intent1);
+                    } else {
+                        String strBank = spinnerBank.getSelectedItem().toString().trim();
+                        Intent intent1 = new Intent(PaymentModifyActivity.this, RegularPurchaseCheckActivity.class);
+                        intent1.putExtra("ITEM", strBank);
+                        intent1.putExtra("PAYMETHOD", "계좌이체/무통장입금");
+                        startActivity(intent1);
+
+                    }
                     break;
 
                 case R.id.btnCard:
-                    String strCard = spinnerCard.getSelectedItem().toString().trim();
-                    Intent intent2 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
-                    intent2.putExtra("ITEM",strCard);
-                    intent2.putExtra("PAYMETHOD","신용/체크카드");
-                    startActivity(intent2);
+                    if (strWay.equals("normal")) {
+                        String strCard = spinnerCard.getSelectedItem().toString().trim();
+                        Intent intent2 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
+                        intent2.putExtra("ITEM", strCard);
+                        intent2.putExtra("PAYMETHOD", "신용/체크카드");
+                        startActivity(intent2);
+                    } else {
+                        String strCard = spinnerCard.getSelectedItem().toString().trim();
+                        Intent intent2 = new Intent(PaymentModifyActivity.this, RegularPurchaseCheckActivity.class);
+                        intent2.putExtra("ITEM", strCard);
+                        intent2.putExtra("PAYMETHOD", "신용/체크카드");
+                        startActivity(intent2);
+                    }
                     break;
                 case R.id.btnPhone:
-                    String strPhone = spinnerPhone.getSelectedItem().toString().trim();
-                    Intent intent3 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
-                    intent3.putExtra("ITEM",strPhone);
-                    intent3.putExtra("PAYMETHOD","휴대폰");
-                    startActivity(intent3);
+                    if (strWay.equals("normal")) {
+                        String strPhone = spinnerPhone.getSelectedItem().toString().trim();
+                        Intent intent3 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
+                        intent3.putExtra("ITEM", strPhone);
+                        intent3.putExtra("PAYMETHOD", "휴대폰");
+                        startActivity(intent3);
+                    } else {
+                        String strPhone = spinnerPhone.getSelectedItem().toString().trim();
+                        Intent intent3 = new Intent(PaymentModifyActivity.this, RegularPurchaseCheckActivity.class);
+                        intent3.putExtra("ITEM", strPhone);
+                        intent3.putExtra("PAYMETHOD", "휴대폰");
+                        startActivity(intent3);
+
+                    }
+
                     break;
             }
 
