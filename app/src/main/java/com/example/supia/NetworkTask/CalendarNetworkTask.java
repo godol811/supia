@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.supia.Dto.CalendarDTO;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
 
@@ -23,7 +25,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<CalendarDTO> calendars;
+    HashSet<CalendarDTO> calendars;
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
     //
@@ -36,7 +38,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
     public CalendarNetworkTask(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.calendars = new ArrayList<CalendarDTO>();
+        this.calendars = new HashSet<CalendarDTO>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
     }
@@ -159,7 +161,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
         try {
 
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("addrlist"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("calendar"));
             calendars.clear();
             Log.v(TAG, "s" + s);
 
@@ -167,17 +169,15 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                int calendarNo = jsonObject1.getInt("calendarNo");
                 String calendarStartDate = jsonObject1.getString("calendarStartDate");
                 String calendarFinishDate = jsonObject1.getString("calendarFinishDate");
                 String calendarDeliveryDate = jsonObject1.getString("calendarDeliveryDate");
                 String calendarBirthDate = jsonObject1.getString("calendarBirthDate");
-                String userId = jsonObject1.getString("userId");
 
 
-                CalendarDTO calendarDTO = new CalendarDTO(calendarNo,calendarStartDate,calendarFinishDate,calendarDeliveryDate,calendarBirthDate,userId);
-                //CalendarDTO.add(calendarDTO);
-                // Log.v(TAG, member.toString());
+                CalendarDTO calendarDTO = new CalendarDTO(calendarStartDate,calendarFinishDate,calendarDeliveryDate,calendarBirthDate);
+                calendars.add(calendarDTO);
+                //Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
             }
         } catch (Exception e) {

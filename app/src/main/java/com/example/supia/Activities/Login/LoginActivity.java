@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.Adapter.UserAdapter;
@@ -70,7 +71,7 @@ public class LoginActivity extends Activity {
 
         if(userinfoId.trim().length()!=0){
             ShareVar.sharvarUserId = userinfoId;
-            Intent intent2 = new Intent(LoginActivity.this, RegularPurchaseCheckActivity.class);//추후에는 참치 쪽으로 이동
+            Intent intent2 = new Intent(LoginActivity.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
             startActivity(intent2);
 
         }
@@ -261,7 +262,7 @@ public class LoginActivity extends Activity {
                         ShareVar.sharvarUserId = user.getKakaoAccount().getEmail();//쉐어바에 값 넣어버리기
                         startActivity(intent);
                     }
-                    macIp = "192.168.35.147";
+                    macIp = ShareVar.urlIp;
                     urlAddr = "http:/" + macIp + ":8080/test/supiaUserinfoInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
                     urlAddr = urlAddr + "userId=" + user.getKakaoAccount().getEmail() + "&userPlatform=kakao";
                     try {
