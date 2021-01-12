@@ -65,6 +65,7 @@ public class CategoryActivity extends AppCompatActivity {
         spiner = findViewById(R.id.spinner_category);
 
 
+        ActivityCompat.requestPermissions(CategoryActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
         recyclerView = findViewById(R.id.rl_product_category);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);

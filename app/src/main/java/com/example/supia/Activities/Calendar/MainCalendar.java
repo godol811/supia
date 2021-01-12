@@ -52,6 +52,9 @@ public class MainCalendar extends FragmentActivity {
         gotosub = findViewById(R.id.btn_maincalendar_gotosub);
         materialCalendarView_main =findViewById(R.id.materialcalendar_maincalendar);
 
+
+
+
         tvDday.setText("월경"+Dday+"일전");
 
 //        EventDecorator eventDecorator = new EventDecorator();
