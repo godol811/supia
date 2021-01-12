@@ -47,7 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-    String urlAddr = "http://"+ ShareVar.urlIp+":8080/pictures/";//Ip
+    String urlAddr = "http://"+ ShareVar.urlIp +":8080/pictures/";//Ip
 
 
     private Object ArrayList;
