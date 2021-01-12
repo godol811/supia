@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:backgroundTint="#bad23a"
+        android:background="@drawable/button_long"
         android:text="배송지 추가" />
 
 
