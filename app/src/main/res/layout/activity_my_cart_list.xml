@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.MyPage.MyCartListActivity">
+
+
+    <include layout="@layout/mypage_header"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cartlist_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <include layout="@layout/bottom_bar"/>
+
+</LinearLayout>
