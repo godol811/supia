@@ -43,7 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     private RecyclerView recyclerView = null;
 
 
-    private boolean[] checked;
+    int Counter;
 
 
 
@@ -102,7 +102,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-
+        //현재 카운트된 수량
+        holder.count = Integer.parseInt((String) holder.productQuantity.getText());
 
 
         /**
@@ -135,7 +136,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
                 connectGetData();
 
-
             }
         });
 
@@ -143,8 +143,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int Counter =  Integer.parseInt((String) holder.productQuantity.getText());
+                Counter =  Integer.parseInt((String) holder.productQuantity.getText());
                 if (Counter >1){
+
+                    holder.count = Integer.parseInt((String) holder.productQuantity.getText());
+
                     holder.productQuantity.setText(String.valueOf(--holder.count));
 
                     int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
