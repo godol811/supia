@@ -100,6 +100,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 .apply(new RequestOptions()).into(holder.productImg);//사진
 
 
+
+
+
+
+
         /**
          * 수량 플러스,마이너스,삭제버튼
          */
@@ -122,6 +127,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
                 holder.productQuantity.setText(String.valueOf(++holder.count));
+
+                int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
+                int cartNo = mDataset.get(position).getCartNo();
+
+                urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
+                urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
+                connectGetData();
+
+
             }
         });
 
@@ -132,6 +146,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 int Counter =  Integer.parseInt((String) holder.productQuantity.getText());
                 if (Counter >1){
                     holder.productQuantity.setText(String.valueOf(--holder.count));
+
+                    int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
+                    int cartNo = mDataset.get(position).getCartNo();
+
+                    urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
+                    urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
+
+
+                    connectGetData();
                 }
 
             }
@@ -297,7 +320,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             String formattedStringPrice = myFormatter.format(Integer.parseInt( cartDto.getCartProductPrice()));
             productPrice.setText(formattedStringPrice);
 
-
+            //db에서 수량 새로고침
+            productQuantity.setText(cartDto.getCartProductQuantity());
         }
 
 
