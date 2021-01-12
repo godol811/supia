@@ -40,15 +40,15 @@ public class PurchaseCheckActivity extends Activity {
         Intent intent = getIntent();
         intDeliveryNo = intent.getIntExtra("deliveryNo", 0);
         strDeliveryAddr = intent.getStringExtra("deliveryAddr");
+        strDeliveryAddrDetail = intent.getStringExtra("deliveryAddrDetail");
         strDeliveryTel = intent.getStringExtra("deliveryTel");
         strDeliveryName = intent.getStringExtra("deliveryName");
-        strDeliveryAddrDetail = intent.getStringExtra("deliveryAddrDetail");
         strPayMethod = intent.getStringExtra("PAYMETHOD");
         strMethodItem = intent.getStringExtra("ITEM");
         strUserId = ShareVar.sharvarUserId;
 
 
-        strUserId = "jongchanko@gmail.com";//임시용
+
 
         btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify);
         btnPaymentMethod = findViewById(R.id.btn_paymentmodify);
@@ -86,11 +86,12 @@ public class PurchaseCheckActivity extends Activity {
             switch (v.getId()) {
                 case R.id.btn_deliveryinfomodify://배송지 변경
                     Intent intent = new Intent(PurchaseCheckActivity.this, DeliveryAddressListActivity.class);
-                    intent.putExtra("USERID", strUserId);
+                    intent.putExtra("way","normal");
                     startActivity(intent);
                     break;
                 case R.id.btn_paymentmodify://결제수단 변경
                     Intent intent1 = new Intent(PurchaseCheckActivity.this, PaymentModifyActivity.class);
+                    intent1.putExtra("way","normal");
                     startActivity(intent1);
                     break;
                 case R.id.btn_payment:
@@ -102,7 +103,7 @@ public class PurchaseCheckActivity extends Activity {
                     if (intentIndex == 0) {
                         Intent intent2 = new Intent(PurchaseCheckActivity.this, PaymentCardActivity.class);
                         intent2.putExtra("ITEM", strMethodItem);
-                        intent2.putExtra("userId",strUserId);
+                        intent2.putExtra("way","normal");
                         intent2.putExtra("orderAddr",strDeliveryAddr);
                         intent2.putExtra("orderAddrDetail",strDeliveryAddrDetail);
                         intent2.putExtra("orderTel",strDeliveryTel);
@@ -114,7 +115,7 @@ public class PurchaseCheckActivity extends Activity {
                     } else if (intentIndex == 1) {
                         Intent intent3 = new Intent(PurchaseCheckActivity.this, PaymentBankActivity.class);
                         intent3.putExtra("ITEM", strMethodItem);
-                        intent3.putExtra("userId",strUserId);
+                        intent3.putExtra("way","normal");
                         intent3.putExtra("orderTel",strDeliveryTel);
                         intent3.putExtra("orderAddr",strDeliveryAddr);
                         intent3.putExtra("orderAddrDetail",strDeliveryAddrDetail);
@@ -126,7 +127,7 @@ public class PurchaseCheckActivity extends Activity {
                     } else if (intentIndex == 2) {
                         Intent intent4 = new Intent(PurchaseCheckActivity.this, PaymentPhoneActivity.class);
                         intent4.putExtra("ITEM", strMethodItem);
-                        intent4.putExtra("userId",strUserId);
+                        intent4.putExtra("way","normal");
                         intent4.putExtra("orderTel",strDeliveryTel);
                         intent4.putExtra("orderAddr",strDeliveryAddr);
                         intent4.putExtra("orderAddrDetail",strDeliveryAddrDetail);

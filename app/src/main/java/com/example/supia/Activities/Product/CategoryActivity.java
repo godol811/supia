@@ -72,9 +72,6 @@ public class CategoryActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-
         //생리대
         btnSmall = findViewById(R.id.btn_small_product);
         btnMedium = findViewById(R.id.btn_medium_product);
@@ -403,9 +400,32 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-//        connectGetData();
+        connectGetData();
 
         registerForContextMenu(recyclerView);
+
+        /////////////////////////////////////////보람 추가 - 값 받아가요///////////////////////////////////////////////////////
+        adapter.setOnItemClickListener(new ProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(CategoryActivity.this, ProductDetailActivity.class);
+
+                Log.v(TAG,"전달 전");
+                //-- fragment1로 값 전달
+
+                intent.putExtra("urlIp",urlIp);
+                intent.putExtra("productNo", product.get(position).getProductNo());
+                intent.putExtra("productName", product.get(position).getProductName());
+                intent.putExtra("productPrice", product.get(position).getProductPrice());
+                intent.putExtra("productBrand", product.get(position).getProductBrand());
+                intent.putExtra("productImagePath", product.get(position).getProductImagePath());
+                Log.v(TAG,"productName " + product.get(position).getProductName());
+
+                startActivity(intent);
+
+            }
+        });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
 

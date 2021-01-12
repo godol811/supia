@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Product.PurchaseFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/deliveryguide"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#E1E1E1">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="배송안내"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/deliverydown_purchasefragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/deliveryup_purchasefragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/deliverytext_purchasefragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/deliveryguide"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="배송지역 : 전국 \n\n배송비 : 2500원 \n수피아 배송 상품의 총 결제금액 100,000원 이상일 경우 무료배송 됩니다.\n\n배송가능일:3일\n • 배송가능일이란 본 상품을 주문하신 고객님들께 상품배송이 가능한 기간을 의미합니다. 단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다. \n • 천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해부탁드립니다."
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/exchangeguide_purchasefragment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#E1E1E1"
+            android:layout_below="@+id/deliverytext_purchasefragment">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="교환/반품/교환 안내"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/exchangedown_purchasefragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/exchangeup_purchasefragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/exchangetext_purchasefragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/exchangeguide_purchasefragment"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[교환/반품 신청 방법] \n 마이페이지 내 주문내역에서 신청가능하며, 반품 신청의 경우 택배회수로 신청가능합니다. \n\n[교환/반품 신청 기간]\n교환,반품 신청은 배송이 완료된 후 15일 이내 가능합니다.\n고객님이 배송 받으신 상품의 내용이 표시・광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 배송 받으신 날로부터 3개월 이내, 혹은 그 사실을 알 수 있었던 날로 부터 30일 이내에 가능합니다.\n\n[교환/반품/회수 비용]\n고객님의 사유에 의한 교환 및 반품은 회수 및 배송에 필요한 비용을 부담해주셔야 합니다. 기본 비용은 교환 5,000원(회수비+배송비), 반품 2,500원 (회수비)입니다. 당사의 사유 (상품의 하자, 배송의 오류 등)로 인한 경우 교환 및 반품에 필요한 비용은 당사에서 부담합니다. \n\n[교환/반품 불가안내]\n고객님의 사유에 의한 교환 및 반품이 불가한 경우 \n 1. 배송이 완료된 후 15일이 경과한 경우 \n 2.포장 훼손 및 사용 또는 일부 소비, 구성품 누락 및 상품의 결함 발생으로 인해 상품의 가치가 훼손된 경우\n\n당사의 사유에 의한 교환 및 반품이 불가한 경우\n1. 배송 받으신 날로부터 3개월, 혹은 그 사실을 알 수 있었던 날로 부터 30일이 경과한 경우 \n2. 당사의 귀책(상품의 불량, 생산 및 제조 및 배송 간의 파손 등)으로 인한 현상이 아닌 해당 상품의 고유한 특성, 혹은 상품 수령 후 고객님의 과실로 인한 문제임이 규명된 경우"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/exchangetext_purchasefragment"/>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

@@ -3,6 +3,7 @@ package com.example.supia.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,9 +80,15 @@ public class DeliveryAddressAdapter extends BaseAdapter {
         btnModify.setOnClickListener(new View.OnClickListener() {//수정
             @Override
             public void onClick(View v) {//수정버튼을 누를시 그 position에 있는 값들을 intent로 뿌린다.
+
+
+
+
+
                 Intent intent = new Intent(mContext, DeliveryAddressModifyActivity.class);
                 intent.putExtra("deliveryNo", mDataset.get(position).getDeliveryNo());//No는 index값이므로 매우 중요하다.
                 intent.putExtra("deliveryName", mDataset.get(position).getDeliveryName());
+                intent.putExtra("way","normal");
                 intent.putExtra("deliveryAddr", mDataset.get(position).getDeliveryAddr());
                 intent.putExtra("deliveryAddrDetail", mDataset.get(position).getDeliveryAddDetail());
                 intent.putExtra("deliveryTel", mDataset.get(position).getDeliveryTel());
@@ -130,6 +137,7 @@ public class DeliveryAddressAdapter extends BaseAdapter {
                 Intent intent2 = new Intent(mContext, PurchaseCheckActivity.class);//배송지를 선택했다면 그부분으로 넘어간다.
                 intent2.putExtra("deliveryNo", mDataset.get(position).getDeliveryNo());
                 intent2.putExtra("deliveryName", mDataset.get(position).getDeliveryName());
+                intent2.putExtra("way","normal");
                 intent2.putExtra("deliveryAddr", mDataset.get(position).getDeliveryAddr());
                 intent2.putExtra("deliveryAddrDetail", mDataset.get(position).getDeliveryAddDetail());
                 intent2.putExtra("deliveryTel", mDataset.get(position).getDeliveryTel());

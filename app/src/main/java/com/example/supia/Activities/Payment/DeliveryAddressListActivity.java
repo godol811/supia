@@ -13,6 +13,7 @@ import com.example.supia.Adapter.DeliveryAddressAdapter;
 import com.example.supia.Dto.UserDeliveryAddrDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class DeliveryAddressListActivity extends AppCompatActivity {
     ListView deliveryAddrList;
     DeliveryAddressAdapter deliveryAddressAdapter;
     Button addDeliveryList;
+    String strWay;
 
     String urlAddr = null;
     String urlIp = null;
@@ -30,6 +32,9 @@ public class DeliveryAddressListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_address_list);
+
+        Intent intent = getIntent();
+        strWay = intent.getStringExtra("way");
 
         deliveryAddrList = findViewById(R.id.lv_deliveryaddress);
 
@@ -41,10 +46,11 @@ public class DeliveryAddressListActivity extends AppCompatActivity {
 
         addDeliveryList = findViewById(R.id.btn_addAddrList_deliveryaddresslist);//배송지 추가
         addDeliveryList.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DeliveryAddressListActivity.this,DeliveryAddressAddActivity.class);
-                intent.putExtra("USERID","jongchanko@gmail.com");
+                intent.putExtra("way",strWay);
                 startActivity(intent);
 
             }
@@ -60,9 +66,8 @@ public class DeliveryAddressListActivity extends AppCompatActivity {
 
     private void connectGetData() {
         try {
-            urlIp = "192.168.35.147";
-            urlAddr = "http://" + urlIp + ":8080/test/supiaUserDeliveryAddrCheck.jsp?";
-            urlAddr = urlAddr+"userId="+ "jongchanko@gmail.com";
+            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserDeliveryAddrCheck.jsp?";
+            urlAddr = urlAddr+"userId="+ ShareVar.sharvarUserId;
 
 
             DeliveryAddressNetWorkTask networkTask = new DeliveryAddressNetWorkTask(DeliveryAddressListActivity.this, urlAddr, "select");

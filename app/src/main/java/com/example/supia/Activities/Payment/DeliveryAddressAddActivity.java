@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.supia.Activities.Login.AddressWebViewActivity;
+import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +32,7 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
     String urlAddr = null;
     String urlIp = null;
     String strUserId;
+    String strWay;
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
     @Override
@@ -38,10 +41,9 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delivery_address_add);
 
         Intent intent = getIntent();
-        strUserId = intent.getStringExtra("USERID");
+        strWay = intent.getStringExtra("way");
 
-
-        urlAddr = "http://192.168.35.147:8080/test/supiaDeliveryAddrInsert.jsp?";
+        urlAddr = "http://" + ShareVar.sharvarUserId + ":8080/test/supiaDeliveryAddrInsert.jsp?";
 
         deliveryAddr = findViewById(R.id.et_address_addradd);
         deliverAddrDetail = findViewById(R.id.et_address_detail_addradd);
@@ -86,7 +88,6 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
                 case R.id.btn_changeInsertAddr_addradd:
 
 
-
                     if (strDeliveryAddr.trim().length() != 0 && strDeliveryAddrDetail.trim().length() != 0 && strDeliveryTel.trim().length() != 0 && strDeliveryName.trim().length() != 0) {
 
                         new AlertDialog.Builder(DeliveryAddressAddActivity.this)
@@ -97,7 +98,7 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
                                 .setNegativeButton("예", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        urlAddr = urlAddr + "userId=" + strUserId + "&deliveryAddr=" + strDeliveryAddr + "&deliveryAddrDetail=" + strDeliveryAddrDetail
+                                        urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&deliveryAddr=" + strDeliveryAddr + "&deliveryAddrDetail=" + strDeliveryAddrDetail
                                                 + "&deliveryTel=" + strDeliveryTel + "&deliveryName=" + strDeliveryName + "&insertDate=" + today + "&nextDeliveryDate=" + addMonth;
                                         connectInsertData();
                                         Log.d("Url", urlAddr);
@@ -114,15 +115,22 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
                                                         String strDeliveryAddrDetail = deliverAddrDetail.getText().toString();
                                                         String strDeliveryTel = deliveryTel.getText().toString();
                                                         String strDeliveryName = deliveryName.getText().toString();
+                                                        if (strWay.equals("normal")) {
+                                                            Intent intent = new Intent(DeliveryAddressAddActivity.this, PurchaseCheckActivity.class);
+                                                            intent.putExtra("deliveryAddr", strDeliveryAddr);
+                                                            intent.putExtra("deliveryAddrDetail", strDeliveryAddrDetail);
+                                                            intent.putExtra("deliveryTel", strDeliveryTel);
+                                                            intent.putExtra("deliveryName", strDeliveryName);
+                                                            startActivity(intent);
+                                                        }else {
+                                                            Intent intent = new Intent(DeliveryAddressAddActivity.this, RegularPurchaseCheckActivity.class);
+                                                            intent.putExtra("deliveryAddr", strDeliveryAddr);
+                                                            intent.putExtra("deliveryAddrDetail", strDeliveryAddrDetail);
+                                                            intent.putExtra("deliveryTel", strDeliveryTel);
+                                                            intent.putExtra("deliveryName", strDeliveryName);
+                                                            startActivity(intent);
 
-                                                        Intent intent = new Intent(DeliveryAddressAddActivity.this, PurchaseCheckActivity.class);
-                                                        intent.putExtra("deliveryAddr", strDeliveryAddr);
-                                                        intent.putExtra("deliveryAddrDetail", strDeliveryAddrDetail);
-                                                        intent.putExtra("deliveryTel", strDeliveryTel);
-                                                        intent.putExtra("deliveryName", strDeliveryName);
-                                                        intent.putExtra("USERID", strUserId);
-
-                                                        startActivity(intent);
+                                                        }
                                                     }
                                                 })
                                                 .show();
