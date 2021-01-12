@@ -1,6 +1,8 @@
-package com.example.supia.Activities.Payment;
+package com.example.supia.Activities.RegualarDeliveryPayment;
 
-import android.app.Activity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-
+import com.example.supia.Activities.Payment.DeliveryAddressListActivity;
+import com.example.supia.Activities.Payment.PaymentBankActivity;
+import com.example.supia.Activities.Payment.PaymentCardActivity;
+import com.example.supia.Activities.Payment.PaymentModifyActivity;
+import com.example.supia.Activities.Payment.PaymentPhoneActivity;
+import com.example.supia.Activities.Payment.PurchaseCheckActivity;
 import com.example.supia.Dto.UserDeliveryAddrDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
@@ -17,9 +23,9 @@ import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
 
-public class PurchaseCheckActivity extends Activity {
+public class RegularPurchaseCheckActivity extends AppCompatActivity {
 
-    final static String TAG = "결제";
+    final static String TAG = "정기배송";
     Button btnDeliveryAddressModify, btnPaymentMethod, btnPayment;
     TextView tvDeliveryName, tvDeliveryAddress, tvDeliveryTel, tvPaymentMethod, tvDeliveryAddressDetail;
     String strDeliveryAddr, strDeliveryTel, strDeliveryName, strUserId, strMethodItem, strDeliveryAddrDetail;
@@ -30,12 +36,10 @@ public class PurchaseCheckActivity extends Activity {
     String strPayMethod = "";
     ArrayList<UserDeliveryAddrDto> user;
 
-    private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_purchase_check);
+        setContentView(R.layout.activity_regular_purchase_check);
 
         Intent intent = getIntent();
         intDeliveryNo = intent.getIntExtra("deliveryNo", 0);
@@ -47,18 +51,15 @@ public class PurchaseCheckActivity extends Activity {
         strMethodItem = intent.getStringExtra("ITEM");
         strUserId = ShareVar.sharvarUserId;
 
+        btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify_regular);
+        btnPaymentMethod = findViewById(R.id.btn_paymentmodify_regular);
+        btnPayment = findViewById(R.id.btn_payment_regular);
 
-
-
-        btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify);
-        btnPaymentMethod = findViewById(R.id.btn_paymentmodify);
-        btnPayment = findViewById(R.id.btn_payment);
-
-        tvDeliveryAddress = findViewById(R.id.tv_deliveryaddress);
-        tvDeliveryAddressDetail = findViewById(R.id.tv_deliveryaddressDetail);
-        tvDeliveryTel = findViewById(R.id.tv_deliverytel);
-        tvDeliveryName = findViewById(R.id.tv_deliveryName);
-        tvPaymentMethod = findViewById(R.id.tv_paymentmethod);
+        tvDeliveryAddress = findViewById(R.id.tv_deliveryaddress_regular);
+        tvDeliveryAddressDetail = findViewById(R.id.tv_deliveryaddressDetail_regular);
+        tvDeliveryTel = findViewById(R.id.tv_deliverytel_regular);
+        tvDeliveryName = findViewById(R.id.tv_deliveryName_regular);
+        tvPaymentMethod = findViewById(R.id.tv_paymentmethod_regular);
         tvPaymentMethod.setText(strPayMethod);
 
 
@@ -78,32 +79,34 @@ public class PurchaseCheckActivity extends Activity {
         }
 
 
+
+
     }
 
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_deliveryinfomodify://배송지 변경
-                    Intent intent = new Intent(PurchaseCheckActivity.this, DeliveryAddressListActivity.class);
-                    intent.putExtra("way","normal");
+                case R.id.btn_deliveryinfomodify_regular://배송지 변경
+                    Intent intent = new Intent(RegularPurchaseCheckActivity.this, RegularDeliveryAddressListActivity.class);
+                    intent.putExtra("way","regular");
                     startActivity(intent);
                     break;
-                case R.id.btn_paymentmodify://결제수단 변경
-                    Intent intent1 = new Intent(PurchaseCheckActivity.this, PaymentModifyActivity.class);
-                    intent1.putExtra("way","normal");
+                case R.id.btn_paymentmodify_regular://결제수단 변경
+                    Intent intent1 = new Intent(RegularPurchaseCheckActivity.this, PaymentModifyActivity.class);
+                    intent1.putExtra("way","regular");
                     startActivity(intent1);
                     break;
-                case R.id.btn_payment:
+                case R.id.btn_payment_regular:
                     strDeliveryAddr = tvDeliveryAddress.getText().toString().trim();
                     strDeliveryAddrDetail = tvDeliveryAddressDetail.getText().toString().trim();
                     strDeliveryTel =tvDeliveryTel.getText().toString().trim();
 
                     intentIndex();//0일경우엔 카드 1일경우엔 은행 2일경우엔 폰
                     if (intentIndex == 0) {
-                        Intent intent2 = new Intent(PurchaseCheckActivity.this, PaymentCardActivity.class);
+                        Intent intent2 = new Intent(RegularPurchaseCheckActivity.this, PaymentCardActivity.class);
+                        intent2.putExtra("way","regular");
                         intent2.putExtra("ITEM", strMethodItem);
-                        intent2.putExtra("way","normal");
                         intent2.putExtra("orderAddr",strDeliveryAddr);
                         intent2.putExtra("orderAddrDetail",strDeliveryAddrDetail);
                         intent2.putExtra("orderTel",strDeliveryTel);
@@ -113,9 +116,9 @@ public class PurchaseCheckActivity extends Activity {
                         startActivity(intent2);
                         break;
                     } else if (intentIndex == 1) {
-                        Intent intent3 = new Intent(PurchaseCheckActivity.this, PaymentBankActivity.class);
+                        Intent intent3 = new Intent(RegularPurchaseCheckActivity.this, PaymentBankActivity.class);
+                        intent3.putExtra("way","regular");
                         intent3.putExtra("ITEM", strMethodItem);
-                        intent3.putExtra("way","normal");
                         intent3.putExtra("orderTel",strDeliveryTel);
                         intent3.putExtra("orderAddr",strDeliveryAddr);
                         intent3.putExtra("orderAddrDetail",strDeliveryAddrDetail);
@@ -125,9 +128,9 @@ public class PurchaseCheckActivity extends Activity {
                         startActivity(intent3);
                         break;
                     } else if (intentIndex == 2) {
-                        Intent intent4 = new Intent(PurchaseCheckActivity.this, PaymentPhoneActivity.class);
+                        Intent intent4 = new Intent(RegularPurchaseCheckActivity.this, PaymentPhoneActivity.class);
+                        intent4.putExtra("way","regular");
                         intent4.putExtra("ITEM", strMethodItem);
-                        intent4.putExtra("way","normal");
                         intent4.putExtra("orderTel",strDeliveryTel);
                         intent4.putExtra("orderAddr",strDeliveryAddr);
                         intent4.putExtra("orderAddrDetail",strDeliveryAddrDetail);
@@ -138,7 +141,7 @@ public class PurchaseCheckActivity extends Activity {
                         break;
                     } else {
 
-                        new AlertDialog.Builder(PurchaseCheckActivity.this)
+                        new AlertDialog.Builder(RegularPurchaseCheckActivity.this)
                                 .setTitle("결제 수단 선택")
                                 .setMessage("결제 수단을 선택해주세요.")
                                 .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
@@ -163,7 +166,7 @@ public class PurchaseCheckActivity extends Activity {
 
             urlAddr = urlAddr + "userId=" + strUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
-            DeliveryAddressNetWorkTask networkTask = new DeliveryAddressNetWorkTask(PurchaseCheckActivity.this, urlAddr, "select");
+            DeliveryAddressNetWorkTask networkTask = new DeliveryAddressNetWorkTask(RegularPurchaseCheckActivity.this, urlAddr, "select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
             user = (ArrayList<UserDeliveryAddrDto>) obj; //userInfoDtos 다시 풀기
 
@@ -196,4 +199,5 @@ public class PurchaseCheckActivity extends Activity {
             intentIndex = 3;
         }
     }
+
 }

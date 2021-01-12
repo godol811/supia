@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.supia.Activities.Login.AddressWebViewActivity;
+import com.example.supia.Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity;
+import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -27,6 +29,7 @@ public class DeliveryAddressModifyActivity extends Activity {
     Button btnChange, btnCancel, btnDelete;
     String urlAddr = null;
     String urlIp = null;
+    String strWay;
     int intDeliveryNo;
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
@@ -39,11 +42,12 @@ public class DeliveryAddressModifyActivity extends Activity {
         intDeliveryNo = intent.getIntExtra("deliveryNo", 0);//리스트뷰에서 있는 값 넘어오기
         String strDeliveryName = intent.getStringExtra("deliveryName");
         String strDeliveryAddr = intent.getStringExtra("deliveryAddr");
+        strWay = intent.getStringExtra("way");
         String strDeliveryAddrDetail = intent.getStringExtra("deliveryAddrDetail");
         String strDeliveryTel = intent.getStringExtra("deliveryTel");
 
 
-        urlAddr = "http://"+ ShareVar.urlIp +":8080/test/supiaDeliveryAddrModify.jsp?";
+        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrModify.jsp?";
 
         deliveryAddr = findViewById(R.id.et_address);
         deliverAddrDetail = findViewById(R.id.et_address_detail);
@@ -99,7 +103,7 @@ public class DeliveryAddressModifyActivity extends Activity {
                                 .setNegativeButton("예", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        urlAddr = urlAddr + "userId=" + "jongchanko@gmail.com" + "&deliveryAddr=" + strDeliveryAddr + "&deliveryAddrDetail=" + strDeliveryAddrDetail + "&deliveryTel=" + strDeliveryTel
+                                        urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&deliveryAddr=" + strDeliveryAddr + "&deliveryAddrDetail=" + strDeliveryAddrDetail + "&deliveryTel=" + strDeliveryTel
                                                 + "&deliveryName=" + strDeliveryName + "&insertDate=" + today + "&deliveryNo=" + intDeliveryNo;
                                         connectInsertData();
                                         new AlertDialog.Builder(DeliveryAddressModifyActivity.this)
@@ -109,10 +113,18 @@ public class DeliveryAddressModifyActivity extends Activity {
                                                 .setPositiveButton("닫기", new DialogInterface.OnClickListener() {//닫기와 동시에 결제 화면으로 돌아가서 결제 화면에 있는 배송지를 띄우는 역할
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        Intent intent = new Intent(DeliveryAddressModifyActivity.this, PurchaseCheckActivity.class);
-                                                        intent.putExtra("ADDR", strDeliveryAddr + " " + strDeliveryAddrDetail);
-                                                        intent.putExtra("TEL", strDeliveryTel);
-                                                        startActivity(intent);
+                                                        if (strWay.equals("normal")) {
+                                                            Intent intent = new Intent(DeliveryAddressModifyActivity.this, PurchaseCheckActivity.class);
+                                                            intent.putExtra("ADDR", strDeliveryAddr + " " + strDeliveryAddrDetail);
+                                                            intent.putExtra("TEL", strDeliveryTel);
+                                                            startActivity(intent);
+                                                        } else {
+                                                            Intent intent = new Intent(DeliveryAddressModifyActivity.this, RegularPurchaseCheckActivity.class);
+                                                            intent.putExtra("ADDR", strDeliveryAddr + " " + strDeliveryAddrDetail);
+                                                            intent.putExtra("TEL", strDeliveryTel);
+                                                            startActivity(intent);
+
+                                                        }
                                                     }
                                                 })
                                                 .show();
@@ -178,8 +190,13 @@ public class DeliveryAddressModifyActivity extends Activity {
                                             .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    Intent intent = new Intent(DeliveryAddressModifyActivity.this, DeliveryAddressListActivity.class);
-                                                    startActivity(intent);
+                                                    if (strWay.equals("normal")) {
+                                                        Intent intent = new Intent(DeliveryAddressModifyActivity.this, DeliveryAddressListActivity.class);
+                                                        startActivity(intent);
+                                                    } else {
+                                                        Intent intent = new Intent(DeliveryAddressModifyActivity.this, RegularDeliveryAddressListActivity.class);
+                                                        startActivity(intent);
+                                                    }
                                                 }
                                             })
                                             .show();

@@ -163,9 +163,10 @@ public class UserInfoNetworkTask extends AsyncTask<Integer, String, Object> {
                 String userPw = jsonObject1.getString("userPw");
                 String userAddr = jsonObject1.getString("userAddr");
                 String userTel = jsonObject1.getString("userTel");
+                String userName = jsonObject1.getString("userName");
 
 
-                UserDto member = new UserDto(userId, userPw, userAddr, userTel);
+                UserDto member = new UserDto(userId, userPw, userAddr, userTel,userName);
 
                 user.add(member);
 
