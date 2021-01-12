@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Product.QnAFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/division"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#EBEBEB"
+            android:layout_marginBottom="15dp"
+            />
+
+        <include
+            android:id="@+id/inquiry_qnafragment"
+            android:layout_below="@+id/division"
+            layout="@layout/product_inquiry_qnafragment"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/division2"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#EBEBEB"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/inquiry_qnafragment"
+            android:orientation="vertical"/>
+
+        <TextView
+            android:id="@+id/title__qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/division2"
+            android:text="자주 묻는 질문"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_marginBottom="30dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/qna1"
+            android:layout_below="@+id/title__qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="전성분을 알려주세요."
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:textSize="16dp"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/qna1down_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/qna1up_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qna1_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/qna1"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="햐당 상품별 전성분은 상세페이를 참고해주세요."
+                />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/qna2"
+            android:layout_below="@+id/qna1_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            >
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="방사능 물질은 없나요?"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:textSize="16dp"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/qna2down_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/qna2up_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qna2_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/qna2"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="일본산 원자재를 사용하지 않습니다. 또, 완제품에 대하여 인공방사선핵종 오염검사를 진행하여 방사선 검출치를 확인합니다.
+방사능 물질 걱정은 안 하셔도 됩니다."
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qna3"
+            android:layout_below="@+id/qna2_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            >
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="동물 실험을 하나요?"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:textSize="16dp"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/qna3down_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/qna3up_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qna3_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/qna3"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="동물실험이 수반되는 검사는 진행하지 않습니다."
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/qna4"
+            android:layout_below="@+id/qna3_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            >
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="독성쇼크증후군(TSS) 위험은 없나요?"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:textSize="16dp"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/qna4down_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/qna4up_qnafragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qna4_text_qnafragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/qna4"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="드물지만 탐폰은 독성쇼크증후군(TSS)을 유발할 수 있습니다.\n
+독성쇼크증후군의 발생 위험을 줄이기 위해서 탐폰을 사용할 때에는 아래의 수칙을 꼭 지켜주세요.\n\n
+
+1) 탐폰의 포장을 개봉하기 전에는 반드시 손을 깨끗하게 씻고 개봉 후 바로 사용합니다.\n
+2) 1회 사용 권장 시간은 4~6시간이며 8시간을 넘기지 말아야 합니다. 또한 마지막으로 사용한 탐폰을 제거했는지 꼭 확인해주세요.\n
+3) 많은 흡수량이 늘 좋은 건 아닙니다. 자신의 월경량을 기준으로 최소 사이즈 제품을 선택하세요."
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="vertical"
+            android:layout_marginTop="200dp"
+            android:layout_below="@id/qna4_text_qnafragment"/>
+
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Product.ProductDetilFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#EBEBEB"
+            android:layout_marginBottom="15dp"
+            />
+
+
+        <include
+            android:id="@+id/productview"
+            layout="@layout/productviewlayout_productdetilfragment"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/di1"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#EBEBEB"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/productview"
+            android:orientation="vertical"/>
+
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연령대별 선호도"
+            android:layout_below="@+id/di1"/>
+
+
+
+
+        <include
+            android:id="@+id/progress_10"
+            android:layout_below="@+id/text1"
+            layout="@layout/custom_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            />
+
+        <include
+            android:id="@+id/progress_20"
+            android:layout_below="@+id/progress_10"
+            layout="@layout/custom_progressbar2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            />
+
+        <include
+            android:id="@+id/progress_30"
+            android:layout_below="@+id/progress_20"
+            layout="@layout/custom_progressbar3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            />
+
+        <include
+            android:id="@+id/progress_40"
+            android:layout_below="@+id/progress_30"
+            layout="@layout/custom_progressbar4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            />
+
+        <include
+            android:id="@+id/progress_50"
+            android:layout_below="@+id/progress_40"
+            layout="@layout/custom_progressbar5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            />
+
+
+
+        <LinearLayout
+            android:id="@+id/di2"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#EBEBEB"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/progress_50"
+            android:orientation="vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="vertical"
+            android:layout_marginTop="200dp"
+            android:layout_below="@id/di2"/>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

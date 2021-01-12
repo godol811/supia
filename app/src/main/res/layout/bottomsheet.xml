@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/rounded"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="150dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_up_24"
+        android:layout_gravity="center|top"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        <Button
+            android:id="@+id/cart_bottomsheet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/product_button"
+            android:text="장바구니"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            />
+
+        <Button
+            android:id="@+id/buy_bottomsheet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/product_button"
+            android:text="구매하기"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/back_quan"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="수량"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#bad23a"
+            />
+        <TextView
+            android:id="@+id/minus_bottomsheet"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:id="@+id/productQuantityNum_bottomsheet"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_weight="1"
+            android:textSize="17dp"
+            />
+
+        <TextView
+            android:id="@+id/plus_bottomsheet"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
