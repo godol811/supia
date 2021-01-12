@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Activities.Product.WriteQnAActivity">
+
+        <TextView
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q \u0026 A 작성"
+            android:textSize="22dp"
+            android:textColor="#bad23a"
+            android:textStyle="bold"
+            android:paddingTop="15dp"
+            android:paddingLeft="15dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#EBEBEB"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"/>
+
+        <TextView
+            android:id="@+id/productName_qnawrite"
+            android:textColor="#686868"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="상품명"/>
+        <include
+            android:layout_weight="7"
+            layout="@layout/qnawrite_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:gravity="center"
+            >
+            <Button
+                android:id="@+id/cancel_qnawrite"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:layout_gravity="center"
+                android:text="취소"
+                android:background="@drawable/button_qna"/>
+
+            <Button
+                android:id="@+id/ok_qnawrite"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="확인"
+                android:background="@drawable/button_qna"/>
+
+        </LinearLayout>
+    </LinearLayout>

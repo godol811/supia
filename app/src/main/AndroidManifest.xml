@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".Activities.Product.ProductDetailActivity"></activity>
+        <activity android:name=".Activities.Product.WriteQnAActivity"></activity>
+        <activity android:name=".Activities.Product.ProductDetailActivity" />
         <activity android:name=".Activities.Product.CartActivity" />
         <activity android:name=".Activities.Product.CategoryActivity" />
         <activity android:name=".Activities.Product.SearchActivity" />
