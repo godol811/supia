@@ -1,5 +1,7 @@
 package com.example.supia.Dto;
 
+import java.util.ArrayList;
+
 public class CalendarDTO {
 int calendarNo;
 String calendarStartDate;
@@ -9,13 +11,13 @@ String calendarBirthDate;
 String userId;
 
 
-    public CalendarDTO(int calendarNo, String calendarStartDate, String calendarFinishDate, String calendarDeliveryDate, String calendarBirthDate, String userId) {
-        this.calendarNo = calendarNo;
+    public CalendarDTO( String calendarStartDate, String calendarFinishDate, String calendarDeliveryDate, String calendarBirthDate) {
+        
         this.calendarStartDate = calendarStartDate;
         this.calendarFinishDate = calendarFinishDate;
         this.calendarDeliveryDate = calendarDeliveryDate;
         this.calendarBirthDate = calendarBirthDate;
-        this.userId = userId;
+
     }
 
     public CalendarDTO(String userId, String calendarStartDate, String calendarFinishDate) {
@@ -28,6 +30,7 @@ String userId;
         this.calendarDeliveryDate = calendarDeliveryDate;
         this.userId = userId;
     }
+
 
     public int getCalendarNo() {
         return calendarNo;
