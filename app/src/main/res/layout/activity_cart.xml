@@ -9,50 +9,26 @@
 
 
 
-    <LinearLayout
+    <TextView
+        android:layout_weight="0.3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="left"
-        >
+        android:text="장바구니"
+        android:textSize="22dp"
+        android:textColor="#bad23a"
+        android:textStyle="bold"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:text="장바구니"
-            android:textSize="34sp"
-            android:textColor="#BAD23A"
-            android:layout_marginTop="10dp"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_height="13dp"
+        android:background="#EBEBEB"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"/>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="정기구독"
-            android:textSize="34sp"
-            android:textColor="#BAD23A"
-            android:layout_margin="10dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일반주문"
-            android:textSize="34sp"
-            android:textColor="#A6A6A3"
-            android:layout_margin="10dp"
-            />
-
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

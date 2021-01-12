@@ -98,7 +98,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 // set the peek height
-        bottomSheetBehavior.setPeekHeight(230);
+        bottomSheetBehavior.setPeekHeight(160);
 
 // set hideable or not
         bottomSheetBehavior.setHideable(false);
