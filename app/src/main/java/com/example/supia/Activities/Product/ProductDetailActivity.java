@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.supia.Activities.Payment.PurchaseCheckActivity;
+import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.Activities.ui.main.SectionsPagerAdapter;
 import com.example.supia.Adapter.Product.CartAdapter;
 import com.example.supia.Dto.Product.CartDto;
@@ -70,7 +73,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
         //---
 
 
@@ -98,7 +100,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 // set the peek height
-        bottomSheetBehavior.setPeekHeight(160);
+        bottomSheetBehavior.setPeekHeight(140);
 
 // set hideable or not
         bottomSheetBehavior.setHideable(false);
@@ -110,8 +112,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         btnBuy = findViewById(R.id.buy_bottomsheet);
         btnBuy.setOnClickListener(buyClcick);
-
-
 
     }
 
@@ -170,27 +170,58 @@ public class ProductDetailActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-
             productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
+
             urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
             urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
                     +"&productImagePath=" + productImagePath;
             connectGetData();
 
             Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
-            intent.putExtra("strBtnCategory", ShareVar.strBtnCategory);
             startActivity(intent);
 
 
         }
     };
 
+    //-------------------------01.13 새벽 추가 ----------------------------------------------------
     View.OnClickListener buyClcick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
 
+            new AlertDialog.Builder(ProductDetailActivity.this)
+                    .setMessage("지금 선택하신 정보로 정기구독이\n 가능합니다.\n\n 정기구독을 만나보세요")
+                    .setPositiveButton("일반결제", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent intent = new Intent(ProductDetailActivity.this, PurchaseCheckActivity.class);
+                            intent.putExtra("productNo", productNo);
+                            intent.putExtra("productName", productName);
+                            intent.putExtra("productPrice", productPrice);
+                            intent.putExtra("productQuantity", productQuantity);
+                            startActivity(intent);
+
+                        }
+                    })
+                    .setNegativeButton("정기구독", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(ProductDetailActivity.this, RegularPurchaseCheckActivity.class);
+                            intent.putExtra("productNo", productNo);
+                            intent.putExtra("productName", productName);
+                            intent.putExtra("productPrice", productPrice);
+                            intent.putExtra("productQuantity", productQuantity);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNeutralButton("취소",null)
+                    .setCancelable(true)
+                    .show();
         }
     };
+    //-------------------------------------------------------------------
 
     private void connectGetData() {
         try {

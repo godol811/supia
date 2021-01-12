@@ -13,6 +13,7 @@
         />
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         >
 
         <Button
@@ -83,20 +85,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="28dp"
         >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingLeft="13dp"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="수피아님이 \n 많이 구매했어요"
+                android:text="최근 구매하신 상품을 \n 다시 만나보세요."
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 />
 
         </LinearLayout>
@@ -105,16 +109,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
             android:gravity="right"
             >
 
             <TextView
+                android:textColor="#A2A2A2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="더보기 > "
+                android:text="더보기 〉 "
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="11sp"
+
                 />
 
 
