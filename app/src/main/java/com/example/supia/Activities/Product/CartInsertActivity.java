@@ -50,6 +50,8 @@ public class CartInsertActivity extends Activity {
         productImagePath = intent.getStringExtra("productImagePath");
 
 
+        //insert하기전에 장바구니에 똑같은 물건이 있으면 다이얼로그 띄우기
+//        if ()
         urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
         urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
                 +"&productImagePath=" + productImagePath;

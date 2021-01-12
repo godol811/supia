@@ -310,7 +310,11 @@ public class CategoryActivity extends AppCompatActivity {
                     Intent intent = new Intent(CategoryActivity.this, SearchActivity.class);
                     startActivity(intent);
                     break;
+
+
                 case R.id.cart_header:
+
+
                     Intent intent1 = new Intent(CategoryActivity.this, CartActivity.class);
                     startActivity(intent1);
                     break;

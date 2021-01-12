@@ -178,6 +178,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     Log.d(TAG,"장바구니클릭시 값들어오지는지 확인");
 
                     int productNo = mDataset.get(position).getProductNo();
+
+
                     String productPrice = mDataset.get(position).getProductPrice();
                     String productName = mDataset.get(position).getProductName();
                     String ProductImagePath = mDataset.get(position).getProductImagePath();
