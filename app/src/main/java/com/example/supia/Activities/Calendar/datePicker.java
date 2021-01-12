@@ -14,7 +14,8 @@ import android.widget.ImageButton;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.supiatotal.R;
+import com.example.supia.R;
+
 
 public class datePicker extends Dialog {
     final static String TAG = "캘린더_월경일선택_다이얼로그";
