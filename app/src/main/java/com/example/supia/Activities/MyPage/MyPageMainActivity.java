@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
@@ -31,8 +33,10 @@ public class MyPageMainActivity extends Activity {
     TextView tvUserIdMypage, tvUserNameMypage, tvMyInfoMypage;
     LinearLayout llLikeList, llCartList, llNoticeList, llSnsList, llLogout;
     ArrayList<UserDto> userinfo;
+    String userId = sharvarUserId;
+    String urlIp = ShareVar.urlIp;
 
-    String url = "http://172.30.1.19:8080/test/supiaMypage.jsp";
+    String url = "http://"+urlIp+":8080/test/supiaMypage.jsp?userId="+userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,8 @@ public class MyPageMainActivity extends Activity {
         llCartList.setOnClickListener(cartListClickListener); //장바구니
         llSnsList.setOnClickListener(snsListClickListener); // 소셜로그인
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         //------------------------------------------//
 
 
@@ -94,13 +100,42 @@ public class MyPageMainActivity extends Activity {
     } //---onCreate
 
 
+
+
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(MyPageMainActivity.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 쇼핑몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(MyPageMainActivity.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
+
+
     //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
     View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent gotoMainMypage = new Intent(MyPageMainActivity.this, MyPageMainActivity.class);
             startActivity(gotoMainMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -112,7 +147,7 @@ public class MyPageMainActivity extends Activity {
         public void onClick(View v) {
             Intent snsPlatform = new Intent(MyPageMainActivity.this, MySnsPlatformActivity.class);
             startActivity(snsPlatform);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -125,7 +160,7 @@ public class MyPageMainActivity extends Activity {
         public void onClick(View v) {
             Intent cart = new Intent(MyPageMainActivity.this, MyCartListActivity.class);
             startActivity(cart);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
         }
     };
     //-----------------------------------------------------------------------------------//
@@ -135,7 +170,7 @@ public class MyPageMainActivity extends Activity {
     View.OnClickListener backClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
             onBackPressed();
 
         }
@@ -150,7 +185,7 @@ public class MyPageMainActivity extends Activity {
             Intent like = new Intent(MyPageMainActivity.this, MyLikeListActivity.class);
 
             startActivity(like);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
 
         }
@@ -170,7 +205,7 @@ public class MyPageMainActivity extends Activity {
             infointent.putExtra("url", url);
 
             startActivity(infointent);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
 
         }
@@ -186,7 +221,7 @@ public class MyPageMainActivity extends Activity {
             Intent headerforOrder = new Intent(MyPageMainActivity.this, MyOrderActivity.class);
             tvOrder.setTypeface(tvOrder.getTypeface(), Typeface.BOLD); // 클릭시 글씨 두꺼워짐
             startActivity(headerforOrder);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -199,7 +234,7 @@ public class MyPageMainActivity extends Activity {
             Intent headerSubscribe = new Intent(MyPageMainActivity.this, MySubscribeActivity.class);
             tvSubscribe.setTypeface(tvSubscribe.getTypeface(), Typeface.BOLD);
             startActivity(headerSubscribe);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -212,7 +247,7 @@ public class MyPageMainActivity extends Activity {
             Intent forMypage = new Intent(MyPageMainActivity.this, MyPageMainActivity.class);
             tvMypage.setTypeface(tvMypage.getTypeface(), Typeface.BOLD);
             startActivity(forMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold); //화면전환시 애니메이션 적용
+            overridePendingTransition(R.anim.hold, R.anim.hold); //화면전환시 애니메이션 적용
         }
     };
     //------------------------------------------------------------------------------------//

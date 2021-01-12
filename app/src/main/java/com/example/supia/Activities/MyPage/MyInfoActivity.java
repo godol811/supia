@@ -2,29 +2,60 @@ package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
-public class MyInfoActivity extends AppCompatActivity {
+public class MyInfoActivity extends Activity {
 
 
     //filed
     TextView tvMypage, tvSubscribe, tvOrder; // header
     ImageButton ibtnBack; // header
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
+    String userId = ShareVar.sharvarUserId;
 
-
+    TextView myInfoName, myInfoId, myInfoTel, myInfoPw;
+    EditText etPw, etPwCh;
+    String strMyInfoUserName, strMyInfoUserPw, strMyInfoUserTel, strMyInfoUserAddr; // 인텐트 받아오기위한 string
+    Button changePwBtn;
+    final String pwChange = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_info);
+
+
+        //------------------Intent 받아오기---------------------//
+        Intent intent = getIntent();
+        strMyInfoUserName = intent.getStringExtra("userName");
+        strMyInfoUserTel = intent.getStringExtra("userTel");
+        strMyInfoUserPw = intent.getStringExtra("userPw");
+        strMyInfoUserAddr = intent.getStringExtra("userAddr");
+        //---------------------------------------------------//
+
+        //------------아이디 받기---------------//
+        myInfoId = findViewById(R.id.tv_userid_mypage_info);
+        myInfoName = findViewById(R.id.tv_username_mypage_info);
+        myInfoTel = findViewById(R.id.tv_usertel_mypage_info);
+        myInfoPw = findViewById(R.id.tv_userpw_mypage_info);
+        changePwBtn = findViewById(R.id.btn_changepw_mypage_info);
+        etPw = findViewById(R.id.et_pwchange_mypage_info);
+        etPwCh = findViewById(R.id.et_pwcheck_mypage_info);
+        //----------------------------------//
+
 
         //----------header 아이디----------//
         ibtnBack = findViewById(R.id.ibtn_back_mypage_header); //뒤로가기
@@ -40,17 +71,69 @@ public class MyInfoActivity extends AppCompatActivity {
         ibtnMypage = findViewById(R.id.mypage_bottom_bar);
         //----------------------------------//
 
+
+        //-------setText-------//
+        myInfoId.setText(userId);
+        myInfoName.setText(strMyInfoUserName);
+        myInfoTel.setText(strMyInfoUserTel);
+        myInfoPw.setText(strMyInfoUserPw);
+        //---------------------//
+
+
         //---------------클릭이벤트--------------------//
         ibtnBack.setOnClickListener(backClickListener); //header 뒤로가기
         tvMypage.setOnClickListener(myPageClickListener); //header 마이페이지
         tvSubscribe.setOnClickListener(subscribeClickListener); //header 정기구독
         tvOrder.setOnClickListener(orderClickListener); //header 주문내역
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
+        changePwBtn.setOnClickListener(changePwClickListener); //비번 변경
         //------------------------------------------//
 
 
-
     }//-----------------onCreate
+
+    //----------------------------------------비밀번호 변경 버튼 클릭 이벤트------------------------------------------//
+    View.OnClickListener changePwClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+            MypagePwChangeDialog pwDialog = new MypagePwChangeDialog(MyInfoActivity.this, userId, strMyInfoUserName, strMyInfoUserTel);
+            pwDialog.callFunction(pwChange);
+
+
+        }
+    };
+    //--------------------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(MyInfoActivity.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 쇼핑몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(MyInfoActivity.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
+
 
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
@@ -59,7 +142,7 @@ public class MyInfoActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent gotoMainMypage = new Intent(MyInfoActivity.this, MyPageMainActivity.class);
             startActivity(gotoMainMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -69,13 +152,12 @@ public class MyInfoActivity extends AppCompatActivity {
     View.OnClickListener backClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
             onBackPressed();
 
         }
     };
     //-----------------------------------------------------------------------------------//
-
 
 
     //-----------------------------------header OrderList 이동--------------------------------//
@@ -85,7 +167,7 @@ public class MyInfoActivity extends AppCompatActivity {
             Intent headerforOrder = new Intent(MyInfoActivity.this, MyOrderActivity.class);
             tvOrder.setTypeface(tvOrder.getTypeface(), Typeface.BOLD); // 클릭시 글씨 두꺼워짐
             startActivity(headerforOrder);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -98,7 +180,7 @@ public class MyInfoActivity extends AppCompatActivity {
             Intent headerSubscribe = new Intent(MyInfoActivity.this, MySubscribeActivity.class);
             tvSubscribe.setTypeface(tvSubscribe.getTypeface(), Typeface.BOLD);
             startActivity(headerSubscribe);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -111,12 +193,10 @@ public class MyInfoActivity extends AppCompatActivity {
             Intent forMypage = new Intent(MyInfoActivity.this, MyPageMainActivity.class);
             tvMypage.setTypeface(tvMypage.getTypeface(), Typeface.BOLD);
             startActivity(forMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold); //화면전환시 애니메이션 적용
+            overridePendingTransition(R.anim.hold, R.anim.hold); //화면전환시 애니메이션 적용
         }
     };
     //------------------------------------------------------------------------------------//
-
-
 
 
 }//---------------끝
