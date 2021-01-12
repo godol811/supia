@@ -137,35 +137,39 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.productQuantity.setText(String.valueOf(++holder.count));
 
+                //버튼 누를때마다 수량 증가
+                holder.productQuantity.setText(String.valueOf(++holder.count));
 
                 holder.count = Integer.parseInt((String) holder.productQuantity.getText());
 
 
+                //price onBind할떄 구한 가격 * 현재 수량
                 result = holder.price *  holder.count;
 
                 Log.d(TAG,"result : " + result);
+
 //                String[] strPrice = holder.price.split(",");
 //                for (int i = 0;i<strPrice.length;i++){
 //                     result = strPrice[i];
 //                    Log.d(TAG,"result : " + result);
 //                }
+                //수량 * 가격 가격에 표시
                 holder.productPrice.setText(Integer.toString(result));
 
-                int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
-                int cartNo = mDataset.get(position).getCartNo();
-
+                //가격 , 찍기
                 DecimalFormat myFormatter = new DecimalFormat("###,###");
                 String formattedStringPrice = myFormatter.format(result);
                 holder.productPrice.setText(formattedStringPrice);
 
+                //db에 넘겨줄값
+                int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
+                int cartNo = mDataset.get(position).getCartNo();
 
 
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
                 urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
                 connectGetData();
-
             }
         });
 
@@ -177,9 +181,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 if (Counter >1){
 //                    int productQuantity = Integer.parseInt(String.valueOf(holder.productQuantity));
 
+                    holder.productQuantity.setText(String.valueOf(--holder.count));
 
                     holder.count = Integer.parseInt((String) holder.productQuantity.getText());
 
+
+
+                    Log.d(TAG, "마이너스버튼 price : " + String.valueOf(holder.price));
 
                     result = result - holder.price;
 
@@ -188,14 +196,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     holder.productPrice.setText(Integer.toString(result));
 
 
-                    holder.productQuantity.setText(String.valueOf(--holder.count));
+
+
 
                     int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
                     int cartNo = mDataset.get(position).getCartNo();
 
+
                     DecimalFormat myFormatter = new DecimalFormat("###,###");
                     String formattedStringPrice = myFormatter.format(result);
                     holder.productPrice.setText(formattedStringPrice);
+
 
                     urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
                     urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
@@ -382,8 +393,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
              */
 
 
-
-
             productName.setText(cartDto.getCartProductName());
             Log.d(TAG, "if문에 넣어줄값" + String.valueOf(cartDto.getCartProductId()));
 
@@ -394,13 +403,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             count = Integer.parseInt((String) cartDto.getCartProductQuantity());
             result = price * count;
 
-            Log.d(TAG,"result : " + result);
+            Log.d(TAG,"OnBind result : " + result);
             DecimalFormat myFormatter = new DecimalFormat("###,###");
             String formattedStringPrice = myFormatter.format(result);
             productPrice.setText(formattedStringPrice);
 
+
             //db에서 수량 새로고침
             productQuantity.setText(cartDto.getCartProductQuantity());
+
         }
 
 
