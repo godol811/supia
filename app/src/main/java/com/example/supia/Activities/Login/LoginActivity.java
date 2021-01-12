@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Adapter.UserAdapter;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
@@ -68,7 +69,7 @@ public class LoginActivity extends Activity {
 
         if(userinfoId.trim().length()!=0){
             ShareVar.sharvarUserId = userinfoId;
-            Intent intent2 = new Intent(LoginActivity.this, UserDataQuestion4.class);//추후에는 참치 쪽으로 이동
+            Intent intent2 = new Intent(LoginActivity.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
             startActivity(intent2);
 
         }

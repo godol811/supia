@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scrollbarThumbHorizontal="@color/white"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소형"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_small_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중형"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_medium_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대형"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_large_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오버나이트"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_overnight_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="라이너"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_liner_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="면생리대"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_cotton_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="라이트"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_lite_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="레귤러"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_regular_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="슈퍼"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_super_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소프트"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_soft_product"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="하드"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_round"
+            android:id="@+id/btn_hard_product"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>
