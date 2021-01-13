@@ -106,6 +106,8 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
         tvProductName.setText(PaymentShareVar.paymentProductName);
         tvProductQuantity.setText("총 " + Integer.toString(PaymentShareVar.totalQuantity)+"개");
 
+
+
         //배송지 관련--ß
 
         if (strDeliveryAddr != null) {

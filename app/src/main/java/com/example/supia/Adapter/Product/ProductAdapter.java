@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.Activities.Product.CartInsertActivity;
 import com.example.supia.Activities.Product.LikeActivity;
+import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Dto.Product.ProductDto;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -31,6 +33,14 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder>{
     final static String TAG = "어뎁터";
+
+
+
+    //
+    private OnChangeCheckedPrice onChangeCheckedPrice;
+
+
+
 
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
 
@@ -55,10 +65,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
 
+
     public ProductAdapter(Context mContext, int layout, ArrayList<ProductDto> data) {
         this.mContext = mContext;
         this.layout = layout;
         this.mDataset = data;
+
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -88,7 +100,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         holder.onBind(mDataset.get(position));
-
 
 
 

@@ -1,5 +1,5 @@
 package com.example.supia.Activities.Product;
 
-public class OnChangeCheckedPrice {
+public interface OnChangeCheckedPrice {
     void changedPrice(int totalPrice);
 }

@@ -28,7 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 
-public class CartActivity extends Activity {
+public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
     private RecyclerView recyclerView = null;
 
@@ -151,7 +151,7 @@ public class CartActivity extends Activity {
             cart = (ArrayList<CartDto>) obj;
 
 
-            adapter = new CartAdapter(CartActivity.this, R.layout.listlayout_cart, cart);
+            adapter = new CartAdapter(CartActivity.this, R.layout.listlayout_cart, cart, this);
             recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
@@ -160,4 +160,9 @@ public class CartActivity extends Activity {
     }
 
 
+    @Override
+    public void changedPrice(int totalPrice) {
+
+        payment.setText("총" + totalPrice +"원 주문하기");
+    }
 }
