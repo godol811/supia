@@ -269,7 +269,7 @@ public class SignUpActivity extends Activity {
             macIp = "192.168.35.147";
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
 
-            urlAddr = urlAddr + "userinfoId=" + strId;//jsp에 ID값 Request할 수 있게 페이지 설정.
+            urlAddr = urlAddr + "userId=" + strId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
             UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr,"select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
@@ -309,11 +309,12 @@ public class SignUpActivity extends Activity {
             String strId = userinfoId.getText().toString().trim();
             String strPw = userinfoPw.getText().toString().trim();
             String strTel = userinfoTel.getText().toString().trim();
-            String strAddr = userinfoAddr.getText().toString().trim() + " " + userinfoAddrDetail.getText().toString().trim();
+            String strAddr = userinfoAddr.getText().toString().trim();
+            String strAddrDetail = userinfoAddrDetail.getText().toString().trim();
 
             macIp = "192.168.35.147";
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + strId + "&userPw=" + strPw + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userPlatform=normal";
+            urlAddr = urlAddr + "userId=" + strId + "&userPw=" + strPw + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail +"&userPlatform=normal";
 
 
             try {

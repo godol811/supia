@@ -36,6 +36,12 @@ public class MainCalendar extends FragmentActivity {
     public String Dday;
     public String strcalendarStratDate, strcalendarFinishDate, strcalendarDeliveryDate, strcalendarBirthDate;
 
+    String[] strarray;
+    String[] strarray2;
+    String[] strarray3;
+    String[] strarray4;
+
+
     private HashSet<CalendarDay> dates;
 
     public static String TAG = "메인캘린더";
@@ -76,10 +82,10 @@ public class MainCalendar extends FragmentActivity {
         strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
         Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
 
-        String[] strarray = strcalendarStratDate.split("-");
-        String[] strarray2 = strcalendarFinishDate.split("-");
-        String[] strarray3 = strcalendarDeliveryDate.split("-");
-        String[] strarray4 = strcalendarBirthDate.split("-");
+        strarray = strcalendarStratDate.split("-");
+        strarray2 = strcalendarFinishDate.split("-");
+        strarray3 = strcalendarDeliveryDate.split("-");
+        strarray4 = strcalendarBirthDate.split("-");
 
         intdelyear = Integer.parseInt(strarray[0]);
         intdelmonth = Integer.parseInt(strarray[1]) - 1;

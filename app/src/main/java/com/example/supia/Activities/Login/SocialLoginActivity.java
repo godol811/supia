@@ -14,10 +14,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 
+import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
+import com.kakao.sdk.template.model.Social;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,9 @@ public class SocialLoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_login);
 
+        connectIdCheck();//전에 상세정보 등록했는지 파악하는 메소드
+
+
         buttonSocialSignUp = findViewById(R.id.signUpButton_signup_social);
         buttonSocialSignUp.setOnClickListener(mOnclickListener);
         userId = findViewById(R.id.userid_social);
@@ -50,7 +55,7 @@ public class SocialLoginActivity extends Activity {
         agreementCheckBox = findViewById(R.id.Agreement_social);
 
         Intent intent = getIntent();
-        userId.setText(intent.getStringExtra("userId"));
+        userId.setText(ShareVar.sharvarUserId);
 
 
         //---------------------------------------------------주소API--------------------------------------------//
@@ -144,11 +149,11 @@ public class SocialLoginActivity extends Activity {
         if (userAddr.getText() != null) {
             String strId = userId.getText().toString().trim();
             String strTel = userTel.getText().toString().trim();
-            String strAddr = userAddr.getText().toString().trim() + " " + userAddrDetail.getText().toString().trim();
+            String strAddr = userAddr.getText().toString().trim();
+            String strAddrDetail = userAddrDetail.getText().toString().trim();
 
-            macIp = "192.168.35.147";
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserSocialUpdate.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + strId + "&userTel=" + strTel + "&userAddr=" + strAddr;
+            urlAddr = urlAddr + "userId=" + strId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail ;
 
             Log.v(TAG, urlAddr);
             try {
@@ -175,6 +180,34 @@ public class SocialLoginActivity extends Activity {
                     .show();
         }
     }
+
+
+    private void connectIdCheck() {
+        Log.v(TAG, "connectGetData()");
+        try {
+            urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
+            Log.v(TAG, urlAddr);
+            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"select");
+            Object obj = networkTask.execute().get(); //obj를 받아들여서
+            userDtos = (ArrayList<UserDto>) obj; //userInfoDtos 다시 풀기
+
+
+            String strUserAddr = userDtos.get(0).getUserAddr();
+            Log.d(TAG,Integer.toString(strUserAddr.trim().length()));
+            if(!strUserAddr.equals("null")){
+                Intent intent = new Intent(SocialLoginActivity.this, MainCalendar.class);
+                startActivity(intent);
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 
