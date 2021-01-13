@@ -16,11 +16,11 @@ import java.util.HashSet;
 
 
 public class EventDecoratorDraw implements DayViewDecorator {
-    private final Drawable drawable;
+    //private final Drawable drawable;
     private final HashSet<CalendarDay> dates;
 
-    public EventDecoratorDraw(Collection<CalendarDay> dates, Activity context) {
-        drawable = ResourcesCompat.getDrawable((Resources.getSystem()) , R.drawable.birth, null);
+    public EventDecoratorDraw(Collection<CalendarDay> dates) {
+       // drawable = ResourcesCompat.getDrawable((Resources.getSystem()) , R.drawable.calendar_select_background, null);
 
         this.dates = new HashSet<>(dates);
 
@@ -35,7 +35,8 @@ public class EventDecoratorDraw implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.setSelectionDrawable(drawable);
+        view.addSpan(R.drawable.calendar_background);
+        //view.addSpan(drawable);
 
     }
 

@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.supia.Dto.Product.CartDto;
+import com.example.supia.Dto.Product.ProductDto;
 import com.example.supia.Dto.UserDeliveryAddrDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
@@ -29,6 +31,10 @@ public class PurchaseCheckActivity extends Activity {
     int intentIndex = 3;
     String strPayMethod = "";
     ArrayList<UserDeliveryAddrDto> user;
+
+
+    ArrayList<CartDto> list;
+
 
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
@@ -66,6 +72,8 @@ public class PurchaseCheckActivity extends Activity {
         btnPaymentMethod.setOnClickListener(mOnclickListener);
         btnDeliveryAddressModify.setOnClickListener(mOnclickListener);
 
+
+
         if (strDeliveryTel != null) {
 
             tvDeliveryAddress.setText(strDeliveryAddr);
@@ -76,6 +84,34 @@ public class PurchaseCheckActivity extends Activity {
             getDeliveryAddress();
 
         }
+
+
+
+
+        /**
+         *  1월 13일 인우추가
+         *  장바구니에서 보내는값 받기
+         */
+
+        list = (ArrayList<CartDto>) intent.getSerializableExtra("cartData");
+
+        for (int i = 0; i < list.size(); i++){
+
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartProductId()));
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartProductName()));
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartProductQuantity()));
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartProductPrice()));
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartProductImagePath()));
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartUserId()));
+            Log.d(TAG, "PurchaseCheckActivity 메소드 사용 : " + String.valueOf(list.get(i).getCartNo()));
+
+
+        }
+
+
+
+
+
 
 
     }

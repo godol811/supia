@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 
 public class PaymentModifyActivity extends AppCompatActivity {
 
@@ -91,14 +92,14 @@ public class PaymentModifyActivity extends AppCompatActivity {
                     if (strWay.equals("normal")) {
                         String strBank = spinnerBank.getSelectedItem().toString().trim();
                         Intent intent1 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
-                        intent1.putExtra("ITEM", strBank);
-                        intent1.putExtra("PAYMETHOD", "계좌이체/무통장입금");
+                        PaymentShareVar.payMethodItem= strBank;
+                        PaymentShareVar.payMethod = "계좌이체/무통장입금";
                         startActivity(intent1);
                     } else {
                         String strBank = spinnerBank.getSelectedItem().toString().trim();
                         Intent intent1 = new Intent(PaymentModifyActivity.this, RegularPurchaseCheckActivity.class);
-                        intent1.putExtra("ITEM", strBank);
-                        intent1.putExtra("PAYMETHOD", "계좌이체/무통장입금");
+                        PaymentShareVar.payMethodItem= strBank;
+                        PaymentShareVar.payMethod = "계좌이체/무통장입금";
                         startActivity(intent1);
 
                     }
@@ -108,14 +109,14 @@ public class PaymentModifyActivity extends AppCompatActivity {
                     if (strWay.equals("normal")) {
                         String strCard = spinnerCard.getSelectedItem().toString().trim();
                         Intent intent2 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
-                        intent2.putExtra("ITEM", strCard);
-                        intent2.putExtra("PAYMETHOD", "신용/체크카드");
+                        PaymentShareVar.payMethodItem= strCard;
+                        PaymentShareVar.payMethod = "신용/체크카드";
                         startActivity(intent2);
                     } else {
                         String strCard = spinnerCard.getSelectedItem().toString().trim();
                         Intent intent2 = new Intent(PaymentModifyActivity.this, RegularPurchaseCheckActivity.class);
-                        intent2.putExtra("ITEM", strCard);
-                        intent2.putExtra("PAYMETHOD", "신용/체크카드");
+                        PaymentShareVar.payMethodItem= strCard;
+                        PaymentShareVar.payMethod = "신용/체크카드";
                         startActivity(intent2);
                     }
                     break;
@@ -123,14 +124,14 @@ public class PaymentModifyActivity extends AppCompatActivity {
                     if (strWay.equals("normal")) {
                         String strPhone = spinnerPhone.getSelectedItem().toString().trim();
                         Intent intent3 = new Intent(PaymentModifyActivity.this, PurchaseCheckActivity.class);
-                        intent3.putExtra("ITEM", strPhone);
-                        intent3.putExtra("PAYMETHOD", "휴대폰");
+                        PaymentShareVar.payMethodItem= strPhone;
+                        PaymentShareVar.payMethod = "휴대폰";
                         startActivity(intent3);
                     } else {
                         String strPhone = spinnerPhone.getSelectedItem().toString().trim();
                         Intent intent3 = new Intent(PaymentModifyActivity.this, RegularPurchaseCheckActivity.class);
-                        intent3.putExtra("ITEM", strPhone);
-                        intent3.putExtra("PAYMETHOD", "휴대폰");
+                        PaymentShareVar.payMethodItem= strPhone;
+                        PaymentShareVar.payMethod = "휴대폰";
                         startActivity(intent3);
 
                     }

@@ -36,10 +36,7 @@ public class MainCalendar extends FragmentActivity {
     public String Dday;
     public String strcalendarStratDate, strcalendarFinishDate, strcalendarDeliveryDate, strcalendarBirthDate;
 
-    String[] strarray;
-    String[] strarray2;
-    String[] strarray3;
-    String[] strarray4;
+
 
 
     private HashSet<CalendarDay> dates;
@@ -82,10 +79,10 @@ public class MainCalendar extends FragmentActivity {
         strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
         Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
 
-        strarray = strcalendarStratDate.split("-");
-        strarray2 = strcalendarFinishDate.split("-");
-        strarray3 = strcalendarDeliveryDate.split("-");
-        strarray4 = strcalendarBirthDate.split("-");
+        String [] strarray = strcalendarStratDate.split("-");
+        String [] strarray2 = strcalendarFinishDate.split("-");
+        String [] strarray3 = strcalendarDeliveryDate.split("-");
+        String [] strarray4 = strcalendarBirthDate.split("-");
 
         intdelyear = Integer.parseInt(strarray[0]);
         intdelmonth = Integer.parseInt(strarray[1]) - 1;
@@ -112,7 +109,7 @@ public class MainCalendar extends FragmentActivity {
 
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intdelyear, intdelmonth, intdelday));
-        materialCalendarView_main.addDecorator(new EventDecorator(Color.MAGENTA, Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
+        materialCalendarView_main.addDecorator(new EventDecoratorDraw(Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_main.addDecorator(new EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));

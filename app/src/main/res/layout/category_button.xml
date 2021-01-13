@@ -81,17 +81,6 @@
             android:visibility="gone"
             />
 
-        <Button
-            android:backgroundTint="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="면생리대"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_round"
-            android:id="@+id/btn_cotton_product"
-            android:visibility="gone"
-            />
 
         <Button
             android:backgroundTint="@color/white"
@@ -104,6 +93,7 @@
             android:id="@+id/btn_lite_product"
             android:visibility="gone"
             />
+
 
         <Button
             android:backgroundTint="@color/white"

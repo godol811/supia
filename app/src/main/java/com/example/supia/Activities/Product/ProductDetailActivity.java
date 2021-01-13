@@ -20,6 +20,7 @@ import com.example.supia.Adapter.Product.CartAdapter;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
@@ -31,7 +32,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     final static String TAG ="프로덕트 디테일 엑티비티";
 
     TextView tvMinusBottomsheet, tvProductQuantityNumBottomsheet, tvPlusBottomsheet;
-    Button  btnCartAdd, btnBuy;
+    Button btnCartAdd, btnBuy;
 
 
     int productNo;
@@ -55,22 +56,21 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         //값 받아오기
         Intent intent = getIntent();
-        urlIp= intent.getStringExtra("urlIp");
+        urlIp = intent.getStringExtra("urlIp");
         productNo = intent.getIntExtra("productNo", 0);
-        productName= intent.getStringExtra("productName");
-        productPrice= intent.getStringExtra("productPrice");
-        productBrand= intent.getStringExtra("productBrand");
-        productImagePath= intent.getStringExtra("productImagePath");
-
+        productName = intent.getStringExtra("productName");
+        productPrice = intent.getStringExtra("productPrice");
+        productBrand = intent.getStringExtra("productBrand");
+        productImagePath = intent.getStringExtra("productImagePath");
 
 
         //탭
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        adapter.addFragment(new ProductDetilFragment(urlIp,productNo,productName,productPrice,productBrand,productImagePath), "상품설명");
+        adapter.addFragment(new ProductDetilFragment(urlIp, productNo, productName, productPrice, productBrand, productImagePath), "상품설명");
         adapter.addFragment(new PurchaseFragment(), "구매정보");
-        adapter.addFragment(new ReviewFragment(urlIp,productNo), "리뷰");
-        adapter.addFragment(new QnAFragment(urlIp,productNo,productName), "Q & A");
+        adapter.addFragment(new ReviewFragment(urlIp, productNo), "리뷰");
+        adapter.addFragment(new QnAFragment(urlIp, productNo, productName), "Q & A");
         mViewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -86,7 +86,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvMinusBottomsheet.setOnClickListener(minusClick);
         tvPlusBottomsheet.setOnClickListener(plusClick);
         //---
-
 
 
 //-------바텀시트--------
@@ -134,7 +133,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         .setCancelable(true)
                         .show();
 
-                quantityNum = Integer.toString(quanNum-1);
+                quantityNum = Integer.toString(quanNum - 1);
                 tvProductQuantityNumBottomsheet.setText(quantityNum);
 
             }
@@ -152,15 +151,15 @@ public class ProductDetailActivity extends AppCompatActivity {
             String quantityNum = Integer.toString(quanNum);
             tvProductQuantityNumBottomsheet.setText(quantityNum);
 
-            if (quanNum == 0){
+            if (quanNum == 0) {
                 new AlertDialog.Builder(ProductDetailActivity.this)
                         .setTitle("경고")
                         .setMessage("최소 구입 수량은 1개 입니다")
-                        .setPositiveButton("확인",null)
+                        .setPositiveButton("확인", null)
                         .setCancelable(true)
                         .show();
 
-                quantityNum = Integer.toString(quanNum+1);
+                quantityNum = Integer.toString(quanNum + 1);
                 tvProductQuantityNumBottomsheet.setText(quantityNum);
             }
 
@@ -172,11 +171,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
+            productQuantity = Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
 
-            urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
-            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
-                    +"&productImagePath=" + productImagePath;
+            urlAddr = "http://" + urlIp + ":8080/test/insertcart.jsp?";
+            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity + "&productPrice=" + productPrice + "&productName=" + productName
+                    + "&productImagePath=" + productImagePath;
             connectGetData();
 
             Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
@@ -190,7 +189,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     View.OnClickListener buyClcick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            productQuantity= Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
+            productQuantity = Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
 
             new AlertDialog.Builder(ProductDetailActivity.this)
                     .setMessage("지금 선택하신 정보로 정기구독이\n 가능합니다.\n\n 정기구독을 만나보세요")
@@ -199,10 +198,11 @@ public class ProductDetailActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             Intent intent = new Intent(ProductDetailActivity.this, PurchaseCheckActivity.class);
-                            intent.putExtra("productNo", productNo);
-                            intent.putExtra("productName", productName);
-                            intent.putExtra("productPrice", productPrice);
-                            intent.putExtra("productQuantity", productQuantity);
+                            PaymentShareVar.paymentProductNo = productNo;
+                            PaymentShareVar.paymentProductName = productName;
+                            PaymentShareVar.paymentProductPrice = productPrice;
+                            PaymentShareVar.paymentProductQuantity = productQuantity;
+
                             startActivity(intent);
 
                         }
@@ -211,14 +211,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(ProductDetailActivity.this, RegularPurchaseCheckActivity.class);
-                            intent.putExtra("productNo", productNo);
-                            intent.putExtra("productName", productName);
-                            intent.putExtra("productPrice", productPrice);
-                            intent.putExtra("productQuantity", productQuantity);
+                            PaymentShareVar.paymentProductNo = productNo;
+                            PaymentShareVar.paymentProductName = productName;
+                            PaymentShareVar.paymentProductPrice = productPrice;
+                            PaymentShareVar.paymentProductQuantity = productQuantity;
                             startActivity(intent);
                         }
                     })
-                    .setNeutralButton("취소",null)
+                    .setNeutralButton("취소", null)
                     .setCancelable(true)
                     .show();
         }

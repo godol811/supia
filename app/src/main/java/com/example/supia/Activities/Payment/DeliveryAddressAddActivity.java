@@ -17,6 +17,7 @@ import com.example.supia.Activities.Login.AddressWebViewActivity;
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.text.DateFormat;
@@ -117,17 +118,19 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
                                                         String strDeliveryName = deliveryName.getText().toString();
                                                         if (strWay.equals("normal")) {
                                                             Intent intent = new Intent(DeliveryAddressAddActivity.this, PurchaseCheckActivity.class);
-                                                            intent.putExtra("deliveryAddr", strDeliveryAddr);
-                                                            intent.putExtra("deliveryAddrDetail", strDeliveryAddrDetail);
-                                                            intent.putExtra("deliveryTel", strDeliveryTel);
-                                                            intent.putExtra("deliveryName", strDeliveryName);
+                                                            intent.putExtra("prepared","prepared");
+                                                            PaymentShareVar.deliveryAddr = strDeliveryAddr;
+                                                            PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
+                                                            PaymentShareVar.deliveryTel = strDeliveryTel;
+                                                            PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
                                                         }else {
                                                             Intent intent = new Intent(DeliveryAddressAddActivity.this, RegularPurchaseCheckActivity.class);
-                                                            intent.putExtra("deliveryAddr", strDeliveryAddr);
-                                                            intent.putExtra("deliveryAddrDetail", strDeliveryAddrDetail);
-                                                            intent.putExtra("deliveryTel", strDeliveryTel);
-                                                            intent.putExtra("deliveryName", strDeliveryName);
+                                                            intent.putExtra("prepared","prepared");
+                                                            PaymentShareVar.deliveryAddr = strDeliveryAddr;
+                                                            PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
+                                                            PaymentShareVar.deliveryTel = strDeliveryTel;
+                                                            PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
 
                                                         }

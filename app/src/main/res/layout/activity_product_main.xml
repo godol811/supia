@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <!-- 배너 추가 -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -36,7 +37,11 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+
         </androidx.cardview.widget.CardView>
+
+
     </LinearLayout>
 
     <LinearLayout

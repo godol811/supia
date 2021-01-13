@@ -8,6 +8,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.example.supia.ShareVar.ShareVar;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder>{
     final static String TAG = "어뎁터";
@@ -49,7 +51,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
     String urlAddr = "http://"+ ShareVar.urlIp+":8080/pictures/";
-
 
 
 
@@ -87,6 +88,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         holder.onBind(mDataset.get(position));
+
+
 
 
 
@@ -136,7 +139,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 null");
                             holder.likeListbtn.setImageResource(R.drawable.like_click);
                             Intent intent = new Intent(v.getContext(), LikeActivity.class);
-                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                             intent.putExtra("likeCheck", likeCheck);
                             v.getContext().startActivity(intent);
