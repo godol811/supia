@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -55,10 +56,10 @@ public class datePicker extends Dialog {
         btnCancle = findViewById(R.id.btn_cancle_datepicker_calendar);
         datePicker = findViewById(R.id.datepicker_calendar);
 
-
         year = datePicker.getYear();
         month = datePicker.getMonth();
         dayOfMonth = datePicker.getDayOfMonth();//데이트피커에서 날짜를 가져옴
+
         checkDay(year, month, dayOfMonth);//가져온 날짜에 하이픈을 첨가하여 "yyyy-mm-dd" 형태로 만듬
 
         menstruationStart = checkDay(year, month, dayOfMonth);
@@ -67,18 +68,21 @@ public class datePicker extends Dialog {
 
         myDBHelper = new myDBHelper(datePicker.getContext());
 
-        datePicker.setOnDateChangedListener((view, year1, monthOfYear, dayOfMonth1) -> {
-            checkDay(year1, monthOfYear, dayOfMonth1);
+        datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
+            checkDay(year, monthOfYear, dayOfMonth);
+            Log.v(TAG, "ㅇㅇㅇ"+menstruationStart);
         });//날짜 클릭시 데이터값 변경
-
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sqlDB = myDBHelper.getWritableDatabase();
                 sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
+                Log.v(TAG, "입력날짜:"+menstruationStart+menstruationEnd);
                 sqlDB.close();
+                Toast.makeText(context, "입력되었습니다.", Toast.LENGTH_SHORT).show();
             }
+
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {

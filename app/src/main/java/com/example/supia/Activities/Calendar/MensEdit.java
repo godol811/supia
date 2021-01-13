@@ -27,6 +27,7 @@ public class MensEdit extends Dialog {
     TextView tvToday;
     Button btnInsert, btnUpdate, btnDelete;
     ImageButton btnCancle;
+    //String menstruationStart, menstruationEnd;
     String menstruationStart, menstruationEnd;
     public String CurrentStartDay, LastFinishDay;
     int year, month, dayOfMonth;
@@ -69,8 +70,10 @@ public class MensEdit extends Dialog {
 
         menstruationStart = checkDay(year, month, dayOfMonth);
         Log.v(TAG, "오오오" + menstruationStart);
-        //menstruationEnd = checkDay(year, month, dayOfMonth);
+        menstruationEnd = checkDay(year, month, dayOfMonth);
         Log.v(TAG, "오오오" + menstruationEnd);
+
+//        myDBHelper = new myDBHelper(materialCalendarView.getContext());
 
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +147,7 @@ public class MensEdit extends Dialog {
 //        dates = (HashSet<CalendarDay>) obj;
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE supiamensterm (mStart DATE(20), mEnd DATE(20));");
+            db.execSQL("CREATE TABLE supiamensterm (mStart VAR(20), mEnd VAR(20));");
         }
 
         @Override
