@@ -20,10 +20,11 @@ String userId;
 
     }
 
-    public CalendarDTO(String userId, String calendarStartDate, String calendarFinishDate) {
-        this.userId = userId;
+
+    public CalendarDTO(String calendarBirthDate, String calendarStartDate, String calendarFinishDate) {
         this.calendarStartDate = calendarStartDate;
         this.calendarFinishDate = calendarFinishDate;
+        this.calendarBirthDate = calendarBirthDate;
     }
 
     public CalendarDTO(String calendarDeliveryDate, String userId) {
