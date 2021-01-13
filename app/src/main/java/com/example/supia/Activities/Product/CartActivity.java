@@ -65,6 +65,8 @@ public class CartActivity extends Activity {
         payment = findViewById(R.id.tv_payment_cart);
 
 
+
+
         multipleCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -87,9 +89,7 @@ public class CartActivity extends Activity {
                 Log.d(TAG,"여기에 넣어줘야됨");
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
 
-
-
-//                adapter.sendDate();
+//              adapter.sendDate();
 
                 adapter.connectDeleteData();
                 connectGetData();
@@ -139,6 +139,8 @@ public class CartActivity extends Activity {
 //        connectGetData();
         registerForContextMenu(recyclerView);
     }
+
+
 
     private void connectGetData() {
         try {

@@ -142,7 +142,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rl_product_category"
+            android:id="@+id/rl_product_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
