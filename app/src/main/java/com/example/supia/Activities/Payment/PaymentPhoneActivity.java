@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.text.DateFormat;
@@ -33,11 +34,11 @@ public class PaymentPhoneActivity extends Activity {
     String urlAddr = null;
     String urlIp = null;
     String strOrderDate;
-    String strOrderQuantity;
+    int intOrderQuantity;
     String strOrderAddr;
     String strOrderAddrDetail;
     String strOrderPayment;
-    String strOrderTotalPrice;
+    int intOrderTotalPrice;
     String userId;
     String productId;
     String strItem;
@@ -51,15 +52,10 @@ public class PaymentPhoneActivity extends Activity {
 
 
         Intent intent = getIntent();
-        strItem = intent.getStringExtra("ITEM");
-        userId = intent.getStringExtra("userId");
-        strOrderAddr = intent.getStringExtra("orderAddr");
+        strItem = PaymentShareVar.payMethodItem;
+
         strWay = intent.getStringExtra("way");
-        strOrderAddrDetail = intent.getStringExtra("orderAddrDetail");
-        strOrderQuantity = "1";//intent.getStringExtra("orderQuantity");
-        strOrderTotalPrice = "1"; // intent.getStringExtra("orderTotalPrice");
-        productId = "1"; //intent.getStringExtra("productId");
-        strOrderTel = intent.getStringExtra("orderTel");
+
 
         phoneItem = findViewById(R.id.tv_itemselected_paymentPhone);
         phoneItem.setText(strItem);
@@ -127,8 +123,10 @@ public class PaymentPhoneActivity extends Activity {
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                     String today = df.format(calendar.getTime());//파일에도 날짜를 넣기위한 메소드
 
-                    urlIp = ShareVar.urlIp;
-                    urlAddr = "http://" + urlIp + ":8080/test/supiaUserOrderInsert.jsp?";//바로 삭제 할 수 있도록 한다.(따로 페이지 필요 X)
+                    if(strWay.equals("normal")) urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";//일반 결제
+                    else urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserRegularOrderInsert.jsp?";//정기결제
+
+
                     if (phoneNumber.getText().toString().trim().length() == 13) {
                         new AlertDialog.Builder(PaymentPhoneActivity.this)
                                 .setTitle("구매")
@@ -138,8 +136,9 @@ public class PaymentPhoneActivity extends Activity {
                                 .setNegativeButton("예", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + strOrderQuantity + "&orderAddr=" + strOrderAddr + "&orderAddrDetail=" + strOrderAddrDetail
-                                                + "&orderPayment=" + "휴대폰" + "&orderTotalPrice=" + strOrderTotalPrice + "&userId=" + userId + "&productId=" + productId + "&orderTel=" + strOrderTel;
+                                        urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + PaymentShareVar.paymentProductQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
+                                                + "&orderPayment=" + "핸드폰" + "&orderTotalPrice=" + PaymentShareVar.totalPayment + "&userId=" + ShareVar.sharvarUserId + "&productId="
+                                                + PaymentShareVar.paymentProductNo + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + PaymentShareVar.paymentProductName+"&subscribeProductPrice=" + PaymentShareVar.paymentProductPrice  ;
                                         connectInsertData();
 
                                         new AlertDialog.Builder(PaymentPhoneActivity.this)

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.supia.NetworkTask.NetworkTaskQnA;
 import com.example.supia.NetworkTask.Product.NetworkTaskProduct;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
 public class WriteQnAActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class WriteQnAActivity extends AppCompatActivity {
     Button btnCancle , btnOk;
 
     String urlAddr = null;
+    String userId = ShareVar.sharvarUserId;
     String urlIp;
     int productNo;
     String productName;
@@ -99,7 +101,7 @@ public class WriteQnAActivity extends AppCompatActivity {
                             //sql에 넣을 값
                             String productNameQna  = tvProductNameQnawrite.getText().toString();
                             String qnaContent = etWriteQnawrite.getText().toString();
-                            String userId = "sibal1";
+
 
                             urlAddr = urlAddr + "qnaContent=" + qnaContent + "&userId=" + userId + "&productName=" + productNameQna;
                             connectInsertData();

@@ -27,7 +27,7 @@ public class MyInfoActivity extends Activity {
     String userId = ShareVar.sharvarUserId;
 
     TextView myInfoName, myInfoId, myInfoTel, myInfoPw;
-    EditText etPw, etPwCh;
+    EditText etPw, etPwCh; //커스텀 다이얼로그 EditText
     String strMyInfoUserName, strMyInfoUserPw, strMyInfoUserTel, strMyInfoUserAddr; // 인텐트 받아오기위한 string
     Button changePwBtn;
     final String pwChange = "";

@@ -19,28 +19,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="11dp"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="카드 번호 입력"
-            android:textSize="20dp"
+            android:textSize="18dp"
             />
 
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="30dp"
+            android:layout_marginTop="15dp"
             android:text="카드사"
             android:background="#bad23a"
-            android:gravity="center|top"
+            android:gravity="center"
             android:id="@+id/tv_itemselected_paymentCard"
             />
-
-
-
 
     </LinearLayout>
 
@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="35dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -69,9 +70,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-0.25dp"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            tools:ignore="NegativeMargin">
+            tools:ignore="NegativeMargin"
+            >
 
             <EditText
                 android:id="@+id/cardDateEditText"
@@ -109,7 +111,7 @@
     </LinearLayout>
 
     <Button
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="340dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="확인"

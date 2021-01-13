@@ -22,7 +22,6 @@
                 android:id="@+id/cbSelect_listlayout_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 />
 
             <ImageView
@@ -74,12 +73,14 @@
                 <Button
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:text="+"
-                    android:layout_gravity="center_vertical"
+                    android:text="-"
                     android:background="@color/white"
+                    android:layout_gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:id="@+id/plus_btn_listlayout_cart"
+                    android:id="@+id/minus_btn_listlayout_cart"
                     />
+
+
                 <TextView
                     android:id="@+id/tv_productQuantity_listlayout_cart"
                     android:layout_width="wrap_content"
@@ -89,36 +90,42 @@
                     android:layout_gravity="center_vertical"
                     />
 
+
+
                 <Button
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:text="-"
-                    android:background="@color/white"
+                    android:text="+"
                     android:layout_gravity="center_vertical"
+                    android:background="@color/white"
                     android:textColor="@color/black"
-                    android:id="@+id/minus_btn_listlayout_cart"
+                    android:id="@+id/plus_btn_listlayout_cart"
                     />
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
+                <!-- 비상용 삭제 버튼 -->
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:text="X"
-                        android:background="@color/white"
-                        android:textColor="#BAD23A"
-                        android:id="@+id/delete_Btn_listlayout_cart"/>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:gravity="center"-->
+<!--                    >-->
 
 
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:text="X"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:textColor="#BAD23A"-->
+<!--                        android:id="@+id/delete_tv_listlayout_cart"/>-->
+
+
+<!--                </LinearLayout>-->
+
+
             </LinearLayout>
             </LinearLayout>
 

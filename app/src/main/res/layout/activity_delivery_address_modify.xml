@@ -16,7 +16,7 @@
         android:layout_weight="2"
         android:gravity="center"
         android:text="배송지 변경"
-        android:textSize="40dp"
+        android:textSize="24dp"
         android:textColor="#bad23a"/>
 
 
@@ -41,6 +41,7 @@
 
     <LinearLayout
         android:id="@+id/input_layout_address_detail"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -92,23 +93,26 @@
         android:id="@+id/btn_changeDeliveryAddr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:text="주소 변경하기 "
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_long"
         android:backgroundTint="#bad23a"/>
 
     <Button
         android:id="@+id/btn_deleteDeliveryAddr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:text="주소 삭제하기 "
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_long"
         android:backgroundTint="#bad23a"/>
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:text="뒤로가기 "
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_long"
         android:backgroundTint="#bad23a"/>
 
 

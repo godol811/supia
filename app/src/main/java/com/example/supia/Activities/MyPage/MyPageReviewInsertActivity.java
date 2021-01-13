@@ -46,6 +46,7 @@ public class MyPageReviewInsertActivity extends Activity {
     String url;
     String urlIp = ShareVar.urlIp;
     int reviewOrderId;
+    String userId = ShareVar.sharvarUserId;
 
     EditText etWriteReviewwrite;
     TextView tvCharnumReviewwrite, tvProductNameReviewwrite;
@@ -141,7 +142,7 @@ public class MyPageReviewInsertActivity extends Activity {
             String reviewContent = etWriteReviewwrite.getText().toString();
             String reviewTitle = rbReviewTitle;
 
-            url = "http://" + urlIp + ":8080/test/supiaReviewInsert.jsp?reviewContent=" + reviewContent + "&reviewTitle=" + reviewTitle + "&productNo=" + reviewProductNo + "&orderId=" + reviewOrderId + "&productName=" + reviewProductName;
+            url = "http://" + urlIp + ":8080/test/supiaReviewInsert.jsp?reviewContent=" + reviewContent + "&reviewTitle=" + reviewTitle + "&productNo=" + reviewProductNo + "&orderId=" + reviewOrderId + "&productName=" + reviewProductName + "&userId="+userId;
             Log.v("보내유", url);
             connectInsertData();
 

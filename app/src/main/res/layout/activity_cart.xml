@@ -18,13 +18,14 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:text="장바구니"
             android:textSize="34sp"
             android:textColor="#BAD23A"
             android:layout_marginTop="10dp"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,24 +34,33 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="정기구독"
-            android:textSize="34sp"
-            android:textColor="#BAD23A"
-            android:layout_margin="10dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="일반주문"
-            android:textSize="34sp"
+            android:textSize="20sp"
             android:textColor="#A6A6A3"
             android:layout_margin="10dp"
+            android:gravity="center"
             />
 
 
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_allselect_cart"
+        android:text="전체선택"
+        />
 
     </LinearLayout>
 
@@ -70,6 +80,37 @@
             android:choiceMode="multipleChoice"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_marginTop="15dp">
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="삭제"
+            android:gravity="center_vertical|center"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:id="@+id/tv_delete_cart"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="결제"
+            android:gravity="center_vertical|center"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:id="@+id/tv_payment_cart"
+            />
 
     </LinearLayout>
 

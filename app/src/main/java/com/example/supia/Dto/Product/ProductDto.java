@@ -1,6 +1,8 @@
 package com.example.supia.Dto.Product;
 
-public class ProductDto {
+import java.io.Serializable;
+
+public class ProductDto  {
 
     int productNo;
     String productName;

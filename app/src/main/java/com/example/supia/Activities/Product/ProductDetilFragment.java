@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.R;
 
+import java.text.DecimalFormat;
+
 public class ProductDetilFragment extends Fragment {
 
     private final String TAG = "스크롤 1";
@@ -59,7 +61,7 @@ public class ProductDetilFragment extends Fragment {
 
         tvBrandName.setText(productBrand);
         tvProductName.setText(productName);
-        tvProductPrice.setText(productPrice);
+        tvProductPrice.setText("₩ "+productPrice);
 
         String urlAddr = "http://" + urlIp + ":8080/pictures/";
         Glide.with(ProductDetilFragment.this).
