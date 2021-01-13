@@ -124,7 +124,7 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
                                                             PaymentShareVar.deliveryTel = strDeliveryTel;
                                                             PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
-                                                        }else {
+                                                        }else if(strWay.equals("regular")) {
                                                             Intent intent = new Intent(DeliveryAddressAddActivity.this, RegularPurchaseCheckActivity.class);
                                                             intent.putExtra("prepared","prepared");
                                                             PaymentShareVar.deliveryAddr = strDeliveryAddr;
@@ -132,6 +132,16 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
                                                             PaymentShareVar.deliveryTel = strDeliveryTel;
                                                             PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
+
+                                                        }else {
+                                                            Intent intent = new Intent(DeliveryAddressAddActivity.this, BasketPurchaseCheckActivity.class);
+                                                            intent.putExtra("prepared","prepared");
+                                                            PaymentShareVar.deliveryAddr = strDeliveryAddr;
+                                                            PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
+                                                            PaymentShareVar.deliveryTel = strDeliveryTel;
+                                                            PaymentShareVar.deliveryName = strDeliveryName;
+                                                            startActivity(intent);
+
 
                                                         }
                                                     }
