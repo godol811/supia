@@ -2,6 +2,7 @@ package com.example.supia.Adapter.Product;
 
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -27,10 +28,16 @@ import com.example.supia.ShareVar.ShareVar;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>  implements Checkable {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     final static String TAG = "카트어뎁터";
 
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
+
+
+    public SparseBooleanArray array = new SparseBooleanArray();
+
+
+
 
     Context mContext = null;
     int layout = 0;
@@ -45,13 +52,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     int Counter;
 
-
+    int result;
 
     String urlAddr = "http://"+ ShareVar.urlIp +":8080/pictures/";//Ip
 
 
     private Object ArrayList;
 
+    ArrayList<String> checkd;
 
 
     public CartAdapter(Context mContext, int layout, ArrayList<CartDto> data) {
@@ -82,14 +90,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
      * @param holder
      * @param position
      */
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
 
 
+
         holder.onBind(mDataset.get(position));
 
-        final int pos = position;
+//        final int pos = position;
 
 
         Glide.with(holder.productImg)
@@ -127,15 +137,39 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //버튼 누를때마다 수량 증가
                 holder.productQuantity.setText(String.valueOf(++holder.count));
 
+                holder.count = Integer.parseInt((String) holder.productQuantity.getText());
+
+
+                //price onBind할떄 구한 가격 * 현재 수량
+                result = holder.price *  holder.count;
+
+                Log.d(TAG,"result : " + result);
+
+//                String[] strPrice = holder.price.split(",");
+//                for (int i = 0;i<strPrice.length;i++){
+//                     result = strPrice[i];
+//                    Log.d(TAG,"result : " + result);
+//                }
+                //수량 * 가격 가격에 표시
+                holder.productPrice.setText(Integer.toString(result));
+
+                //가격 , 찍기
+                DecimalFormat myFormatter = new DecimalFormat("###,###");
+                String formattedStringPrice = myFormatter.format(result);
+                holder.productPrice.setText(formattedStringPrice);
+
+                //db에 넘겨줄값
                 int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
                 int cartNo = mDataset.get(position).getCartNo();
+
 
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
                 urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
                 connectGetData();
-
             }
         });
 
@@ -145,13 +179,34 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             public void onClick(View v) {
                 Counter =  Integer.parseInt((String) holder.productQuantity.getText());
                 if (Counter >1){
-
-                    holder.count = Integer.parseInt((String) holder.productQuantity.getText());
+//                    int productQuantity = Integer.parseInt(String.valueOf(holder.productQuantity));
 
                     holder.productQuantity.setText(String.valueOf(--holder.count));
 
+                    holder.count = Integer.parseInt((String) holder.productQuantity.getText());
+
+
+
+                    Log.d(TAG, "마이너스버튼 price : " + String.valueOf(holder.price));
+
+                    result = result - holder.price;
+
+
+                    Log.d(TAG, "productQuantity값 int로 변환 : " + holder.count);
+                    holder.productPrice.setText(Integer.toString(result));
+
+
+
+
+
                     int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
                     int cartNo = mDataset.get(position).getCartNo();
+
+
+                    DecimalFormat myFormatter = new DecimalFormat("###,###");
+                    String formattedStringPrice = myFormatter.format(result);
+                    holder.productPrice.setText(formattedStringPrice);
+
 
                     urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
                     urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
@@ -164,63 +219,35 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
 
 
+        /**
+         * 체크박스 부분
+         */
+
+
         //in some cases, it will prevent unwanted situations
-        holder.cbSelect.setOnCheckedChangeListener(null);
-        holder.cbSelect.isPressed();
+//        holder.cbSelect.setOnCheckedChangeListener(null);
+//        holder.cbSelect.isPressed();
 
 
-        //if true, your checkbox will be selected, else unselected
-//        holder.cbSelect.setChecked(objIncome.isSelected());
-//        holder.cbSelect.setSelected(mDataset.get(position).isSelected());
+        /**
+         * 바인딩 문제는 해결되지만 체크박스가 해제됨, 클릭리스너로 하면된다.
+         */
+        if (array.get(position)) {
+            holder.cbSelect.setChecked(true);
+        } else {
+            holder.cbSelect.setChecked(false);
+        }
 
 
-        holder.cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
 
-//                checked[position] = isChecked;
-
-                String result = (String) ArrayList;
-
-                if (holder.cbSelect.isChecked()) {
-                    Log.d(TAG, "콤보박스 값 선택되는지 확인");
-//                    for (int i = 0; i<items.)
-
-                    result += mDataset.get(position).getCartProductName();
-                    Log.d(TAG, "listItem : " + result);
-//                    Log.d(TAG, "checked : " + checked[position]);
-                } else {
-                }
-            }
-
-        });
-//        holder.cbSelect.setChecked(checked[position]);
 
 
 
     }
 
 
-    /**
-     *
-     * @param checked
-     */
-    @Override
-    public void setChecked(boolean checked) {
 
-    }
-
-    @Override
-    public boolean isChecked() {
-
-        return false;
-    }
-
-    @Override
-    public void toggle() {
-
-    }
 
 
     //인터페이스 선언
@@ -247,9 +274,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     }
 
 
+    /**
+     *
+     *아이템 갯수를 사이즈로 리턴
+     * @return
+     */
+
     @Override
     public int getItemCount() {
+        if (mDataset != null)
         return mDataset.size();
+        else
+        return 0;
     }
 
 
@@ -258,6 +294,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         return position;
     }
 
+
+
+
+
+     /**
+     * 선택한 뷰는 뷰홀더가 가지고있기 때문에
+     * ViewHolder에 Checkable interface를 구현
+     */
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         final static String TAG1 = "MyViewHolder";
@@ -274,7 +318,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         public TextView productName,productPrice,productQuantity,deleteBtn;
         public Button plusBtn, minusBtn;
         public CheckBox cbSelect;
+
+
         int count = 1;
+
+
+        int price;
+
+
+
+
+        private CheckBox[] cb;
+
 
         MyViewHolder(View v) {
 
@@ -309,6 +364,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     }
                 }
             });
+
+            cbSelect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();//어뎁터 포지션값
+                    if (array.get(getAdapterPosition())) {      //!checked
+                        array.put(getAdapterPosition(), false);
+
+                        Log.d(TAG,"체크박스 선택이 취소될 때?");
+                    } else {        //checked
+                        array.put(getAdapterPosition(), true);
+                        String result = (String) ArrayList;
+                        result += mDataset.get(position).getCartProductName();
+                        Log.d(TAG,"체크박스 선택될 때?");
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+
         }
 
 
@@ -318,13 +392,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
              * 상품 이름,가격
              */
 
+
             productName.setText(cartDto.getCartProductName());
+            Log.d(TAG, "if문에 넣어줄값" + String.valueOf(cartDto.getCartProductId()));
+
+            price = Integer.parseInt(cartDto.getCartProductPrice());
+
+
+            price = Integer.parseInt((String) cartDto.getCartProductPrice());
+            count = Integer.parseInt((String) cartDto.getCartProductQuantity());
+            result = price * count;
+
+            Log.d(TAG,"OnBind result : " + result);
             DecimalFormat myFormatter = new DecimalFormat("###,###");
-            String formattedStringPrice = myFormatter.format(Integer.parseInt( cartDto.getCartProductPrice()));
+            String formattedStringPrice = myFormatter.format(result);
             productPrice.setText(formattedStringPrice);
+
 
             //db에서 수량 새로고침
             productQuantity.setText(cartDto.getCartProductQuantity());
+
         }
 
 
@@ -336,12 +423,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         try {
 
             NetworkTaskCart networkTask = new NetworkTaskCart(mContext, urlAddr,"like");
+
             Object obj = networkTask.execute().get();
 
 
-            cart = (ArrayList<CartDto>) obj;
-            adapter = new CartAdapter(mContext, R.layout.listlayout_cart, cart);
-            recyclerView.setAdapter(adapter);
+//            cart = (ArrayList<CartDto>) obj;
+//            adapter = new CartAdapter(mContext, R.layout.listlayout_cart, cart);
+//            recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
             e.printStackTrace();

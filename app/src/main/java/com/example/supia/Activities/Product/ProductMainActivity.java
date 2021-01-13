@@ -121,7 +121,6 @@ public class ProductMainActivity extends AppCompatActivity {
                 case R.id.btn_category1_product:
                     Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
                     String strBtnCategory1 = btnCategory1.getText().toString().trim();
-                    Log.v(TAG, strBtnCategory1);
 
 
                     intent.putExtra("strBtnCategory", strBtnCategory1);
