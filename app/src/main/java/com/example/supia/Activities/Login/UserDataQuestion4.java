@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
@@ -18,11 +20,22 @@ public class UserDataQuestion4 extends Activity {
     final static String TAG = "네번째 질문";
     String userId, strStyle;
     String[] style = {"", "", ""};
-
+    TextView tvSkip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data_question4);
+
+        tvSkip = findViewById(R.id.tv_skip_question4);
+        tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(UserDataQuestion4.this, MainCalendar.class);
+                startActivity(intent1);
+
+            }
+        });
+
 
 
         Intent intent = getIntent();

@@ -144,7 +144,7 @@ public class SocialLoginActivity extends Activity {
         }
     };
 
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     private void moveToQuestion() {
         if (userAddr.getText() != null) {
             String strId = userId.getText().toString().trim();
@@ -181,7 +181,7 @@ public class SocialLoginActivity extends Activity {
         }
     }
 
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     private void connectIdCheck() {
         Log.v(TAG, "connectGetData()");
         try {
