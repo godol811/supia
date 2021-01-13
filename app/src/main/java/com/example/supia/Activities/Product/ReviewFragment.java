@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.supia.Adapter.Product.ProductReviewListAdapter;
 import com.example.supia.Dto.MyPage.MyReviewDto;
 import com.example.supia.NetworkTask.MyPage.MyReviewInsertNetworkTask;
+import com.example.supia.NetworkTask.Product.NetworkTaskBuyCount;
 import com.example.supia.R;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class ReviewFragment extends Fragment {
     private ArrayList<MyReviewDto> list;
     RecyclerView.LayoutManager reviewLayoutManager = null;
 
+    TextView Buycount;
 
 
     public ReviewFragment(String urlIp, int productNo) {
@@ -46,6 +49,8 @@ public class ReviewFragment extends Fragment {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_review, container, false);
 
 
+        Buycount = rootView.findViewById(R.id.buycount_fragmentqna);
+
         list = new ArrayList<MyReviewDto>();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_review_fragmentqna);
         recyclerView.setHasFixedSize(true);
@@ -53,6 +58,8 @@ public class ReviewFragment extends Fragment {
         recyclerView.setLayoutManager(reviewLayoutManager);
 
 
+
+        connectGetDataBuy();
         connectGetData();
         return rootView;
 
@@ -67,6 +74,22 @@ public class ReviewFragment extends Fragment {
             list = (ArrayList<MyReviewDto>) obj;
             adapter = new ProductReviewListAdapter(getContext(), R.layout.activity_my_order, list);
             recyclerView.setAdapter(adapter);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void connectGetDataBuy() {
+        try {
+
+            String reviewUrl = "http://" + urlIp + ":8080/test/supiaBuyCount.jsp?productNo="+productNo;
+            NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getActivity(), reviewUrl, "select");
+            Object obj = networkTask2.execute().get();
+            String cnt = (String) obj;
+            Buycount.setText(cnt);
+
 
 
         } catch (Exception e) {
