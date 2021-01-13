@@ -2,6 +2,7 @@ package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.R;
 
-public class MyCartListActivity extends AppCompatActivity {
+public class MyCartListActivity extends Activity {
 
     //filed
     TextView tvMypage, tvSubscribe, tvOrder; // header
@@ -23,7 +26,6 @@ public class MyCartListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cart_list);
-
 
 
         //----------header 아이디----------//
@@ -46,10 +48,37 @@ public class MyCartListActivity extends AppCompatActivity {
         tvSubscribe.setOnClickListener(subscribeClickListener); //header 정기구독
         tvOrder.setOnClickListener(orderClickListener); //header 주문내역
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         //------------------------------------------//
 
 
     }//-------------onCreate
+
+
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(MyCartListActivity.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 쇼핑몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(MyCartListActivity.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
 
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
@@ -58,7 +87,7 @@ public class MyCartListActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent gotoMainMypage = new Intent(MyCartListActivity.this, MyPageMainActivity.class);
             startActivity(gotoMainMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -68,13 +97,12 @@ public class MyCartListActivity extends AppCompatActivity {
     View.OnClickListener backClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
             onBackPressed();
 
         }
     };
     //-----------------------------------------------------------------------------------//
-
 
 
     //-----------------------------------header OrderList 이동--------------------------------//
@@ -84,7 +112,7 @@ public class MyCartListActivity extends AppCompatActivity {
             Intent headerforOrder = new Intent(MyCartListActivity.this, MyOrderActivity.class);
             tvOrder.setTypeface(tvOrder.getTypeface(), Typeface.BOLD); // 클릭시 글씨 두꺼워짐
             startActivity(headerforOrder);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -97,7 +125,7 @@ public class MyCartListActivity extends AppCompatActivity {
             Intent headerSubscribe = new Intent(MyCartListActivity.this, MySubscribeActivity.class);
             tvSubscribe.setTypeface(tvSubscribe.getTypeface(), Typeface.BOLD);
             startActivity(headerSubscribe);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -110,14 +138,10 @@ public class MyCartListActivity extends AppCompatActivity {
             Intent forMypage = new Intent(MyCartListActivity.this, MyPageMainActivity.class);
             tvMypage.setTypeface(tvMypage.getTypeface(), Typeface.BOLD);
             startActivity(forMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold); //화면전환시 애니메이션 적용
+            overridePendingTransition(R.anim.hold, R.anim.hold); //화면전환시 애니메이션 적용
         }
     };
     //------------------------------------------------------------------------------------//
-
-
-
-
 
 
 }//---------------끝

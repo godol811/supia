@@ -43,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     String likeCheck;
 
     ProductAdapter adapter = null;
-    ArrayList<ProductDto> product;
+
     private RecyclerView recyclerView = null;
 
 
@@ -87,6 +87,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         holder.onBind(mDataset.get(position));
+
+
+
 
 //      상품넘버 저장
         ShareVar.productId = mDataset.get(position).getProductNo();
@@ -175,6 +178,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     Log.d(TAG,"장바구니클릭시 값들어오지는지 확인");
 
                     int productNo = mDataset.get(position).getProductNo();
+
+
                     String productPrice = mDataset.get(position).getProductPrice();
                     String productName = mDataset.get(position).getProductName();
                     String ProductImagePath = mDataset.get(position).getProductImagePath();
@@ -286,6 +291,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             DecimalFormat myFormatter = new DecimalFormat("###,###");
             String formattedStringPrice = myFormatter.format(Integer.parseInt( productDto.getProductPrice()));
             productPrice.setText(formattedStringPrice);
+
+
         }
 
 

@@ -5,10 +5,18 @@ public class UserDto {
     private String userId;
     private String userPw;
     private String userAddr;
+    private String userAddrDetail;
     private String userTel;
     private String userName;
 
-
+    public UserDto(String userId, String userPw, String userAddr, String userAddrDetail, String userTel, String userName) {
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userAddr = userAddr;
+        this.userAddrDetail = userAddrDetail;
+        this.userTel = userTel;
+        this.userName = userName;
+    }
 
     public UserDto(String userId, String userPw, String userAddr, String userTel) {
         this.userId = userId;
@@ -23,6 +31,14 @@ public class UserDto {
         this.userAddr = userAddr;
         this.userTel = userTel;
         this.userName = userName;
+    }
+
+    public String getUserAddrDetail() {
+        return userAddrDetail;
+    }
+
+    public void setUserAddrDetail(String userAddrDetail) {
+        this.userAddrDetail = userAddrDetail;
     }
 
     public String getUserName() {

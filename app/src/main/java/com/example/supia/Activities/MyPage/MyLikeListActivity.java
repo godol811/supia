@@ -1,27 +1,62 @@
 package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Adapter.MyPage.MyLikeListAdapter;
+import com.example.supia.Dto.MyPage.MyLikeListDto;
+import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
-public class MyLikeListActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MyLikeListActivity extends Activity {
 
     //filed
     TextView tvMypage, tvSubscribe, tvOrder; // header
     ImageButton ibtnBack; // header
-    ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
+    String userId = ShareVar.sharvarUserId;
+    String urlIp = ShareVar.urlIp;
+
+    //Recycler
+    RecyclerView recyclerView;
+    ArrayList<MyLikeListDto> like;
+    RecyclerView.LayoutManager layoutManager = null;
+    MyLikeListAdapter adapter = null;
+
+
+    String url = "http://"+urlIp+":8080/test/supiaLikeList.jsp?userId="+userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_like_list);
+
+        Log.v("라이크리스트",url);
+
+        //-----------For Recycler----------------//
+        like = new ArrayList<MyLikeListDto>();
+        recyclerView = findViewById(R.id.mypage_likelist);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        //---------------------------------------//
 
 
         //----------header 아이디----------//
@@ -31,43 +66,34 @@ public class MyLikeListActivity extends AppCompatActivity {
         tvOrder = findViewById(R.id.tv_order_mypage_header); //주문내역
         //-------------------------------------//
 
-
-        //----------bottom 아이디----------//
-        ibtnMall = findViewById(R.id.mall_bottom_bar);
-        ibtnHome = findViewById(R.id.home_bottom_bar);
-        ibtnMypage = findViewById(R.id.mypage_bottom_bar);
-        //----------------------------------//
-
         //---------------클릭이벤트--------------------//
         ibtnBack.setOnClickListener(backClickListener); //header 뒤로가기
         tvMypage.setOnClickListener(myPageClickListener); //header 마이페이지
         tvSubscribe.setOnClickListener(subscribeClickListener); //header 정기구독
         tvOrder.setOnClickListener(orderClickListener); //header 주문내역
-        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+
         //------------------------------------------//
 
+
+
+        //------------------------------------사진 불러오기---------------------------------------//
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        ActivityCompat.requestPermissions(MyLikeListActivity.this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
+        //------------------------------------------------------------------------------------//
+
+        getdata();
 
 
     }//---------------------onCreate
 
 
-    //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
-    View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent gotoMainMypage = new Intent(MyLikeListActivity.this, MyPageMainActivity.class);
-            startActivity(gotoMainMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
-
-        }
-    };
-    //---------------------------------------------------------------------------------------------//
-
     //----------------------------------뒤로가기 버튼 이벤트----------------------------------//
     View.OnClickListener backClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
             onBackPressed();
 
         }
@@ -83,7 +109,7 @@ public class MyLikeListActivity extends AppCompatActivity {
             Intent headerforOrder = new Intent(MyLikeListActivity.this, MyOrderActivity.class);
             tvOrder.setTypeface(tvOrder.getTypeface(), Typeface.BOLD); // 클릭시 글씨 두꺼워짐
             startActivity(headerforOrder);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -96,7 +122,7 @@ public class MyLikeListActivity extends AppCompatActivity {
             Intent headerSubscribe = new Intent(MyLikeListActivity.this, MySubscribeActivity.class);
             tvSubscribe.setTypeface(tvSubscribe.getTypeface(), Typeface.BOLD);
             startActivity(headerSubscribe);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -109,12 +135,29 @@ public class MyLikeListActivity extends AppCompatActivity {
             Intent forMypage = new Intent(MyLikeListActivity.this, MyPageMainActivity.class);
             tvMypage.setTypeface(tvMypage.getTypeface(), Typeface.BOLD);
             startActivity(forMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold); //화면전환시 애니메이션 적용
+            overridePendingTransition(R.anim.hold, R.anim.hold); //화면전환시 애니메이션 적용
         }
     };
     //------------------------------------------------------------------------------------//
 
 
+
+    //------------------------------------------------getdata------------------------------------------------//
+    private void getdata() {
+        try {
+            MyPageLikeListNetworkTask networkTask = new MyPageLikeListNetworkTask(MyLikeListActivity.this, url, "select");
+            Object obj = networkTask.execute().get();
+            like = (ArrayList<MyLikeListDto>) obj;
+
+            adapter = new MyLikeListAdapter(MyLikeListActivity.this, R.layout.activity_my_like_list, like);
+            recyclerView.setAdapter(adapter); //리사이클러뷰 어댑터 연결
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------------------------------------------------------//
 
 
 

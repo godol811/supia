@@ -16,6 +16,9 @@
         android:roundIcon="@mipmap/supia"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        <activity android:name=".Activities.MyPage.MyPageReviewInsertActivity"></activity>
+        <activity android:name=".Activities.Product.ProductDetailActivity"/>
+        <activity android:name=".Activities.MyPage.MyInfoActivity"></activity>
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
         <activity android:name=".Activities.Product.LikeActivity"/>
         <activity android:name=".Activities.MyPage.MyLikeListActivity" />
@@ -47,13 +50,13 @@
         <activity android:name=".Activities.Login.UserDataQuestion2" />
         <activity android:name=".Activities.Login.SocialLoginActivity" />
         <activity android:name=".Activities.Login.RefactorPassWordActivity" />
-        <activity android:name=".Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity"/>
         <activity android:name=".Activities.Login.AddressWebViewActivity" />
         <activity android:name=".Activities.Login.FindPWActivity" />
         <activity android:name=".Activities.Login.SignUpActivity" />
         <activity android:name=".Activities.Login.UserDataQuestion1" />
         <activity android:name=".Activities.Calendar.MainCalendar" />
         <activity android:name=".Activities.Calendar.SubCalendar" />
+        <activity android:name=".Activities.Product.LikeActivity" />
         <activity android:name=".Activities.Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

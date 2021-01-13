@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.supia.Dto.CalendarDTO;
+import com.example.supia.ShareVar.ShareVar;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
@@ -175,9 +176,14 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
                 String calendarBirthDate = jsonObject1.getString("calendarBirthDate");
 
 
+                ShareVar.calendarsharvarStartdate = calendarStartDate;
+                ShareVar.calendarsharvarFinishdate = calendarFinishDate;
+                ShareVar.calendarsharvarDeliverydate = calendarDeliveryDate;
+                ShareVar.calendarsharvarBirthdate = calendarBirthDate;
+                Log.v(TAG, "파서셀렉트"+ ShareVar.calendarsharvarStartdate+ShareVar.calendarsharvarFinishdate+ShareVar.calendarsharvarDeliverydate+ShareVar.calendarsharvarBirthdate);
+
                 CalendarDTO calendarDTO = new CalendarDTO(calendarStartDate,calendarFinishDate,calendarDeliveryDate,calendarBirthDate);
                 calendars.add(calendarDTO);
-                //Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
             }
         } catch (Exception e) {
