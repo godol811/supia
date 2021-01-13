@@ -32,6 +32,7 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     final static String TAG = "카트어뎁터";
 
+
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
 
 
@@ -46,8 +47,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     private ArrayList<CartDto> mDataset;
 
+
+
+    ArrayList<CartDto> sendCartData;
+
+
     CartAdapter adapter = null;
-    ArrayList<CartDto> cart;
+
+
+
+
+//    ArrayList<CartDto> cart;
+
+
     private RecyclerView recyclerView = null;
 
 
@@ -60,7 +72,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     private Object ArrayList;
 
+
+
+    //체크된 데이터
     ArrayList<String> checkd;
+
+
+    //전체 체크용
+    List<CheckBox> intradayCheckboxsList = new ArrayList<>();
+
+
+
 
 
     public CartAdapter(Context mContext, int layout, ArrayList<CartDto> data) {
@@ -69,6 +91,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         this.mDataset = data;
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
+
+
+
+
+
+
 
 
 
@@ -98,12 +127,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
+        // 체크박스 리스트에 전부 추가하기
+        intradayCheckboxsList.add(holder.cbSelect);
+
+
         holder.onBind(mDataset.get(position));
 
 //        final int pos = position;
-
-
-
 
 
         Glide.with(holder.productImg)
@@ -112,8 +142,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 .placeholder(R.drawable.ic_launcher_foreground)//이미지가 로딩하는 동안 보여질 이미
                 .override(120, 120)//이미지 크기
                 .apply(new RequestOptions()).into(holder.productImg);//사진
-
-
 
 
         //현재 카운트된 수량
@@ -126,10 +154,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"삭제버튼 클릭시 삭제");
+                Log.d(TAG, "삭제버튼 클릭시 삭제");
                 int cartNo = mDataset.get(position).getCartNo();
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecart.jsp?";
-                urlAddr = urlAddr + "cartNo=" + cartNo ;
+                urlAddr = urlAddr + "cartNo=" + cartNo;
                 connectGetData();
 
                 mDataset.remove(holder.getAdapterPosition());
@@ -149,9 +177,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
                 //price onBind할떄 구한 가격 * 현재 수량
-                result = holder.price *  holder.count;
+                result = holder.price * holder.count;
 
-                Log.d(TAG,"result : " + result);
+                Log.d(TAG, "result : " + result);
 
 //                String[] strPrice = holder.price.split(",");
 //                for (int i = 0;i<strPrice.length;i++){
@@ -178,11 +206,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
 
 
+
         holder.minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Counter =  Integer.parseInt((String) holder.productQuantity.getText());
-                if (Counter >1){
+                Counter = Integer.parseInt((String) holder.productQuantity.getText());
+                if (Counter > 1) {
 //                    int productQuantity = Integer.parseInt(String.valueOf(holder.productQuantity));
 
                     holder.productQuantity.setText(String.valueOf(--holder.count));
@@ -190,20 +219,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     holder.count = Integer.parseInt((String) holder.productQuantity.getText());
 
 
-
                     Log.d(TAG, "마이너스버튼 price : " + String.valueOf(holder.price));
 
 //                    result = result - holder.price;
 
 
-                    result = holder.price *  holder.count;
+                    result = holder.price * holder.count;
 
 
                     Log.d(TAG, "productQuantity값 int로 변환 : " + holder.count);
                     holder.productPrice.setText(Integer.toString(result));
-
-
-
 
 
                     int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
@@ -239,20 +264,30 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         /**
          * 바인딩 문제는 해결되지만 체크박스가 해제됨, 클릭리스너로 하면된다.
          */
+
         if (array.get(position)) {
             holder.cbSelect.setChecked(true);
         } else {
             holder.cbSelect.setChecked(false);
         }
 
-
-
-
-
-
-
     }
 
+
+
+
+    /**
+     * 체크박스 전체선택 옵션 메소드
+     * @param what
+     */
+
+    public void checkBoxOperation(boolean what){
+        for (CheckBox checkBox : intradayCheckboxsList ){
+            //true면 체크
+            //false면 체크풀기
+            checkBox.setChecked(what);
+        }
+    }
 
 
 
@@ -314,13 +349,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         final static String TAG1 = "MyViewHolder";
         // each data item is just a string in this case
 
-
-
         /**
          * 상품명,상품이미지,상품가격 선언
          */
-
-
         public ImageView productImg;
         public TextView productName,productPrice,productQuantity,deleteBtn;
         public Button plusBtn, minusBtn;
@@ -338,7 +369,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         private CheckBox[] cb;
 
 
-        MyViewHolder(View v) {
+         MyViewHolder(View v) {
 
             super(v);
 
@@ -356,6 +387,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             Log.v(TAG1, "MyViewHolder");
             // 뷰홀더에서만 리스트 포지션값을 불러올 수 있음.
 
+
+
+            sendCartData = new ArrayList<CartDto>();
+
+
+
             //-----------------Click Event---------------------
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -366,29 +403,77 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     if (position != RecyclerView.NO_POSITION) {
                         if (mListener != null) {
                             mListener.onItemClick(view, position);
-
                         }
                     }
                 }
             });
 
+//            cbSelect.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = getAdapterPosition();//어뎁터 포지션값
+//                    if (array.get(getAdapterPosition())) {      //!checked
+//                        array.put(getAdapterPosition(), false);
+//
+//                        Log.d(TAG,"체크박스 선택이 취소될 때?");
+//                    } else {        //checked
+//                        array.put(getAdapterPosition(), true);
+//                        String result = (String) ArrayList;
+//                        result += mDataset.get(position).getCartProductName();
+//                        Log.d(TAG,"체크박스 선택될 때?");
+//                    }
+//                    notifyDataSetChanged();
+//                }
+//            });
+
+
+//            cbSelect.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = getAdapterPosition();//어뎁터 포지션값
+//                    if (array.get(getAdapterPosition())) {      //!checked
+//                        array.put(getAdapterPosition(), false);
+
+
+//                        Log.d(TAG,"체크박스 선택이 취소될 때?");
+//                    } else {        //checked
+//                        array.put(getAdapterPosition(), true);
+//                        String result = (String) ArrayList;
+//                        result += mDataset.get(position).getCartProductName();
+//                        Log.d(TAG,"체크박스 선택될 때?");
+//                    }
+//                    notifyDataSetChanged();
+//                }
+//            });
             cbSelect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();//어뎁터 포지션값
-                    if (array.get(getAdapterPosition())) {      //!checked
-                        array.put(getAdapterPosition(), false);
+                    String str = "";
+                  sendCartData.clear();
+//                    for (int i =0; i < mDataset.size(); i++){
+//                        if (cbSelect.isChecked() == true){
+//                            sendCartData.add(mDataset.get(getAdapterPosition()));
+//                            Log.d(TAG,"position" + String.valueOf(getAdapterPosition()));
+//                            Log.d(TAG,"position" + String.valueOf(mDataset.get(getAdapterPosition()).getCartProductName()));
+//
+//                        }else {
+//                            Log.d(TAG,"체크해제");
 
-                        Log.d(TAG,"체크박스 선택이 취소될 때?");
-                    } else {        //checked
-                        array.put(getAdapterPosition(), true);
-                        String result = (String) ArrayList;
-                        result += mDataset.get(position).getCartProductName();
-                        Log.d(TAG,"체크박스 선택될 때?");
+                    for (int i = 0; i < intradayCheckboxsList.size(); i ++){
+                        if (intradayCheckboxsList.get(i).isChecked() == true){
+                            mDataset.add(mDataset.get(i));
+                            Log.d(TAG,"-----------------------------------");
+                            Log.d(TAG, "mDataset데이터 이름 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductName()));
+                            Log.d(TAG, "mDataset데이터 이미지 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductImagePath()));
+                            Log.d(TAG, "mDataset데이터 가격 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductPrice()));
+                            Log.d(TAG, "mDataset데이터 수량 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductQuantity()));
+                            Log.d(TAG,"-----------------------------------");
+                        }
                     }
-                    notifyDataSetChanged();
                 }
             });
+
+
 
         }
 

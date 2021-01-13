@@ -1,12 +1,15 @@
 package com.example.supia.Activities.Product;
 
 import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.supia.Adapter.Product.CartAdapter;
+import com.example.supia.Adapter.Product.ProductAdapter;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
@@ -26,6 +29,9 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<CartDto> cart;
     CartAdapter adapter = null;
 
+    CheckBox multipleCheck;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,23 @@ public class CartActivity extends AppCompatActivity {
 
 
         urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
+
+        multipleCheck = findViewById(R.id.multipleCheck);
+
+
+        multipleCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (multipleCheck.isChecked()){
+                    adapter.checkBoxOperation(true);
+                }else {
+                    adapter.checkBoxOperation(false);
+                }
+
+
+            }
+        });
+
 
         connectGetData();
 
