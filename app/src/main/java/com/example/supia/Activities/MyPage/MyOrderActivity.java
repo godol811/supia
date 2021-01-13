@@ -56,7 +56,7 @@ public class MyOrderActivity extends Activity {
 
     String deliveryUrl = "http://" + urlIp + ":8080/test/supiaDeliveryMypage.jsp?userId="+userId;
     String orderUrl = "http://" + urlIp + ":8080/test/supiaOrderlist.jsp?userId="+userId;
-    String reviewUrl = "http://" + urlIp + ":8080/test/supiaReviewList.jsp";
+    String reviewUrl = "http://" + urlIp + ":8080/test/supiaReviewList.jsp?userId="+userId;
     MyReviewListAdapter reviewAdapter = null;
     MyOrderListAdapter orderAdapter = null;
 
