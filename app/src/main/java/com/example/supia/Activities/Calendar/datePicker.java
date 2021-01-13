@@ -62,15 +62,13 @@ public class datePicker extends Dialog {
 
         checkDay(year, month, dayOfMonth);//가져온 날짜에 하이픈을 첨가하여 "yyyy-mm-dd" 형태로 만듬
 
-        menstruationStart = checkDay(year, month, dayOfMonth);
-        Log.v(TAG, "aa" + menstruationStart);
-        menstruationEnd = checkDay(year, month, dayOfMonth);
-
         myDBHelper = new myDBHelper(datePicker.getContext());
 
         datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
             checkDay(year, monthOfYear, dayOfMonth);
-            Log.v(TAG, "ㅇㅇㅇ"+menstruationStart);
+            menstruationStart = checkDay(year, month, dayOfMonth);
+            menstruationEnd = checkDay(year, month, dayOfMonth);
+            Log.v(TAG, "ㅇㅇㅇ"+menstruationStart+menstruationEnd);
         });//날짜 클릭시 데이터값 변경
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
