@@ -2,19 +2,23 @@ package com.example.supia.Activities.Login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
+import com.kakao.sdk.user.model.User;
 
 import java.util.ArrayList;
 
@@ -24,9 +28,12 @@ public class UserDataQuestion1 extends Activity {
     final static String TAG = "첫번째 질문";
     Button buttonNext;
     DatePicker datePicker;
+    TextView tvSkip;
     String userId;
     private String urlAddr;
     ArrayList<CalendarDTO> calendarDtos;
+    String date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +42,51 @@ public class UserDataQuestion1 extends Activity {
 
         Intent intent = getIntent();
         userId = ShareVar.sharvarUserId;
-        datePicker = findViewById(R.id.dp_question1);
 
+        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);
+        date = sf.getString("date", "");
+
+        if (date.trim().length() != 0) {
+            Intent intent2 = new Intent(UserDataQuestion1.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
+            startActivity(intent2);
+        }
+
+
+        tvSkip = findViewById(R.id.tv_skip_question1);
+        tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(UserDataQuestion1.this,MainCalendar.class);
+                startActivity(intent1);
+
+            }
+        });
+
+        datePicker = findViewById(R.id.dp_question1);
         insertCheck();//달력 수정했다면 다음으로 넘기
 
 
         buttonNext = findViewById(R.id.btn_next_question1);
+
+
+
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String date = Integer.toString(datePicker.getYear()) + "-" + Integer.toString(datePicker.getMonth() + 1) + "-" + Integer.toString(datePicker.getDayOfMonth());
+
+
+                date = Integer.toString(datePicker.getYear()) + "-" + Integer.toString(datePicker.getMonth() + 1) + "-" + Integer.toString(datePicker.getDayOfMonth());
                 Log.d(TAG, date);
                 Intent intent1 = new Intent(UserDataQuestion1.this, UserDataQuestion2.class);
+                SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
+                SharedPreferences.Editor editor = sf.edit();
+                editor.putString("date", date);
+                editor.commit();
                 intent1.putExtra("menstruationStart", date);
                 intent1.putExtra("userId", userId);
                 startActivity(intent1);
+
 
             }
         });

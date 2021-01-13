@@ -57,7 +57,7 @@ public class RefactorPassWordActivity extends Activity {
 
 
 
-        //------------------------------------------------눈 보이기------------------------------------------//
+        ///////////////////////////////////////눈 보이기////////////////////////////////////////////
         buttonPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,8 @@ public class RefactorPassWordActivity extends Activity {
             }
         });
 
-//---------------------------------------------------암호체크용--------------------------------------------//
+        ////////////////////////////암호체크용 텍스트 와쳐//////////////////////////////////////////
+
         passwordCheck.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,7 +101,8 @@ public class RefactorPassWordActivity extends Activity {
             public void afterTextChanged(Editable s) {
             }
         });
-//---------------------------------------------------암호체크용--------------------------------------------//
+        ////////////////////////////암호체크용 텍스트 와쳐//////////////////////////////////////////
+
 
         refactorPasswordButton = findViewById(R.id.btn_resetpw_Refactor);
         refactorPasswordButton.setOnClickListener(mOnclickListener);
@@ -113,7 +115,7 @@ public class RefactorPassWordActivity extends Activity {
             String strPasswordCheck = passwordCheck.getText().toString().trim();
 
             if (strPasswordCheck.length() != 0 && strPassword.length() != 0) {
-                buttonEnable();
+                buttonEnable();//암호설정 메소드로
 
             } else {
 
@@ -129,7 +131,7 @@ public class RefactorPassWordActivity extends Activity {
         }
     };
 
-
+    ////////////////////////////암호 설정 메소드////////////////////////////////////////////////////
     private void buttonEnable() {
 
         String strPassword = password.getText().toString().trim();

@@ -40,16 +40,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:text="다음"
-        android:backgroundTint="#BAD23A"/>
+        android:backgroundTint="#BAD23A"
+        android:text="다음" />
 
 
     <TextView
+        android:id="@+id/tv_skip_question3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="SKIP"
-        android:paddingRight="20dp"
         android:gravity="right"
-        android:textSize="25dp"
-        android:textColor="#BAD23A"/>
+        android:paddingRight="20dp"
+        android:text="SKIP"
+        android:textColor="#BAD23A"
+        android:textSize="25dp" />
 </LinearLayout>

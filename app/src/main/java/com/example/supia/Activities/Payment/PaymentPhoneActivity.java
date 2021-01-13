@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
@@ -176,7 +177,7 @@ public class PaymentPhoneActivity extends Activity {
                                                 .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        Intent intent = new Intent(PaymentPhoneActivity.this, PaymentConfirmActivity.class);//
+                                                        Intent intent = new Intent(PaymentPhoneActivity.this, MyOrderActivity.class);//
                                                         startActivity(intent);
                                                     }
                                                 })

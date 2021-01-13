@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.R;
 
 
@@ -20,6 +22,7 @@ public class UserDataQuestion5 extends Activity {
     String[] purchaseStyle = {"","","",""};
     private String urlAddr;
     private String macIp;
+    TextView tvSkip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,15 @@ public class UserDataQuestion5 extends Activity {
         userId = intent.getStringExtra("userId");
         userStyle = intent.getStringExtra("userStyle");
 
+        tvSkip = findViewById(R.id.tv_skip_question5);
+        tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(UserDataQuestion5.this, MainCalendar.class);
+                startActivity(intent1);
 
+            }
+        });
 
 
         buttonIndex1 = findViewById(R.id.btn_price_question5);

@@ -69,13 +69,13 @@ public class LoginActivity extends Activity {
         userinfoPw = sf.getString("userPw", "");
         Log.d(TAG, userinfoId);
 
-        if (userinfoId.trim().length() != 0) {
+        if (userinfoId.trim().length() != 0) {//자동 로그인 되어있을경우에는 MainCalendar 액티비티로이동
             ShareVar.sharvarUserId = userinfoId;
-            Intent intent2 = new Intent(LoginActivity.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
+            Intent intent2 = new Intent(LoginActivity.this, MainCalendar.class);//
             startActivity(intent2);
         }
 
-
+        //구글 SignInOptions 유도///////////////////////////////////////////////////////////////////
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -83,11 +83,10 @@ public class LoginActivity extends Activity {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-
+        ///// findViewID 유도///////////////////////////////////////////////////////////////////////
         cbAutoLogin = findViewById(R.id.cb_autologin_login);
-
-
         kakaoLoginButton = findViewById(R.id.kakaologin);
+
         loginButton = findViewById(R.id.login);
         findButton = findViewById(R.id.btn_find);
         signUpButton = findViewById(R.id.btnsignUp);
@@ -96,11 +95,11 @@ public class LoginActivity extends Activity {
         userId = findViewById(R.id.userid);
         userPw = findViewById(R.id.userpw);
 
-
+        //// 회원가입에서 이동해서 아이디 값 가져오기///////////////////////////////////////////////
         Intent intent = getIntent();
         userId.setText(intent.getStringExtra("USERID"));
 
-
+        //// 클릭 리스너 할당 //////////////////////////////////////////////////////////////////////
         signUpButton.setOnClickListener(mOnclickListener);
         findButton.setOnClickListener(mOnclickListener);
         kakaoLoginButton.setOnClickListener(mOnclickListener);
@@ -111,12 +110,12 @@ public class LoginActivity extends Activity {
 
     }//oncreate
 
-
+    /////// 클릭 리스너 활성////////////////////////////////////////////////////////////////////////
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.kakaologin:
+                case R.id.kakaologin://카카오 로그인
                     if (LoginClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) { //기기를 통한 카카오톡 로그인 가능한지
                         LoginClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
                     } else {
@@ -126,7 +125,7 @@ public class LoginActivity extends Activity {
                     updateKakaoLoginUi();
                     break;
 
-                case R.id.login:
+                case R.id.login://일반 로그인
                     userinfoId = userId.getText().toString().trim();
                     userinfoPw = userPw.getText().toString().trim();
                     if (userinfoId.length() != 0 && userinfoPw.length() != 0) {//빈칸이 아닐경우
@@ -136,7 +135,7 @@ public class LoginActivity extends Activity {
 
                     }
                     break;
-                case R.id.loginGoogle:
+                case R.id.loginGoogle://구글 로그인
                     signIn();
                     break;
 
@@ -153,10 +152,7 @@ public class LoginActivity extends Activity {
         }
     };
 
-
-    ////////////////////////////////////////////////////////////////////////////
-    //카카오 로그인 추가                                                      //
-    ////////////////////////////////////////////////////////////////////////////
+    //// 카카오 로그인 추가/////////////////////////////////////////////////////////////////////////
 
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
         @Override
@@ -172,7 +168,7 @@ public class LoginActivity extends Activity {
         }
     };
 
-
+    //// 카카오 로그인 값 불러오기 /////////////////////////////////////////////////////////////////
     private void updateKakaoLoginUi() {//로그인 유무 확인
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
@@ -245,7 +241,7 @@ public class LoginActivity extends Activity {
         }
     } // [END onActivityResult]
 
-
+    //// 구글 로그인시 받아오는 값을 인텐트로 넘기기 ///////////////////////////////////////////////
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {// [START handleSignInResult]
 
         try {
@@ -256,9 +252,9 @@ public class LoginActivity extends Activity {
 
             if (account != null) {//google 인텐트 보내는 값 (유저 데이터)
                 String personName = account.getDisplayName();
-                String personGivenName = account.getGivenName();
-                String personFamilyName = account.getFamilyName();
                 String personEmail = account.getEmail();
+//                String personGivenName = account.getGivenName();
+//                String personFamilyName = account.getFamilyName();
 //                String personId = account.getId();
 //                Uri personPhoto = account.getPhotoUrl();
                 if (cbAutoLogin.isChecked()) {
@@ -303,15 +299,12 @@ public class LoginActivity extends Activity {
     }
     // [END signIn]
 
-    ////////////////////////////////////////////////////////////////////////////
-    //구글로그인 추가                                                         //
-    ////////////////////////////////////////////////////////////////////////////
+    ////구글로그인 끝  /////////////////////////////////////////////////////////////////////////////
 
 
-    ////////////////////////////////////////////////////////////////////////////
-    //일반 로그인                                                             //
-    ////////////////////////////////////////////////////////////////////////////
 
+
+    ////일반로그인 메소드 //////////////////////////////////////////////////////////////////////////
     private void connectloginCheck() {
         Log.v(TAG, "connectGetData()");
         try {
@@ -365,15 +358,9 @@ public class LoginActivity extends Activity {
             e.printStackTrace();
         }
     }
-    private void loginDirect(){
 
 
-    }
-
-
-
-
-    //SNS 로그인 체크
+    ////////구글이나 카카오로 로그인했을시 부족한테이터를 채우기 위한 인텐트////////////////////////
 
     private void socialUserInsert() {
 
