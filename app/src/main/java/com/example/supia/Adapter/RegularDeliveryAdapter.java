@@ -21,6 +21,7 @@ import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheck
 import com.example.supia.Dto.UserDeliveryAddrDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
@@ -132,12 +133,12 @@ public class RegularDeliveryAdapter extends BaseAdapter {
             public void onClick(View v) {
 
                 Intent intent2 = new Intent(mContext, RegularPurchaseCheckActivity.class);//배송지를 선택했다면 그부분으로 넘어간다.
-                intent2.putExtra("deliveryNo", mDataset.get(position).getDeliveryNo());
-                intent2.putExtra("deliveryName", mDataset.get(position).getDeliveryName());
-                intent2.putExtra("deliveryAddr", mDataset.get(position).getDeliveryAddr());
-                intent2.putExtra("way","regular");
-                intent2.putExtra("deliveryAddrDetail", mDataset.get(position).getDeliveryAddDetail());
-                intent2.putExtra("deliveryTel", mDataset.get(position).getDeliveryTel());
+                intent2.putExtra("prepared","prepared");
+                PaymentShareVar.deliveryNo =  mDataset.get(position).getDeliveryNo();
+                PaymentShareVar.deliveryName = mDataset.get(position).getDeliveryName();
+                PaymentShareVar.deliveryAddr =mDataset.get(position).getDeliveryAddr();
+                PaymentShareVar.deliveryAddrDetail = mDataset.get(position).getDeliveryAddDetail();
+                PaymentShareVar.deliveryTel = mDataset.get(position).getDeliveryTel();
                 mContext.startActivity(intent2);
             }
         });

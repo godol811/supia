@@ -17,6 +17,7 @@ import com.example.supia.Activities.RegualarDeliveryPayment.RegularDeliveryAddre
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.text.SimpleDateFormat;
@@ -115,13 +116,17 @@ public class DeliveryAddressModifyActivity extends Activity {
                                                     public void onClick(DialogInterface dialog, int which) {
                                                         if (strWay.equals("normal")) {
                                                             Intent intent = new Intent(DeliveryAddressModifyActivity.this, PurchaseCheckActivity.class);
-                                                            intent.putExtra("ADDR", strDeliveryAddr + " " + strDeliveryAddrDetail);
-                                                            intent.putExtra("TEL", strDeliveryTel);
+                                                            PaymentShareVar.deliveryAddr = strDeliveryAddr;
+                                                            PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
+                                                            PaymentShareVar.deliveryTel = strDeliveryTel;
+                                                            PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
                                                         } else {
                                                             Intent intent = new Intent(DeliveryAddressModifyActivity.this, RegularPurchaseCheckActivity.class);
-                                                            intent.putExtra("ADDR", strDeliveryAddr + " " + strDeliveryAddrDetail);
-                                                            intent.putExtra("TEL", strDeliveryTel);
+                                                            PaymentShareVar.deliveryAddr = strDeliveryAddr;
+                                                            PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
+                                                            PaymentShareVar.deliveryTel = strDeliveryTel;
+                                                            PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
 
                                                         }

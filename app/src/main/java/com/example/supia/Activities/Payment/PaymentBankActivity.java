@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.text.DateFormat;
@@ -29,16 +30,17 @@ public class PaymentBankActivity extends Activity {
     String urlAddr = null;
     String urlIp = null;
     String strOrderDate;
-    String strOrderQuantity;
+    int intOrderQuantity;
     String strOrderAddr;
     String strOrderAddrDetail;
     String strOrderPayment;
-    String strOrderTotalPrice;
+    int intOrderTotalPrice;
     String userId;
     String productId;
     String strItem;
     String strOrderTel;
     String strWay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +48,9 @@ public class PaymentBankActivity extends Activity {
         setContentView(R.layout.activity_payment_bank);
 
         Intent intent = getIntent();
-        strItem = intent.getStringExtra("ITEM");
+        strItem = PaymentShareVar.payMethodItem;
+
         strWay = intent.getStringExtra("way");
-        urlAddr = "http://"+ ShareVar.sharvarUserId +":8080/test/supiaDeliveryAddrInsert.jsp?";
-        strOrderAddr = intent.getStringExtra("orderAddr");
-        strOrderAddrDetail = intent.getStringExtra("orderAddrDetail");
-        strOrderQuantity = "1";//intent.getStringExtra("orderQuantity");
-        strOrderTotalPrice = "1"; // intent.getStringExtra("orderTotalPrice");
-        productId  = "1"; //intent.getStringExtra("productId");
-        strOrderTel = intent.getStringExtra("orderTel");
-        bankUserName = findViewById(R.id.bankNameEditText);
-        bankNumber = findViewById(R.id.bankNumberEditText);
 
         btnNext = findViewById(R.id.btn_paymentNext_Bankpayment);
         btnNext.setOnClickListener(mOnclickListener);
@@ -82,8 +76,10 @@ public class PaymentBankActivity extends Activity {
                     String today = df.format(calendar.getTime());//파일에도 날짜를 넣기위한 메소드
 
 
-                    urlIp = ShareVar.urlIp;
-                    urlAddr = "http://" + urlIp + ":8080/test/supiaUserOrderInsert.jsp?";//바로 삭제 할 수 있도록 한다.(따로 페이지 필요 X)
+                    if(strWay.equals("normal")) urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";//일반 결제
+                    else urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserRegularOrderInsert.jsp?";//정기결제
+
+
                     if (bankItem.getText().toString().trim().length() >= 10) {//임의로 10자리만큼 큰걸로
                         new AlertDialog.Builder(PaymentBankActivity.this)
                                 .setTitle("구매")
@@ -93,8 +89,9 @@ public class PaymentBankActivity extends Activity {
                                 .setNegativeButton("예", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + strOrderQuantity + "&orderAddr=" + strOrderAddr + "&orderAddrDetail=" + strOrderAddrDetail
-                                                + "&orderPayment=" + "은행" + "&orderTotalPrice=" + strOrderTotalPrice + "&userId=" + userId + "&productId=" + productId+"&orderTel="+strOrderTel;
+                                        urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + PaymentShareVar.paymentProductQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
+                                                + "&orderPayment=" + "은행" + "&orderTotalPrice=" + PaymentShareVar.totalPayment + "&userId=" + ShareVar.sharvarUserId + "&productId="
+                                                + PaymentShareVar.paymentProductNo + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + PaymentShareVar.paymentProductName+"&subscribeProductPrice=" + PaymentShareVar.paymentProductPrice ;
                                         connectInsertData();
 
                                         new AlertDialog.Builder(PaymentBankActivity.this)

@@ -19,6 +19,7 @@ import com.example.supia.Activities.Payment.PurchaseCheckActivity;
 import com.example.supia.Dto.UserDeliveryAddrDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
@@ -27,13 +28,15 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
 
     final static String TAG = "정기배송";
     Button btnDeliveryAddressModify, btnPaymentMethod, btnPayment;
-    TextView tvDeliveryName, tvDeliveryAddress, tvDeliveryTel, tvPaymentMethod, tvDeliveryAddressDetail;
-    String strDeliveryAddr, strDeliveryTel, strDeliveryName, strUserId, strMethodItem, strDeliveryAddrDetail;
+    TextView tvDeliveryName, tvDeliveryAddress, tvDeliveryTel, tvPaymentMethod, tvDeliveryAddressDetail, tvProductName, tvProductQuantity, tvTotalprice;
+    String strDeliveryAddr, strDeliveryTel, strDeliveryName, strUserId, strMethodItem, strDeliveryAddrDetail,
+            strProductName, strProductPrice;
+    int intProductPrice, intProductQuantity, intTotalPrice, intProductNo;
     int intDeliveryNo;
     private String urlAddr;
     private String macIp;
     int intentIndex = 3;
-    String strPayMethod = "";
+    String strPrepared = "";
     ArrayList<UserDeliveryAddrDto> user;
 
     @Override
@@ -41,15 +44,19 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regular_purchase_check);
 
-        Intent intent = getIntent();
-        intDeliveryNo = intent.getIntExtra("deliveryNo", 0);
-        strDeliveryAddr = intent.getStringExtra("deliveryAddr");
-        strDeliveryAddrDetail = intent.getStringExtra("deliveryAddrDetail");
-        strDeliveryTel = intent.getStringExtra("deliveryTel");
-        strDeliveryName = intent.getStringExtra("deliveryName");
-        strPayMethod = intent.getStringExtra("PAYMETHOD");
-        strMethodItem = intent.getStringExtra("ITEM");
+
+        Log.d(TAG, PaymentShareVar.paymentProductPrice);
+
+        intProductNo = PaymentShareVar.paymentProductNo;
+        strProductName = PaymentShareVar.paymentProductName;
+        strProductPrice = PaymentShareVar.paymentProductPrice;
+        intProductQuantity = PaymentShareVar.paymentProductQuantity;
+        intProductPrice = Integer.parseInt(strProductPrice);
+        intTotalPrice = intProductPrice * intProductQuantity;
+        PaymentShareVar.totalPayment = intTotalPrice;
         strUserId = ShareVar.sharvarUserId;
+
+        strDeliveryAddr = PaymentShareVar.deliveryAddr;
 
         btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify_regular);
         btnPaymentMethod = findViewById(R.id.btn_paymentmodify_regular);
@@ -60,27 +67,38 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
         tvDeliveryTel = findViewById(R.id.tv_deliverytel_regular);
         tvDeliveryName = findViewById(R.id.tv_deliveryName_regular);
         tvPaymentMethod = findViewById(R.id.tv_paymentmethod_regular);
-        tvPaymentMethod.setText(strPayMethod);
+        tvProductName = findViewById(R.id.tv_productName_regular);
+        tvProductQuantity = findViewById(R.id.tv_productQuantity_regular);
+        tvTotalprice = findViewById(R.id.tv_totalprice_regular);
+
+
+        //배송지 관련--
+
+        if (strDeliveryAddr != null) {
+            tvDeliveryAddress.setText(PaymentShareVar.deliveryAddr);
+            tvDeliveryAddressDetail.setText(PaymentShareVar.deliveryAddrDetail);
+            tvDeliveryTel.setText(PaymentShareVar.deliveryTel);
+            tvDeliveryName.setText(PaymentShareVar.deliveryName);
+        } else {
+            getDeliveryAddress();
+        }
+
+
+
+        //결제 방식 관련
+        tvPaymentMethod.setText(PaymentShareVar.payMethod);
+
+
+        //추가--
+        tvProductName.setText(strProductName);
+        tvTotalprice.setText(Integer.toString(intTotalPrice));
+        tvProductQuantity.setText(Integer.toString(intProductQuantity));
+        //--추가
 
 
         btnPayment.setOnClickListener(mOnclickListener);
         btnPaymentMethod.setOnClickListener(mOnclickListener);
         btnDeliveryAddressModify.setOnClickListener(mOnclickListener);
-
-        if (strDeliveryTel != null) {
-
-            tvDeliveryAddress.setText(strDeliveryAddr);
-            tvDeliveryAddressDetail.setText(strDeliveryAddrDetail);
-            tvDeliveryName.setText(strDeliveryName);
-            tvDeliveryTel.setText(strDeliveryTel);
-        } else {
-            getDeliveryAddress();
-
-        }
-
-
-
-
     }
 
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
@@ -89,54 +107,36 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_deliveryinfomodify_regular://배송지 변경
                     Intent intent = new Intent(RegularPurchaseCheckActivity.this, RegularDeliveryAddressListActivity.class);
-                    intent.putExtra("way","regular");
+                    intent.putExtra("way", "regular");
                     startActivity(intent);
                     break;
                 case R.id.btn_paymentmodify_regular://결제수단 변경
                     Intent intent1 = new Intent(RegularPurchaseCheckActivity.this, PaymentModifyActivity.class);
-                    intent1.putExtra("way","regular");
+                    intent1.putExtra("way", "regular");
                     startActivity(intent1);
                     break;
                 case R.id.btn_payment_regular:
-                    strDeliveryAddr = tvDeliveryAddress.getText().toString().trim();
-                    strDeliveryAddrDetail = tvDeliveryAddressDetail.getText().toString().trim();
-                    strDeliveryTel =tvDeliveryTel.getText().toString().trim();
-
+                    PaymentShareVar.deliveryAddr = tvDeliveryAddress.getText().toString();
+                    PaymentShareVar.deliveryAddrDetail = tvDeliveryAddressDetail.getText().toString();
+                    PaymentShareVar.deliveryTel = tvDeliveryTel.getText().toString();
+                    PaymentShareVar.deliveryName = tvDeliveryName.getText().toString();
                     intentIndex();//0일경우엔 카드 1일경우엔 은행 2일경우엔 폰
                     if (intentIndex == 0) {
                         Intent intent2 = new Intent(RegularPurchaseCheckActivity.this, PaymentCardActivity.class);
-                        intent2.putExtra("way","regular");
-                        intent2.putExtra("ITEM", strMethodItem);
-                        intent2.putExtra("orderAddr",strDeliveryAddr);
-                        intent2.putExtra("orderAddrDetail",strDeliveryAddrDetail);
-                        intent2.putExtra("orderTel",strDeliveryTel);
-                        intent2.putExtra("orderQuantity","오더퀀티티 스트링");
-                        intent2.putExtra("orderTotalPrice","총가격 불러오는대로");
-                        intent2.putExtra("productId","프로덕트아이디 가져오는대로");
+                        intent2.putExtra("way", "regular");
+
                         startActivity(intent2);
                         break;
                     } else if (intentIndex == 1) {
                         Intent intent3 = new Intent(RegularPurchaseCheckActivity.this, PaymentBankActivity.class);
-                        intent3.putExtra("way","regular");
-                        intent3.putExtra("ITEM", strMethodItem);
-                        intent3.putExtra("orderTel",strDeliveryTel);
-                        intent3.putExtra("orderAddr",strDeliveryAddr);
-                        intent3.putExtra("orderAddrDetail",strDeliveryAddrDetail);
-                        intent3.putExtra("orderQuantity","오더퀀티티 스트링");
-                        intent3.putExtra("orderTotalPrice","총가격 불러오는대로");
-                        intent3.putExtra("productId","프로덕트아이디 가져오는대로");
+                        intent3.putExtra("way", "regular");
+
                         startActivity(intent3);
                         break;
                     } else if (intentIndex == 2) {
                         Intent intent4 = new Intent(RegularPurchaseCheckActivity.this, PaymentPhoneActivity.class);
-                        intent4.putExtra("way","regular");
-                        intent4.putExtra("ITEM", strMethodItem);
-                        intent4.putExtra("orderTel",strDeliveryTel);
-                        intent4.putExtra("orderAddr",strDeliveryAddr);
-                        intent4.putExtra("orderAddrDetail",strDeliveryAddrDetail);
-                        intent4.putExtra("orderQuantity","오더퀀티티 스트링");
-                        intent4.putExtra("orderTotalPrice","총가격 불러오는대로");
-                        intent4.putExtra("productId","프로덕트아이디 가져오는대로");
+                        intent4.putExtra("way", "regular");
+
                         startActivity(intent4);
                         break;
                     } else {
@@ -182,6 +182,7 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
                 tvDeliveryAddressDetail.setText(deliveryAddrDetail);
                 tvDeliveryTel.setText(deliveryTel);
                 tvDeliveryName.setText(deliveryName);
+
             }
         } catch (Exception e) {
             e.printStackTrace();

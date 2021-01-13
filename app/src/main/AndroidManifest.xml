@@ -16,6 +16,8 @@
         android:roundIcon="@mipmap/supia"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity"/>
+        <activity android:name=".Activities.Product.ProductDetailActivity"/>
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
         <activity android:name=".Activities.Product.LikeActivity"/>
         <activity android:name=".Activities.MyPage.MyLikeListActivity" />
