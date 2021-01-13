@@ -111,7 +111,7 @@ public class MainCalendar extends FragmentActivity {
         //materialCalendarView_main.setBackgroundResource(R.drawable.calendar_background_total);
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intdelyear, intdelmonth, intdelday));
-        materialCalendarView_main.addDecorator(new EventDecoratorDraw(Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
+        materialCalendarView_main.addDecorator(new EventDecorator(Color.YELLOW, Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_main.addDecorator(new EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
