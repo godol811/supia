@@ -72,7 +72,6 @@ public class ReviewFragment extends Fragment {
             String reviewUrl = "http://" + urlIp + ":8080/test/supiaProductReviewList.jsp?productNo="+productNo;
             MyReviewInsertNetworkTask networkTask1 = new MyReviewInsertNetworkTask(getActivity(), reviewUrl, "select");
             Object obj = networkTask1.execute().get();
-            Log.v("뭐지" ,"obj"+obj);
             list = (ArrayList<MyReviewDto>) obj;
             adapter = new ProductReviewListAdapter(getContext(), R.layout.activity_my_order, list);
             recyclerView.setAdapter(adapter);
@@ -88,9 +87,9 @@ public class ReviewFragment extends Fragment {
 
             String buyUrl = "http://" + urlIp + ":8080/test/supiaBuyCount.jsp?productNo="+productNo;
             NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getActivity(), buyUrl, "select");
-            Object obj = networkTask2.execute().get();
-            Log.v("안들어오니?" ,"obj"+obj);
-            String cnt = (String) obj;
+            Object obj2 = networkTask2.execute().get();
+            Log.v("안들어오니?" ,"obj"+obj2);
+            String cnt = (String) obj2;
             Buycount.setText(cnt);
 
 
