@@ -58,25 +58,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-//    ArrayList<CartDto> cart;
-
-
-    private RecyclerView recyclerView = null;
-
-
     int Counter;
 
     int result;
 
     String urlAddr = "http://"+ ShareVar.urlIp +":8080/pictures/";//Ip
-
-
-    private Object ArrayList;
-
-
-
-    //체크된 데이터
-    ArrayList<String> checkd;
 
 
     //전체 체크용
