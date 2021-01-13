@@ -8,12 +8,13 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="암호 찾기"
         android:textColor="#BAD23A"
-        android:textSize="50dp" />
+        android:textSize="24dp" />
 
 
     <EditText
@@ -28,9 +29,11 @@
         android:id="@+id/authBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#BAD23A"
         android:gravity="center"
-        android:text="이메일 인증하기" />
+        android:text="이메일 인증하기"
+        android:background="@drawable/button_long"/>
 
 
     <EditText
@@ -38,14 +41,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="15dp"
         android:hint="인증번호를 입력해주세요"/>
 
     <Button
         android:id="@+id/authCheckBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#BAD23A"
         android:gravity="center"
+        android:background="@drawable/button_long"
         android:text="제출" />
 
     <Button
@@ -54,6 +60,8 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#BAD23A"
         android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_long"
         android:text="뒤로가기" />
 
 

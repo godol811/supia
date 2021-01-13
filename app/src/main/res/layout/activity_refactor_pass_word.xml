@@ -16,7 +16,7 @@
         android:layout_weight="2"
         android:gravity="center"
         android:text="암호 재설정"
-        android:textSize="40dp"
+        android:textSize="24dp"
         android:textColor="#BAD23A"
         />
 
@@ -73,6 +73,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -96,6 +97,7 @@
         android:id="@+id/pwCheckAlert_refactor"/>
 
     <Button
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="암호 재설정"
@@ -103,6 +105,7 @@
         android:backgroundTint="#BAD23A"/>
 
     <Button
+        android:layout_marginTop="13dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="뒤로가기"
