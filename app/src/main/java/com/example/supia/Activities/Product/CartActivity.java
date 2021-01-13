@@ -59,6 +59,9 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
 
         urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
+        urlAddr = urlAddr + "?cartUserId='" + ShareVar.sharvarUserId +"'";
+//        connectGetData();
+
 
         multipleCheck = findViewById(R.id.cb_allselect_cart);
 
@@ -89,6 +92,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
                 Log.d(TAG,"여기에 넣어줘야됨");
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
+                urlAddr = urlAddr + "?cartUserId='" + ShareVar.sharvarUserId +"'";
 
 //              adapter.sendDate();
 
@@ -142,6 +146,9 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
 
     private void connectGetData() {
+
+
+
         try {
 
             NetworkTaskCart networkTask = new NetworkTaskCart(CartActivity.this, urlAddr,"select");
@@ -156,6 +163,9 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             e.printStackTrace();
         }
     }
+
+
+
 
 
     @Override
