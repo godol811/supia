@@ -27,6 +27,7 @@ import com.example.supia.ShareVar.ShareVar;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     final static String TAG = "카트어뎁터";
@@ -100,6 +101,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.onBind(mDataset.get(position));
 
 //        final int pos = position;
+
+
+
 
 
         Glide.with(holder.productImg)
@@ -189,7 +193,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
                     Log.d(TAG, "마이너스버튼 price : " + String.valueOf(holder.price));
 
-                    result = result - holder.price;
+//                    result = result - holder.price;
+
+
+                    result = holder.price *  holder.count;
 
 
                     Log.d(TAG, "productQuantity값 int로 변환 : " + holder.count);
