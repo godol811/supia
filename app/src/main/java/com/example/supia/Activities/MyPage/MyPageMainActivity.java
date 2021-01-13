@@ -33,7 +33,7 @@ public class MyPageMainActivity extends Activity {
     TextView tvUserIdMypage, tvUserNameMypage, tvMyInfoMypage;
     LinearLayout llLikeList, llCartList, llNoticeList, llSnsList, llLogout;
     ArrayList<UserDto> userinfo;
-    String userId = sharvarUserId;
+    String userId = ShareVar.sharvarUserId;
     String urlIp = ShareVar.urlIp;
 
     String url = "http://"+urlIp+":8080/test/supiaMypage.jsp?userId="+userId;

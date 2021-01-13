@@ -154,8 +154,9 @@ public class MyReviewInsertNetworkTask extends AsyncTask<Integer, String, Object
                 int reviewNo = jsonObject1.getInt("reviewNo");
                 int orderId = jsonObject1.getInt("orderId");
                 String productName = jsonObject1.getString("productName");
+                String userId = jsonObject1.getString("userId");
 
-                MyReviewDto product = new MyReviewDto(reviewContent,reviewTitle,productNo,reviewNo,orderId,productName);
+                MyReviewDto product = new MyReviewDto(reviewContent,reviewTitle,productNo,reviewNo,orderId,productName,userId);
                 Product.add(product);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");

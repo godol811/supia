@@ -8,12 +8,35 @@ public class MyReviewDto {
     private int reviewNo;
     private int orderId;
     private String productName;
+    private String userId;
+
+
+    public MyReviewDto(String reviewContent, String reviewTitle, int productNo, int reviewNo, int orderId, String productName, String userId) {
+        this.reviewContent = reviewContent;
+        this.reviewTitle = reviewTitle;
+        this.productNo = productNo;
+        this.reviewNo = reviewNo;
+        this.orderId = orderId;
+        this.productName = productName;
+        this.userId = userId;
+    }
 
 
     public String getProductName() {
         return productName;
     }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public MyReviewDto(String reviewContent, String reviewTitle, int productNo, int reviewNo, int orderId, String productName) {
         this.reviewContent = reviewContent;

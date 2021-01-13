@@ -34,26 +34,38 @@ public class MySubscribeActivity extends Activity {
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
 
 
-    LinearLayout llSubscribeSetting;
+    LinearLayout llSubscribeSetting,llSubscribeDetail;
     RadioGroup rgSubscribe;
     RadioButton rbSubscribeSetting, rbSubscribeDetail;
-
-    TextView tvStartDate,tvState,tvAddr,tvPrice,tvPayment,tvNextPayDay;
+    TextView tvProductPrice, tvPriceTotal, tvChangePayment, tvCxl;
+    TextView tvStartDate, tvState, tvAddr, tvPrice, tvPayment, tvNextPayDay;
+    TextView tvSubscribeProductName,tvSubscribePrice,tvSubscribeQuantity;
     ArrayList<MySubscribeDto> members;
     String urlIp = ShareVar.urlIp;
     String userId = ShareVar.sharvarUserId;
-    String url = "http://"+urlIp+":8080/test/supiaSubscribe.jsp?userId="+userId;
-
+    String url = "http://" + urlIp + ":8080/test/supiaSubscribe.jsp?userId=" + userId;
+    int productPriceDialog = 0;
+    int productQuantity = 0;
+    TextView paymentDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_subscribe);
 
+
+        //----------------라디오 버튼-----------------//
         rgSubscribe = findViewById(R.id.toggle);
         rbSubscribeDetail = findViewById(R.id.rb_detail_my_subscribe);
         rbSubscribeSetting = findViewById(R.id.rb_setting_my_subscribe);
+        //-----------------------------------------//
         llSubscribeSetting = findViewById(R.id.ll_subscribe_setting); //구독관리 LinearLayout
+        llSubscribeDetail = findViewById(R.id.ll_subscribe_detial); //구독내역 LinearLayout
+
+        tvSubscribeProductName = findViewById(R.id.tv_productname_mysubscribe_detail);
+        tvSubscribePrice = findViewById(R.id.tv_productprice_mysubscribe_detail);
+        tvSubscribeQuantity = findViewById(R.id.tv_productquantity_mysubscribe_detail);
+
 
         tvStartDate = findViewById(R.id.tv_startdate_my_subscribe);
         tvState = findViewById(R.id.tv_state_my_subscribe);
@@ -61,19 +73,37 @@ public class MySubscribeActivity extends Activity {
         tvPrice = findViewById(R.id.tv_price_my_subscribe);
         tvPayment = findViewById(R.id.tv_payment_my_subscribe);
         tvNextPayDay = findViewById(R.id.tv_next_payday_my_subscribe);
+        paymentDetail = findViewById(R.id.tv_pay_detail_my_subscribe);
+
+        tvProductPrice = findViewById(R.id.tv_productprice_mysubscribe);
+        tvPriceTotal = findViewById(R.id.tv_producttotal_mysubscribe);
+        tvChangePayment = findViewById(R.id.tv_change_payment_mysubscribe);
+        tvCxl = findViewById(R.id.tv_cxl_mysubscribe);
+
+
+
 
         connectGetData();
 
+
+//        tvSubscribeProductName.setText(members.get(0).);
+
+
         tvStartDate.setText(members.get(0).getSubscribeOrderDate());
-        if(members.get(0).getProductId() == members.get(0).getProductNo()){
+
+        if (members.get(0).getProductId() == members.get(0).getProductNo()) {  //구독 여부
             tvState.setText("구독중");
-        }else {
+        } else {
             tvState.setText("구독중이 아닙니다.");
         }
+
+
         tvAddr.setText(members.get(0).getSubscribeOrderAddr());
-        tvPrice.setText(Integer.toString(members.get(0).getProductPrice()*members.get(0).getSubscribeOrderQuantity())+"원");
+        tvPrice.setText(Integer.toString((members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity()) + 2500) + "원");
         tvPayment.setText(members.get(0).getSubscribeOrderPayment());
         tvNextPayDay.setText(members.get(0).getSubscribeOrderDate());
+        productPriceDialog = members.get(0).getProductPrice();
+        productQuantity = members.get(0).getSubscribeOrderQuantity();
 
 
         //----------header 아이디----------//
@@ -98,7 +128,8 @@ public class MySubscribeActivity extends Activity {
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
-        rgSubscribe.setOnCheckedChangeListener(radioGroupClickListener);
+        rgSubscribe.setOnCheckedChangeListener(radioGroupClickListener); //라디오버튼
+        paymentDetail.setOnClickListener(payMentDetailClickListener); // 결제상세 커스텀다이얼로그
         //------------------------------------------//
 
         //------------------------------------사진 불러오기---------------------------------------//
@@ -111,6 +142,20 @@ public class MySubscribeActivity extends Activity {
 
     }//----------------onCreate
 
+    //----------------------------------------결제상세정보 버튼 클릭 이벤트------------------------------------------//
+    View.OnClickListener payMentDetailClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+            MySubscribeChangeDialog subscribe = new MySubscribeChangeDialog(MySubscribeActivity.this, productPriceDialog, productQuantity);
+            subscribe.callFunction();
+
+
+        }
+    };
+    //--------------------------------------------------------------------------------------------------------//
+
 
     //-------------------------------------------라디오 버튼 클릭이벤트----------------------------------------//
     RadioGroup.OnCheckedChangeListener radioGroupClickListener = new RadioGroup.OnCheckedChangeListener() {
@@ -118,9 +163,11 @@ public class MySubscribeActivity extends Activity {
         public void onCheckedChanged(RadioGroup group, int i) {
             if (rbSubscribeDetail.isChecked()) {
                 llSubscribeSetting.setVisibility(View.GONE);
+                llSubscribeDetail.setVisibility(View.VISIBLE);
             }
             if (rbSubscribeSetting.isChecked()) {
                 llSubscribeSetting.setVisibility(View.VISIBLE);
+                llSubscribeDetail.setVisibility(View.GONE);
 
             }
         }
@@ -223,8 +270,6 @@ public class MySubscribeActivity extends Activity {
             MyPageSubscribeNetworkTask networkTask = new MyPageSubscribeNetworkTask(MySubscribeActivity.this, url, "select");
             Object obj = networkTask.execute().get();
             members = (ArrayList<MySubscribeDto>) obj;
-
-
 
 
         } catch (Exception e) {
