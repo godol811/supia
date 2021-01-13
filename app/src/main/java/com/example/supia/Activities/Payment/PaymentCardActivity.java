@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.R;
@@ -138,7 +139,7 @@ public class PaymentCardActivity extends Activity {
                         if (cardNumber.getText().toString().trim().length() == 19) {
                             new AlertDialog.Builder(PaymentCardActivity.this)
                                     .setTitle("구매")
-                                    .setMessage("진짜로 구매 하시겠습니까?")
+                                    .setMessage("구매 하시겠습니까?")
                                     .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
                                     .setPositiveButton("아니오", null)
                                     .setNegativeButton("예", new DialogInterface.OnClickListener() {
@@ -179,7 +180,7 @@ public class PaymentCardActivity extends Activity {
                                                     .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            Intent intent = new Intent(PaymentCardActivity.this, PaymentConfirmActivity.class);//
+                                                            Intent intent = new Intent(PaymentCardActivity.this, MyOrderActivity.class);//
                                                             startActivity(intent);
                                                         }
                                                     })

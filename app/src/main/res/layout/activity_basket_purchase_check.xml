@@ -258,17 +258,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <Button
 
             android:id="@+id/btn_payment_basket"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_long"
             android:backgroundTint="#bad23a"
             android:text="결제하기"
+            android:textSize="20dp"
+            android:textStyle="bold"
+
+            />
+        <Button
+            android:id="@+id/btn_back_basket"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_long"
+            android:backgroundTint="#bad23a"
+            android:text="뒤로가기"
             android:textSize="20dp"
             android:textStyle="bold"
 
