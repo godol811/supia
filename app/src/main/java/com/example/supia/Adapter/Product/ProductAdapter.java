@@ -121,6 +121,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 .apply(new RequestOptions()).into(holder.productImg);//사진
 
 
+
+
+
+
         holder.likeListbtn.setTag(position);
             holder.likeListbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,6 +248,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         public TextView productName;
         public TextView productPrice;
         public ImageView productImg;
+
+
 
 
         public ImageButton likeListbtn;//라이크리스트버튼
