@@ -37,10 +37,7 @@ public class UserDataQuestion1 extends Activity {
         userId = ShareVar.sharvarUserId;
         datePicker = findViewById(R.id.dp_question1);
 
-        insertCheck();
-
-
-
+        insertCheck();//달력 수정했다면 다음으로 넘기
 
 
         buttonNext = findViewById(R.id.btn_next_question1);
@@ -48,11 +45,11 @@ public class UserDataQuestion1 extends Activity {
             @Override
             public void onClick(View v) {
 
-                String date = Integer.toString(datePicker.getYear())+"-"+Integer.toString(datePicker.getMonth()+1)+"-"+Integer.toString(datePicker.getDayOfMonth());
-                Log.d(TAG,date);
-                Intent intent1 = new Intent(UserDataQuestion1.this,UserDataQuestion2.class);
-                intent1.putExtra("menstruationStart",date);
-                intent1.putExtra("userId",userId);
+                String date = Integer.toString(datePicker.getYear()) + "-" + Integer.toString(datePicker.getMonth() + 1) + "-" + Integer.toString(datePicker.getDayOfMonth());
+                Log.d(TAG, date);
+                Intent intent1 = new Intent(UserDataQuestion1.this, UserDataQuestion2.class);
+                intent1.putExtra("menstruationStart", date);
+                intent1.putExtra("userId", userId);
                 startActivity(intent1);
 
             }
@@ -60,7 +57,7 @@ public class UserDataQuestion1 extends Activity {
     }
 
 
-    public void insertCheck(){
+    public void insertCheck() {
 
         Log.v(TAG, "connectGetData()");
         try {
@@ -68,18 +65,17 @@ public class UserDataQuestion1 extends Activity {
 
             urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
-            CalendarNetworkTask networkTask = new CalendarNetworkTask(UserDataQuestion1.this, urlAddr,"select");
+            CalendarNetworkTask networkTask = new CalendarNetworkTask(UserDataQuestion1.this, urlAddr, "select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
             calendarDtos = (ArrayList<CalendarDTO>) obj; //userInfoDtos 다시 풀기
 
 
             String strCalendarStartDate = calendarDtos.get(0).getCalendarStartDate();
-            Log.d(TAG,Integer.toString(strCalendarStartDate.trim().length()));
-            if(!strCalendarStartDate.equals("null")){
+            Log.d(TAG, Integer.toString(strCalendarStartDate.trim().length()));
+            if (!strCalendarStartDate.equals("null")) {
                 Intent intent = new Intent(UserDataQuestion1.this, MainCalendar.class);
                 startActivity(intent);
             }
-
 
 
         } catch (Exception e) {
@@ -89,5 +85,32 @@ public class UserDataQuestion1 extends Activity {
     }
 
 
+    private void CheckInsertCalendar() {
+        Log.v(TAG, "CheckInsertCalendar()");
+        try {
+            urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaCalendarSelectMens.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
+            Log.v(TAG, urlAddr);
+            CalendarNetworkTask networkTask = new CalendarNetworkTask(UserDataQuestion1.this, urlAddr, "select");
+            Object obj = networkTask.execute().get(); //obj를 받아들여서
+            calendarDtos = (ArrayList<CalendarDTO>) obj; //userInfoDtos 다시 풀기
+
+
+            String strUserAddr = calendarDtos.get(0).getCalendarStartDate();
+            Log.d(TAG, Integer.toString(strUserAddr.trim().length()));
+            if (!strUserAddr.equals("null")) {
+                Intent intent = new Intent(UserDataQuestion1.this, MainCalendar.class);
+                startActivity(intent);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
+
+
+

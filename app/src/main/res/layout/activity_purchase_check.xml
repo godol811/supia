@@ -131,12 +131,13 @@
                 android:text="주문상품"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_productName_purchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
                 android:layout_marginLeft="30dp"
+                android:ellipsize="end"
                 android:hint="주문상품명"
                 android:maxLines="1"
                 android:textSize="18dp" />
@@ -149,23 +150,23 @@
             android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingLeft="8dp"
-            android:text="주문수량"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="8dp"
+                android:text="주문수량"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_productQuantity_purchase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:layout_marginLeft="30dp"
-            android:hint="주문수량"
-            android:maxLines="1"
-            android:textSize="18dp" />
+            <TextView
+                android:id="@+id/tv_productQuantity_purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:ellipsize="end"
+                android:hint="주문수량"
+                android:maxLines="1"
+                android:textSize="18dp" />
         </LinearLayout>
 
     </LinearLayout>

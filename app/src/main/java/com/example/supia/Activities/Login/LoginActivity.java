@@ -365,6 +365,12 @@ public class LoginActivity extends Activity {
             e.printStackTrace();
         }
     }
+    private void loginDirect(){
+
+
+    }
+
+
 
 
     //SNS 로그인 체크
