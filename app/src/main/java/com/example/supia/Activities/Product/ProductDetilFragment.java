@@ -26,6 +26,7 @@ public class ProductDetilFragment extends Fragment {
     ProgressBar progressBar10, progressBar20, progressBar30, progressBar40, progressBar50;
 
     ImageView ivProductImage;
+    ImageView ivProductInfo;
     TextView tvBrandName;
     TextView tvProductName;
     TextView tvProductPrice;
@@ -36,15 +37,17 @@ public class ProductDetilFragment extends Fragment {
     String productPrice;
     String productBrand;
     String productImagePath;
+    String productInfo; //이거 추가
 
-    public ProductDetilFragment(String urlIp, int productNo, String productName, String productPrice, String productBrand, String productImagePath) {
+    public ProductDetilFragment(String urlIp, int productNo, String productName, String productPrice, String productBrand, String productImagePath, String productInfo) {
         this.urlIp = urlIp;
         this.productNo = productNo;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productBrand = productBrand;
         this.productImagePath = productImagePath;
-    }
+        this.productInfo = productInfo;
+    } //생성자 변경
 
     @Nullable
     @Override
@@ -55,6 +58,7 @@ public class ProductDetilFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_detil, null);
 
         ivProductImage = view.findViewById(R.id.productImage_productdetilfragment);
+        ivProductInfo = view.findViewById(R.id.infoimg_productdetil); // 아이디 추가
         tvBrandName = view.findViewById(R.id.brandName_productdetilfragment);
         tvProductName = view.findViewById(R.id.productName_productdetilfragment);
         tvProductPrice = view.findViewById(R.id.productPrice_productdetilfragment);
@@ -69,6 +73,13 @@ public class ProductDetilFragment extends Fragment {
                 override(300, 300).
                 placeholder(R.drawable.blank_square).
                 apply(new RequestOptions()).into(ivProductImage);
+
+
+        Glide.with(ProductDetilFragment.this).
+                load(urlAddr + productInfo).
+                override(3000, 1500).
+                placeholder(R.drawable.blank_productinfo).
+                apply(new RequestOptions()).into(ivProductInfo);
 
 
 

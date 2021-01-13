@@ -35,7 +35,7 @@ public class EventDecoratorDraw implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(R.drawable.calendar_background);
+        view.addSpan(R.drawable.calendar_background);;
         //view.addSpan(drawable);
 
     }

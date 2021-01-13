@@ -121,8 +121,16 @@ public class DeliveryAddressModifyActivity extends Activity {
                                                             PaymentShareVar.deliveryTel = strDeliveryTel;
                                                             PaymentShareVar.deliveryName = strDeliveryName;
                                                             startActivity(intent);
-                                                        } else {
+                                                        } else if(strWay.equals("regular")){
                                                             Intent intent = new Intent(DeliveryAddressModifyActivity.this, RegularPurchaseCheckActivity.class);
+                                                            PaymentShareVar.deliveryAddr = strDeliveryAddr;
+                                                            PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
+                                                            PaymentShareVar.deliveryTel = strDeliveryTel;
+                                                            PaymentShareVar.deliveryName = strDeliveryName;
+                                                            startActivity(intent);
+
+                                                        }else{
+                                                            Intent intent = new Intent(DeliveryAddressModifyActivity.this, BasketPurchaseCheckActivity.class);
                                                             PaymentShareVar.deliveryAddr = strDeliveryAddr;
                                                             PaymentShareVar.deliveryAddrDetail = strDeliveryAddrDetail;
                                                             PaymentShareVar.deliveryTel = strDeliveryTel;

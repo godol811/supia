@@ -9,25 +9,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.supia.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
+import java.util.Date;
+import java.util.HashSet;
 
 public class MensEdit extends Dialog {
     final static String TAG = "캘린더_월경일선택_material";
     private final Context context;
     MaterialCalendarView materialCalendarView;
+    TextView textView;
     ImageButton cancle;
     Button btnInsert, btnUpdate, btnDelete;
     ImageButton btnCancle;
-    DatePicker datePicker;
-    String pickDate;
     String menstruationStart, menstruationEnd;
-    int year, month, dayOfMonth;
+
+    Date today,startdate,finishdate;
 
     myDBHelper myDBHelper;
     SQLiteDatabase sqlDB;
 
+    private HashSet<CalendarDay> dates;
 
 
     public MensEdit(Context context) {
@@ -41,6 +47,11 @@ public class MensEdit extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_mens_edit);
 
+        btnInsert = findViewById(R.id.btn_insert_datepicker_calendar);
+        btnUpdate = findViewById(R.id.btn_update_datepicker_calendar);
+        btnDelete = findViewById(R.id.btn_delete_datepicker_calendar);
+        btnCancle = findViewById(R.id.btn_cancle_datepicker_calendar);
+
         cancle = findViewById(R.id.btn_cancle_mensedit_calendar);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,10 +60,14 @@ public class MensEdit extends Dialog {
             }
         });
 
+
+       // Date [] dates = materialCalendarView.getSelectedDates();
+
         materialCalendarView = findViewById(R.id.mensedit_calendar);
-       // materialCalendarView.setOnDateChangedListener((OnDateSelectedListener) this);
-       // materialCalendarView.setOnMonthChangedListener((OnMonthChangedListener) this);
         materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
+
+        materialCalendarView.getCurrentDate();
+        materialCalendarView.getSelectedDates();
 
 
 

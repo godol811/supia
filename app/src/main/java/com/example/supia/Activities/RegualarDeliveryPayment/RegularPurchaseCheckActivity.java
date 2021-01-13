@@ -45,7 +45,6 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
         setContentView(R.layout.activity_regular_purchase_check);
 
 
-        Log.d(TAG, PaymentShareVar.paymentProductPrice);
 
         intProductNo = PaymentShareVar.paymentProductNo;
         strProductName = PaymentShareVar.paymentProductName;

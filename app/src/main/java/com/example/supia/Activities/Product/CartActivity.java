@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.supia.Activities.Payment.BasketPurchaseCheckActivity;
 import com.example.supia.Activities.Payment.PurchaseCheckActivity;
 import com.example.supia.Adapter.Product.CartAdapter;
 import com.example.supia.Adapter.Product.ProductAdapter;
@@ -115,7 +116,7 @@ public class CartActivity extends Activity {
             public void onClick(View v) {
 
 
-                Intent intent = new Intent(CartActivity.this, PurchaseCheckActivity.class);
+                Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
                 intent.putExtra("cartData",adapter.sendDate());
                 startActivity(intent);
 
