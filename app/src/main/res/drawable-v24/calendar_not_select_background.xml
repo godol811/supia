@@ -25,7 +25,7 @@
     <item
         android:width="16dp"
         android:height="16dp"
-        android:bottom="2dp"
-        android:drawable="@drawable/cart"
+        android:bottom="0dp"
+        android:drawable="@drawable/delivery"
         android:gravity="bottom|center"></item>
 </layer-list>

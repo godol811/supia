@@ -1,28 +1,29 @@
 package com.example.supia.Activities.Calendar;
 
-import android.graphics.Color;
+import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.widget.TextView;
 
+import androidx.core.content.res.ResourcesCompat;
+
+import com.example.supia.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
-import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Set;
 
-public class EventDecorator implements DayViewDecorator {
-    //private final Drawable drawable;
-    private final int color;
+
+public class EventDecoratorDraw implements DayViewDecorator {
+    private final Drawable drawable;
     private final HashSet<CalendarDay> dates;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
-        this.color = color;
+    public EventDecoratorDraw(Collection<CalendarDay> dates, Activity context) {
+        drawable = ResourcesCompat.getDrawable((Resources.getSystem()) , R.drawable.birth, null);
+
         this.dates = new HashSet<>(dates);
-        //this.drawable = drawable;
+
     }
 
     @Override
@@ -30,10 +31,12 @@ public class EventDecorator implements DayViewDecorator {
         return dates.contains(day);
     }
 
+
+
     @Override
     public void decorate(DayViewFacade view) {
-        //view.setSelectionDrawable(drawable);
-        view.addSpan(new DotSpan(10, color));
+        view.setSelectionDrawable(drawable);
+
     }
 
 
