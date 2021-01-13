@@ -1,9 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activities.MyPage.MySnsPlatformActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/mypage_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+
+            android:layout_width="384dp"
+            android:layout_height="66dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/mypage_linear_layout_round"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="252dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="카카오 계정과 연결하기" />
+
+            <Button
+                android:id="@+id/snslist_kakao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:backgroundTint="#FBE8AA"
+                android:hint="연동" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="384dp"
+            android:layout_height="66dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/mypage_linear_layout_round"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="252dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="구글 계정과 연결하기" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:backgroundTint="#FFFFFF"
+                android:hint="연동" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/bottom_bar" />
+</LinearLayout>
