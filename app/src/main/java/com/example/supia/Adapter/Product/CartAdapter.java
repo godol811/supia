@@ -352,6 +352,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         /**
          * 상품명,상품이미지,상품가격 선언
          */
+
         public ImageView productImg;
         public TextView productName,productPrice,productQuantity,deleteBtn;
         public Button plusBtn, minusBtn;
