@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
-import com.example.supia.Dto.Product.ProductReviewDto;
+import com.example.supia.Dto.MyPage.MyReviewDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +23,7 @@ public class ProductReviewInsertNetworkTask extends AsyncTask<Integer, String, O
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<ProductReviewDto> Product;
+    ArrayList<MyReviewDto> Product;
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
     //
@@ -35,7 +35,7 @@ public class ProductReviewInsertNetworkTask extends AsyncTask<Integer, String, O
     public ProductReviewInsertNetworkTask(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.Product = new ArrayList<ProductReviewDto>();
+        this.Product = new ArrayList<MyReviewDto>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
     }
@@ -157,8 +157,8 @@ public class ProductReviewInsertNetworkTask extends AsyncTask<Integer, String, O
                 String productName = jsonObject1.getString("productName");
                 String userId = jsonObject1.getString("userId");
 
-                ProductReviewDto productReviewDto = new ProductReviewDto(reviewContent,reviewTitle,productNo,reviewNo,orderId,productName,userId);
-                Product.add(productReviewDto);
+                MyReviewDto myReviewDto = new MyReviewDto(reviewContent,reviewTitle,productNo,reviewNo,orderId,productName,userId);
+                Product.add(myReviewDto);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
             }

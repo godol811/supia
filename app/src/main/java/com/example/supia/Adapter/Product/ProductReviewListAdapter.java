@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.supia.Dto.Product.ProductReviewDto;
+import com.example.supia.Dto.MyPage.MyReviewDto;
 import com.example.supia.R;
 
 import java.util.ArrayList;
@@ -20,12 +20,12 @@ public class ProductReviewListAdapter extends RecyclerView.Adapter<ProductReview
 
     private Context mContext = null;
     private int layout = 0;
-    private ArrayList<ProductReviewDto> data = null;
+    private ArrayList<MyReviewDto> data = null;
     private LayoutInflater inflater = null;
 
 
 
-    public ProductReviewListAdapter(Context mContext, int layout, ArrayList<ProductReviewDto> data) {
+    public ProductReviewListAdapter(Context mContext, int layout, ArrayList<MyReviewDto> data) {
 
         this.mContext = mContext;
         this.layout = layout;
