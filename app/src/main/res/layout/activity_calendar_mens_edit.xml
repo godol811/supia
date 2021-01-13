@@ -8,23 +8,26 @@
 
     <LinearLayout
         android:layout_width="290dp"
-        android:layout_height="415dp"
-        android:orientation="vertical">
+        android:layout_height="447dp"
+        android:orientation="vertical"
+        >
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <TextView
                 android:id="@+id/tv_today_mensedit_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#018786"
                 android:text="today"
-                android:backgroundTint="@color/black"
-                android:textSize="50dp">
-
-            </TextView>
-
+                android:textSize="60dp"/>
+            </LinearLayout>
             <ImageButton
                 android:id="@+id/btn_cancle_mensedit_calendar"
                 android:layout_width="30dp"
@@ -36,6 +39,7 @@
         </FrameLayout>
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:layout_marginTop="5dp"
             android:id="@+id/mensedit_calendar"
             android:layout_width="252dp"
             android:layout_height="314dp"
@@ -51,19 +55,19 @@
 
 
             <Button
-                android:id="@+id/btn_insert_datepicker_calendar"
+                android:id="@+id/btn_insert_mensedit_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="입력" />
 
             <Button
-                android:id="@+id/btn_delete_datepicker_calendar"
+                android:id="@+id/btn_delete_mensedit_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="삭제" />
 
             <Button
-                android:id="@+id/btn_update_datepicker_calendar"
+                android:id="@+id/btn_update_mensedit_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="수정" />
