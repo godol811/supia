@@ -16,6 +16,7 @@ import com.example.supia.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -68,7 +69,7 @@ public class MensEdit extends Dialog {
 
         menstruationStart = checkDay(year, month, dayOfMonth);
         Log.v(TAG, "오오오" + menstruationStart);
-        menstruationEnd = checkDay(year, month, dayOfMonth);
+        //menstruationEnd = checkDay(year, month, dayOfMonth);
         Log.v(TAG, "오오오" + menstruationEnd);
 
         btnCancle.setOnClickListener(new View.OnClickListener() {

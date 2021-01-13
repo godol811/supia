@@ -3,6 +3,7 @@ package com.example.supia.Activities.Calendar;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -16,6 +17,8 @@ import java.util.HashSet;
 
 
 public class EventDecoratorDraw implements DayViewDecorator {
+
+    public static String TAG = "이벵데코드로";
     //private final Drawable drawable;
     private final HashSet<CalendarDay> dates;
 
@@ -35,8 +38,11 @@ public class EventDecoratorDraw implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(R.drawable.calendar_background);;
+        view.addSpan(R.drawable.calendar_select_background);;
         //view.addSpan(drawable);
+//        view.setBackgroundDrawable();
+//        int id = R.drawable.calendar_select_background;
+//        Log.v(TAG, "ㅇㅇㅇ"+id);
 
     }
 
