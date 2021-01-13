@@ -52,7 +52,7 @@
                         <TextView
                             android:id="@+id/tv_newaddr_myorder"
                             android:layout_width="111dp"
-                            android:layout_height="38dp"
+                            android:layout_height="29dp"
                             android:layout_gravity="right"
                             android:background="@drawable/defalt_address"
                             android:gravity="center"
