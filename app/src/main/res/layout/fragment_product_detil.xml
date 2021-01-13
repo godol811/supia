@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Activities.Product.ProductDetilFragment">
 
     <RelativeLayout
@@ -104,12 +104,16 @@
             android:layout_below="@+id/progress_50"
             android:orientation="vertical"/>
 
-        <LinearLayout
+
+        <ImageView
+            android:id="@+id/infoimg_productdetil"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="vertical"
-            android:layout_marginTop="200dp"
-            android:layout_below="@id/di2"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/di2"
+            android:src="@drawable/blank_productinfo"
+            android:layout_marginBottom="200dp"
+            />
+
 
     </RelativeLayout>
 
