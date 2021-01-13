@@ -2,6 +2,8 @@ package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,14 +13,25 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductDetilFragment;
 import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Adapter.MyPage.MyOrderListAdapter;
+import com.example.supia.Adapter.MyPage.MyReviewListAdapter;
+import com.example.supia.Adapter.MyPage.MySubOrderListAdapter;
+import com.example.supia.Dto.MyPage.MyDeliveryOrderDto;
+import com.example.supia.Dto.MyPage.MyOrderListDto;
 import com.example.supia.Dto.MyPage.MySubscribeDto;
+import com.example.supia.NetworkTask.MyPage.MyPageDeliveryOrderNetworkTask;
+import com.example.supia.NetworkTask.MyPage.MyPageSubscribe2NetworkTask;
 import com.example.supia.NetworkTask.MyPage.MyPageSubscribeNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -34,24 +47,39 @@ public class MySubscribeActivity extends Activity {
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
 
 
-    LinearLayout llSubscribeSetting,llSubscribeDetail;
+    LinearLayout llSubscribeSetting, llSubscribeDetail;
     RadioGroup rgSubscribe;
     RadioButton rbSubscribeSetting, rbSubscribeDetail;
     TextView tvProductPrice, tvPriceTotal, tvChangePayment, tvCxl;
     TextView tvStartDate, tvState, tvAddr, tvPrice, tvPayment, tvNextPayDay;
-    TextView tvSubscribeProductName,tvSubscribePrice,tvSubscribeQuantity;
+    TextView tvMySubProductName,tvMySubProductPrice,tvMySubProductQuantity;
+    ImageView ivMySubProductImg;
+
     ArrayList<MySubscribeDto> members;
+
     String urlIp = ShareVar.urlIp;
     String userId = ShareVar.sharvarUserId;
     String url = "http://" + urlIp + ":8080/test/supiaSubscribe.jsp?userId=" + userId;
+    String url2 = "http://" + urlIp + ":8080/test/supiaMyPageSubOrderList.jsp?userId=" + userId;
     int productPriceDialog = 0;
     int productQuantity = 0;
     TextView paymentDetail;
+    RecyclerView.LayoutManager subLayoutManager = null;
+    RecyclerView subscriveRv;
+    MySubOrderListAdapter subAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_subscribe);
+
+        //-----------For Recycler----------------//
+        members = new ArrayList<MySubscribeDto>();
+        subscriveRv = findViewById(R.id.rv_mysubscribe);
+        subscriveRv.setHasFixedSize(true);
+        subLayoutManager = new LinearLayoutManager(this);
+        subscriveRv.setLayoutManager(subLayoutManager);
+        //---------------------------------------//
 
 
         //----------------라디오 버튼-----------------//
@@ -62,9 +90,10 @@ public class MySubscribeActivity extends Activity {
         llSubscribeSetting = findViewById(R.id.ll_subscribe_setting); //구독관리 LinearLayout
         llSubscribeDetail = findViewById(R.id.ll_subscribe_detial); //구독내역 LinearLayout
 
-        tvSubscribeProductName = findViewById(R.id.tv_productname_mysubscribe_detail);
-        tvSubscribePrice = findViewById(R.id.tv_productprice_mysubscribe_detail);
-        tvSubscribeQuantity = findViewById(R.id.tv_productquantity_mysubscribe_detail);
+        tvMySubProductName = findViewById(R.id.tv_productname_mysubscribe_detail);
+        tvMySubProductPrice = findViewById(R.id.tv_productprice_mysubscribe_detail);
+        tvMySubProductQuantity = findViewById(R.id.tv_productquantity_mysubscribe_detail);
+        ivMySubProductImg = findViewById(R.id.iv_product_mysubscribe_detail);
 
 
         tvStartDate = findViewById(R.id.tv_startdate_my_subscribe);
@@ -82,11 +111,16 @@ public class MySubscribeActivity extends Activity {
 
 
 
-
         connectGetData();
+        connectGetData1();
+
+//        tvMySubProductName.setText(members.get(0).getSubscribeProductName());
+//        tvMySubProductPrice.setText(Integer.toString(members.get(0).getSubscribeProductPrice()));
+//        tvMySubProductQuantity.setText(Integer.toString(members.get(0).getSubscribeOrderQuantity()));
 
 
-//        tvSubscribeProductName.setText(members.get(0).);
+
+
 
 
         tvStartDate.setText(members.get(0).getSubscribeOrderDate());
@@ -104,6 +138,7 @@ public class MySubscribeActivity extends Activity {
         tvNextPayDay.setText(members.get(0).getSubscribeOrderDate());
         productPriceDialog = members.get(0).getProductPrice();
         productQuantity = members.get(0).getSubscribeOrderQuantity();
+
 
 
         //----------header 아이디----------//
@@ -138,6 +173,9 @@ public class MySubscribeActivity extends Activity {
         ActivityCompat.requestPermissions(MySubscribeActivity.this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
         //------------------------------------------------------------------------------------//
+
+
+
 
 
     }//----------------onCreate
@@ -277,5 +315,25 @@ public class MySubscribeActivity extends Activity {
         }
     }
     //----------------------------------------------------------------------------------//
+
+
+    // ----------------------------------connectGetData1----------------------------------//
+    private void connectGetData1() {
+        try {
+
+            MyPageSubscribe2NetworkTask networkTask = new MyPageSubscribe2NetworkTask(MySubscribeActivity.this, url2, "select");
+            Object obj = networkTask.execute().get();
+            members = (ArrayList<MySubscribeDto>) obj;
+            subAdapter = new MySubOrderListAdapter(MySubscribeActivity.this, R.layout.activity_my_subscribe, members);
+            subscriveRv.setAdapter(subAdapter);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //----------------------------------------------------------------------------------//
+
+
 
 }//--------------------끝

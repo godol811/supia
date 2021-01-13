@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.supia.Dto.MyPage.MyOrderListDto;
+import com.example.supia.Dto.MyPage.MySubscribeDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,12 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MyOrderListNetworkTask extends AsyncTask<Integer, String, Object> {
-    final static String TAG = "오더리스트네트워크타스크";
+public class MyPageSubscribe2NetworkTask extends AsyncTask<Integer, String, Object> {
+
+    final static String TAG = "네트워크타스크";
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<MyOrderListDto> Address;
+    ArrayList<MySubscribeDto> Address;
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
     //
@@ -32,10 +33,10 @@ public class MyOrderListNetworkTask extends AsyncTask<Integer, String, Object> {
     ///////////////////////////////////////////////////////////////////////////////////////
     String where = null;
 
-    public MyOrderListNetworkTask(Context context, String mAddr, String where) {
+    public MyPageSubscribe2NetworkTask(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.Address = new ArrayList<MyOrderListDto>();
+        this.Address = new ArrayList<MySubscribeDto>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
     }
@@ -159,26 +160,28 @@ public class MyOrderListNetworkTask extends AsyncTask<Integer, String, Object> {
         try {
 
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("orderlist,product"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("subscribeOrder,product"));
             Address.clear();
             Log.v(TAG, "s" + s);
+
+
+
 
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                int orderQuantity = jsonObject1.getInt("orderQuantity");
-                int productPrice = jsonObject1.getInt("productPrice");
-                int productId = jsonObject1.getInt("productId");
-                int productNo = jsonObject1.getInt("productNo");
-                String productName = jsonObject1.getString("productName");
-                String orderPayment = jsonObject1.getString("orderPayment");
-                String userId = jsonObject1.getString("userId");
+                int subscribeOrderQuantity = jsonObject1.getInt("subscribeOrderQuantity");
+                int subscribeProductPrice = jsonObject1.getInt("subscribeProductPrice");
+                String subscribeProductName = jsonObject1.getString("subscribeProductName");
                 String productImagePath = jsonObject1.getString("productImagePath");
-                int orderNo = jsonObject1.getInt("orderNo");
+                int productNo = jsonObject1.getInt("productNo");
+                int productId = jsonObject1.getInt("productId");
 
 
-                MyOrderListDto address = new MyOrderListDto(orderQuantity, productPrice, productId, productNo, productName, orderPayment, userId, productImagePath, orderNo);
+
+
+                MySubscribeDto address = new MySubscribeDto(subscribeProductName,subscribeProductPrice,subscribeOrderQuantity,productImagePath,productNo,productId);
                 Address.add(address);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
@@ -212,5 +215,8 @@ public class MyOrderListNetworkTask extends AsyncTask<Integer, String, Object> {
         }
         return returnValue;
     }
+    ///////////////////////////////////////////////////////////////////////////////////////
+
+
 
 }

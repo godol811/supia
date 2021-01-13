@@ -32,7 +32,7 @@
         <activity android:name=".Activities.Product.CategoryActivity" />
         <activity android:name=".Activities.Product.SearchActivity" />
         <activity android:name=".Activities.Product.ProductMainActivity" />
-        <activity android:name=".Activities.Product.ProductDetailActivity" />
+
         <activity android:name=".Activities.Product.WriteQnAActivity" />
         <activity android:name=".Activities.Payment.PaymentModifyActivity"/>
         <activity android:name=".Activities.Payment.PurchaseCheckActivity" />
