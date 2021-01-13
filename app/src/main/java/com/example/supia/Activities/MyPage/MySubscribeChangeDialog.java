@@ -2,6 +2,7 @@ package com.example.supia.Activities.MyPage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -56,8 +57,9 @@ public class MySubscribeChangeDialog extends Dialog {
 
         final TextView tvProductPrice = dialog.findViewById(R.id.tv_productprice_mysubscribe);
         final TextView tvPriceTotal = dialog.findViewById(R.id.tv_producttotal_mysubscribe);
-        final TextView tvChangePayment = dialog.findViewById(R.id.tv_change_payment_mysubscribe);
+        final TextView tvChangePayment = dialog.findViewById(R.id.tv_changepayment_mysubscribe);
         final TextView tvCxl = dialog.findViewById(R.id.tv_cxl_mysubscribe);
+        final String userId = ShareVar.sharvarUserId;
 
         tvProductPrice.setText(productPriceDialog*productQuantity+"원");
         tvPriceTotal.setText((productPriceDialog*productQuantity)+2500+"원");
@@ -66,6 +68,11 @@ public class MySubscribeChangeDialog extends Dialog {
         tvChangePayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context,MyPageUpdatePaymentActivity.class);
+                intent.putExtra("userId",userId);
+
+                context.startActivity(intent);
+
 
 
             }

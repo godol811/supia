@@ -14,16 +14,21 @@ public class MySubscribeDto {
     private int productPrice;
 
 
-    public MySubscribeDto(String subscribeOrderDate, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, int productPrice) {
-        this.subscribeOrderDate = subscribeOrderDate;
-        this.subscribeOrderAddr = subscribeOrderAddr;
+//    public MySubscribeDto(String subscribeOrderDate, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, int productPrice) {
+//        this.subscribeOrderDate = subscribeOrderDate;
+//        this.subscribeOrderAddr = subscribeOrderAddr;
+//        this.subscribeOrderPayment = subscribeOrderPayment;
+//        this.userId = userId;
+//        this.productId = productId;
+//        this.productNo = productNo;
+//        this.productPrice = productPrice;
+//    }
+
+
+    public MySubscribeDto(String subscribeOrderPayment, String userId) {
         this.subscribeOrderPayment = subscribeOrderPayment;
         this.userId = userId;
-        this.productId = productId;
-        this.productNo = productNo;
-        this.productPrice = productPrice;
     }
-
 
     public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
         this.subscribeOrderDate = subscribeOrderDate;

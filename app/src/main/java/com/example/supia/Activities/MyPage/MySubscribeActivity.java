@@ -77,7 +77,7 @@ public class MySubscribeActivity extends Activity {
 
         tvProductPrice = findViewById(R.id.tv_productprice_mysubscribe);
         tvPriceTotal = findViewById(R.id.tv_producttotal_mysubscribe);
-        tvChangePayment = findViewById(R.id.tv_change_payment_mysubscribe);
+        tvChangePayment = findViewById(R.id.tv_changepayment_mysubscribe);
         tvCxl = findViewById(R.id.tv_cxl_mysubscribe);
 
 
