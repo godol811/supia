@@ -46,7 +46,7 @@ public class FindPWActivity extends AppCompatActivity {
         String auth = authCheck.getText().toString();
 
 
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        buttonBack.setOnClickListener(new View.OnClickListener() {//뒤로 가기
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -54,7 +54,7 @@ public class FindPWActivity extends AppCompatActivity {
         });
 
 
-        buttonSend.setOnClickListener(new View.OnClickListener() {
+        buttonSend.setOnClickListener(new View.OnClickListener() {//이메일 보내기 버튼
             @Override
             public void onClick(View v) {
             userId = authEmail.getText().toString().trim();
@@ -74,7 +74,7 @@ public class FindPWActivity extends AppCompatActivity {
         });
 
 
-      buttonCheck.setOnClickListener(new View.OnClickListener() {
+      buttonCheck.setOnClickListener(new View.OnClickListener() {//인증번호 비교 대조 확인
           @Override
           public void onClick(View v) {
               Log.d("확인",code);
@@ -88,7 +88,7 @@ public class FindPWActivity extends AppCompatActivity {
                           .setPositiveButton("닫기", null)
                           .show();
               }
-             else if(authCheck.getText().toString().equals(code))
+             else if(authCheck.getText().toString().equals(code))//이메일 코드랑 맞는 경우에는 이메일 재설정 페이지로 이동
               {
                   Intent intent = new Intent(FindPWActivity.this,RefactorPassWordActivity.class);
                   intent.putExtra("userId",userId);
@@ -133,7 +133,7 @@ public class FindPWActivity extends AppCompatActivity {
                         .setPositiveButton("닫기", null)
                         .show();
             } else {
-                userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.
+                userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.)
                 Log.d(TAG, userIdCheck);
                 new AlertDialog.Builder(FindPWActivity.this)
                         .setTitle("이메일을 보냈습니다.!")
