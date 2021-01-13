@@ -71,7 +71,7 @@ public class LoginActivity extends Activity {
 
         if (userinfoId.trim().length() != 0) {
             ShareVar.sharvarUserId = userinfoId;
-            Intent intent2 = new Intent(LoginActivity.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
+            Intent intent2 = new Intent(LoginActivity.this, MainCalendar.class);//추후에는 참치 쪽으로 이동
             startActivity(intent2);
         }
 
