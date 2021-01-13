@@ -1,5 +1,9 @@
 package com.example.supia.ShareVar;
 
+import com.example.supia.Dto.Product.CartDto;
+
+import java.util.ArrayList;
+
 public class PaymentShareVar {
 
     //godol 추가
@@ -18,7 +22,9 @@ public class PaymentShareVar {
     public static String deliveryTel;
     public static String deliveryName;
     public static int totalPayment;
+    public static int totalQuantity;
 
+    public static ArrayList<CartDto> list;
 
 
 }
