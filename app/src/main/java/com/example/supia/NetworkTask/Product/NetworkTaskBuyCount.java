@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.supia.Dto.MyPage.MyOrderListDto;
 import com.example.supia.Dto.Product.CartDto;
 
 import org.json.JSONArray;
@@ -24,7 +25,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<CartDto> Cart;
+    ArrayList<MyOrderListDto> Cart;
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
@@ -40,7 +41,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
     public NetworkTaskBuyCount(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.Cart = new ArrayList<CartDto>();
+        this.Cart = new ArrayList<MyOrderListDto>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
 

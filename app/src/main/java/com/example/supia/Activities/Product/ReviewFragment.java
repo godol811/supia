@@ -1,6 +1,7 @@
 package com.example.supia.Activities.Product;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class ReviewFragment extends Fragment {
             String reviewUrl = "http://" + urlIp + ":8080/test/supiaProductReviewList.jsp?productNo="+productNo;
             MyReviewInsertNetworkTask networkTask1 = new MyReviewInsertNetworkTask(getActivity(), reviewUrl, "select");
             Object obj = networkTask1.execute().get();
+            Log.v("뭐지" ,"obj"+obj);
             list = (ArrayList<MyReviewDto>) obj;
             adapter = new ProductReviewListAdapter(getContext(), R.layout.activity_my_order, list);
             recyclerView.setAdapter(adapter);
@@ -84,9 +86,10 @@ public class ReviewFragment extends Fragment {
     private void connectGetDataBuy() {
         try {
 
-            String reviewUrl = "http://" + urlIp + ":8080/test/supiaBuyCount.jsp?productNo="+productNo;
-            NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getActivity(), reviewUrl, "select");
+            String buyUrl = "http://" + urlIp + ":8080/test/supiaBuyCount.jsp?productNo="+productNo;
+            NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getActivity(), buyUrl, "select");
             Object obj = networkTask2.execute().get();
+            Log.v("안들어오니?" ,"obj"+obj);
             String cnt = (String) obj;
             Buycount.setText(cnt);
 
