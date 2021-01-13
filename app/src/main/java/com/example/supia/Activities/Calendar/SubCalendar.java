@@ -1,31 +1,50 @@
 package com.example.supia.Activities.Calendar;
 
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.supia.Activities.MyPage.MyPageMainActivity;
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.util.Collections;
 import java.util.HashSet;
 
 public class SubCalendar extends FragmentActivity {
 
     public String urlAddr,urlIp,userId;
-    MaterialCalendarView materialCalendarView;
+    MaterialCalendarView materialCalendarView_sub;
     Button btnedit;
 
     private HashSet<CalendarDay> dates;
 
+    public String strcalendarStratDate, strcalendarFinishDate, strcalendarDeliveryDate, strcalendarBirthDate;
+    String[] strarray;
+    String[] strarray2;
+    String[] strarray3;
+    String[] strarray4;
+
+    public int intdelyear, intstayear, intfinyear, intbiryear,
+            intdelmonth, intstamonth, intfinmonth, intbirmonth,
+            intdelday, intstaday, intfinday, intbirday;
+
     public static String TAG ="서브캘린더";
 
+
+    ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +55,61 @@ public class SubCalendar extends FragmentActivity {
         urlAddr = "http://"+urlIp+":8080/test/supiaCalendarSelectMens.jsp";//jsp주소
         urlAddr = urlAddr + "?userId="+ userId;
 
-        materialCalendarView =findViewById(R.id.subcalendar_calendarView);
+        materialCalendarView_sub =findViewById(R.id.subcalendar_calendarView);
 
         btnedit = findViewById(R.id.btn_edit_subcalendar);
+
+
+        connectGetData();
+
+        strcalendarStratDate = ShareVar.calendarsharvarStartdate;
+        strcalendarFinishDate = ShareVar.calendarsharvarFinishdate;
+        strcalendarDeliveryDate = ShareVar.calendarsharvarDeliverydate;
+        strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
+        Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
+
+        strarray = strcalendarStratDate.split("-");
+        strarray2 = strcalendarFinishDate.split("-");
+        strarray3 = strcalendarDeliveryDate.split("-");
+        strarray4 = strcalendarBirthDate.split("-");
+
+        intdelyear = Integer.parseInt(strarray[0]);
+        intdelmonth = Integer.parseInt(strarray[1]) - 1;
+        intdelday = Integer.parseInt(strarray[2]);
+
+        intbiryear = Integer.parseInt(strarray2[0]);
+        intbirmonth = Integer.parseInt(strarray2[1]) - 1;
+        intbirday = Integer.parseInt(strarray2[2]);
+
+        intstayear = Integer.parseInt(strarray3[0]);
+        intstamonth = Integer.parseInt(strarray3[1]) - 1;
+        intstaday = Integer.parseInt(strarray3[2]);
+
+        intfinyear = Integer.parseInt(strarray4[0]);
+        intfinmonth = Integer.parseInt(strarray4[1]) - 1;
+        intfinday = Integer.parseInt(strarray4[2]);
+        //애정추가-----------------//
+//        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+//        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+//        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
+        //---------------------//
+
+
+
+
+        materialCalendarView_sub.setSelectedDate(CalendarDay.from(intdelyear, intdelmonth, intdelday));
+        materialCalendarView_sub.addDecorator(new EventDecoratorDraw(Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
+
+        materialCalendarView_sub.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
+        materialCalendarView_sub.addDecorator(new EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
+
+        materialCalendarView_sub.setSelectedDate(CalendarDay.from(intstayear, intstamonth, intstaday));
+        materialCalendarView_sub.addDecorator(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(intstayear, intstamonth, intstaday))));
+
+        materialCalendarView_sub.setSelectedDate(CalendarDay.from(intfinyear, intfinmonth, intfinday));
+        materialCalendarView_sub.addDecorator(new EventDecorator(Color.GREEN, Collections.singleton(CalendarDay.from(intfinyear, intfinmonth, intfinday))));
+
+
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,5 +137,44 @@ public class SubCalendar extends FragmentActivity {
             e.printStackTrace();
         }
     }
+    //애정존-----------------------------------
+
+    //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMainMypage = new Intent(SubCalendar.this, MyPageMainActivity.class);
+            startActivity(gotoMainMypage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(SubCalendar.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 쇼필몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(SubCalendar.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
 
 }

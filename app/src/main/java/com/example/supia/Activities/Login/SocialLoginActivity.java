@@ -197,7 +197,7 @@ public class SocialLoginActivity extends Activity {
             String strUserAddr = userDtos.get(0).getUserAddr();
             Log.d(TAG,Integer.toString(strUserAddr.trim().length()));
             if(!strUserAddr.equals("null")){
-                Intent intent = new Intent(SocialLoginActivity.this, MainCalendar.class);
+                Intent intent = new Intent(SocialLoginActivity.this, UserDataQuestion1.class);
                 startActivity(intent);
             }
 

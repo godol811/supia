@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.Payment.PurchaseCheckActivity">
+    tools:context=".Activities.Payment.BasketPurchaseCheckActivity">
 
 
     <TextView
@@ -14,7 +14,7 @@
         android:paddingLeft="15dp"
         android:paddingTop="25dp"
         android:paddingBottom="40dp"
-        android:text="일반 결제"
+        android:text="장바구니 결제"
         android:textColor="#bad23a"
         android:textSize="22dp"
         android:textStyle="bold" />
@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_deliveryName"
+                android:id="@+id/tv_deliveryName_basket"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_deliveryaddress"
+            android:id="@+id/tv_deliveryaddress_basket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -65,7 +65,7 @@
             android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/tv_deliveryaddressDetail"
+            android:id="@+id/tv_deliveryaddressDetail_basket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -80,7 +80,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_deliverytel"
+                android:id="@+id/tv_deliverytel_basket"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:gravity="bottom"
@@ -90,7 +90,7 @@
                 android:textSize="15dp" />
 
             <Button
-                android:id="@+id/btn_deliveryinfomodify"
+                android:id="@+id/btn_deliveryinfomodify_basket"
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="185dp"
@@ -133,7 +133,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_productName_purchase"
+                android:id="@+id/tv_productName_basket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -151,6 +151,7 @@
 
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="8dp"
@@ -159,7 +160,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_productQuantity_purchase"
+                android:id="@+id/tv_productQuantity_basket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -185,6 +186,7 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -194,7 +196,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_totalprice_purchase"
+            android:id="@+id/tv_totalprice_basket"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="200dp"
@@ -234,7 +236,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_paymentmethod"
+            android:id="@+id/tv_paymentmethod_basket"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="160dp"
@@ -243,7 +245,7 @@
             android:textSize="16dp" />
 
         <Button
-            android:id="@+id/btn_paymentmodify"
+            android:id="@+id/btn_paymentmodify_basket"
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
@@ -260,7 +262,7 @@
 
         <Button
 
-            android:id="@+id/btn_payment"
+            android:id="@+id/btn_payment_basket"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="50dp"

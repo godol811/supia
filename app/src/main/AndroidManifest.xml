@@ -20,7 +20,7 @@
         <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity" />
         <activity android:name=".Activities.Product.ProductDetailActivity" />
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
-        <activity android:name=".Activities.Product.LikeActivity" />
+        <activity android:name=".Activities.Product.LikeActivity"/>
         <activity android:name=".Activities.MyPage.MyLikeListActivity" />
         <activity android:name=".Activities.MyPage.MySubscribeActivity" />
         <activity android:name=".Activities.MyPage.MyOrderActivity" />
@@ -28,10 +28,13 @@
         <activity android:name=".Activities.MyPage.MySnsPlatformActivity" />
         <activity android:name=".Activities.MyPage.MyPageMainActivity" />
         <activity android:name=".Activities.Product.CartInsertActivity" />
+
         <activity android:name=".Activities.Product.CategoryActivity" />
         <activity android:name=".Activities.Product.SearchActivity" />
         <activity android:name=".Activities.Product.ProductMainActivity" />
-        <activity android:name=".Activities.Payment.PaymentModifyActivity" />
+        <activity android:name=".Activities.Product.ProductDetailActivity" />
+        <activity android:name=".Activities.Product.WriteQnAActivity" />
+        <activity android:name=".Activities.Payment.PaymentModifyActivity"/>
         <activity android:name=".Activities.Payment.PurchaseCheckActivity" />
         <activity android:name=".Activities.Payment.PaymentPhoneActivity" />
         <activity android:name=".Activities.Payment.PaymentConfirmActivity" />
@@ -75,7 +78,7 @@
                     android:scheme="kakaob8f1e7f5e6bb8f2b5ba642c75ff2d201" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Product.CartActivity" />
+
     </application>
 
 </manifest>

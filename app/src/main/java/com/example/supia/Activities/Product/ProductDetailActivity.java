@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 
 public class ProductDetailActivity extends AppCompatActivity {
+    final static String TAG ="프로덕트 디테일 엑티비티";
 
     TextView tvMinusBottomsheet, tvProductQuantityNumBottomsheet, tvPlusBottomsheet;
     Button btnCartAdd, btnBuy;
@@ -39,6 +41,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     String productPrice;
     String productBrand;
     String productImagePath;
+    String productInfo;
+
     String urlIp;
     String urlAddr = null;
 
@@ -60,12 +64,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         productPrice = intent.getStringExtra("productPrice");
         productBrand = intent.getStringExtra("productBrand");
         productImagePath = intent.getStringExtra("productImagePath");
+        productInfo = intent.getStringExtra("productInfo");
 
 
         //탭
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        adapter.addFragment(new ProductDetilFragment(urlIp, productNo, productName, productPrice, productBrand, productImagePath), "상품설명");
+        adapter.addFragment(new ProductDetilFragment(urlIp, productNo, productName, productPrice, productBrand, productImagePath, productInfo), "상품설명");
         adapter.addFragment(new PurchaseFragment(), "구매정보");
         adapter.addFragment(new ReviewFragment(urlIp, productNo), "리뷰");
         adapter.addFragment(new QnAFragment(urlIp, productNo, productName), "Q & A");
@@ -99,7 +104,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 // set the peek height
-        bottomSheetBehavior.setPeekHeight(140);
+        bottomSheetBehavior.setPeekHeight(180);
 
 // set hideable or not
         bottomSheetBehavior.setHideable(false);

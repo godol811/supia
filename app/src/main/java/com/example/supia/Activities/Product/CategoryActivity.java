@@ -427,6 +427,7 @@ public class CategoryActivity extends Activity {
                 intent.putExtra("productPrice", product.get(position).getProductPrice());
                 intent.putExtra("productBrand", product.get(position).getProductBrand());
                 intent.putExtra("productImagePath", product.get(position).getProductImagePath());
+                intent.putExtra("productInfo", product.get(position).getProductInfo());
                 Log.v(TAG,"productName " + product.get(position).getProductName());
 
                 startActivity(intent);
