@@ -51,15 +51,15 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
         strMethodItem = intent.getStringExtra("ITEM");
         strUserId = ShareVar.sharvarUserId;
 
-        btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify_regular);
-        btnPaymentMethod = findViewById(R.id.btn_paymentmodify_regular);
-        btnPayment = findViewById(R.id.btn_payment_regular);
+        btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify);
+        btnPaymentMethod = findViewById(R.id.btn_paymentmodify);
+        btnPayment = findViewById(R.id.btn_payment);
 
         tvDeliveryAddress = findViewById(R.id.tv_deliveryaddress_regular);
         tvDeliveryAddressDetail = findViewById(R.id.tv_deliveryaddressDetail_regular);
         tvDeliveryTel = findViewById(R.id.tv_deliverytel_regular);
         tvDeliveryName = findViewById(R.id.tv_deliveryName_regular);
-        tvPaymentMethod = findViewById(R.id.tv_paymentmethod_regular);
+        tvPaymentMethod = findViewById(R.id.tv_paymentmethod);
         tvPaymentMethod.setText(strPayMethod);
 
 
@@ -87,17 +87,17 @@ public class RegularPurchaseCheckActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_deliveryinfomodify_regular://배송지 변경
+                case R.id.btn_deliveryinfomodify://배송지 변경
                     Intent intent = new Intent(RegularPurchaseCheckActivity.this, RegularDeliveryAddressListActivity.class);
                     intent.putExtra("way","regular");
                     startActivity(intent);
                     break;
-                case R.id.btn_paymentmodify_regular://결제수단 변경
+                case R.id.btn_paymentmodify://결제수단 변경
                     Intent intent1 = new Intent(RegularPurchaseCheckActivity.this, PaymentModifyActivity.class);
                     intent1.putExtra("way","regular");
                     startActivity(intent1);
                     break;
-                case R.id.btn_payment_regular:
+                case R.id.btn_payment:
                     strDeliveryAddr = tvDeliveryAddress.getText().toString().trim();
                     strDeliveryAddrDetail = tvDeliveryAddressDetail.getText().toString().trim();
                     strDeliveryTel =tvDeliveryTel.getText().toString().trim();
