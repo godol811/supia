@@ -28,7 +28,7 @@ public class MensEdit extends Dialog {
     ImageButton btnCancle;
     String menstruationStart, menstruationEnd;
 
-    Date today,date1, date2;
+    Date today,startdate,finishdate;
 
     myDBHelper myDBHelper;
     SQLiteDatabase sqlDB;
@@ -59,6 +59,9 @@ public class MensEdit extends Dialog {
                 dismiss();
             }
         });
+
+
+       // Date [] dates = materialCalendarView.getSelectedDates();
 
         materialCalendarView = findViewById(R.id.mensedit_calendar);
         materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);

@@ -34,10 +34,10 @@ public class MainCalendar extends FragmentActivity {
     public Button btnedit;
     public ImageButton gotosub;
     public MaterialCalendarView materialCalendarView_main;
-    public String Dday;
     public String strcalendarStratDate, strcalendarFinishDate, strcalendarDeliveryDate, strcalendarBirthDate;
 
-
+    public String Dday;
+    public String CurrentStartDay,LastFinishDay;
 
 
     private HashSet<CalendarDay> dates;
@@ -112,7 +112,7 @@ public class MainCalendar extends FragmentActivity {
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intdelyear, intdelmonth, intdelday));
         materialCalendarView_main.addDecorator(new EventDecoratorDraw(Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
-        
+
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_main.addDecorator(new EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
 

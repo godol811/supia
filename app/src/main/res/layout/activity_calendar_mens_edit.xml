@@ -19,7 +19,9 @@
                 android:id="@+id/tv_today_mensedit_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp">
+                android:text="today"
+                android:backgroundTint="@color/black"
+                android:textSize="50dp">
 
             </TextView>
 
