@@ -64,17 +64,16 @@ public class LoginActivity extends Activity {
         mContext = this;
 
 
-        SharedPreferences sf = getSharedPreferences("auto",MODE_PRIVATE);
-        userinfoId = sf.getString("userId","");
-        userinfoPw =sf.getString("userPw","");
-        Log.d(TAG,userinfoId);
+        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);
+        userinfoId = sf.getString("userId", "");
+        userinfoPw = sf.getString("userPw", "");
+        Log.d(TAG, userinfoId);
 
-        if(userinfoId.trim().length()!=0){
+        if (userinfoId.trim().length() != 0) {
             ShareVar.sharvarUserId = userinfoId;
             Intent intent2 = new Intent(LoginActivity.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
             startActivity(intent2);
         }
-
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -86,8 +85,6 @@ public class LoginActivity extends Activity {
 
 
         cbAutoLogin = findViewById(R.id.cb_autologin_login);
-
-
 
 
         kakaoLoginButton = findViewById(R.id.kakaologin);
@@ -155,65 +152,6 @@ public class LoginActivity extends Activity {
 
         }
     };
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    //일반 로그인                                                             //
-    ////////////////////////////////////////////////////////////////////////////
-
-    private void connectloginCheck() {
-        Log.v(TAG, "connectGetData()");
-        try {
-
-            macIp = ShareVar.urlIp;
-            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + userinfoId;//jsp에 ID값 Request할 수 있게 페이지 설정.
-            Log.v(TAG, urlAddr);
-            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "select");
-            Object obj = networkTask.execute().get(); //obj를 받아들여서
-            userDtos = (ArrayList<UserDto>) obj; //userInfoDtos 다시 풀기
-
-            userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.
-            userPwCheck = userDtos.get(0).getUserPw();
-//            Log.d(TAG,userIdCheck);
-//            Log.d(TAG,userPwCheck);
-
-            if (userPwCheck.length() != 0) {//받아오는 암호값이 있으면 고고
-                if (userPwCheck.equals(userinfoPw)) {//암호가 같으면
-                    if (cbAutoLogin.isChecked()) {
-                        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
-                        SharedPreferences.Editor editor = sf.edit();
-                        editor.putString("userId", userinfoId);
-                        editor.putString("userPw", userinfoPw);
-                        editor.commit();
-                        Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
-                        ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
-                        intent.putExtra("userId", userinfoId);
-                        Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
-                        ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
-                        intent.putExtra("userId", userinfoId);
-                        Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                    }
-
-
-                } else {// 암호가 다르면 암호가 틀렸다고 메세지 띄우기
-                    Toast.makeText(LoginActivity.this, "암호가 틀립니다.", Toast.LENGTH_SHORT).show();
-                }
-
-
-            } else {//아이디가 없는값이라면 없는 아이디라 메세지 띄우고
-                Toast.makeText(this, "없는 아이디입니다.", Toast.LENGTH_SHORT).show();
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -321,8 +259,8 @@ public class LoginActivity extends Activity {
                 String personGivenName = account.getGivenName();
                 String personFamilyName = account.getFamilyName();
                 String personEmail = account.getEmail();
-                String personId = account.getId();
-                Uri personPhoto = account.getPhotoUrl();
+//                String personId = account.getId();
+//                Uri personPhoto = account.getPhotoUrl();
                 if (cbAutoLogin.isChecked()) {
                     SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
                     SharedPreferences.Editor editor = sf.edit();
@@ -343,14 +281,9 @@ public class LoginActivity extends Activity {
                 }
 
                 macIp = "192.168.35.147";
-                urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserinfoInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+                urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
                 urlAddr = urlAddr + "userId=" + personEmail + "&userPlatform=google";
-                try {
-                    UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "insert");
-                    insertworkTask.execute().get();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                socialUserInsert();
             }
 
 
@@ -373,6 +306,78 @@ public class LoginActivity extends Activity {
     ////////////////////////////////////////////////////////////////////////////
     //구글로그인 추가                                                         //
     ////////////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    //일반 로그인                                                             //
+    ////////////////////////////////////////////////////////////////////////////
+
+    private void connectloginCheck() {
+        Log.v(TAG, "connectGetData()");
+        try {
+
+            macIp = ShareVar.urlIp;
+            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+            urlAddr = urlAddr + "userId=" + userinfoId;//jsp에 ID값 Request할 수 있게 페이지 설정.
+            Log.v(TAG, urlAddr);
+            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "select");
+            Object obj = networkTask.execute().get(); //obj를 받아들여서
+            userDtos = (ArrayList<UserDto>) obj; //userInfoDtos 다시 풀기
+
+            userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.
+            userPwCheck = userDtos.get(0).getUserPw();
+//            Log.d(TAG,userIdCheck);
+//            Log.d(TAG,userPwCheck);
+
+            if (userPwCheck.length() != 0) {//받아오는 암호값이 있으면 고고
+                if (userPwCheck.equals(userinfoPw)) {//암호가 같으면
+                    if (cbAutoLogin.isChecked()) {
+                        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
+                        SharedPreferences.Editor editor = sf.edit();
+                        editor.putString("userId", userinfoId);
+                        editor.putString("userPw", userinfoPw);
+                        editor.commit();
+                        Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
+                        ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
+                        intent.putExtra("userId", userinfoId);
+                        Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
+                        ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
+                        intent.putExtra("userId", userinfoId);
+                        Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    }
+
+
+                } else {// 암호가 다르면 암호가 틀렸다고 메세지 띄우기
+                    Toast.makeText(LoginActivity.this, "암호가 틀립니다.", Toast.LENGTH_SHORT).show();
+                }
+
+
+            } else {//아이디가 없는값이라면 없는 아이디라 메세지 띄우고
+                Toast.makeText(this, "없는 아이디입니다.", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //SNS 로그인 체크
+
+    private void socialUserInsert() {
+
+        try {
+            UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "insert");
+            insertworkTask.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

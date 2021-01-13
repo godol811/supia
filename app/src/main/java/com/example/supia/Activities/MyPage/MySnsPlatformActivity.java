@@ -2,6 +2,7 @@ package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.supia.R;
 
-public class MySnsPlatformActivity extends AppCompatActivity {
+public class MySnsPlatformActivity extends Activity {
 
 
     //filed
@@ -60,7 +61,7 @@ public class MySnsPlatformActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent gotoMainMypage = new Intent(MySnsPlatformActivity.this, MyPageMainActivity.class);
             startActivity(gotoMainMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -70,7 +71,7 @@ public class MySnsPlatformActivity extends AppCompatActivity {
     View.OnClickListener backClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
             onBackPressed();
 
         }
@@ -86,7 +87,7 @@ public class MySnsPlatformActivity extends AppCompatActivity {
             Intent headerforOrder = new Intent(MySnsPlatformActivity.this, MyOrderActivity.class);
             tvOrder.setTypeface(tvOrder.getTypeface(), Typeface.BOLD); // 클릭시 글씨 두꺼워짐
             startActivity(headerforOrder);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -99,7 +100,7 @@ public class MySnsPlatformActivity extends AppCompatActivity {
             Intent headerSubscribe = new Intent(MySnsPlatformActivity.this, MySubscribeActivity.class);
             tvSubscribe.setTypeface(tvSubscribe.getTypeface(), Typeface.BOLD);
             startActivity(headerSubscribe);
-            overridePendingTransition(R.anim.fadein, R.anim.hold);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
@@ -112,7 +113,7 @@ public class MySnsPlatformActivity extends AppCompatActivity {
             Intent forMypage = new Intent(MySnsPlatformActivity.this, MyPageMainActivity.class);
             tvMypage.setTypeface(tvMypage.getTypeface(), Typeface.BOLD);
             startActivity(forMypage);
-            overridePendingTransition(R.anim.fadein, R.anim.hold); //화면전환시 애니메이션 적용
+            overridePendingTransition(R.anim.hold, R.anim.hold); //화면전환시 애니메이션 적용
         }
     };
     //------------------------------------------------------------------------------------//
