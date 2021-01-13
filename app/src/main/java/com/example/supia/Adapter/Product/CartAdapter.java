@@ -14,6 +14,7 @@ import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +50,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-    ArrayList<CartDto> sendCartData;
+    ArrayList<CartDto> sendCartData ;
 
 
     CartAdapter adapter = null;
@@ -149,22 +150,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
         /**
-         * 수량 플러스,마이너스,삭제버튼
+         * 수량 플러스,마이너스, 리스트에서 바로 삭제하는 버튼
          */
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "삭제버튼 클릭시 삭제");
-                int cartNo = mDataset.get(position).getCartNo();
-                urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecart.jsp?";
-                urlAddr = urlAddr + "cartNo=" + cartNo;
-                connectGetData();
-
-                mDataset.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemChanged(holder.getAdapterPosition());
-            }
-        });
+//        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "삭제버튼 클릭시 삭제");
+//                int cartNo = mDataset.get(position).getCartNo();
+//                urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecart.jsp?";
+//                urlAddr = urlAddr + "cartNo=" + cartNo;
+//
+//                connectGetData();
+//
+//                mDataset.remove(holder.getAdapterPosition());
+//                notifyItemRemoved(holder.getAdapterPosition());
+//                notifyItemChanged(holder.getAdapterPosition());
+//
+//
+//            }
+//        });
 
         holder.plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,7 +293,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         }
     }
 
+    public ArrayList<CartDto> checkBoxChecked(){
 
+        return checkBoxChecked();
+
+    }
 
 
     //인터페이스 선언
@@ -352,7 +360,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         /**
          * 상품명,상품이미지,상품가격 선언
          */
-
         public ImageView productImg;
         public TextView productName,productPrice,productQuantity,deleteBtn;
         public Button plusBtn, minusBtn;
@@ -374,12 +381,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
             super(v);
 
+
+
+            sendCartData = new ArrayList<CartDto>();
+
             productName = v.findViewById(R.id.tv_productName_listlayout_cart);
             productPrice = v.findViewById(R.id.tv_productPrice_listlayout_cart);
             productQuantity = v.findViewById(R.id.tv_productQuantity_listlayout_cart);
 
             productImg = v.findViewById(R.id.iv_product_listlayout_cart);
-            deleteBtn = v.findViewById(R.id.delete_Btn_listlayout_cart);
+//            deleteBtn = v.findViewById(R.id.delete_tv_listlayout_cart);
             plusBtn = v.findViewById(R.id.plus_btn_listlayout_cart);
             minusBtn = v.findViewById(R.id.minus_btn_listlayout_cart);
 
@@ -390,7 +401,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-            sendCartData = new ArrayList<CartDto>();
+
 
 
 
@@ -408,61 +419,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     }
                 }
             });
-
-//            cbSelect.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int position = getAdapterPosition();//어뎁터 포지션값
-//                    if (array.get(getAdapterPosition())) {      //!checked
-//                        array.put(getAdapterPosition(), false);
-//
-//                        Log.d(TAG,"체크박스 선택이 취소될 때?");
-//                    } else {        //checked
-//                        array.put(getAdapterPosition(), true);
-//                        String result = (String) ArrayList;
-//                        result += mDataset.get(position).getCartProductName();
-//                        Log.d(TAG,"체크박스 선택될 때?");
-//                    }
-//                    notifyDataSetChanged();
-//                }
-//            });
-
-
-//            cbSelect.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int position = getAdapterPosition();//어뎁터 포지션값
-//                    if (array.get(getAdapterPosition())) {      //!checked
-//                        array.put(getAdapterPosition(), false);
-
-
-//                        Log.d(TAG,"체크박스 선택이 취소될 때?");
-//                    } else {        //checked
-//                        array.put(getAdapterPosition(), true);
-//                        String result = (String) ArrayList;
-//                        result += mDataset.get(position).getCartProductName();
-//                        Log.d(TAG,"체크박스 선택될 때?");
-//                    }
-//                    notifyDataSetChanged();
-//                }
-//            });
-            cbSelect.setOnClickListener(new View.OnClickListener() {
+            cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View v) {
-                    String str = "";
-                  sendCartData.clear();
-//                    for (int i =0; i < mDataset.size(); i++){
-//                        if (cbSelect.isChecked() == true){
-//                            sendCartData.add(mDataset.get(getAdapterPosition()));
-//                            Log.d(TAG,"position" + String.valueOf(getAdapterPosition()));
-//                            Log.d(TAG,"position" + String.valueOf(mDataset.get(getAdapterPosition()).getCartProductName()));
-//
-//                        }else {
-//                            Log.d(TAG,"체크해제");
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    sendCartData.clear();
+
 
                     for (int i = 0; i < intradayCheckboxsList.size(); i ++){
                         if (intradayCheckboxsList.get(i).isChecked() == true){
-                            mDataset.add(mDataset.get(i));
+                            sendCartData.add(mDataset.get(i));
                             Log.d(TAG,"-----------------------------------");
                             Log.d(TAG, "mDataset데이터 이름 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductName()));
                             Log.d(TAG, "mDataset데이터 이미지 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductImagePath()));
@@ -473,6 +438,36 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     }
                 }
             });
+
+//            cbSelect.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    String str = "";
+//                  sendCartData.clear();
+
+//                    for (int i =0; i < mDataset.size(); i++){
+//                        if (cbSelect.isChecked() == true){
+//                            sendCartData.add(mDataset.get(getAdapterPosition()));
+//                            Log.d(TAG,"position" + String.valueOf(getAdapterPosition()));
+//                            Log.d(TAG,"position" + String.valueOf(mDataset.get(getAdapterPosition()).getCartProductName()));
+//
+//                        }else {
+//                            Log.d(TAG,"체크해제");
+
+//                    for (int i = 0; i < intradayCheckboxsList.size(); i ++){
+//                        if (intradayCheckboxsList.get(i).isChecked() == true){
+//                            sendCartData.add(mDataset.get(i));
+//                            Log.d(TAG,"-----------------------------------");
+//                            Log.d(TAG, "mDataset데이터 이름 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductName()));
+//                            Log.d(TAG, "mDataset데이터 이미지 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductImagePath()));
+//                            Log.d(TAG, "mDataset데이터 가격 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductPrice()));
+//                            Log.d(TAG, "mDataset데이터 수량 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductQuantity()));
+//                            Log.d(TAG,"-----------------------------------");
+//                        }
+//                    }
+
+//                }
+//            });
 
 
 
@@ -512,6 +507,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     }
 
+
+
+
+
     private void connectGetData() {
         try {
 
@@ -529,6 +528,47 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         }
     }
 
+
+    /**
+     * 카트 삭제 메소드
+     */
+    // 장바구니 선택 제품 삭제
+    public void connectDeleteData() {
+
+        if (sendCartData.size() == 0) {
+            Toast.makeText(mContext, "삭제할 제품을 선택해주세요", Toast.LENGTH_SHORT).show();
+        } else {
+//            String urlAddrDelete;
+
+            for (int i = 0; i < sendCartData.size(); i++) {
+//                urlAddrDelete = "http://" + ShareVar.urlIp + ":8080/JSP/cart_delete_inCart.jsp?userEmail=" + userEmail + "&prdName=";
+//                urlAddrDelete = urlAddrDelete + sendCartData.get(i).getCartNo();
+
+                int cartNo = sendCartData.get(i).getCartNo();
+                urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecart.jsp?";
+                urlAddr = urlAddr + "cartNo=" + cartNo;
+
+                try {
+                    NetworkTaskCart networkTask = new NetworkTaskCart(mContext, urlAddr,"like");
+
+                    Object obj = networkTask.execute().get();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+
+
+    public ArrayList<CartDto> sendDate(){
+
+        return sendCartData;
+
+    }
 
 
 

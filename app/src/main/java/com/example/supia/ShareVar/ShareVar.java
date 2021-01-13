@@ -10,7 +10,10 @@ public class ShareVar {
 
 
 
+
     public static String sharvarUserId;
+
+
 
     //tuna 추가
     public static String calendarsharvarStartdate;
@@ -21,10 +24,7 @@ public class ShareVar {
 
     //inwoo 추가
     public static int productId;
-
-    //장바구니에 값이 있는지 비교하기 위한 productNo
     public static int productNo;
-
     public static String strBtnCategory;
 
 

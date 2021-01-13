@@ -1,6 +1,7 @@
 package com.example.supia.Activities.Product;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
 
-public class CategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends Activity {
 
     private static String  TAG = "카테고리";
 
@@ -77,7 +78,7 @@ public class CategoryActivity extends AppCompatActivity {
         btnLarge = findViewById(R.id.btn_large_product);
         btnOverNight = findViewById(R.id.btn_overnight_product);
         btnLiner = findViewById(R.id.btn_liner_product);
-        btnCotton = findViewById(R.id.btn_cotton_product);
+
 
 
 
@@ -136,14 +137,14 @@ public class CategoryActivity extends AppCompatActivity {
                 btnLarge.setVisibility(View.VISIBLE);
                 btnOverNight.setVisibility(View.VISIBLE);
                 btnLiner.setVisibility(View.VISIBLE);
-                btnCotton.setVisibility(View.VISIBLE);
+
 
                 small = btnSmall.getText().toString();
                 medium = btnMedium.getText().toString();
                 large = btnregular.getText().toString();
                 overNight = btnOverNight.getText().toString();
                 liner = btnLiner.getText().toString();
-                cotton = btnCotton.getText().toString();
+
 
                 ShareVar.strBtnCategory = strBtnCategory;
                 break;
@@ -353,11 +354,13 @@ public class CategoryActivity extends AppCompatActivity {
                     urlAddr = urlAddr + "?tag=" + btnLiner.getText().toString();
 
                     break;
-                case R.id.btn_cotton_product:
-                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnCotton.getText().toString();
 
-                    break;
+
+//                case R.id.btn_cotton_product:
+//                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
+//                    urlAddr = urlAddr + "?tag=" + btnCotton.getText().toString();
+//
+//                    break;
 
 
 
