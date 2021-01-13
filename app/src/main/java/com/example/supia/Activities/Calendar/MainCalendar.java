@@ -3,6 +3,7 @@ package com.example.supia.Activities.Calendar;
 import android.content.Intent;
 import android.graphics.Color;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -110,10 +111,11 @@ public class MainCalendar extends FragmentActivity {
 
         tvDday.setText("월경" + Dday + "일전");
 
+        //materialCalendarView_main.setBackgroundResource(R.drawable.calendar_background_total);
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intdelyear, intdelmonth, intdelday));
         materialCalendarView_main.addDecorator(new EventDecoratorDraw(Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
-
+        
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_main.addDecorator(new EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
 

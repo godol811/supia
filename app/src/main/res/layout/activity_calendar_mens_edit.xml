@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="290dp"
-        android:layout_height="434dp"
+        android:layout_height="415dp"
         android:orientation="vertical">
 
         <FrameLayout
@@ -16,10 +16,10 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_today_mensedit_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="today"
-                android:textSize="50dp">
+                android:textSize="20dp">
 
             </TextView>
 
@@ -42,9 +42,9 @@
 
 
         <LinearLayout
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
 
