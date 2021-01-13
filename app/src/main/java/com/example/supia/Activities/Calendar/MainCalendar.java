@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.supia.Activities.MyPage.MyCartListActivity;
+import com.example.supia.Activities.MyPage.MyPageMainActivity;
+import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -34,13 +37,19 @@ public class MainCalendar extends FragmentActivity {
     public static String TAG ="메인캘린더";
 
 
-    ImageButton home, mall, mypage;
-
+    ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_maincalendar);//xml연결
+
+        //----------bottom bar 아이디(애정추가)----------//
+        ibtnMall = findViewById(R.id.mall_bottom_bar);
+        ibtnHome = findViewById(R.id.home_bottom_bar);
+        ibtnMypage = findViewById(R.id.mypage_bottom_bar);
+        //-------------------------------------------//
+
 
         userId = ShareVar.sharvarUserId;//사용자 아이디를 받아옴
         urlIp = ShareVar.urlIp;//아이피 받아옴
@@ -53,7 +62,11 @@ public class MainCalendar extends FragmentActivity {
         materialCalendarView_main =findViewById(R.id.materialcalendar_maincalendar);
 
 
-
+        //애정추가-----------------//
+        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
+        //---------------------//
 
         tvDday.setText("월경"+Dday+"일전");
 
@@ -97,5 +110,43 @@ public class MainCalendar extends FragmentActivity {
         }
     }
     //애정존-----------------------------------
+
+    //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMainMypage = new Intent(MainCalendar.this, MyPageMainActivity.class);
+            startActivity(gotoMainMypage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(MainCalendar.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 쇼필몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(MainCalendar.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
 
 }

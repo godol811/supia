@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Adapter.Banner.BannerAdapter;
 import com.example.supia.R;
 
@@ -20,6 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ProductMainActivity extends AppCompatActivity {
+
 
     final static String TAG = "메인엑티비티";
 
@@ -34,6 +37,11 @@ public class ProductMainActivity extends AppCompatActivity {
     ImageButton ibtnSearchActivity;//검색버튼
 
     Button btnCategory1,btnCategory2,btnCategory3;
+
+
+    ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +64,23 @@ public class ProductMainActivity extends AppCompatActivity {
         btnCategory3 = findViewById(R.id.btn_category3_product);
 
 
-
+        //----------bottom bar 아이디(애정추가)----------//
+        ibtnMall = findViewById(R.id.mall_bottom_bar);
+        ibtnHome = findViewById(R.id.home_bottom_bar);
+        ibtnMypage = findViewById(R.id.mypage_bottom_bar);
+        //-------------------------------------------//
 
         ibtnSearchActivity.setOnClickListener(searchOnClickListener);
 
         btnCategory1.setOnClickListener(btnCategoryOnClickListener);
         btnCategory2.setOnClickListener(btnCategoryOnClickListener);
         btnCategory3.setOnClickListener(btnCategoryOnClickListener);
+
+        //애정추가-----------------//
+        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
+        //---------------------//
 
 
         //오토스크롤
@@ -129,6 +147,42 @@ public class ProductMainActivity extends AppCompatActivity {
             }
         }
     };
+
+    //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMainMypage = new Intent(ProductMainActivity.this, MyPageMainActivity.class);
+            startActivity(gotoMainMypage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(ProductMainActivity.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+   //--------------------------------------바텀바 쇼필몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(ProductMainActivity.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
 
 
 

@@ -120,7 +120,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/info_tel"
+                            android:id="@+id/tv_usertel_mypage_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -132,7 +132,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/info_pw"
+                                android:id="@+id/tv_userpw_mypage_info"
                                 android:layout_width="78dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -142,7 +142,7 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/info_pw_btn"
+                                android:id="@+id/btn_changepw_mypage_info"
                                 android:layout_width="60dp"
                                 android:layout_marginLeft="12dp"
                                 android:layout_height="match_parent"
