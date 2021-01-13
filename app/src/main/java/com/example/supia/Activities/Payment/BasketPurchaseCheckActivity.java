@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.supia.Activities.Product.CartActivity;
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity;
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.Dto.Product.CartDto;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class BasketPurchaseCheckActivity extends AppCompatActivity {
 
     final static String TAG = "장바구니배송";
-    Button btnDeliveryAddressModify, btnPaymentMethod, btnPayment;
+    Button btnDeliveryAddressModify, btnPaymentMethod, btnPayment,btnBack;
     TextView tvDeliveryName, tvDeliveryAddress, tvDeliveryTel, tvPaymentMethod, tvDeliveryAddressDetail, tvProductName, tvProductQuantity, tvTotalprice;
     String strDeliveryAddr, strDeliveryTel, strDeliveryName, strUserId, strMethodItem, strDeliveryAddrDetail,
             strProductName, strProductPrice;
@@ -59,6 +60,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
         btnDeliveryAddressModify = findViewById(R.id.btn_deliveryinfomodify_basket);
         btnPaymentMethod = findViewById(R.id.btn_paymentmodify_basket);
         btnPayment = findViewById(R.id.btn_payment_basket);
+        btnBack = findViewById(R.id.btn_back_basket);
 
         tvDeliveryAddress = findViewById(R.id.tv_deliveryaddress_basket);
         tvDeliveryAddressDetail = findViewById(R.id.tv_deliveryaddressDetail_basket);
@@ -92,6 +94,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                 int price = Integer.parseInt(String.valueOf(list.get(i).getCartProductPrice()));
                 int quantity = Integer.parseInt(String.valueOf(list.get(i).getCartProductQuantity()));
                 totalPrice = totalPrice + (price * quantity);
+                Log.d(TAG,"가격"+Integer.toString(price)+"수량"+Integer.toString(quantity));
                 totalQuantity += quantity;
 
             }
@@ -133,6 +136,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
         btnPayment.setOnClickListener(mOnclickListener);
         btnPaymentMethod.setOnClickListener(mOnclickListener);
         btnDeliveryAddressModify.setOnClickListener(mOnclickListener);
+        btnBack.setOnClickListener(mOnclickListener);
     }
 
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
@@ -183,6 +187,14 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                                 .show();
                         break;
                     }
+                case R.id.btn_back_basket:
+                    Intent intent2 = new Intent(BasketPurchaseCheckActivity.this, CartActivity.class);
+                    int zero = 0;
+
+                    PaymentShareVar.totalPayment = zero;
+                    PaymentShareVar.paymentProductName = null;
+                    PaymentShareVar.totalQuantity = zero;
+                    startActivity(intent2);
 
 
             }

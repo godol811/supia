@@ -16,15 +16,11 @@
         android:roundIcon="@mipmap/supia"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-
-        <activity android:name=".Activities.Payment.BasketPurchaseCheckActivity"/>
         <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity"/>
         <activity android:name=".Activities.Product.ProductDetailActivity"/>
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
-        <activity android:name=".Activities.Product.LikeActivity"/>
-        <activity android:name=".Activities.MyPage.MyPageReviewInsertActivity"></activity>
-        <activity android:name=".Activities.Product.ProductDetailActivity"/>
-        <activity android:name=".Activities.MyPage.MyInfoActivity"></activity>
+        <activity android:name=".Activities.Product.LikeActivity" />
+        <activity android:name=".Activities.MyPage.MyPageReviewInsertActivity" />
         <activity android:name=".Activities.MyPage.MyLikeListActivity" />
         <activity android:name=".Activities.MyPage.MySubscribeActivity" />
         <activity android:name=".Activities.MyPage.MyOrderActivity" />
@@ -36,9 +32,10 @@
         <activity android:name=".Activities.Product.CategoryActivity" />
         <activity android:name=".Activities.Product.SearchActivity" />
         <activity android:name=".Activities.Product.ProductMainActivity" />
-        <activity android:name=".Activities.Product.ProductDetailActivity" />
         <activity android:name=".Activities.Product.WriteQnAActivity" />
-        <activity android:name=".Activities.Payment.PaymentModifyActivity"/>
+        <activity android:name=".Activities.Payment.BasketDeliveryAddressListActivity" />
+        <activity android:name=".Activities.Payment.BasketPurchaseCheckActivity"/>
+        <activity android:name=".Activities.Payment.PaymentModifyActivity" />
         <activity android:name=".Activities.Payment.PurchaseCheckActivity" />
         <activity android:name=".Activities.Payment.PaymentPhoneActivity" />
         <activity android:name=".Activities.Payment.PaymentConfirmActivity" />
@@ -54,7 +51,7 @@
         <activity android:name=".Activities.Login.UserDataQuestion2" />
         <activity android:name=".Activities.Login.SocialLoginActivity" />
         <activity android:name=".Activities.Login.RefactorPassWordActivity" />
-        <activity android:name=".Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity"/>
+        <activity android:name=".Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity" />
         <activity android:name=".Activities.Login.AddressWebViewActivity" />
         <activity android:name=".Activities.Login.FindPWActivity" />
         <activity android:name=".Activities.Login.SignUpActivity" />
@@ -81,7 +78,6 @@
                     android:host="oauth"
                     android:scheme="kakaob8f1e7f5e6bb8f2b5ba642c75ff2d201" />
             </intent-filter>
-
         </activity>
 
     </application>

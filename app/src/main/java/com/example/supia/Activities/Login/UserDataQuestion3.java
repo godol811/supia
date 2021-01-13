@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
+import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -22,7 +24,7 @@ public class UserDataQuestion3 extends Activity {
 
     Button buttonNext;
     DatePicker datePicker;
-
+    TextView tvSkip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,17 @@ public class UserDataQuestion3 extends Activity {
         datePicker = findViewById(R.id.dp_question3);
 
         buttonNext = findViewById(R.id.btn_next_question3);
+
+        tvSkip = findViewById(R.id.tv_skip_question3);
+        tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(UserDataQuestion3.this, MainCalendar.class);
+                startActivity(intent1);
+
+            }
+        });
+
 
 
         buttonNext.setOnClickListener(new View.OnClickListener() {

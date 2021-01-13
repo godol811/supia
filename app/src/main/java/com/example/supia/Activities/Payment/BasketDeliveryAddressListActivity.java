@@ -52,15 +52,9 @@ public class BasketDeliveryAddressListActivity extends AppCompatActivity {
                 Intent intent = new Intent(BasketDeliveryAddressListActivity.this,DeliveryAddressAddActivity.class);
                 intent.putExtra("way",strWay);
                 startActivity(intent);
-
             }
         });
-
-
-
-
     }
-
 
 
 
@@ -68,7 +62,6 @@ public class BasketDeliveryAddressListActivity extends AppCompatActivity {
         try {
             urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserDeliveryAddrCheck.jsp?";
             urlAddr = urlAddr+"userId="+ ShareVar.sharvarUserId;
-
 
             DeliveryAddressNetWorkTask networkTask = new DeliveryAddressNetWorkTask(BasketDeliveryAddressListActivity.this, urlAddr, "select");
             Object obj = networkTask.execute().get();

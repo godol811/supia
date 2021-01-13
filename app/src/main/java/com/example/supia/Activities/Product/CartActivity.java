@@ -115,11 +115,9 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
-
                 Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
                 intent.putExtra("cartData",adapter.sendDate());
                 startActivity(intent);
-
 
             }
         });
