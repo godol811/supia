@@ -1,5 +1,6 @@
 package com.example.supia.Activities.Product;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ProductMainActivity extends AppCompatActivity {
+public class ProductMainActivity extends Activity {
 
 
     final static String TAG = "메인엑티비티";
@@ -34,7 +35,7 @@ public class ProductMainActivity extends AppCompatActivity {
     final long PERIOD_MS = 3000; //배너사이 간격 시간
 
     String urlIp = null;
-    ImageButton ibtnSearchActivity;//검색버튼
+    ImageButton ibtnSearchActivity,ibtnCartActivity;//검색버튼
 
     Button btnCategory1,btnCategory2,btnCategory3;
 
@@ -56,6 +57,7 @@ public class ProductMainActivity extends AppCompatActivity {
         viewPager.setAdapter(bannerAdapter); //Auto Viewpager에 Adapter 장착
 
         ibtnSearchActivity = findViewById(R.id.search_header);
+        ibtnCartActivity = findViewById(R.id.cart_header);
 
 
 
@@ -71,6 +73,7 @@ public class ProductMainActivity extends AppCompatActivity {
         //-------------------------------------------//
 
         ibtnSearchActivity.setOnClickListener(searchOnClickListener);
+        ibtnCartActivity.setOnClickListener(cartOnClickListener);
 
         btnCategory1.setOnClickListener(btnCategoryOnClickListener);
         btnCategory2.setOnClickListener(btnCategoryOnClickListener);
@@ -111,6 +114,16 @@ public class ProductMainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+
+    View.OnClickListener cartOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent1 = new Intent(ProductMainActivity.this, CartActivity.class);
+            startActivity(intent1);
+        }
+    } ;
+
 
 
     View.OnClickListener btnCategoryOnClickListener = new View.OnClickListener() {

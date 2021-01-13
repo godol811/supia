@@ -1,6 +1,8 @@
 package com.example.supia.Dto.Product;
 
-public class CartDto {
+import java.io.Serializable;
+
+public class CartDto implements Serializable {
 
     int cartNo;
     int cartProductId;
