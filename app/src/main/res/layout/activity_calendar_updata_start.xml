@@ -12,12 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="가장 최근의 \n월경 시작일을 수정해주세요."
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
         <DatePicker
             android:id="@+id/maincalendar_mens_start_update"

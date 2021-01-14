@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
+import com.kakao.auth.helper.StartActivityWrapper;
 
 public class mensUpdate2 extends Dialog {
 
@@ -23,7 +24,9 @@ public class mensUpdate2 extends Dialog {
     public String urlAddr, urlIp, userId;
     private Context context;
     Button btnback, btncomplite;
+    String pickDate;
     DatePicker datePicker;
+    int year, month, dayOfMonth;
 
     public mensUpdate2(Context context) {
         super(context);
@@ -55,11 +58,17 @@ public class mensUpdate2 extends Dialog {
         btncomplite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareVar.Updatemensfinishdate= date;
+
+
+                year = datePicker.getYear();
+                month = datePicker.getMonth();
+                dayOfMonth = datePicker.getDayOfMonth();//데이트피커에서 날짜를 가져옴
+                checkDay(year, month, dayOfMonth);
+                dismiss();
+                ShareVar.Updatemensfinishdate= pickDate;
                 Log.v(TAG, ShareVar.Updatemensfinishdate);
-                dismiss();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                dismiss();
                 builder.setTitle("아래의 날짜가 맞습니까?");
                 builder.setMessage(ShareVar.updatemensstartdate+"~"+ShareVar.Updatemensfinishdate);
                 builder.setPositiveButton("예",
@@ -70,19 +79,18 @@ public class mensUpdate2 extends Dialog {
                                 urlAddr = urlAddr + "calendarStartDate="+ShareVar.updatemensstartdate+"&calendarFinishDate="+ShareVar.Updatemensfinishdate+"&userId=" + userId;
 
                                 connectUpdateData();
-                                ShareVar.updatemensstartdate = null;
-                                ShareVar.Updatemensfinishdate = null;
+
                             }
                         });
                 builder.setNegativeButton("아니오",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                ShareVar.updatemensstartdate = null;
-                                ShareVar.Updatemensfinishdate = null;
                                 dismiss();
                             }
                         });
                 builder.show();
+
+
             }
         });
 
@@ -94,6 +102,11 @@ public class mensUpdate2 extends Dialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public String checkDay(int Year, int Month, int Day) {
+        pickDate = Year + "-" + (Month + 1) + "" + "-" + Day;
+        Log.v("TAG", "오오오" + pickDate);
+        return pickDate;
     }
 
 }
