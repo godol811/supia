@@ -111,6 +111,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
 
 
 
+
         //배송지 관련--ß
 
         if (strDeliveryAddr != null) {
@@ -153,6 +154,12 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                     intent1.putExtra("way", "basket");
                     startActivity(intent1);
                     break;
+
+                /**
+                 * 결제가 완료될 떄 장바구니에서 delete해주자
+                 */
+
+
                 case R.id.btn_payment_basket:
                     PaymentShareVar.deliveryAddr = tvDeliveryAddress.getText().toString();
                     PaymentShareVar.deliveryAddrDetail = tvDeliveryAddressDetail.getText().toString();
