@@ -7,6 +7,7 @@ public class MyDeliveryOrderDto {
     private String deliveryName;
     private String userId;
 
+
     public MyDeliveryOrderDto(String deliveryAddr, String deliveryTel, String deliveryName, String userId) {
         this.deliveryAddr = deliveryAddr;
         this.deliveryTel = deliveryTel;

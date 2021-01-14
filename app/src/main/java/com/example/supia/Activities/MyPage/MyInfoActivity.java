@@ -36,7 +36,7 @@ public class MyInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_info);
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         //------------------Intent 받아오기---------------------//
         Intent intent = getIntent();

@@ -44,7 +44,7 @@ public class MyPageMainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page_main);
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
         //----------header 아이디----------//
         ibtnBack = findViewById(R.id.ibtn_back_mypage_header); //뒤로가기
         tvMypage = findViewById(R.id.tv_mypage_mypage_header); //마이페이지

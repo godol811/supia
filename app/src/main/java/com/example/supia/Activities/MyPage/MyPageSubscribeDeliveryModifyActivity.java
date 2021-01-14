@@ -44,7 +44,7 @@ public class MyPageSubscribeDeliveryModifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page_subscribe_delivery_modify);
 
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         Intent intent = getIntent();
         intDeliveryNo = intent.getIntExtra("deliveryNo", 0);//리스트뷰에서 있는 값 넘어오기

@@ -77,9 +77,7 @@ public class MySubscribeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_subscribe);
-
-        overridePendingTransition(R.anim.hold, R.anim.hold);
-
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         //-----------For Recycler----------------//
         members = new ArrayList<MySubscribeDto>();
