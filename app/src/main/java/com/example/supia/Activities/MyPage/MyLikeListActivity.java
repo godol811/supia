@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.CategoryActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Adapter.MyPage.MyLikeListAdapter;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
@@ -162,6 +163,10 @@ public class MyLikeListActivity extends Activity {
     }
     //-------------------------------------------------------------------------------------------------------//
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MyLikeListActivity.this, MyPageMainActivity.class);
+        startActivity(intent);
+    } // 뒤로가기 버튼 클릭했을 때 메인으로
 
 }//-----------------------끝

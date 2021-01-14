@@ -3,9 +3,11 @@ package com.example.supia.Activities.Product;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.supia.Activities.MyPage.MyLikeListActivity;
 import com.example.supia.Adapter.Product.CartAdapter;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
@@ -45,13 +47,18 @@ public class CartInsertActivity extends Activity {
         urlIp = ShareVar.urlIp;
 
         productNo = intent.getIntExtra("productNo",0);
-        check = intent.getIntExtra("check",0);
+
         productQuantity = 1;
         productPrice = intent.getStringExtra("productPrice");
         productName = intent.getStringExtra("productName");
         productImagePath = intent.getStringExtra("productImagePath");
 
+        check = intent.getIntExtra("check",0);
 
+        Log.d("마이라이크리스트어뎁터1",String.valueOf(productNo));
+        Log.d("마이라이크리스트어뎁터2",String.valueOf(productPrice));
+        Log.d("마이라이크리스트어뎁터3",productName);
+        Log.d("마이라이크리스트어뎁터4",productImagePath);
 
         //insert하기전에 장바구니에 똑같은 물건이 있으면 다이얼로그 띄우기
 //        if ()
@@ -68,8 +75,12 @@ public class CartInsertActivity extends Activity {
             intent = new Intent(CartInsertActivity.this, CategoryActivity.class);
             intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
             startActivity(intent);
-        }else {
+        }else if (check == 1){
             intent = new Intent(CartInsertActivity.this, ProductMainActivity.class);
+//            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
+            startActivity(intent);
+        } else if (check == 2){
+            intent = new Intent(CartInsertActivity.this, MyLikeListActivity.class);
 //            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
             startActivity(intent);
         }

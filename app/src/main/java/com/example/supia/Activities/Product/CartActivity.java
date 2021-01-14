@@ -3,32 +3,32 @@ package com.example.supia.Activities.Product;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseBooleanArray;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.example.supia.Activities.Payment.BasketPurchaseCheckActivity;
-import com.example.supia.Activities.Payment.PurchaseCheckActivity;
+
 import com.example.supia.Adapter.Product.CartAdapter;
-import com.example.supia.Adapter.Product.ProductAdapter;
+
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
 import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
-import com.google.android.material.tabs.TabLayout;
+
 
 import java.util.ArrayList;
 
@@ -51,6 +51,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
     Button deleteBtn,paymentBtn;
     TextView payment;
     int CartTotalPrice;
+    ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
         deleteBtn = findViewById(R.id.btn_delete_cart);
         paymentBtn = findViewById(R.id.btn_payment_cart);
         payment = findViewById(R.id.tv_payment_cart);
+        backBtn = findViewById(R.id.ibtn_back_mypage_header);
 
 
 
@@ -189,7 +191,12 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
 
 
-
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
     }

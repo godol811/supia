@@ -188,10 +188,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 //수량 * 가격 가격에 표시
                 holder.productPrice.setText(Integer.toString(result));
 
+
                 //가격 , 찍기
                 DecimalFormat myFormatter = new DecimalFormat("###,###");
                 String formattedStringPrice = myFormatter.format(result);
                 holder.productPrice.setText(formattedStringPrice);
+
+
 
                 //db에 넘겨줄값
                 int cartProductQuantity = Integer.parseInt((String) holder.productQuantity.getText());
@@ -350,8 +353,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
      /**
-     * 선택한 뷰는 뷰홀더가 가지고있기 때문에
-     * ViewHolder에 Checkable interface를 구현
+     *  선택한 뷰는 뷰홀더가 가지고있다
+      * ViewHolder에 C 구현
      */
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -361,6 +364,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         /**
          * 상품명,상품이미지,상품가격 선언
          */
+
         public ImageView productImg;
         public TextView productName,productPrice,productQuantity,deleteBtn;
         public Button plusBtn, minusBtn;
@@ -421,6 +425,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     }
                 }
             });
+
+
             cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

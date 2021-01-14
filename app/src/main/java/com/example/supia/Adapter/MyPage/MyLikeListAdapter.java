@@ -107,16 +107,25 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                                 int productNo = data.get(position).getProductNo();
 
 
-                                int productPrice = data.get(position).getProductPrice();
                                 String productName = data.get(position).getProductName();
-                                String ProductImagePath = data.get(position).getProductImagePath();
+                                String productImagePath = data.get(position).getProductImagePath();
+
+
+                                int intProductPrice = data.get(position).getProductPrice();
+                                String productPrice = String.valueOf(intProductPrice);
+
+                                Log.d("마이라이크리스트어뎁터1",String.valueOf(productNo));
+                                Log.d("마이라이크리스트어뎁터2",String.valueOf(productPrice));
+                                Log.d("마이라이크리스트어뎁터3",productName);
+                                Log.d("마이라이크리스트어뎁터4",productImagePath);
 
                                 Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
 
+                                intent.putExtra("check",2);
                                 intent.putExtra("productNo", productNo);
                                 intent.putExtra("productPrice", productPrice);
                                 intent.putExtra("productName", productName);
-                                intent.putExtra("productImagePath", ProductImagePath);
+                                intent.putExtra("productImagePath", productImagePath);
                                 v.getContext().startActivity(intent);
 
                             }
