@@ -11,6 +11,7 @@ public class ShareVar {
 
 
     public static String sharvarUserId;
+    public static String sharvarKaKaoUserId;
 
 
 
@@ -24,6 +25,7 @@ public class ShareVar {
     //inwoo 추가
     public static int productId;
     public static int productNo;
+    public static int CartTotalPrice;
     public static String strBtnCategory;
 
 

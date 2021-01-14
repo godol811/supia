@@ -98,14 +98,14 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                 totalQuantity += quantity;
 
             }
-            PaymentShareVar.totalPayment = totalPrice;
+            PaymentShareVar.totalPayment = totalPrice+2500;
             PaymentShareVar.paymentProductName = String.valueOf(list.get(0).getCartProductName())+"외 " + Integer.toString(list.size()-1) +"개";
             PaymentShareVar.totalQuantity = totalQuantity;
         }
         Log.d(TAG,Integer.toString(totalPrice));
 
 
-        tvTotalprice.setText(Integer.toString(PaymentShareVar.totalPayment));
+        tvTotalprice.setText(Integer.toString(PaymentShareVar.totalPayment));//2500원 배송비 포함..
         tvProductName.setText(PaymentShareVar.paymentProductName);
         tvProductQuantity.setText("총 " + Integer.toString(PaymentShareVar.totalQuantity)+"개");
 
