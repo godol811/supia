@@ -167,11 +167,11 @@ public class NetworkTaskProduct extends AsyncTask<Integer, String, Object> {
         Log.v(TAG, "parserSelect()");
 
         try {
-
+            Log.v(TAG, "s" + s);
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("product"));
             Product.clear();
-            Log.v(TAG, "s" + s);
+
 
 
             for (int i = 0; i < jsonArray.length(); i++) {

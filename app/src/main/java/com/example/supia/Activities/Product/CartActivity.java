@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +36,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
     private RecyclerView.LayoutManager layoutManager = null;
 
+
     final static String TAG = "카트액티비티";
 
     String urlAddr = null;
@@ -43,8 +45,9 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
     CheckBox multipleCheck;
 
-    Button deleteBtn,payment;
-
+    Button deleteBtn,paymentBtn;
+    TextView payment;
+    int CartTotalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,9 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
         setContentView(R.layout.activity_cart);
 
         recyclerView = findViewById(R.id.rl_cart_category);
-
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
 
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
@@ -66,7 +69,8 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
         multipleCheck = findViewById(R.id.cb_allselect_cart);
 
-        deleteBtn = findViewById(R.id.tv_delete_cart);
+        deleteBtn = findViewById(R.id.btn_delete_cart);
+        paymentBtn = findViewById(R.id.btn_payment_cart);
         payment = findViewById(R.id.tv_payment_cart);
 
 
@@ -76,6 +80,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (multipleCheck.isChecked()){
+
                     adapter.checkBoxOperation(true);
                 }else {
                     adapter.checkBoxOperation(false);
@@ -120,8 +125,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
-
-
                 Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
                 intent.putExtra("cartData",adapter.sendDate());
                 startActivity(intent);
@@ -130,6 +133,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
         });
 
         connectGetData();
+
 
 
 

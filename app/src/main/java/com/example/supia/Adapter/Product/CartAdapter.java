@@ -436,12 +436,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 }
             });
 
-//            cbSelect.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
+            cbSelect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    if (cbSelect.isChecked()){
+                        Log.d(TAG,"확인");
+                        ShareVar.CartTotalPrice = 1;
+//                        totalprice.setText("총 금액: 원");
+                    }
 //                    String str = "";
 //                  sendCartData.clear();
-
+//
 //                    for (int i =0; i < mDataset.size(); i++){
 //                        if (cbSelect.isChecked() == true){
 //                            sendCartData.add(mDataset.get(getAdapterPosition()));
@@ -450,7 +457,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 //
 //                        }else {
 //                            Log.d(TAG,"체크해제");
-
+//
 //                    for (int i = 0; i < intradayCheckboxsList.size(); i ++){
 //                        if (intradayCheckboxsList.get(i).isChecked() == true){
 //                            sendCartData.add(mDataset.get(i));
@@ -463,8 +470,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 //                        }
 //                    }
 
-//                }
-//            });
+                }
+            });
 
 
 
@@ -516,9 +523,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             Object obj = networkTask.execute().get();
 
 
-//            cart = (ArrayList<CartDto>) obj;
-//            adapter = new CartAdapter(mContext, R.layout.listlayout_cart, cart);
-//            recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -535,11 +539,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         if (sendCartData.size() == 0) {
             Toast.makeText(mContext, "삭제할 제품을 선택해주세요", Toast.LENGTH_SHORT).show();
         } else {
-//            String urlAddrDelete;
+
 
             for (int i = 0; i < sendCartData.size(); i++) {
-//                urlAddrDelete = "http://" + ShareVar.urlIp + ":8080/JSP/cart_delete_inCart.jsp?userEmail=" + userEmail + "&prdName=";
-//                urlAddrDelete = urlAddrDelete + sendCartData.get(i).getCartNo();
+
 
                 int cartNo = sendCartData.get(i).getCartNo();
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecart.jsp?";
