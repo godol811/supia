@@ -142,13 +142,15 @@ public class MyPageLikeListNetworkTask extends AsyncTask<Integer, String, Object
                 int productNo = jsonObject1.getInt("productNo");
                 String productName = jsonObject1.getString("productName");
                 int productPrice = jsonObject1.getInt("productPrice");
+                String  productBrand = jsonObject1.getString("productBrand");
+                String  productInfo = jsonObject1.getString("productInfo");
                 String productImagePath = jsonObject1.getString("productImagePath");
                 String likeUserId = jsonObject1.getString("likeUserId");
                 int likeProductId = jsonObject1.getInt("likeProductId");
                 String likeCheck = jsonObject1.getString("likeCheck");
 
 
-                MyLikeListDto like = new MyLikeListDto(productNo, productName, productPrice, productImagePath, likeUserId, likeProductId, likeCheck);
+                MyLikeListDto like = new MyLikeListDto(productNo, productName, productPrice, productBrand,productInfo,productImagePath, likeUserId, likeProductId, likeCheck);
                 likecheck = likeCheck;
 
 

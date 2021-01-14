@@ -17,10 +17,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
-import com.example.supia.Activities.Product.CategoryActivity;
 import com.example.supia.Activities.Product.ProductDetailActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Adapter.MyPage.MyLikeListAdapter;
+import com.example.supia.Adapter.Product.MainAdapter;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
 import com.example.supia.Dto.Product.ProductDto;
 import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
@@ -37,12 +37,16 @@ public class MyLikeListActivity extends Activity {
     String userId = ShareVar.sharvarUserId;
     String urlIp = ShareVar.urlIp;
 
+    String TAG ="마이라이크리스트액티비티";
+
+
     //Recycler
     RecyclerView recyclerView;
     ArrayList<MyLikeListDto> like;
     ArrayList<ProductDto> cart;
     RecyclerView.LayoutManager layoutManager = null;
     MyLikeListAdapter adapter = null;
+
 
 
     String url = "http://"+urlIp+":8080/test/supiaLikeList.jsp?userId="+userId;
@@ -52,9 +56,8 @@ public class MyLikeListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_like_list);
 
-        ActivityCompat.requestPermissions(MyLikeListActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
-
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
+        ActivityCompat.requestPermissions(MyLikeListActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
 
         Log.v("라이크리스트",url);
 
@@ -96,35 +99,37 @@ public class MyLikeListActivity extends Activity {
 
     }//---------------------onCreate
 
+
     @Override
     protected void onResume() {
         super.onResume();
-
         getdata();
-
+        /////////////////////////////////////////보람 추가 - 값 받아가요///////////////////////////////////////////////////////
         adapter.setOnItemClickListener(new MyLikeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Intent intent = new Intent(MyLikeListActivity.this, ProductDetailActivity.class);
 
-
                 //-- fragment1로 값 전달
 
-                intent.putExtra("urlIp",urlIp);
+                Log.v(TAG,""+like.get(position).getProductNo());
+                intent.putExtra("urlIp",ShareVar.urlIp);
                 intent.putExtra("productNo", like.get(position).getProductNo());
                 intent.putExtra("productName", like.get(position).getProductName());
                 intent.putExtra("productPrice", like.get(position).getProductPrice());
-
+                intent.putExtra("productBrand", like.get(position).getProductBrand());
                 intent.putExtra("productImagePath", like.get(position).getProductImagePath());
-
-
+                intent.putExtra("productInfo", like.get(position).getProductInfo());
+//                Log.v(TAG,"productName " + cart.get(position).getProductName());
 
                 startActivity(intent);
 
-
             }
         });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     }
+
 
     //----------------------------------뒤로가기 버튼 이벤트----------------------------------//
     View.OnClickListener backClickListener = new View.OnClickListener() {
@@ -195,6 +200,13 @@ public class MyLikeListActivity extends Activity {
         }
     }
     //-------------------------------------------------------------------------------------------------------//
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MyLikeListActivity.this, MyPageMainActivity.class);
+        startActivity(intent);
+    } // 뒤로가기 버튼 클릭했을 때 메인으로
 
 
 

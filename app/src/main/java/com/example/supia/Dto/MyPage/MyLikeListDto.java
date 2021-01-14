@@ -13,12 +13,19 @@ public class MyLikeListDto {
     private String likeUserId;
     private int likeProductId;
     private String likeCheck;
+    private String productBrand;
+    private String productInfo;
 
 
-    public MyLikeListDto(int productNo, String productName, int productPrice, String productImagePath, String likeUserId, int likeProductId, String likeCheck) {
+
+
+
+    public MyLikeListDto(int productNo, String productName, int productPrice,String productBrand ,String productInfo,String productImagePath, String likeUserId, int likeProductId, String likeCheck) {
         this.productNo = productNo;
         this.productName = productName;
         this.productPrice = productPrice;
+        this.productBrand = productBrand;
+        this.productInfo =productInfo;
         this.productImagePath = productImagePath;
         this.likeUserId = likeUserId;
         this.likeProductId = likeProductId;
@@ -26,6 +33,21 @@ public class MyLikeListDto {
     }
 
 
+    public String getProductBrand() {
+        return productBrand;
+    }
+
+    public void setProductBrand(String productBrand) {
+        this.productBrand = productBrand;
+    }
+
+    public String getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
+    }
 
     public int getProductNo() {
         return productNo;
