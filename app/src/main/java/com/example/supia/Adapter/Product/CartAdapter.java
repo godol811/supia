@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.supia.Activities.Product.CartActivity;
 import com.example.supia.Activities.Product.CategoryActivity;
 import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Dto.Product.CartDto;
@@ -85,11 +86,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-    public CartAdapter(Context mContext, int layout, ArrayList<CartDto> data, OnChangeCheckedPrice onChangeCheckedPrice) {
+    public CartAdapter(Context mContext, int layout, ArrayList<CartDto> data) {
         this.mContext = mContext;
         this.layout = layout;
         this.mDataset = data;
-        this.onChangeCheckedPrice =onChangeCheckedPrice;
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
