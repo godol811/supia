@@ -42,19 +42,19 @@
                     android:id="@+id/btn_insert_datepicker_calendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="입력" />
+                    android:text="시작일선택" />
 
                 <Button
                     android:id="@+id/btn_update_datepicker_calendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="수정" />
+                    android:text="입력" />
 
                 <Button
                     android:id="@+id/btn_delete_datepicker_calendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="삭제" />
+                    android:text="종료일선택" />
 
             </LinearLayout>
         </LinearLayout>
