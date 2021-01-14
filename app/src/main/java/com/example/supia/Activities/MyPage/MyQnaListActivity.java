@@ -2,58 +2,30 @@ package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.R;
-import com.example.supia.ShareVar.ShareVar;
 
-public class MyInfoActivity extends Activity {
-
+public class MyQnaListActivity extends AppCompatActivity {
 
     //filed
     TextView tvMypage, tvSubscribe, tvOrder; // header
     ImageButton ibtnBack; // header
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
-    String userId = ShareVar.sharvarUserId;
 
-    TextView myInfoId, myInfoTel, myInfoPw;
-    EditText etPw, etPwCh; //커스텀 다이얼로그 EditText
-    String strMyInfoUserName, strMyInfoUserPw, strMyInfoUserTel, strMyInfoUserAddr; // 인텐트 받아오기위한 string
-    Button changePwBtn;
-    final String pwChange = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_info);
-
-
-        //------------------Intent 받아오기---------------------//
-        Intent intent = getIntent();
-        strMyInfoUserName = intent.getStringExtra("userName");
-        strMyInfoUserTel = intent.getStringExtra("userTel");
-        strMyInfoUserPw = intent.getStringExtra("userPw");
-        strMyInfoUserAddr = intent.getStringExtra("userAddr");
-        //---------------------------------------------------//
-
-        //------------아이디 받기---------------//
-        myInfoId = findViewById(R.id.tv_userid_mypage_info);
-        myInfoTel = findViewById(R.id.tv_usertel_mypage_info);
-        myInfoPw = findViewById(R.id.tv_userpw_mypage_info);
-        changePwBtn = findViewById(R.id.btn_changepw_mypage_info);
-        etPw = findViewById(R.id.et_pwchange_mypage_info);
-        etPwCh = findViewById(R.id.et_pwcheck_mypage_info);
-        //----------------------------------//
+        setContentView(R.layout.activity_my_qna_list);
 
 
         //----------header 아이디----------//
@@ -71,11 +43,6 @@ public class MyInfoActivity extends Activity {
         //----------------------------------//
 
 
-        //-------setText-------//
-        myInfoId.setText(userId);
-        myInfoTel.setText(strMyInfoUserTel);
-        myInfoPw.setText(strMyInfoUserPw);
-        //---------------------//
 
 
         //---------------클릭이벤트--------------------//
@@ -86,31 +53,15 @@ public class MyInfoActivity extends Activity {
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
-        changePwBtn.setOnClickListener(changePwClickListener); //비번 변경
-        //------------------------------------------//
 
+    }
 
-    }//-----------------onCreate
-
-    //----------------------------------------비밀번호 변경 버튼 클릭 이벤트------------------------------------------//
-    View.OnClickListener changePwClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-
-            MypagePwChangeDialog pwDialog = new MypagePwChangeDialog(MyInfoActivity.this, userId, strMyInfoUserName, strMyInfoUserTel);
-            pwDialog.callFunction(pwChange);
-
-
-        }
-    };
-    //--------------------------------------------------------------------------------------------------------//
 
     //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
     View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent gotoHomePage = new Intent(MyInfoActivity.this, MainCalendar.class);
+            Intent gotoHomePage = new Intent(MyQnaListActivity.this, MainCalendar.class);
             startActivity(gotoHomePage);
             overridePendingTransition(R.anim.hold, R.anim.hold);
 
@@ -122,7 +73,7 @@ public class MyInfoActivity extends Activity {
     View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent gotoMallPage = new Intent(MyInfoActivity.this, ProductMainActivity.class);
+            Intent gotoMallPage = new Intent(MyQnaListActivity.this, ProductMainActivity.class);
             startActivity(gotoMallPage);
             overridePendingTransition(R.anim.hold, R.anim.hold);
 
@@ -133,18 +84,18 @@ public class MyInfoActivity extends Activity {
 
 
 
-
     //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
     View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent gotoMainMypage = new Intent(MyInfoActivity.this, MyPageMainActivity.class);
+            Intent gotoMainMypage = new Intent(MyQnaListActivity.this, MyPageMainActivity.class);
             startActivity(gotoMainMypage);
             overridePendingTransition(R.anim.hold, R.anim.hold);
 
         }
     };
     //---------------------------------------------------------------------------------------------//
+
 
     //----------------------------------뒤로가기 버튼 이벤트----------------------------------//
     View.OnClickListener backClickListener = new View.OnClickListener() {
@@ -157,12 +108,11 @@ public class MyInfoActivity extends Activity {
     };
     //-----------------------------------------------------------------------------------//
 
-
     //-----------------------------------header OrderList 이동--------------------------------//
     View.OnClickListener orderClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent headerforOrder = new Intent(MyInfoActivity.this, MyOrderActivity.class);
+            Intent headerforOrder = new Intent(MyQnaListActivity.this, MyOrderActivity.class);
             tvOrder.setTypeface(tvOrder.getTypeface(), Typeface.BOLD); // 클릭시 글씨 두꺼워짐
             startActivity(headerforOrder);
             overridePendingTransition(R.anim.hold, R.anim.hold);
@@ -175,7 +125,7 @@ public class MyInfoActivity extends Activity {
     View.OnClickListener subscribeClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent headerSubscribe = new Intent(MyInfoActivity.this, MySubscribeActivity.class);
+            Intent headerSubscribe = new Intent(MyQnaListActivity.this, MySubscribeActivity.class);
             tvSubscribe.setTypeface(tvSubscribe.getTypeface(), Typeface.BOLD);
             startActivity(headerSubscribe);
             overridePendingTransition(R.anim.hold, R.anim.hold);
@@ -188,7 +138,7 @@ public class MyInfoActivity extends Activity {
     View.OnClickListener myPageClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent forMypage = new Intent(MyInfoActivity.this, MyPageMainActivity.class);
+            Intent forMypage = new Intent(MyQnaListActivity.this, MyPageMainActivity.class);
             tvMypage.setTypeface(tvMypage.getTypeface(), Typeface.BOLD);
             startActivity(forMypage);
             overridePendingTransition(R.anim.hold, R.anim.hold); //화면전환시 애니메이션 적용
@@ -197,4 +147,5 @@ public class MyInfoActivity extends Activity {
     //------------------------------------------------------------------------------------//
 
 
-}//---------------끝
+}//------------------끝
+

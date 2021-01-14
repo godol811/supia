@@ -40,8 +40,7 @@ public class UserInfoNetworkTask extends AsyncTask<Integer, String, Object> {
         Log.v(TAG, "progressDialogue()");
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("dialogue");
-        progressDialog.setMessage("down....");
+        progressDialog.setMessage("로딩중");
         progressDialog.show();
         super.onPreExecute();
     }
