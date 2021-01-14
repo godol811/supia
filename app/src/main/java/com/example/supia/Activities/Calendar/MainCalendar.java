@@ -92,21 +92,21 @@ public class MainCalendar extends FragmentActivity {
         String [] strarray3 = strcalendarDeliveryDate.split("-");
         String [] strarray4 = strcalendarBirthDate.split("-");
 
-        intdelyear = Integer.parseInt(strarray[0]);
-        intdelmonth = Integer.parseInt(strarray[1]) - 1;
-        intdelday = Integer.parseInt(strarray[2]);
+        intstayear = Integer.parseInt(strarray[0]);
+        intstamonth = Integer.parseInt(strarray[1]) - 1;
+        intstaday = Integer.parseInt(strarray[2]);
 
-        intbiryear = Integer.parseInt(strarray2[0]);
-        intbirmonth = Integer.parseInt(strarray2[1]) - 1;
-        intbirday = Integer.parseInt(strarray2[2]);
+        intfinyear = Integer.parseInt(strarray2[0]);
+        intfinmonth = Integer.parseInt(strarray2[1]) - 1;
+        intfinday = Integer.parseInt(strarray2[2]);
 
-        intstayear = Integer.parseInt(strarray3[0]);
-        intstamonth = Integer.parseInt(strarray3[1]) - 1;
-        intstaday = Integer.parseInt(strarray3[2]);
+        intdelyear = Integer.parseInt(strarray3[0]);
+        intdelmonth = Integer.parseInt(strarray3[1]) - 1;
+        intdelday = Integer.parseInt(strarray3[2]);
 
-        intfinyear = Integer.parseInt(strarray4[0]);
-        intfinmonth = Integer.parseInt(strarray4[1]) - 1;
-        intfinday = Integer.parseInt(strarray4[2]);
+        intbiryear = Integer.parseInt(strarray4[0]);
+        intbirmonth = Integer.parseInt(strarray4[1]) - 1;
+        intbirday = Integer.parseInt(strarray4[2]);
         //애정추가-----------------//
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
@@ -119,10 +119,10 @@ public class MainCalendar extends FragmentActivity {
         //materialCalendarView_main.setBackgroundResource(R.drawable.calendar_background_total);
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intdelyear, intdelmonth, intdelday));
-        materialCalendarView_main.addDecorator(new EventDecorator(Color.YELLOW, Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
+        materialCalendarView_main.addDecorator(new EventDecoratorDraw(MainCalendar.this, Collections.singleton(CalendarDay.from(intdelyear, intdelmonth, intdelday))));
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
-        materialCalendarView_main.addDecorator(new EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
+        materialCalendarView_main.addDecorator(new EventDecoratorDraw2(MainCalendar.this, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
 
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intstayear, intstamonth, intstaday));
         materialCalendarView_main.addDecorator(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(intstayear, intstamonth, intstaday))));
