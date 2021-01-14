@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -28,6 +29,7 @@ public class SubCalendar extends FragmentActivity {
     public String urlAddr,urlIp,userId;
     MaterialCalendarView materialCalendarView_sub;
     Button btnedit;
+    TextView tvmensCycle, tvmensTerm, tvDeliveryDay;
 
     private HashSet<CalendarDay> dates;
 
@@ -58,6 +60,9 @@ public class SubCalendar extends FragmentActivity {
         materialCalendarView_sub =findViewById(R.id.subcalendar_calendarView);
 
         btnedit = findViewById(R.id.btn_edit_subcalendar);
+        tvmensCycle = findViewById(R.id.tv_average_menscycle_sucalendar);
+        tvmensTerm = findViewById(R.id.tv_average_mensterm_sucalendar);
+        tvDeliveryDay = findViewById(R.id.tv_deliveryday_subcalendar);
 
         //----------bottom bar 아이디(애정추가)----------//
         ibtnMall = findViewById(R.id.mall_bottom_bar);
@@ -66,6 +71,7 @@ public class SubCalendar extends FragmentActivity {
         //-------------------------------------------//
 
         connectGetData();
+
 
         strcalendarStratDate = ShareVar.calendarsharvarStartdate;
         strcalendarFinishDate = ShareVar.calendarsharvarFinishdate;
@@ -78,21 +84,26 @@ public class SubCalendar extends FragmentActivity {
         strarray3 = strcalendarDeliveryDate.split("-");
         strarray4 = strcalendarBirthDate.split("-");
 
-        intdelyear = Integer.parseInt(strarray[0]);
-        intdelmonth = Integer.parseInt(strarray[1]) - 1;
-        intdelday = Integer.parseInt(strarray[2]);
 
-        intbiryear = Integer.parseInt(strarray2[0]);
-        intbirmonth = Integer.parseInt(strarray2[1]) - 1;
-        intbirday = Integer.parseInt(strarray2[2]);
+        intstayear = Integer.parseInt(strarray[0]);
+        intstamonth = Integer.parseInt(strarray[1]) - 1;
+        intstaday = Integer.parseInt(strarray[2]);
 
-        intstayear = Integer.parseInt(strarray3[0]);
-        intstamonth = Integer.parseInt(strarray3[1]) - 1;
-        intstaday = Integer.parseInt(strarray3[2]);
+        intfinyear = Integer.parseInt(strarray2[0]);
+        intfinmonth = Integer.parseInt(strarray2[1]) - 1;
+        intfinday = Integer.parseInt(strarray2[2]);
 
-        intfinyear = Integer.parseInt(strarray4[0]);
-        intfinmonth = Integer.parseInt(strarray4[1]) - 1;
-        intfinday = Integer.parseInt(strarray4[2]);
+        intdelyear = Integer.parseInt(strarray3[0]);
+        intdelmonth = Integer.parseInt(strarray3[1]) - 1;
+        intdelday = Integer.parseInt(strarray3[2]);
+
+        intbiryear = Integer.parseInt(strarray4[0]);
+        intbirmonth = Integer.parseInt(strarray4[1]) - 1;
+        intbirday = Integer.parseInt(strarray4[2]);
+
+        tvmensCycle.setText(Integer.toString(27));
+        tvmensTerm.setText(Integer.toString(intfinday-intstaday));
+        tvDeliveryDay.setText(Integer.toString(intdelday));
         //애정추가-----------------//
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
