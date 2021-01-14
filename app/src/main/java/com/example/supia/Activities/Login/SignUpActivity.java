@@ -268,7 +268,6 @@ public class SignUpActivity extends Activity {
             String strId = userinfoId.getText().toString();
             macIp = "192.168.35.147";
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-
             urlAddr = urlAddr + "userId=" + strId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
             UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr,"select");
@@ -312,7 +311,6 @@ public class SignUpActivity extends Activity {
             String strAddr = userinfoAddr.getText().toString().trim();
             String strAddrDetail = userinfoAddrDetail.getText().toString().trim();
 
-            macIp = "192.168.35.147";
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
             urlAddr = urlAddr + "userId=" + strId + "&userPw=" + strPw + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail +"&userPlatform=normal";
 
@@ -323,6 +321,18 @@ public class SignUpActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";//배송지 주소록에도 넣기
+            urlAddr = urlAddr + "userId=" + strId + "&deliveryTel=" + strTel +  "&deliveryAddr="+ strAddr + "&deliveryAddrDetail=" + strAddrDetail;
+
+
+            try {
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr,"insert");
+                insertworkTask.execute().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
             new AlertDialog.Builder(SignUpActivity.this)
                     .setTitle("가입완료!")

@@ -21,6 +21,7 @@ import com.example.supia.ShareVar.ShareVar;
 import com.kakao.sdk.user.model.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class UserDataQuestion1 extends Activity {
@@ -31,7 +32,7 @@ public class UserDataQuestion1 extends Activity {
     TextView tvSkip;
     String userId;
     private String urlAddr;
-    ArrayList<CalendarDTO> calendarDtos;
+    HashSet<CalendarDTO> calendarDtos;
     String date;
 
 
@@ -43,8 +44,6 @@ public class UserDataQuestion1 extends Activity {
         Intent intent = getIntent();
         userId = ShareVar.sharvarUserId;
 
-        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);
-        date = sf.getString("date", "");
 
         if (date.trim().length() != 0) {
             Intent intent2 = new Intent(UserDataQuestion1.this, MainCalendar.class);//추후에는 참치 쪽으로 이동
@@ -79,14 +78,9 @@ public class UserDataQuestion1 extends Activity {
                 date = Integer.toString(datePicker.getYear()) + "-" + Integer.toString(datePicker.getMonth() + 1) + "-" + Integer.toString(datePicker.getDayOfMonth());
                 Log.d(TAG, date);
                 Intent intent1 = new Intent(UserDataQuestion1.this, UserDataQuestion2.class);
-                SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
-                SharedPreferences.Editor editor = sf.edit();
-                editor.putString("date", date);
-                editor.commit();
                 intent1.putExtra("menstruationStart", date);
                 intent1.putExtra("userId", userId);
                 startActivity(intent1);
-
 
             }
         });
@@ -97,20 +91,21 @@ public class UserDataQuestion1 extends Activity {
 
         Log.v(TAG, "connectGetData()");
         try {
-            urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaCalendarSelectMens.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaCalendarSelectMens.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
 
             urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
             CalendarNetworkTask networkTask = new CalendarNetworkTask(UserDataQuestion1.this, urlAddr, "select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
-            calendarDtos = (ArrayList<CalendarDTO>) obj; //userInfoDtos 다시 풀기
+            calendarDtos = (HashSet<CalendarDTO>) obj; //userInfoDtos 다시 풀기
 
 
-            String strCalendarStartDate = calendarDtos.get(0).getCalendarStartDate();
-            Log.d(TAG, Integer.toString(strCalendarStartDate.trim().length()));
-            if (!strCalendarStartDate.equals("null")) {
+            if (!calendarDtos.isEmpty()) {
                 Intent intent = new Intent(UserDataQuestion1.this, MainCalendar.class);
                 startActivity(intent);
+
+            }else {
+
             }
 
 
@@ -121,29 +116,6 @@ public class UserDataQuestion1 extends Activity {
     }
 
 
-    private void CheckInsertCalendar() {
-        Log.v(TAG, "CheckInsertCalendar()");
-        try {
-            urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaCalendarSelectMens.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-
-            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
-            Log.v(TAG, urlAddr);
-            CalendarNetworkTask networkTask = new CalendarNetworkTask(UserDataQuestion1.this, urlAddr, "select");
-            Object obj = networkTask.execute().get(); //obj를 받아들여서
-            calendarDtos = (ArrayList<CalendarDTO>) obj; //userInfoDtos 다시 풀기
-
-
-            String strUserAddr = calendarDtos.get(0).getCalendarStartDate();
-            Log.d(TAG, Integer.toString(strUserAddr.trim().length()));
-            if (!strUserAddr.equals("null")) {
-                Intent intent = new Intent(UserDataQuestion1.this, MainCalendar.class);
-                startActivity(intent);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
