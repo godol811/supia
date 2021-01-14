@@ -441,42 +441,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 }
             });
 
-            cbSelect.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-
-                    if (cbSelect.isChecked()){
-                        Log.d(TAG,"확인");
-                        ShareVar.CartTotalPrice = 1;
-//                        totalprice.setText("총 금액: 원");
-                    }
-//                    String str = "";
-//                  sendCartData.clear();
-//
-//                    for (int i =0; i < mDataset.size(); i++){
-//                        if (cbSelect.isChecked() == true){
-//                            sendCartData.add(mDataset.get(getAdapterPosition()));
-//                            Log.d(TAG,"position" + String.valueOf(getAdapterPosition()));
-//                            Log.d(TAG,"position" + String.valueOf(mDataset.get(getAdapterPosition()).getCartProductName()));
-//
-//                        }else {
-//                            Log.d(TAG,"체크해제");
-//
-//                    for (int i = 0; i < intradayCheckboxsList.size(); i ++){
-//                        if (intradayCheckboxsList.get(i).isChecked() == true){
-//                            sendCartData.add(mDataset.get(i));
-//                            Log.d(TAG,"-----------------------------------");
-//                            Log.d(TAG, "mDataset데이터 이름 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductName()));
-//                            Log.d(TAG, "mDataset데이터 이미지 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductImagePath()));
-//                            Log.d(TAG, "mDataset데이터 가격 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductPrice()));
-//                            Log.d(TAG, "mDataset데이터 수량 " + i + "번째 " + String.valueOf(mDataset.get(i).getCartProductQuantity()));
-//                            Log.d(TAG,"-----------------------------------");
-//                        }
-//                    }
-
-                }
-            });
 
 
 

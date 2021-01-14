@@ -3,6 +3,8 @@ package com.example.supia.Activities.MyPage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Login.LoginActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -27,6 +30,7 @@ public class MyInfoActivity extends Activity {
     String userId = ShareVar.sharvarUserId;
 
     TextView myInfoId, myInfoTel, myInfoPw;
+    TextView tvLogout;
     EditText etPw, etPwCh; //커스텀 다이얼로그 EditText
     String strMyInfoUserName, strMyInfoUserPw, strMyInfoUserTel, strMyInfoUserAddr; // 인텐트 받아오기위한 string
     Button changePwBtn;
@@ -36,7 +40,7 @@ public class MyInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_info);
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         //------------------Intent 받아오기---------------------//
         Intent intent = getIntent();
@@ -53,6 +57,7 @@ public class MyInfoActivity extends Activity {
         changePwBtn = findViewById(R.id.btn_changepw_mypage_info);
         etPw = findViewById(R.id.et_pwchange_mypage_info);
         etPwCh = findViewById(R.id.et_pwcheck_mypage_info);
+        tvLogout = findViewById(R.id.info_logout);
         //----------------------------------//
 
 
@@ -87,10 +92,40 @@ public class MyInfoActivity extends Activity {
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         changePwBtn.setOnClickListener(changePwClickListener); //비번 변경
+        tvLogout.setOnClickListener(logoutClickListener);
         //------------------------------------------//
 
 
     }//-----------------onCreate
+
+    //-----------------------------------logout 변경 클릭 이벤트-----------------------------------//
+    View.OnClickListener logoutClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+
+            new AlertDialog.Builder(MyInfoActivity.this)
+                    .setTitle("알림")
+                    .setIcon(R.mipmap.supia)
+                    .setMessage("확인을 누르시면 로그인 화면으로 돌아가게 됩니다.")
+                    .setPositiveButton("취소",null)
+                    .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent logout = new Intent(MyInfoActivity.this, LoginActivity.class);
+                                      userId= null;
+                                      logout.putExtra("userId",userId);
+                                      startActivity(logout);
+
+                        }
+                    }).show();
+
+
+
+        }
+    };
+    //-----------------------------------------------------------------------------------------//
 
     //----------------------------------------비밀번호 변경 버튼 클릭 이벤트------------------------------------------//
     View.OnClickListener changePwClickListener = new View.OnClickListener() {

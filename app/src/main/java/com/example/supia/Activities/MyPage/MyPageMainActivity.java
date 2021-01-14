@@ -44,7 +44,7 @@ public class MyPageMainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page_main);
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
         //----------header 아이디----------//
         ibtnBack = findViewById(R.id.ibtn_back_mypage_header); //뒤로가기
         tvMypage = findViewById(R.id.tv_mypage_mypage_header); //마이페이지
@@ -210,7 +210,6 @@ public class MyPageMainActivity extends Activity {
         @Override
         public void onClick(View v) {
             Intent infointent = new Intent(MyPageMainActivity.this, MyInfoActivity.class);
-            infointent.putExtra("userId", userinfo.get(0).getUserId());
             infointent.putExtra("userName", userinfo.get(0).getUserName());
             infointent.putExtra("userTel", userinfo.get(0).getUserTel());
             infointent.putExtra("userPw", userinfo.get(0).getUserPw());
