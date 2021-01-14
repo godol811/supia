@@ -77,7 +77,7 @@ public class datePicker extends Dialog {
                 sqlDB = myDBHelper.getWritableDatabase();
                 sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
                 sqlDB.close();
-                Toast.makeText(context,"Toast 메시지", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"입력되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -85,9 +85,10 @@ public class datePicker extends Dialog {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sqlDB = myDBHelper.getWritableDatabase();
-                sqlDB.execSQL("UPDATE INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
-                sqlDB.close();
+//                sqlDB = myDBHelper.getWritableDatabase();
+//                sqlDB.execSQL("UPDATE INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
+//                sqlDB.close();
+                Toast.makeText(context,"수정되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +102,7 @@ public class datePicker extends Dialog {
 //                int n = sqlDB.delete(tableName, "NAME = supiamensterm", nameArr);
 //
 //                Log.d(TAG, "n: " + n);
+                Toast.makeText(context,"삭제되었습니다.", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -120,4 +122,5 @@ public class datePicker extends Dialog {
     }
 
 }
+
 
