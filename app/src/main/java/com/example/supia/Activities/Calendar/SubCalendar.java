@@ -23,6 +23,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 public class SubCalendar extends FragmentActivity {
 
@@ -45,8 +46,10 @@ public class SubCalendar extends FragmentActivity {
 
     public static String TAG ="서브캘린더";
 
+    public List<CalendarDTOforSQLite> mensList;
 
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +107,7 @@ public class SubCalendar extends FragmentActivity {
         tvmensCycle.setText(Integer.toString(27));
         tvmensTerm.setText(Integer.toString(intfinday-intstaday));
         tvDeliveryDay.setText(Integer.toString(intdelday));
+
         //애정추가-----------------//
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
@@ -139,6 +143,7 @@ public class SubCalendar extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         connectGetData();
+        materialCalendarView_sub.setSelectedDate(CalendarDay.from(2020,1,20));
     }
 
     private void connectGetData() {
@@ -152,6 +157,12 @@ public class SubCalendar extends FragmentActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initLoadDB(){
+        DataAdapter mDBHelper = new DataAdapter(getApplicationContext());
+        mDBHelper.createDatabase();
+        mDBHelper.open();
     }
     //애정존-----------------------------------
 
@@ -190,8 +201,6 @@ public class SubCalendar extends FragmentActivity {
         }
     };
     //---------------------------------------------------------------------------------------------//
-
-
 
 }
 

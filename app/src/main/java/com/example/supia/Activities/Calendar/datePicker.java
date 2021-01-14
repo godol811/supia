@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,7 +65,7 @@ public class datePicker extends Dialog {
 
         checkDay(year, monthOfYear, dayOfMonth);//가져온 날짜에 하이픈을 첨가하여 "yyyy-mm-dd" 형태로 만듬
 
-        myDBHelper = new myDBHelper(datePicker.getContext());
+        //myDBHelper = new myDBHelper(datePicker.getContext(), mContext);
 
         datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
             checkDay(year, monthOfYear, dayOfMonth);
