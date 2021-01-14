@@ -154,7 +154,7 @@ public class PaymentPhoneActivity extends Activity {
                                                 String productPrice = String.valueOf(listPayment.get(i).getCartProductPrice());
                                                 int price = Integer.parseInt(String.valueOf(listPayment.get(i).getCartProductPrice()));
                                                 int quantity = Integer.parseInt(String.valueOf(listPayment.get(i).getCartProductQuantity()));
-                                                Log.d("배열확인",productId+"와"+productName);
+                                                Log.d("배열확인", productId + "와" + productName);
                                                 urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + productQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
                                                         + "&orderPayment=" + "핸드폰" + "&orderTotalPrice=" + (price * quantity) + "&userId=" + ShareVar.sharvarUserId + "&productId="
                                                         + productId + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + productName + "&subscribeProductPrice=" + productPrice;
@@ -222,6 +222,7 @@ public class PaymentPhoneActivity extends Activity {
         }
 
     }
+
     //--------------------------------------애정 추가  배경 터치 시 키보드 사라지게----------------------------------//
     public boolean dispatchTouchEvent(MotionEvent ev) {
         View view = getCurrentFocus();

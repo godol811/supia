@@ -23,6 +23,9 @@ import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RefactorPassWordActivity extends Activity {
 
     final static String TAG = "암호재설정액티비티";
@@ -30,7 +33,7 @@ public class RefactorPassWordActivity extends Activity {
     EditText password, passwordCheck;
     TextView tvUserId, pwCheckAlert;
     ImageView buttonPassword;
-    Button refactorPasswordButton,buttonBack;
+    Button refactorPasswordButton, buttonBack;
     private String urlAddr;
     private String macIp;
 
@@ -57,7 +60,6 @@ public class RefactorPassWordActivity extends Activity {
                 onBackPressed();
             }
         });
-
 
 
         ///////////////////////////////////////눈 보이기////////////////////////////////////////////
@@ -117,11 +119,18 @@ public class RefactorPassWordActivity extends Activity {
             String strPassword = password.getText().toString().trim();
             String strPasswordCheck = passwordCheck.getText().toString().trim();
 
-            if (strPasswordCheck.length() != 0 && strPassword.length() != 0) {
+            if (strPasswordCheck.length() != 0 && strPassword.length() != 0 && isValidPassword(strPassword) == true) {
                 buttonEnable();//암호설정 메소드로
 
-            } else {
+            } else if (isValidPassword(strPassword) == false) {
+                new AlertDialog.Builder(RefactorPassWordActivity.this)
+                        .setTitle("암호형식 확인")
+                        .setMessage("숫자와 문자 포함하여 6~12 자리의 암호를 입력해주세요.")
+                        .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                        .setPositiveButton("닫기", null)
+                        .show();
 
+            } else {
                 new AlertDialog.Builder(RefactorPassWordActivity.this)
                         .setTitle("암호확인 체크!")
                         .setMessage("암호를 입력해주세요!")
@@ -150,7 +159,7 @@ public class RefactorPassWordActivity extends Activity {
             Log.d(TAG, urlAddr);
 
             try {
-                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(RefactorPassWordActivity.this, urlAddr,"insert");
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(RefactorPassWordActivity.this, urlAddr, "insert");
                 insertworkTask.execute().get();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -201,4 +210,17 @@ public class RefactorPassWordActivity extends Activity {
     }
 
     //---------------------------------------------------------------------------------------------//
+
+    public static boolean isValidPassword(String pw) {//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+        boolean err = false;
+        String regex = "/^[A-Za-z0-9]{6,12}$/";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(pw);
+        if (m.matches()) {
+            err = true;
+        }
+        return err;
+    }
+
+
 }

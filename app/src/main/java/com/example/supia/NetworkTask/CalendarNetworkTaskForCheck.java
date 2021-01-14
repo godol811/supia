@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.ShareVar.ShareVar;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,16 +17,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
 
-public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
+public class CalendarNetworkTaskForCheck extends AsyncTask<Integer, String, Object> {
 
-    final static String TAG = "캘린더네트워크타스크";
+    final static String TAG = "캘린더네트워크타스크체크";
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    HashSet<CalendarDTO> calendars;
     ArrayList<CalendarDTO> calendarCheck;
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
@@ -38,10 +35,9 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
     ///////////////////////////////////////////////////////////////////////////////////////
     String where = null;
 
-    public CalendarNetworkTask(Context context, String mAddr, String where) {
+    public CalendarNetworkTaskForCheck(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.calendars = new HashSet<CalendarDTO>();
         this.calendarCheck = new ArrayList<CalendarDTO>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
@@ -131,7 +127,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
         //
         ///////////////////////////////////////////////////////////////////////////////////////
         if (where.equals("select")) {
-            return calendars;
+            return calendarCheck;
         } else {
             return result;
         }
@@ -167,7 +163,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
 
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("calendar"));
-            calendars.clear();
+            calendarCheck.clear();
             Log.v(TAG, "s" + s);
 
 
@@ -187,7 +183,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
                 Log.v(TAG, "파서셀렉트"+ ShareVar.calendarsharvarStartdate+ShareVar.calendarsharvarFinishdate+ShareVar.calendarsharvarDeliverydate+ShareVar.calendarsharvarBirthdate);
 
                 CalendarDTO calendarDTO = new CalendarDTO(calendarStartDate,calendarFinishDate,calendarDeliveryDate,calendarBirthDate);
-                calendars.add(calendarDTO);
+                calendarCheck.add(calendarDTO);
                 Log.v(TAG, "----------------------------------");
             }
         } catch (Exception e) {

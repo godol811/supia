@@ -26,6 +26,8 @@ import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends Activity {
 
@@ -172,7 +174,7 @@ public class SignUpActivity extends Activity {
             String strPw = userinfoPw.getText().toString().trim();
             String strPwCheck = userinfoPwCheck.getText().toString().trim();
 
-            if (strTel.length() != 0 && strAddr.length() != 0 && strPw.equals(strPwCheck) && agreementCheckBox.isChecked()) {
+            if (strTel.length() != 0 && strAddr.length() != 0 && strPw.equals(strPwCheck) && agreementCheckBox.isChecked() && isValidEmail(userinfoId.getText().toString()) == true && isValidPassword(strPw) == true) {
 
                 Log.d("입력체크", "토탈체크 " + totalCheck);
                 buttonEnable();
@@ -214,7 +216,7 @@ public class SignUpActivity extends Activity {
                         .setPositiveButton("닫기", null)
                         .show();
                 userinfoTel.setFocusable(true);
-            } else if (strPw != strPwCheck) {
+            } else if (!strPw.equals(strPwCheck)) {
                 new AlertDialog.Builder(SignUpActivity.this)
                         .setTitle("같은 암호를 입력하세요")
                         .setMessage("같은 암호를 입력하세요")
@@ -231,7 +233,7 @@ public class SignUpActivity extends Activity {
                         .show();
                 userinfoPwCheck.setFocusable(true);
 
-            }else if (strPw.length() == 0) {
+            } else if (strPw.length() == 0) {
                 new AlertDialog.Builder(SignUpActivity.this)
                         .setTitle("암호를 입력해주세요")
                         .setMessage("암호를 입력해주세요")
@@ -239,8 +241,24 @@ public class SignUpActivity extends Activity {
                         .setPositiveButton("닫기", null)
                         .show();
                 userinfoPw.setFocusable(true);
+            } else if (isValidEmail(userinfoId.getText().toString()) == false) {
+                new AlertDialog.Builder(SignUpActivity.this)
+                        .setTitle("이메일을 입력해주세요")
+                        .setMessage("이메일의 양식에 맞게 입력해주세요")
+                        .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                        .setPositiveButton("닫기", null)
+                        .show();
+                userinfoId.setFocusable(true);
+            } else if (isValidPassword(strPw) == false) {
+                new AlertDialog.Builder(SignUpActivity.this)
+                        .setTitle("암호형식 확인")
+                        .setMessage("숫자와 문자 포함하여 6~12 자리의 암호를 입력해주세요.")
+                        .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                        .setPositiveButton("닫기", null)
+                        .show();
+                userinfoId.setFocusable(true);
 
-            }  else {
+            } else {
 
                 new AlertDialog.Builder(SignUpActivity.this)
                         .setTitle("전화번호와 주소를 입력하세요")
@@ -273,19 +291,27 @@ public class SignUpActivity extends Activity {
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
             urlAddr = urlAddr + "userId=" + strId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
-            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr,"select");
+            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr, "select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
             userDtos = (ArrayList<UserDto>) obj; //userInfoDtos 다시 풀기
 
 
-            if (userDtos.isEmpty()) {//아이디가 없는값이라면 없는 아이디라 메세지 띄우고 (없는 값이기 때문에 불러와지지 않으므로
+            if (isValidEmail(strId) == false) {//아이디가 없는값이라면 없는 아이디라 메세지 띄우고 (없는 값이기 때문에 불러와지지 않으므로
+                new AlertDialog.Builder(SignUpActivity.this)
+                        .setTitle("이메일을 입력해주세요")
+                        .setMessage("이메일의 양식에 맞게 입력해주세요")
+                        .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                        .setPositiveButton("닫기", null)
+                        .show();
+                totalCheck = 1;
+            } else if (userDtos.isEmpty()) {
                 new AlertDialog.Builder(SignUpActivity.this)
                         .setTitle("이메일 중복확인 결과!")
                         .setMessage("사용가능한 이메일 입니다.")
                         .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
                         .setPositiveButton("닫기", null)
                         .show();
-                totalCheck = 1;
+                userinfoId.setFocusable(true);
             } else {
                 userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.
                 Log.d(TAG, userIdCheck);
@@ -315,22 +341,22 @@ public class SignUpActivity extends Activity {
             String strAddrDetail = userinfoAddrDetail.getText().toString().trim();
 
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + strId + "&userPw=" + strPw + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail +"&userPlatform=normal";
+            urlAddr = urlAddr + "userId=" + strId + "&userPw=" + strPw + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail + "&userPlatform=normal";
 
 
             try {
-                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr,"insert");
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr, "insert");
                 insertworkTask.execute().get();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";//배송지 주소록에도 넣기
-            urlAddr = urlAddr + "userId=" + strId + "&deliveryTel=" + strTel +  "&deliveryAddr="+ strAddr + "&deliveryAddrDetail=" + strAddrDetail;
+            urlAddr = urlAddr + "userId=" + strId + "&deliveryTel=" + strTel + "&deliveryAddr=" + strAddr + "&deliveryAddrDetail=" + strAddrDetail;
 
 
             try {
-                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr,"insert");
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SignUpActivity.this, urlAddr, "insert");
                 insertworkTask.execute().get();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -364,6 +390,7 @@ public class SignUpActivity extends Activity {
 
 
     }
+
     //--------------------------------------애정 추가  배경 터치 시 키보드 사라지게----------------------------------//
     public boolean dispatchTouchEvent(MotionEvent ev) {
         View view = getCurrentFocus();
@@ -380,5 +407,31 @@ public class SignUpActivity extends Activity {
     }
 
     //---------------------------------------------------------------------------------------------//
+
+    /**
+     * Comment : 정상적인 이메일 인지 검증.
+     */
+    public static boolean isValidEmail(String email) {
+        boolean err = false;
+        String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        if (m.matches()) {
+            err = true;
+        }
+        return err;
+    }
+
+    public static boolean isValidPassword(String pw) {//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+        boolean err = false;
+        String regex = "/^[A-Za-z0-9]{6,12}$/";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(pw);
+        if (m.matches()) {
+            err = true;
+        }
+        return err;
+    }
+
 
 }
