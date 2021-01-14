@@ -156,17 +156,30 @@ public class SocialLoginActivity extends Activity {
             String strAddrDetail = userAddrDetail.getText().toString().trim();
 
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserSocialUpdate.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + strId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail ;
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail ;
 
             Log.v(TAG, urlAddr);
             try {
                 UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"insert");
                 insertworkTask.execute().get();
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";//배송지 주소록에도 넣기
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId+ "&deliveryTel=" + strTel +  "&deliveryAddr="+ strAddr + "&deliveryAddrDetail=" + strAddrDetail;
+
+
+            try {
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"insert");
+                insertworkTask.execute().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
+
             new AlertDialog.Builder(SocialLoginActivity.this)
                     .setTitle("추가정보 등록 완료!")
                     .setMessage("취향 선택 페이지로 넘어갈게요!")

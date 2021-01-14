@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.example.supia.Activities.Payment.BasketPurchaseCheckActivity;
 import com.example.supia.Activities.Payment.PurchaseCheckActivity;
@@ -56,10 +57,17 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+
+
+
         recyclerView = findViewById(R.id.rl_cart_category);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
+        if (animator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
 
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
@@ -159,14 +167,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
                                 .setCancelable(true)
                                 .show();
                     } else {
-//                        Toast.makeText(CartActivity.this, "구매 시작해주세요.", Toast.LENGTH_SHORT).show();
-//
-//                        new AlertDialog.Builder(CartActivity.this)
-//                                .setTitle("알림")
-//                                .setMessage("최소 구입 수량은 1개 입니다")
-//                                .setPositiveButton("확인", null)
-//                                .setCancelable(true)
-//                                .show();
 
                         Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
                         intent.putExtra("cartData", adapter.sendDate());
