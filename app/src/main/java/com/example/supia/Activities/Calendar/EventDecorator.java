@@ -1,9 +1,11 @@
 package com.example.supia.Activities.Calendar;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
+import com.example.supia.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
@@ -16,13 +18,19 @@ import java.util.Set;
 
 public class EventDecorator implements DayViewDecorator {
     //private final Drawable drawable;
-    private final int color;
+    public static String TAG = "이벵데코드로";
+    private Drawable drawable;
+
     private final HashSet<CalendarDay> dates;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
-        this.color = color;
+
+    public EventDecorator(Activity context, Collection<CalendarDay> dates) {
+        // drawable = ResourcesCompat.getDrawable((Resources.getSystem()) , R.drawable.calendar_select_background, null);
+
         this.dates = new HashSet<>(dates);
-        //this.drawable = drawable;
+        drawable = context.getDrawable(R.drawable.line);
+
+
     }
 
     @Override
@@ -30,10 +38,17 @@ public class EventDecorator implements DayViewDecorator {
         return dates.contains(day);
     }
 
+
     @Override
     public void decorate(DayViewFacade view) {
-        //view.setSelectionDrawable(drawable);
-        view.addSpan(new DotSpan(10, color));
+
+        view.setBackgroundDrawable(drawable);
+//        view.setSelectionDrawable(drawable);
+//    view.addSpan(drawable);
+//        view.setBackgroundDrawable();
+//        int id = R.drawable.calendar_select_background;
+//        Log.v(TAG, "ㅇㅇㅇ"+id);
+
     }
 
 

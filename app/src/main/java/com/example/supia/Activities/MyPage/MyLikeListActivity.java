@@ -48,6 +48,9 @@ public class MyLikeListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_like_list);
 
+
+        overridePendingTransition(R.anim.hold, R.anim.hold);
+
         Log.v("라이크리스트",url);
 
         //-----------For Recycler----------------//

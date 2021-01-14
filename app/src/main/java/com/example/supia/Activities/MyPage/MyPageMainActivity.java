@@ -44,8 +44,7 @@ public class MyPageMainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page_main);
-
-
+        overridePendingTransition(R.anim.hold, R.anim.hold);
         //----------header 아이디----------//
         ibtnBack = findViewById(R.id.ibtn_back_mypage_header); //뒤로가기
         tvMypage = findViewById(R.id.tv_mypage_mypage_header); //마이페이지
@@ -101,7 +100,7 @@ public class MyPageMainActivity extends Activity {
     } //---onCreate
 
 
-    //-----------------------------------------고객센터 클릭 이벤트---------------------------------------// <--방금 추가된거에요 팬츠
+    //-----------------------------------------고객센터 클릭 이벤트---------------------------------------//
     View.OnClickListener qnaListClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
