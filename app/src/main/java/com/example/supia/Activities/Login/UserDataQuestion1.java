@@ -45,10 +45,7 @@ public class UserDataQuestion1 extends Activity {
         userId = ShareVar.sharvarUserId;
 
 
-        if (date.trim().length() != 0) {
-            Intent intent2 = new Intent(UserDataQuestion1.this, MainCalendar.class);//추후에는 참치 쪽으로 이동
-            startActivity(intent2);
-        }
+
 
 
         tvSkip = findViewById(R.id.tv_skip_question1);
