@@ -74,7 +74,10 @@ public class datePicker extends Dialog {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sqlDB = myDBHelper.getWritableDatabase();
+                sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
+                sqlDB.close();
+                Toast.makeText(context,"Toast 메시지", Toast.LENGTH_SHORT).show();
             }
 
         });
