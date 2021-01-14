@@ -56,8 +56,8 @@ public class MyLikeListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_like_list);
 
-
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
+        ActivityCompat.requestPermissions(MyLikeListActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
 
         Log.v("라이크리스트",url);
 
@@ -112,14 +112,15 @@ public class MyLikeListActivity extends Activity {
 
                 //-- fragment1로 값 전달
 
+                Log.v(TAG,""+like.get(position).getProductNo());
                 intent.putExtra("urlIp",ShareVar.urlIp);
-                intent.putExtra("productNo", cart.get(position).getProductNo());
-                intent.putExtra("productName", cart.get(position).getProductName());
-                intent.putExtra("productPrice", cart.get(position).getProductPrice());
-                intent.putExtra("productBrand", cart.get(position).getProductBrand());
-                intent.putExtra("productImagePath", cart.get(position).getProductImagePath());
-                intent.putExtra("productInfo", cart.get(position).getProductInfo());
-                Log.v(TAG,"productName " + cart.get(position).getProductName());
+                intent.putExtra("productNo", like.get(position).getProductNo());
+                intent.putExtra("productName", like.get(position).getProductName());
+                intent.putExtra("productPrice", like.get(position).getProductPrice());
+                intent.putExtra("productBrand", like.get(position).getProductBrand());
+                intent.putExtra("productImagePath", like.get(position).getProductImagePath());
+                intent.putExtra("productInfo", like.get(position).getProductInfo());
+//                Log.v(TAG,"productName " + cart.get(position).getProductName());
 
                 startActivity(intent);
 
