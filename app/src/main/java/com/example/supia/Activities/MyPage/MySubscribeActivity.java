@@ -60,7 +60,7 @@ public class MySubscribeActivity extends Activity {
 
     TextView tvMySubProductName, tvMySubProductPrice, tvMySubProductQuantity;
     ImageView ivMySubProductImg;
-    TextView tvChangeArrd, tvStopSub;
+    TextView tvChangeArrd;
 
 
     ArrayList<MySubscribeDto> members; //구독관리
@@ -93,7 +93,7 @@ public class MySubscribeActivity extends Activity {
         //---------------------------------------//
 
 
-        tvStopSub = findViewById(R.id.tv_stop_my_subscribe);
+
         tvChangeArrd = findViewById(R.id.tv_changeaddr_my_subscribe);
         //----------------라디오 버튼-----------------//
         rgSubscribe = findViewById(R.id.toggle);
@@ -179,7 +179,7 @@ public class MySubscribeActivity extends Activity {
         rgSubscribe.setOnCheckedChangeListener(radioGroupClickListener); //라디오버튼
         paymentDetail.setOnClickListener(payMentDetailClickListener); // 결제상세 커스텀다이얼로그
         tvChangeArrd.setOnClickListener(changeAddrClickListener);
-        tvStopSub.setOnClickListener(stopSubClickListener);
+
         //------------------------------------------//
 
         //------------------------------------사진 불러오기---------------------------------------//
