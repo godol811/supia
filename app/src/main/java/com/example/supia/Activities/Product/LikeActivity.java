@@ -115,6 +115,7 @@ public class LikeActivity extends Activity {
         try {
             NetworkTaskProduct updateworkTask = new NetworkTaskProduct(LikeActivity.this, urlAddr, "like");
             updateworkTask.execute().get();
+
             Object obj = updateworkTask.execute().get();
 
 

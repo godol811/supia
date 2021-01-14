@@ -16,6 +16,7 @@ import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheck
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.Dto.UserDeliveryAddrDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
+import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
 import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
@@ -47,7 +48,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
 
 
 
-
+        String paymentProductName;
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -96,8 +97,11 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                 totalPrice = totalPrice + (price * quantity);
                 Log.d(TAG,"가격"+Integer.toString(price)+"수량"+Integer.toString(quantity));
                 totalQuantity += quantity;
-
+                PaymentShareVar.paymentProductNo = list.get(i).getCartProductId();
+                Log.d(TAG,"내가 필요한것은 주문에 있는 상품 넘버다 " + PaymentShareVar.paymentProductNo);
+                connectGetDataCateDelete();
             }
+
             PaymentShareVar.totalPayment = totalPrice+2500;
             PaymentShareVar.paymentProductName = String.valueOf(list.get(0).getCartProductName())+"외 " + Integer.toString(list.size()-1) +"개";
             PaymentShareVar.totalQuantity = totalQuantity;
@@ -108,6 +112,9 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
         tvTotalprice.setText(Integer.toString(PaymentShareVar.totalPayment));//2500원 배송비 포함..
         tvProductName.setText(PaymentShareVar.paymentProductName);
         tvProductQuantity.setText("총 " + Integer.toString(PaymentShareVar.totalQuantity)+"개");
+
+
+
 
 
 
@@ -159,7 +166,6 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                  * 결제가 완료될 떄 장바구니에서 delete해주자
                  */
 
-
                 case R.id.btn_payment_basket:
                     PaymentShareVar.deliveryAddr = tvDeliveryAddress.getText().toString();
                     PaymentShareVar.deliveryAddrDetail = tvDeliveryAddressDetail.getText().toString();
@@ -167,20 +173,31 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                     PaymentShareVar.deliveryName = tvDeliveryName.getText().toString();
                     intentIndex();//0일경우엔 카드 1일경우엔 은행 2일경우엔 폰
                     if (intentIndex == 0) {
+
+
+
                         Intent intent2 = new Intent(BasketPurchaseCheckActivity.this, PaymentCardActivity.class);
                         intent2.putExtra("way", "basket");
 
                         startActivity(intent2);
                         break;
                     } else if (intentIndex == 1) {
+
+
+
                         Intent intent3 = new Intent(BasketPurchaseCheckActivity.this, PaymentBankActivity.class);
                         intent3.putExtra("way", "basket");
 
                         startActivity(intent3);
                         break;
                     } else if (intentIndex == 2) {
+
+
+
                         Intent intent4 = new Intent(BasketPurchaseCheckActivity.this, PaymentPhoneActivity.class);
                         intent4.putExtra("way", "basket");
+
+
 
                         startActivity(intent4);
                         break;
@@ -253,5 +270,28 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
             intentIndex = 3;
         }
     }
+
+
+    /**
+     * 인우 추가
+     * 결제수단마다 결제될떄 삭제해주기
+     */
+    private void connectGetDataCateDelete() {
+
+        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecartpayment.jsp";
+        urlAddr = urlAddr + "?cartProductId=" + PaymentShareVar.paymentProductNo;
+
+        try {
+
+            NetworkTaskCart networkTask = new NetworkTaskCart(BasketPurchaseCheckActivity.this, urlAddr,"like");
+            networkTask.execute().get();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
