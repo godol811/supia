@@ -164,12 +164,7 @@ public class MainCalendar extends FragmentActivity {
             e.printStackTrace();
         }
     }
-//    public void displayUsers() {
-//        Cursor cursor = databaseHelper.getAllDates(); //here's where the error keeps on happening
-//        if(cursor.getCount() == 0) {
-//            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+
     //애정존-----------------------------------
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
