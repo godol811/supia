@@ -143,7 +143,7 @@ public class ProductDetilFragment extends Fragment {
         try {
 
             String buyUrl = "http://" + urlIp + ":8080/test/supiaPreferenceTwenty.jsp?productNo="+productNo;
-            NetworkTaskPreference20 networkTask2 = new NetworkTaskPreference20(getContext(), buyUrl, "select");
+            NetworkTaskPreference networkTask2 = new NetworkTaskPreference(getContext(), buyUrl, "select");
             Object obj20 = networkTask2.execute().get();
             String birth = (String) obj20;
             int birthData = Integer.parseInt(birth)*10;
@@ -164,7 +164,7 @@ public class ProductDetilFragment extends Fragment {
         try {
 
             String buyUrl = "http://" + urlIp + ":8080/test/supiaPreferenceThirty.jsp?productNo="+productNo;
-            NetworkTaskPreference30 networkTask2 = new NetworkTaskPreference30(getContext(), buyUrl, "select");
+            NetworkTaskPreference networkTask2 = new NetworkTaskPreference(getContext(), buyUrl, "select");
             Object obj30 = networkTask2.execute().get();
             String birth = (String) obj30;
             int birthData = Integer.parseInt(birth)*10;
@@ -185,7 +185,7 @@ public class ProductDetilFragment extends Fragment {
         try {
 
             String buyUrl = "http://" + urlIp + ":8080/test/supiaPreferenceForty.jsp?productNo="+productNo;
-            NetworkTaskPreference40 networkTask2 = new NetworkTaskPreference40(getContext(), buyUrl, "select");
+            NetworkTaskPreference networkTask2 = new NetworkTaskPreference(getContext(), buyUrl, "select");
             Object obj40 = networkTask2.execute().get();
             String birth = (String) obj40;
             int birthData = Integer.parseInt(birth)*10;
@@ -206,7 +206,7 @@ public class ProductDetilFragment extends Fragment {
         try {
 
             String buyUrl = "http://" + urlIp + ":8080/test/supiaPreferenceFifty.jsp?productNo="+productNo;
-            NetworkTaskPreference50 networkTask2 = new NetworkTaskPreference50(getContext(), buyUrl, "select");
+            NetworkTaskPreference networkTask2 = new NetworkTaskPreference(getContext(), buyUrl, "select");
             Object obj50 = networkTask2.execute().get();
             String birth = (String) obj50;
             int birthData = Integer.parseInt(birth)*10;
