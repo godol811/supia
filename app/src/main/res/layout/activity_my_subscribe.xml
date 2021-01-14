@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-        <include layout="@layout/bottom_bar" />
+
     </LinearLayout>
 
 
@@ -368,9 +368,6 @@
         </LinearLayout>
     </LinearLayout>
     <include layout="@layout/bottom_bar" />
-
-
-
 
 
 </LinearLayout>
