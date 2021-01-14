@@ -31,6 +31,7 @@ public class mensUpdate extends Dialog {
             public void onClick(View v) {
                 mensUpdate2 dialog = new mensUpdate2(getContext());
                 dialog.show();
+                dismiss();
             }
         });
 
