@@ -134,6 +134,23 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rl_product_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+
+
 <include layout="@layout/bottom_bar"/> <!--애정츄 추가-->
 
 </LinearLayout>

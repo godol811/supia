@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -55,22 +56,20 @@ public class datePicker extends Dialog {
         btnCancle = findViewById(R.id.btn_cancle_datepicker_calendar);
         datePicker = findViewById(R.id.datepicker_calendar);
 
-
         year = datePicker.getYear();
         month = datePicker.getMonth();
         dayOfMonth = datePicker.getDayOfMonth();//데이트피커에서 날짜를 가져옴
-        checkDay(year, month, dayOfMonth);//가져온 날짜에 하이픈을 첨가하여 "yyyy-mm-dd" 형태로 만듬
 
-        menstruationStart = checkDay(year, month, dayOfMonth);
-        Log.v(TAG, "aa" + menstruationStart);
-        menstruationEnd = checkDay(year, month, dayOfMonth);
+        checkDay(year, month, dayOfMonth);//가져온 날짜에 하이픈을 첨가하여 "yyyy-mm-dd" 형태로 만듬
 
         myDBHelper = new myDBHelper(datePicker.getContext());
 
-        datePicker.setOnDateChangedListener((view, year1, monthOfYear, dayOfMonth1) -> {
-            checkDay(year1, monthOfYear, dayOfMonth1);
+        datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
+            checkDay(year, monthOfYear, dayOfMonth);
+            menstruationStart = checkDay(year, monthOfYear, dayOfMonth);
+            menstruationEnd = checkDay(year, monthOfYear, dayOfMonth);
+            Log.v(TAG, "ㅇㅇㅇ"+menstruationStart+menstruationEnd);
         });//날짜 클릭시 데이터값 변경
-
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +77,9 @@ public class datePicker extends Dialog {
                 sqlDB = myDBHelper.getWritableDatabase();
                 sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
                 sqlDB.close();
+                Toast.makeText(context,"Toast 메시지", Toast.LENGTH_SHORT).show();
             }
+
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +93,14 @@ public class datePicker extends Dialog {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Log.d(TAG, "Delete Data " + name);
+//
+//                String nameArr[] = {name};
+//
+//                // 리턴값: 삭제한 수
+//                int n = sqlDB.delete(tableName, "NAME = supiamensterm", nameArr);
+//
+//                Log.d(TAG, "n: " + n);
 
             }
         });
@@ -109,26 +118,6 @@ public class datePicker extends Dialog {
         Log.v("TAG", "오오오" + pickDate);
         return pickDate;
     }
-
-
-    public class myDBHelper extends SQLiteOpenHelper {
-        public myDBHelper(Context context) {
-            super(context, "supia", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE supiamensterm (mStart DATE(20), mEnd DATE(20));");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS supiamensterm");
-            onCreate(db);
-
-        }
-    }
-
 
 }
 
