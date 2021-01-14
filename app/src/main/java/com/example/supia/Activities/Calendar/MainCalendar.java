@@ -119,11 +119,10 @@ public class MainCalendar extends FragmentActivity {
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_main.addDecorator(new EventDecoratorDraw2(MainCalendar.this, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
 
-        materialCalendarView_main.setSelectedDate(CalendarDay.from(intstayear, intstamonth, intstaday));
-        materialCalendarView_main.addDecorator(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(intstayear, intstamonth, intstaday))));
-
-        materialCalendarView_main.setSelectedDate(CalendarDay.from(intfinyear, intfinmonth, intfinday));
-        materialCalendarView_main.addDecorator(new EventDecorator(Color.GREEN, Collections.singleton(CalendarDay.from(intfinyear, intfinmonth, intfinday))));
+        for (int i=intstaday; i<=intfinday; i++) {
+            materialCalendarView_main.setSelectedDate(CalendarDay.from(intstayear, intstamonth, i));
+            materialCalendarView_main.addDecorator(new EventDecorator(MainCalendar.this, Collections.singleton(CalendarDay.from(intstayear, intstamonth, i))));
+        }
 
         gotosub.setOnClickListener(new View.OnClickListener() {//sub페이지로 이동
             @Override
