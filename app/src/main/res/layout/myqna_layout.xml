@@ -24,7 +24,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/review_productname"
+                    android:id="@+id/tv_qnatitle_myqna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -33,7 +33,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/review_title"
+                    android:id="@+id/tv_productname_myqna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -42,7 +42,7 @@
                     android:hint="문의 상품" />
 
                 <TextView
-                    android:id="@+id/review_content"
+                    android:id="@+id/tv_content_myqna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
