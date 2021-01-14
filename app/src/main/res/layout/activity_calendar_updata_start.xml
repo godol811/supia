@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.Login.UserDataQuestion1">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="가장 최근의 \n월경 시작일을 입력해주세요."
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <DatePicker
+            android:id="@+id/maincalendar_mens_start_update"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:outlineAmbientShadowColor="#BAD23A"
+            android:outlineSpotShadowColor="#BAD23A"
+
+            />
+        <Button
+            android:id="@+id/btn_next_question2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"
+            android:backgroundTint="#BAD23A"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>
