@@ -5,6 +5,7 @@ public class MySubscribeDto {
     private String subscribeOrderDate;
     private int subscribeOrderQuantity;
     private String subscribeOrderAddr;
+    private String subscribeOrderAddrDetail;
     private String subscribeOrderPayment;
     private String userId;
     private int productId;
@@ -30,10 +31,11 @@ public class MySubscribeDto {
 
 
 
-    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
+    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr,String subscribeOrderAddrDetail, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
         this.subscribeOrderDate = subscribeOrderDate;
         this.subscribeOrderQuantity = subscribeOrderQuantity;
         this.subscribeOrderAddr = subscribeOrderAddr;
+        this.subscribeOrderAddrDetail = subscribeOrderAddrDetail;
         this.subscribeOrderPayment = subscribeOrderPayment;
         this.userId = userId;
         this.productId = productId;
@@ -61,7 +63,13 @@ public class MySubscribeDto {
     }
 
 
+    public String getSubscribeOrderAddrDetail() {
+        return subscribeOrderAddrDetail;
+    }
 
+    public void setSubscribeOrderAddrDetail(String subscribeOrderAddrDetail) {
+        this.subscribeOrderAddrDetail = subscribeOrderAddrDetail;
+    }
 
     public MySubscribeDto(String subscribeOrderPayment, String userId) {
         this.subscribeOrderPayment = subscribeOrderPayment;

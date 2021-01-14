@@ -174,6 +174,7 @@ public class MyPageSubscribeNetworkTask extends AsyncTask<Integer, String, Objec
                 String subscribeOrderDate = jsonObject1.getString("subscribeOrderDate");
                 int subscribeOrderQuantity = jsonObject1.getInt("subscribeOrderQuantity");
                 String subscribeOrderAddr = jsonObject1.getString("subscribeOrderAddr");
+                String subscribeOrderAddrDetail = jsonObject1.getString("subscribeOrderAddrDetail");
                 String subscribeOrderPayment = jsonObject1.getString("subscribeOrderPayment");
                 String userId = jsonObject1.getString("userId");
                 int productId = jsonObject1.getInt("productId");
@@ -185,7 +186,7 @@ public class MyPageSubscribeNetworkTask extends AsyncTask<Integer, String, Objec
 
 
 
-                MySubscribeDto address = new MySubscribeDto(subscribeOrderDate,subscribeOrderQuantity,subscribeOrderAddr,subscribeOrderPayment,userId,productId,productNo,productName,productImagePath,productPrice);
+                MySubscribeDto address = new MySubscribeDto(subscribeOrderDate,subscribeOrderQuantity,subscribeOrderAddr,subscribeOrderAddrDetail,subscribeOrderPayment,userId,productId,productNo,productName,productImagePath,productPrice);
                 Address.add(address);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");

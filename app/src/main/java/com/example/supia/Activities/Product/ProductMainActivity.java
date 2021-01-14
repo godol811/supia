@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -72,7 +73,8 @@ public class ProductMainActivity extends Activity {
 
         recyclerView = findViewById(R.id.rl_product_main);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+//        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
 

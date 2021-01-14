@@ -5,7 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.supia.Dto.MyPage.MyDeliveryOrderDto;
+import com.example.supia.Dto.MyPage.MyOrderListDto;
+import com.example.supia.Dto.MyPage.MyQnaDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,13 +18,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MyPageDeliveryOrderNetworkTask extends AsyncTask<Integer, String, Object> {
-
-    final static String TAG = "딜리버리네트워크타스크";
+public class MyQnaListNetworkTask extends AsyncTask<Integer, String, Object> {
+    final static String TAG = "오더리스트네트워크타스크";
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<MyDeliveryOrderDto> Address;
+    ArrayList<MyQnaDto> Address;
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
     //
@@ -33,10 +33,10 @@ public class MyPageDeliveryOrderNetworkTask extends AsyncTask<Integer, String, O
     ///////////////////////////////////////////////////////////////////////////////////////
     String where = null;
 
-    public MyPageDeliveryOrderNetworkTask(Context context, String mAddr, String where) {
+    public MyQnaListNetworkTask(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.Address = new ArrayList<MyDeliveryOrderDto>();
+        this.Address = new ArrayList<MyQnaDto>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
     }
@@ -160,26 +160,21 @@ public class MyPageDeliveryOrderNetworkTask extends AsyncTask<Integer, String, O
         try {
 
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("userDeliveryAddrList"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("qna"));
             Address.clear();
             Log.v(TAG, "s" + s);
-
-
-
 
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                String deliveryAddr = jsonObject1.getString("deliveryAddr");
-                String deliveryAddrDetail = jsonObject1.getString("deliveryAddrDetail");
-                String deliveryTel = jsonObject1.getString("deliveryTel");
-                String deliveryName = jsonObject1.getString("deliveryName");
                 String userId = jsonObject1.getString("userId");
+                String qnaContent = jsonObject1.getString("qnaContent");
+                String productName = jsonObject1.getString("productName");
 
 
 
-                MyDeliveryOrderDto address = new MyDeliveryOrderDto(deliveryAddr,deliveryTel,deliveryName,userId);
+                MyQnaDto address = new MyQnaDto(userId, qnaContent, productName);
                 Address.add(address);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
@@ -213,8 +208,5 @@ public class MyPageDeliveryOrderNetworkTask extends AsyncTask<Integer, String, O
         }
         return returnValue;
     }
-    ///////////////////////////////////////////////////////////////////////////////////////
-
-
 
 }

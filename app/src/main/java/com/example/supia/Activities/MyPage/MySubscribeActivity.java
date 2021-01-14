@@ -56,7 +56,7 @@ public class MySubscribeActivity extends Activity {
     TextView tvProductPrice, tvPriceTotal, tvChangePayment, tvCxl;
     TextView tvStartDate, tvState, tvAddrMyPage, tvPriceMyPage, tvPaymentMyPage, tvNextPayDay;
 
-    TextView tvMySubProductName,tvMySubProductPrice,tvMySubProductQuantity;
+    TextView tvMySubProductName, tvMySubProductPrice, tvMySubProductQuantity;
     ImageView ivMySubProductImg;
     TextView tvChangeArrd, tvStopSub;
 
@@ -64,10 +64,8 @@ public class MySubscribeActivity extends Activity {
     ArrayList<MySubscribeDto> members; //구독관리
     ArrayList<MySubscribeDto> members2; //구독내역
 
-    String urlIp = ShareVar.urlIp;
-    String userId = ShareVar.sharvarUserId;
-    String url = "http://" + urlIp + ":8080/test/supiaSubscribe.jsp?userId=" + userId;
-    String url2 = "http://" + urlIp + ":8080/test/supiaMyPageSubOrderList.jsp?userId=" + userId;
+    String url = "http://" + ShareVar.urlIp + ":8080/test/supiaSubscribe.jsp?userId=" + ShareVar.sharvarUserId;
+    String url2 = "http://" + ShareVar.urlIp+ ":8080/test/supiaMyPageSubOrderList.jsp?userId=" + ShareVar.sharvarUserId;
     int productPriceDialog = 0;
     int productQuantity = 0;
     TextView paymentDetail;
@@ -89,7 +87,7 @@ public class MySubscribeActivity extends Activity {
         //---------------------------------------//
 
 
-        tvStopSub =findViewById(R.id.tv_stop_my_subscribe);
+        tvStopSub = findViewById(R.id.tv_stop_my_subscribe);
         tvChangeArrd = findViewById(R.id.tv_changeaddr_my_subscribe);
         //----------------라디오 버튼-----------------//
         rgSubscribe = findViewById(R.id.toggle);
@@ -107,7 +105,7 @@ public class MySubscribeActivity extends Activity {
 
         tvStartDate = findViewById(R.id.tv_startdate_my_subscribe);
         tvState = findViewById(R.id.tv_state_my_subscribe);
-        tvAddrMyPage = findViewById(R.id.tv_address_my_subscibe);
+        tvAddrMyPage = findViewById(R.id.tv_address_my_subscribe);
         tvPriceMyPage = findViewById(R.id.tv_price_my_subscribe);
         tvPaymentMyPage = findViewById(R.id.tv_payment_my_subscribe);
         tvNextPayDay = findViewById(R.id.tv_next_payday_my_subscribe);
@@ -119,16 +117,10 @@ public class MySubscribeActivity extends Activity {
         tvCxl = findViewById(R.id.tv_cxl_mysubscribe);
 
 
-
-
-
-
-
-
         connectGetData();
         connectGetData1();
 
-        Log.v(TAG,"시작"+members.get(0).getSubscribeOrderDate());
+        Log.v(TAG, "시작" + members.get(0).getSubscribeOrderDate());
         tvStartDate.setText(members.get(0).getSubscribeOrderDate());
 
         if (members.get(0).getProductId() == members.get(0).getProductNo()) {  //구독 여부
@@ -137,22 +129,21 @@ public class MySubscribeActivity extends Activity {
             tvState.setText("구독중이 아닙니다.");
         }
 
-        Log.v(TAG,"주소"+members.get(0).getSubscribeOrderAddr());
+        Log.v(TAG, "주소" + members.get(0).getSubscribeOrderAddr());
 
         tvAddrMyPage.setText(members.get(0).getSubscribeOrderAddr());
 
-        Log.v(TAG,"가격"+members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity());
+        Log.v(TAG, "가격" + members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity());
 
         tvPriceMyPage.setText(Integer.toString((members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity()) + 2500) + "원");
 
-        Log.v(TAG,"결제수단"+members.get(0).getSubscribeOrderPayment());
+        Log.v(TAG, "결제수단" + members.get(0).getSubscribeOrderPayment());
 
         tvPaymentMyPage.setText(members.get(0).getSubscribeOrderPayment());
-        Log.v(TAG,"담달"+members.get(0).getSubscribeOrderDate());
+        Log.v(TAG, "담달" + members.get(0).getSubscribeOrderDate());
         tvNextPayDay.setText(members.get(0).getSubscribeOrderDate());
         productPriceDialog = members.get(0).getProductPrice(); // 커스텀 다이얼로그
         productQuantity = members.get(0).getSubscribeOrderQuantity(); // 커스텀 다이얼로그
-
 
 
         //----------header 아이디----------//
@@ -191,8 +182,6 @@ public class MySubscribeActivity extends Activity {
         //------------------------------------------------------------------------------------//
 
 
-
-
     }//----------------onCreate
 
 
@@ -200,11 +189,14 @@ public class MySubscribeActivity extends Activity {
     View.OnClickListener changeAddrClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(MySubscribeActivity.this, MyPageSubscribeDeliveryModifyActivity.class);
+            intent.putExtra("deliveryAddr",members.get(0).getSubscribeOrderAddr());
+            intent.putExtra("deliveryAddrDetail",members.get(0).getSubscribeOrderAddrDetail());
+            startActivity(intent);
 
         }
     };
     //---------------------------------------------------------------------------------------------//
-
 
 
     //-------------------------------------구독 취소 클릭 이벤트---------------------------------------//
@@ -215,11 +207,6 @@ public class MySubscribeActivity extends Activity {
         }
     };
     //---------------------------------------------------------------------------------------------//
-
-
-
-
-
 
 
     //----------------------------------------결제상세정보 버튼 클릭 이벤트------------------------------------------//
@@ -375,7 +362,6 @@ public class MySubscribeActivity extends Activity {
         }
     }
     //----------------------------------------------------------------------------------//
-
 
 
 }//--------------------끝
