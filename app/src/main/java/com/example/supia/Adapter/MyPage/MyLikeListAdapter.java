@@ -20,10 +20,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.Activities.Product.CartInsertActivity;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
 import com.example.supia.Dto.Product.CartDto;
+import com.example.supia.Dto.Product.ProductDto;
 import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.MyViewHolder> {
@@ -32,7 +34,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
     private Context mContext = null;
     private int layout = 0;
     private ArrayList<MyLikeListDto> data = null;
-    private ArrayList<CartDto> cart;
+    private ArrayList<ProductDto> cart;
     private LayoutInflater inflater = null;
     String urlAddr1;
     String urlIp = ShareVar.urlIp;
@@ -71,8 +73,9 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
         Log.v("이프의 이프안임유", "" + data.get(position).getLikeCheck());
 
 
-        holder.productName.setText("" + data.get(position).getProductName());
-        holder.productPrice.setText(Integer.toString(data.get(position).getProductPrice()));
+        holder.productNameMypage.setText("" + data.get(position).getProductName());
+        holder.productPriceMypage.setText(Integer.toString(data.get(position).getProductPrice()));
+
         if (data.get(position).getLikeCheck().equals("1")) {
             holder.like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.like_click));
             Log.v("이프안임유", "" + data.get(position).getLikeCheck());
@@ -86,7 +89,9 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                 .override(120, 120)
                 .apply(new RequestOptions().circleCrop()).into(holder.productImagePath);//사진
 
-        holder.cart.setOnClickListener(new View.OnClickListener() {
+
+
+        holder.cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(mContext)
@@ -94,7 +99,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                         .setTitle("알림")
                         .setMessage("장바구니에 넣겠습니까?")
                         .setCancelable(false)
-                        .setPositiveButton("취소",null)
+                        .setPositiveButton("취소", null)
                         .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -103,24 +108,13 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                                  * 넘겨줘야될값 : 상품 번호,수량,가격
                                  */
 
-
+                                int intProductPrice = data.get(position).getProductPrice();
+                                String productPrice = String.valueOf(intProductPrice);
                                 int productNo = data.get(position).getProductNo();
-
-
                                 String productName = data.get(position).getProductName();
                                 String productImagePath = data.get(position).getProductImagePath();
 
-
-                                int intProductPrice = data.get(position).getProductPrice();
-                                String productPrice = String.valueOf(intProductPrice);
-
-                                Log.d("마이라이크리스트어뎁터1",String.valueOf(productNo));
-                                Log.d("마이라이크리스트어뎁터2",String.valueOf(productPrice));
-                                Log.d("마이라이크리스트어뎁터3",productName);
-                                Log.d("마이라이크리스트어뎁터4",productImagePath);
-
                                 Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
-
                                 intent.putExtra("check",2);
                                 intent.putExtra("productNo", productNo);
                                 intent.putExtra("productPrice", productPrice);
@@ -151,7 +145,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                         .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String url1 = "http://"+urlIp+":8080/text/supiaLikeListDelete.jsp?likeProductId="+data.get(position).getLikeProductId()+"&userId="+userId;
+                                String url1 = "http://" + urlIp + ":8080/text/supiaLikeListDelete.jsp?likeProductId=" + data.get(position).getLikeProductId() + "&userId=" + userId;
                                 urlAddr1 = url1;
                                 connectDeleteData();
                                 data.remove(holder.getAdapterPosition());
@@ -162,7 +156,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
 
 
                         })
-                        .setPositiveButton("취소",null)
+                        .setPositiveButton("취소", null)
                         .show();
 
 
@@ -199,11 +193,10 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-
         ImageView productImagePath;
-        TextView productName;
-        TextView productPrice;
-        ImageButton cart;
+        TextView productNameMypage;
+        TextView productPriceMypage;
+        ImageButton cartBtn;
         ImageButton like;
 
 
@@ -213,11 +206,12 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
 
 
             Log.v("여기 부홀더", "제발되라고 샹");
-            productName = v.findViewById(R.id.tv_productname_mylikelist);
-            productPrice = v.findViewById(R.id.tv_productprice_mylikelist);
+            productNameMypage = v.findViewById(R.id.tv_productname_mylikelist);
+            productPriceMypage = v.findViewById(R.id.tv_productprice_mylikelist);
             like = v.findViewById(R.id.ibm_like_mylikelist);
             productImagePath = v.findViewById(R.id.iv_productimg_mylikelist);
-            cart = v.findViewById(R.id.ibn_cart_mylikelist);
+            cartBtn = v.findViewById(R.id.ibn_cart_mylikelist);
+
 
 
             v.setOnClickListener(new View.OnClickListener() {
@@ -237,6 +231,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
         }
 
     }
+
     private void connectDeleteData() {
 
         try {
