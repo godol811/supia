@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 
@@ -26,9 +27,11 @@ public class mensUpdate extends Dialog {
     String pickDate;
     int year, month, dayOfMonth;
 
-    public mensUpdate(Context context){
+    ImageButton btnx;
+
+    public mensUpdate(Context context) {
         super(context);
-        this.context= context;
+        this.context = context;
     }
 
     @Override
@@ -38,12 +41,18 @@ public class mensUpdate extends Dialog {
 
         btnnext = findViewById(R.id.btn_next_mensupdate);
         datePicker = findViewById(R.id.maincalendar_mens_start_update);
+        btnx = findViewById(R.id.btn_cancle_datepicker_calendar1);
 
-
-
-
-        String date = Integer.toString(datePicker.getYear())+"-"+Integer.toString(datePicker.getMonth()+1)+"-"+Integer.toString(datePicker.getDayOfMonth());
+        String date = Integer.toString(datePicker.getYear()) + "-" + Integer.toString(datePicker.getMonth() + 1) + "-" + Integer.toString(datePicker.getDayOfMonth());
         Log.v(TAG, date);
+
+        btnx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,16 +63,18 @@ public class mensUpdate extends Dialog {
                 checkDay(year, month, dayOfMonth);
 
                 ShareVar.updatemensstartdate = pickDate;
-                Log.v(TAG, "dddd"+ShareVar.updatemensstartdate);
+                Log.v(TAG, "dddd" + ShareVar.updatemensstartdate);
 
 
                 mensUpdate2 dialog = new mensUpdate2(getContext());
                 dialog.show();
                 dismiss();
+
             }
         });
 
     }
+
     public String checkDay(int Year, int Month, int Day) {
         pickDate = Year + "-" + (Month + 1) + "" + "-" + Day;
         Log.v("TAG", "오오오" + pickDate);
