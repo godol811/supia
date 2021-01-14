@@ -30,7 +30,7 @@
 
             />
         <Button
-            android:id="@+id/btn_next_question2"
+            android:id="@+id/btn_complite_mensupdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="다음"
