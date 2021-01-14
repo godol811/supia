@@ -21,6 +21,7 @@ import com.example.supia.Adapter.UserAdapter;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

@@ -22,6 +22,7 @@ import com.example.supia.Adapter.Product.ProductAdapter;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -119,6 +120,8 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
+
+
                 Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
                 intent.putExtra("cartData",adapter.sendDate());
                 startActivity(intent);
@@ -132,7 +135,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
 
 
-
     }
 
 
@@ -141,6 +143,14 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
         super.onResume();
 //        connectGetData();
         registerForContextMenu(recyclerView);
+
+        //종찬 추가 PaymentShareVar 초기화 0114//
+        int zero = 0;
+        PaymentShareVar.list =null;
+        PaymentShareVar.totalQuantity = zero;
+        PaymentShareVar.totalPayment = zero;
+        PaymentShareVar.paymentProductName = null;
+        /////////////////////////////////////////
     }
 
 
