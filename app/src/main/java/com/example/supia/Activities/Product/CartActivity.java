@@ -11,7 +11,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -125,10 +127,23 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
-                intent.putExtra("cartData",adapter.sendDate());
-                startActivity(intent);
+                if(cart.size() != 0) {
+                    Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
+                    intent.putExtra("cartData",adapter.sendDate());
+                    startActivity(intent);
+                    Log.d(TAG,"들어오나");
 
+                } else {
+
+                    new AlertDialog.Builder(CartActivity.this)
+                            .setTitle("알림")
+                            .setMessage("장바구니에 선택된 상품이 없습니다!")
+                            .setPositiveButton("확인", null)
+                            .setCancelable(true)
+                            .show();
+
+                    paymentBtn.setClickable(false);
+                }
             }
         });
 

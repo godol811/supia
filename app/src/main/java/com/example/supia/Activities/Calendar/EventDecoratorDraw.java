@@ -27,11 +27,11 @@ public class EventDecoratorDraw implements DayViewDecorator {
     private final HashSet<CalendarDay> dates;
 
 
-
-    public EventDecoratorDraw(Collection<CalendarDay> dates) {
+    public EventDecoratorDraw(Activity context,Collection<CalendarDay> dates) {
         // drawable = ResourcesCompat.getDrawable((Resources.getSystem()) , R.drawable.calendar_select_background, null);
 
         this.dates = new HashSet<>(dates);
+        drawable = context.getDrawable(R.drawable.calendar_select_background);
 
 
     }
@@ -45,7 +45,7 @@ public class EventDecoratorDraw implements DayViewDecorator {
     @Override
     public void decorate(DayViewFacade view) {
 
-
+        view.setBackgroundDrawable(drawable);
 //        view.setSelectionDrawable(drawable);
 //    view.addSpan(drawable);
 //        view.setBackgroundDrawable();
