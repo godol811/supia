@@ -28,7 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 
-public class CartActivity extends Activity {
+public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
     private RecyclerView recyclerView = null;
 
@@ -59,11 +59,16 @@ public class CartActivity extends Activity {
 
 
         urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
+        urlAddr = urlAddr + "?cartUserId='" + ShareVar.sharvarUserId +"'";
+//        connectGetData();
+
 
         multipleCheck = findViewById(R.id.cb_allselect_cart);
 
         deleteBtn = findViewById(R.id.tv_delete_cart);
         payment = findViewById(R.id.tv_payment_cart);
+
+
 
 
         multipleCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -87,10 +92,9 @@ public class CartActivity extends Activity {
 
                 Log.d(TAG,"여기에 넣어줘야됨");
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
+                urlAddr = urlAddr + "?cartUserId='" + ShareVar.sharvarUserId +"'";
 
-
-
-//                adapter.sendDate();
+//              adapter.sendDate();
 
                 adapter.connectDeleteData();
                 connectGetData();
@@ -139,7 +143,12 @@ public class CartActivity extends Activity {
         registerForContextMenu(recyclerView);
     }
 
+
+
     private void connectGetData() {
+
+
+
         try {
 
             NetworkTaskCart networkTask = new NetworkTaskCart(CartActivity.this, urlAddr,"select");
@@ -147,7 +156,7 @@ public class CartActivity extends Activity {
             cart = (ArrayList<CartDto>) obj;
 
 
-            adapter = new CartAdapter(CartActivity.this, R.layout.listlayout_cart, cart);
+            adapter = new CartAdapter(CartActivity.this, R.layout.listlayout_cart, cart, this);
             recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
@@ -156,4 +165,12 @@ public class CartActivity extends Activity {
     }
 
 
+
+
+
+    @Override
+    public void changedPrice(int totalPrice) {
+
+        payment.setText("총" + totalPrice +"원 주문하기");
+    }
 }

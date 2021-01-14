@@ -2,7 +2,6 @@ package com.example.supia.Adapter.Product;
 
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
@@ -40,7 +39,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     public SparseBooleanArray array = new SparseBooleanArray();
 
 
-
+    private OnChangeCheckedPrice onChangeCheckedPrice;
 
     Context mContext = null;
     int layout = 0;
@@ -58,12 +57,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-//    ArrayList<CartDto> cart;
-
-
-    private RecyclerView recyclerView = null;
-
-
     int Counter;
 
     int result;
@@ -71,25 +64,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     String urlAddr = "http://"+ ShareVar.urlIp +":8080/pictures/";//Ip
 
 
-    private Object ArrayList;
-
-
-
-    //체크된 데이터
-    ArrayList<String> checkd;
-
-
     //전체 체크용
     List<CheckBox> intradayCheckboxsList = new ArrayList<>();
+    //수량 체크용
+    List<TextView> TextViewList = new ArrayList<TextView>();
 
 
 
 
-
-    public CartAdapter(Context mContext, int layout, ArrayList<CartDto> data) {
+    public CartAdapter(Context mContext, int layout, ArrayList<CartDto> data, OnChangeCheckedPrice onChangeCheckedPrice) {
         this.mContext = mContext;
         this.layout = layout;
         this.mDataset = data;
+        this.onChangeCheckedPrice =onChangeCheckedPrice;
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -130,6 +117,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
         // 체크박스 리스트에 전부 추가하기
         intradayCheckboxsList.add(holder.cbSelect);
+        TextViewList.add(holder.productQuantity);
+
+
 
 
         holder.onBind(mDataset.get(position));
@@ -205,7 +195,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
                 urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
+
+                updateTotalPrice();
                 connectGetData();
+                mDataset.get(position).setCartProductQuantity(String.valueOf(Integer.parseInt((String) TextViewList.get(position).getText())));
+                Log.d(TAG,"바뀐 수량 확인 :" + mDataset.get(position).getCartProductQuantity());
             }
         });
 
@@ -247,8 +241,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     urlAddr = "http://" + ShareVar.urlIp + ":8080/test/updateQuantity.jsp?";
                     urlAddr = urlAddr + "cartProductQuantity=" + cartProductQuantity + "&cartNo=" + cartNo;
 
+                    updateTotalPrice();
 
                     connectGetData();
+                    mDataset.get(position).setCartProductQuantity(String.valueOf(Integer.parseInt((String) TextViewList.get(position).getText())));
+                    Log.d(TAG,"바뀐 수량 확인 :" + mDataset.get(position).getCartProductQuantity());
                 }
 
             }
@@ -565,10 +562,29 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
     public ArrayList<CartDto> sendDate(){
-
         return sendCartData;
-
     }
+
+
+    public void updateTotalPrice(){
+        Log.v(TAG, "**viewholder 안 updateTotalPrice 들어옴 **");
+        int price_each;
+        int price_total = 0;
+
+
+        for (int i = 0; i < intradayCheckboxsList.size(); i++) {
+            if (intradayCheckboxsList.get(i).isChecked() == true) {
+                price_each = Integer.parseInt(TextViewList.get(i).getText().toString()) * Integer.parseInt(mDataset.get(i).getCartProductPrice());
+                price_total += price_each;
+            }
+        }
+        if (onChangeCheckedPrice != null){
+            Log.v(TAG, "**onChangeCheckedPrice != null **");
+            Log.v(TAG, "**전체 가격은 **" + price_total);
+            onChangeCheckedPrice.changedPrice(price_total);
+        }
+    }
+
 
 
 

@@ -37,7 +37,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-
 //켈린더
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 //카드뷰
@@ -67,7 +66,6 @@ dependencies {
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
     //
-
 //발리
     implementation 'com.android.volley:volley:1.1.1'
 

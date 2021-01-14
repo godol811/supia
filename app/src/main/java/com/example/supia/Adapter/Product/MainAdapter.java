@@ -8,8 +8,6 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,26 +19,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.Activities.Product.CartInsertActivity;
 import com.example.supia.Activities.Product.LikeActivity;
-import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Dto.Product.ProductDto;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder>{
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder>{
     final static String TAG = "어뎁터";
-
-
-
-    //
-    private OnChangeCheckedPrice onChangeCheckedPrice;
-
-
-
 
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
 
@@ -54,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     String likeCheck;
 
-    ProductAdapter adapter = null;
+    MainAdapter adapter = null;
 
     private RecyclerView recyclerView = null;
 
@@ -65,12 +52,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
 
-
-    public ProductAdapter(Context mContext, int layout, ArrayList<ProductDto> data) {
+    public MainAdapter(Context mContext, int layout, ArrayList<ProductDto> data) {
         this.mContext = mContext;
         this.layout = layout;
         this.mDataset = data;
-
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -80,7 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.listlayout, parent, false);
+        View view = inflater.inflate(R.layout.listlayout_main, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -100,6 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         holder.onBind(mDataset.get(position));
+
 
 
 
@@ -130,10 +116,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 .placeholder(R.drawable.ic_launcher_foreground)//이미지가 로딩하는 동안 보여질 이미
                 .override(120, 120)//이미지 크기
                 .apply(new RequestOptions()).into(holder.productImg);//사진
-
-
-
-
 
 
         holder.likeListbtn.setTag(position);
@@ -259,8 +241,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         public TextView productName;
         public TextView productPrice;
         public ImageView productImg;
-
-
 
 
         public ImageButton likeListbtn;//라이크리스트버튼

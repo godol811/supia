@@ -168,10 +168,13 @@ public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
 
         try {
 
+
+            Log.v(TAG, "s" + s);
+
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("cart"));
             Cart.clear();
-            Log.v(TAG, "s" + s);
+
 
 
             for (int i = 0; i < jsonArray.length(); i++) {

@@ -55,6 +55,8 @@ public class MainCalendar extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_maincalendar);//xml연결
 
+
+
         //----------bottom bar 아이디(애정추가)----------//
         ibtnMall = findViewById(R.id.mall_bottom_bar);
         ibtnHome = findViewById(R.id.home_bottom_bar);
@@ -156,6 +158,9 @@ public class MainCalendar extends FragmentActivity {
             e.printStackTrace();
         }
     }
+
+
+
     //애정존-----------------------------------
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
