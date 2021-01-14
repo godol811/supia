@@ -78,6 +78,9 @@ public class MySubscribeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_subscribe);
 
+        overridePendingTransition(R.anim.hold, R.anim.hold);
+
+
         //-----------For Recycler----------------//
         members = new ArrayList<MySubscribeDto>();
         subscriveRv = findViewById(R.id.rv_mysubscribe);

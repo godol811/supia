@@ -67,6 +67,7 @@ public class MyOrderActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order);
+        overridePendingTransition(R.anim.hold, R.anim.hold);
 
 
         //-----------For Recycler----------------//
