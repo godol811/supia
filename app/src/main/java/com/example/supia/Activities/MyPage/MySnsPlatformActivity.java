@@ -100,12 +100,13 @@ public class MySnsPlatformActivity extends Activity {
                     .setTitle("알림")
                     .setIcon(R.mipmap.supia)
                     .setMessage("\n  확인을 누르시면 로그아웃이되며 \n 구글연동 로그인페이지로 가게됩니다.")
-                    .setPositiveButton("취소",null)
+                    .setPositiveButton("취소", null)
                     .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             signIn();
                         }
+
                     }).show();
 
         }
@@ -121,7 +122,7 @@ public class MySnsPlatformActivity extends Activity {
                     .setTitle("알림")
                     .setIcon(R.mipmap.supia)
                     .setMessage("\n  확인을 누르시면 로그아웃이되며 \n 카카오연동 로그인페이지로 가게됩니다.")
-                    .setPositiveButton("취소",null)
+                    .setPositiveButton("취소", null)
                     .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -135,7 +136,6 @@ public class MySnsPlatformActivity extends Activity {
 
                         }
                     }).show();
-
 
 
         }

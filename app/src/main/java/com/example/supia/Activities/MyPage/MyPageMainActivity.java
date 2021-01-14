@@ -210,7 +210,6 @@ public class MyPageMainActivity extends Activity {
         @Override
         public void onClick(View v) {
             Intent infointent = new Intent(MyPageMainActivity.this, MyInfoActivity.class);
-            infointent.putExtra("userId", userinfo.get(0).getUserId());
             infointent.putExtra("userName", userinfo.get(0).getUserName());
             infointent.putExtra("userTel", userinfo.get(0).getUserTel());
             infointent.putExtra("userPw", userinfo.get(0).getUserPw());
