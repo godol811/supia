@@ -81,8 +81,7 @@ public class WriteQnAActivity extends AppCompatActivity {
     View.OnClickListener cancelClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(WriteQnAActivity.this, CategoryActivity.class);
-            startActivity(intent);
+            onBackPressed();
 
         }
     };

@@ -113,7 +113,7 @@ public class MainCalendar extends FragmentActivity {
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         //---------------------//
 
-        Dday = "23";
+        Dday = "1";
         tvDday.setText("월경   " + Dday + "   일전");
 
         //materialCalendarView_main.setBackgroundResource(R.drawable.calendar_background_total);
