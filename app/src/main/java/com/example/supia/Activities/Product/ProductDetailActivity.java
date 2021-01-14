@@ -115,7 +115,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 // set the peek height
-        bottomSheetBehavior.setPeekHeight(180);
+        bottomSheetBehavior.setPeekHeight(220); //여기 바꾸면 구매하기 버튼 높이 바뀜
 
 // set hideable or not
         bottomSheetBehavior.setHideable(false);

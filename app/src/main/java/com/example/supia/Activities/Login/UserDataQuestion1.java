@@ -48,6 +48,7 @@ public class UserDataQuestion1 extends Activity {
 
 
 
+
         tvSkip = findViewById(R.id.tv_skip_question1);
         tvSkip.setOnClickListener(new View.OnClickListener() {
             @Override
