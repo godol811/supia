@@ -107,9 +107,10 @@ public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
                     Log.d(TAG,"select");
                 } else if (where.equals("like")) {//라이크로 들어오면 파싱하지 않음
 
-                } else {
-                    result = parserAction(stringBuffer.toString());
                 }
+//                else {
+//                    result = parserAction(stringBuffer.toString());
+//                }
                 ///////////////////////////////////////////////////////////////////////////////////////
 
             }
