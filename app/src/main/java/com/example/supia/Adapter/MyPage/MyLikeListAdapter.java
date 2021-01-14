@@ -107,18 +107,18 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                                  * 넘겨줘야될값 : 상품 번호,수량,가격
                                  */
 
-
-                                int productNo = cart.get(position).getProductNo();
-                                String productPrice = cart.get(position).getProductPrice();
-                                String productName = cart.get(position).getProductName();
-                                String ProductImagePath = cart.get(position).getProductImagePath();
+                                int intProductPrice = data.get(position).getProductPrice();
+                                String productPrice = String.valueOf(intProductPrice);
+                                int productNo = data.get(position).getProductNo();
+                                String productName = data.get(position).getProductName();
+                                String productImagePath = data.get(position).getProductImagePath();
 
                                 Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
-
+                                intent.putExtra("check",2);
                                 intent.putExtra("productNo", productNo);
                                 intent.putExtra("productPrice", productPrice);
                                 intent.putExtra("productName", productName);
-                                intent.putExtra("productImagePath", ProductImagePath);
+                                intent.putExtra("productImagePath", productImagePath);
                                 v.getContext().startActivity(intent);
 
                             }
