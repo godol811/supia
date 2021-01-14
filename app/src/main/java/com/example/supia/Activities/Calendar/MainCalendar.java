@@ -141,7 +141,7 @@ public class MainCalendar extends FragmentActivity {
         btnedit.setOnClickListener(new View.OnClickListener() {//월경일 편집- datepicker
             @Override
             public void onClick(View v) {
-                datePicker dialog = new datePicker(MainCalendar.this);
+                mensUpdate dialog = new mensUpdate(MainCalendar.this);
                 dialog.show();
             }
         });
