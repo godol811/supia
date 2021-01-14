@@ -66,19 +66,15 @@ public class datePicker extends Dialog {
 
         datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
             checkDay(year, monthOfYear, dayOfMonth);
-            menstruationStart = checkDay(year, month, dayOfMonth);
-            menstruationEnd = checkDay(year, month, dayOfMonth);
+            menstruationStart = checkDay(year, monthOfYear, dayOfMonth);
+            menstruationEnd = checkDay(year, monthOfYear, dayOfMonth);
             Log.v(TAG, "ㅇㅇㅇ"+menstruationStart+menstruationEnd);
         });//날짜 클릭시 데이터값 변경
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sqlDB = myDBHelper.getWritableDatabase();
-                sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
-                Log.v(TAG, "입력날짜:"+menstruationStart+menstruationEnd);
-                sqlDB.close();
-                Toast.makeText(context, "입력되었습니다.", Toast.LENGTH_SHORT).show();
+
             }
 
         });
@@ -94,6 +90,14 @@ public class datePicker extends Dialog {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Log.d(TAG, "Delete Data " + name);
+//
+//                String nameArr[] = {name};
+//
+//                // 리턴값: 삭제한 수
+//                int n = sqlDB.delete(tableName, "NAME = supiamensterm", nameArr);
+//
+//                Log.d(TAG, "n: " + n);
 
             }
         });
@@ -111,26 +115,6 @@ public class datePicker extends Dialog {
         Log.v("TAG", "오오오" + pickDate);
         return pickDate;
     }
-
-
-    public class myDBHelper extends SQLiteOpenHelper {
-        public myDBHelper(Context context) {
-            super(context, "supia", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE supiamensterm (mStart DATE(20), mEnd DATE(20));");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS supiamensterm");
-            onCreate(db);
-
-        }
-    }
-
 
 }
 
