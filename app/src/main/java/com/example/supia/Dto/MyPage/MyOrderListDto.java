@@ -13,6 +13,19 @@ public class MyOrderListDto {
     private int orderNo;
 
 
+    public MyOrderListDto(int orderQuantity, int productId, int productNo, String productName, String orderPayment, String userId, String productImagePath, int orderNo) {
+        this.orderQuantity = orderQuantity;
+        this.productId = productId;
+        this.productNo = productNo;
+        this.productName = productName;
+        this.orderPayment = orderPayment;
+        this.userId = userId;
+        this.productImagePath = productImagePath;
+        this.orderNo = orderNo;
+    }
+
+
+
     public MyOrderListDto(int orderQuantity, int productPrice, int productId, int productNo, String productName, String orderPayment, String userId, String productImagePath, int orderNo) {
         this.orderQuantity = orderQuantity;
         this.productPrice = productPrice;

@@ -12,18 +12,45 @@ public class MySubscribeDto {
     private String productName;
     private String productImagePath;
     private int productPrice;
+    private int subscribeProductPrice;
+    private String subscribeProductName;
 
 
-    public MySubscribeDto(String subscribeOrderDate, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, int productPrice) {
-        this.subscribeOrderDate = subscribeOrderDate;
-        this.subscribeOrderAddr = subscribeOrderAddr;
-        this.subscribeOrderPayment = subscribeOrderPayment;
-        this.userId = userId;
-        this.productId = productId;
+    public MySubscribeDto(String subscribeProductName,int subscribeProductPrice,int subscribeOrderQuantity, String productImagePath,int productNo, int productId) {
+        this.subscribeProductName = subscribeProductName;
+        this.subscribeProductPrice = subscribeProductPrice;
+        this.subscribeOrderQuantity = subscribeOrderQuantity;
+        this.productImagePath = productImagePath;
         this.productNo = productNo;
-        this.productPrice = productPrice;
+        this.productId = productId;
     }
 
+
+
+
+    public int getSubscribeProductPrice() {
+        return subscribeProductPrice;
+    }
+
+    public void setSubscribeProductPrice() {
+        this.subscribeProductPrice = subscribeProductPrice;
+    }
+
+    public String getSubscribeProductName() {
+        return subscribeProductName;
+    }
+
+    public void setSubscribeProductName(String subscribeProductName) {
+        this.subscribeProductName = subscribeProductName;
+    }
+
+
+
+
+    public MySubscribeDto(String subscribeOrderPayment, String userId) {
+        this.subscribeOrderPayment = subscribeOrderPayment;
+        this.userId = userId;
+    }
 
     public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
         this.subscribeOrderDate = subscribeOrderDate;

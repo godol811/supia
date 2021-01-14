@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +22,7 @@ import com.example.supia.Adapter.Product.ProductAdapter;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
+import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -104,19 +104,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
                 adapter.connectDeleteData();
                 connectGetData();
 
-//                if(cart.size() != 0) {
-//                    adapter.connectDeleteData();
-//                    connectGetData();
-//                    payment.setText("0원");
-////                    productDeliveryTotalPrice.setText("0원");
-////                    allProductTotalPrice.setText("0원");
-//
-////                    orderTotalNext.setText("구매하기");
-////                    multipleCheck.setChecked(false);
-//                } else {
-//                    deleteBtn.setClickable(false);
-//                    paymentBtn.setClickable(false);
-//                }
 
 //                for (int i = 0; i < adapter.sendDate().size(); i++){
 //                    Log.d(TAG, "액티비티에서 메소드 사용 : " + String.valueOf(adapter.sendDate().get(i).getCartProductQuantity()));
@@ -151,7 +138,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
 
 
-
     }
 
 
@@ -160,6 +146,14 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
         super.onResume();
 //        connectGetData();
         registerForContextMenu(recyclerView);
+
+        //종찬 추가 PaymentShareVar 초기화 0114//
+        int zero = 0;
+        PaymentShareVar.list =null;
+        PaymentShareVar.totalQuantity = zero;
+        PaymentShareVar.totalPayment = zero;
+        PaymentShareVar.paymentProductName = null;
+        /////////////////////////////////////////
     }
 
 

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="18"
+    tools:context=".Activities.MyPage.MyPageUpdatePaymentActivity">
+
+
+    <include layout="@layout/mypage_header" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:text="결제 수단 변경"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+    <RadioGroup
+        android:id="@+id/rg_payment_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rb_bank_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="계좌이체/무통장입금" />
+
+        <LinearLayout
+            android:id="@+id/ll_bank_Layout_payment_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:visibility="gone"
+            android:background="@drawable/mypage_linear_layout_round_dialog"
+            android:elevation="4dp"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/sp_bank_spinner_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="15dp"
+                android:entries="@array/bank" />
+
+            <TextView
+                android:id="@+id/tv_checkbank_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="right"
+                android:text="선택완료"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rb_card_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="신용/체크카드" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_card_Layout_payment_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/mypage_linear_layout_round_dialog"
+            android:elevation="4dp"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/sp_card_spinner_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="15dp"
+                android:entries="@array/card" />
+
+            <TextView
+                android:id="@+id/tv_checkcard_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="right"
+                android:text="선택완료"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <RadioButton
+            android:id="@+id/rb_phone_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="휴대폰" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_phone_Layout_payment_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/mypage_linear_layout_round_dialog"
+        android:elevation="4dp"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/sp_phone_spinner_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:entries="@array/phone" />
+
+        <TextView
+            android:id="@+id/tv_checkphone_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="right"
+            android:text="선택완료"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+
+    <include layout="@layout/bottom_bar" />
+
+</LinearLayout>

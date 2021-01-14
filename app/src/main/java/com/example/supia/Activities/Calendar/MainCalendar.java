@@ -1,6 +1,7 @@
 package com.example.supia.Activities.Calendar;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 
 import android.graphics.drawable.Drawable;
@@ -10,12 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.supia.Activities.MyPage.MyCartListActivity;
 import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -39,6 +42,7 @@ public class MainCalendar extends FragmentActivity {
     public String Dday;
     public String CurrentStartDay,LastFinishDay;
 
+    myDBHelper databaseHelper;
 
     private HashSet<CalendarDay> dates;
 
@@ -74,13 +78,14 @@ public class MainCalendar extends FragmentActivity {
         gotosub = findViewById(R.id.btn_maincalendar_gotosub);
         materialCalendarView_main = findViewById(R.id.materialcalendar_maincalendar);
 
-        connectGetData();
+        connectGetData();//mySQL 연결
 
         strcalendarStratDate = ShareVar.calendarsharvarStartdate;
         strcalendarFinishDate = ShareVar.calendarsharvarFinishdate;
         strcalendarDeliveryDate = ShareVar.calendarsharvarDeliverydate;
         strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
         Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
+
 
         String [] strarray = strcalendarStratDate.split("-");
         String [] strarray2 = strcalendarFinishDate.split("-");
@@ -134,7 +139,7 @@ public class MainCalendar extends FragmentActivity {
         btnedit.setOnClickListener(new View.OnClickListener() {//월경일 편집- datepicker
             @Override
             public void onClick(View v) {
-                MensEdit dialog = new MensEdit(MainCalendar.this);
+                datePicker dialog = new datePicker(MainCalendar.this);
                 dialog.show();
             }
         });
@@ -153,14 +158,17 @@ public class MainCalendar extends FragmentActivity {
             CalendarNetworkTask networkTask = new CalendarNetworkTask(MainCalendar.this, urlAddr, "select");
             Object obj = networkTask.execute().get();
             dates = (HashSet<CalendarDay>) obj;
-
+            strcalendarStratDate = dates.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-
+//    public void displayUsers() {
+//        Cursor cursor = databaseHelper.getAllDates(); //here's where the error keeps on happening
+//        if(cursor.getCount() == 0) {
+//            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+//        }
+//    }
     //애정존-----------------------------------
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
