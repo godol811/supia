@@ -15,9 +15,31 @@ public class MySubscribeDto {
     private int productPrice;
     private int subscribeProductPrice;
     private String subscribeProductName;
+    private String productBrand;
+    private String productInfo;
 
 
-    public MySubscribeDto(String subscribeProductName,int subscribeProductPrice,int subscribeOrderQuantity, String productImagePath,int productNo, int productId) {
+
+
+
+
+
+
+
+    public MySubscribeDto(String subscribeProductName,int subscribeProductPrice,int subscribeOrderQuantity, String productImagePath, int productNo,int productId,  String productBrand,String productInfo, int productPrice,String productName) {
+        this.subscribeProductName = subscribeProductName;
+        this.subscribeProductPrice = subscribeProductPrice;
+        this.subscribeOrderQuantity = subscribeOrderQuantity;
+        this.productImagePath = productImagePath;
+        this.productNo = productNo;
+        this.productId = productId;
+        this.productBrand = productBrand;
+        this.productInfo = productInfo;
+        this.productPrice = productPrice;
+        this.productName = productName;
+    }
+
+    public MySubscribeDto(String subscribeProductName, int subscribeProductPrice, int subscribeOrderQuantity, String productImagePath, int productNo, int productId) {
         this.subscribeProductName = subscribeProductName;
         this.subscribeProductPrice = subscribeProductPrice;
         this.subscribeOrderQuantity = subscribeOrderQuantity;
@@ -27,11 +49,27 @@ public class MySubscribeDto {
     }
 
 
+    public void setSubscribeProductPrice(int subscribeProductPrice) {
+        this.subscribeProductPrice = subscribeProductPrice;
+    }
 
+    public String getProductBrand() {
+        return productBrand;
+    }
 
+    public void setProductBrand(String productBrand) {
+        this.productBrand = productBrand;
+    }
 
+    public String getProductInfo() {
+        return productInfo;
+    }
 
-    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr,String subscribeOrderAddrDetail, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
+    }
+
+    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderAddrDetail, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
         this.subscribeOrderDate = subscribeOrderDate;
         this.subscribeOrderQuantity = subscribeOrderQuantity;
         this.subscribeOrderAddr = subscribeOrderAddr;

@@ -130,7 +130,7 @@ public class MyLikeListActivity extends Activity {
                 intent.putExtra("urlIp",ShareVar.urlIp);
                 intent.putExtra("productNo", like.get(position).getProductNo());
                 intent.putExtra("productName", like.get(position).getProductName());
-                intent.putExtra("productPrice", like.get(position).getProductPrice());
+                intent.putExtra("productPrice", Integer.toString(like.get(position).getProductPrice()));
                 intent.putExtra("productBrand", like.get(position).getProductBrand());
                 intent.putExtra("productImagePath", like.get(position).getProductImagePath());
                 intent.putExtra("productInfo", like.get(position).getProductInfo());
