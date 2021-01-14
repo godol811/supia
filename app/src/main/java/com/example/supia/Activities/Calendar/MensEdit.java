@@ -27,7 +27,6 @@ public class MensEdit extends Dialog {
     TextView tvToday;
     Button btnInsert, btnUpdate, btnDelete;
     ImageButton btnCancle;
-    //String menstruationStart, menstruationEnd;
     String menstruationStart, menstruationEnd;
     public String CurrentStartDay, LastFinishDay;
     int year, month, dayOfMonth;
@@ -73,7 +72,7 @@ public class MensEdit extends Dialog {
         menstruationEnd = checkDay(year, month, dayOfMonth);
         Log.v(TAG, "오오오" + menstruationEnd);
 
-//        myDBHelper = new myDBHelper(materialCalendarView.getContext());
+        myDBHelper = new myDBHelper(materialCalendarView.getContext());
 
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override

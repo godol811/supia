@@ -51,7 +51,6 @@ public class MainCalendar extends FragmentActivity {
             intdelmonth, intstamonth, intfinmonth, intbirmonth,
             intdelday, intstaday, intfinday, intbirday;
 
-
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
 
     @Override
@@ -59,14 +58,11 @@ public class MainCalendar extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_maincalendar);//xml연결
 
-
-
         //----------bottom bar 아이디(애정추가)----------//
         ibtnMall = findViewById(R.id.mall_bottom_bar);
         ibtnHome = findViewById(R.id.home_bottom_bar);
         ibtnMypage = findViewById(R.id.mypage_bottom_bar);
         //-------------------------------------------//
-
 
         userId = ShareVar.sharvarUserId;//사용자 아이디를 받아옴
         urlIp = ShareVar.urlIp;//아이피 받아옴
@@ -85,7 +81,6 @@ public class MainCalendar extends FragmentActivity {
         strcalendarDeliveryDate = ShareVar.calendarsharvarDeliverydate;
         strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
         Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
-
 
         String [] strarray = strcalendarStratDate.split("-");
         String [] strarray2 = strcalendarFinishDate.split("-");
@@ -144,13 +139,11 @@ public class MainCalendar extends FragmentActivity {
                 dialog.show();
             }
         });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     private void connectGetData() {
