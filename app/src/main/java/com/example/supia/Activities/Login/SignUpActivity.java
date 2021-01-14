@@ -91,6 +91,50 @@ public class SignUpActivity extends Activity {
 
             }
         });
+        //---------------------------------------------------전화번호 입력--------------------------------------------//
+
+        userinfoTel.addTextChangedListener(new TextWatcher() {//자동으로 "-" 생성해서 카드번호에 붙여주기
+            private int beforeLenght = 0;
+            private int afterLenght = 0;
+
+            //입력 혹은 삭제 전의 길이와 지금 길이를 비교하기 위해 beforeTextChanged에 저장
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                beforeLenght = s.length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //아무글자도 없는데 지우려고 하면 로그띄우기 에러방지
+                if (s.length() <= 0) {
+                    Log.d("addTextChangedListener", "onTextChanged: Intput text is wrong (Type : Length)");
+                    return;
+                }
+                //특수문자 입력 방지
+                char inputChar = s.charAt(s.length() - 1);
+                if (inputChar != '-' && (inputChar < '0' || inputChar > '9')) {
+                    userinfoTel.getText().delete(s.length() - 1, s.length());
+                    Log.d("addTextChangedListener", "onTextChanged: Intput text is wrong (Type : Number)");
+                    return;
+                }
+                afterLenght = s.length();
+                String tel = String.valueOf(userinfoTel.getText());
+                tel.substring(0, 1);
+                if (beforeLenght < afterLenght) {// 타자를 입력 중이면
+                    if (afterLenght == 3) { //subSequence로 지정된 문자열을 반환해서 "-"폰을 붙여주고 substring
+                        userinfoTel.setText(s.toString().subSequence(0, 3) + "-" + s.toString().substring(3, s.length()));
+                    } else if (afterLenght == 8) {
+                        userinfoTel.setText(s.toString().subSequence(0, 8) + "-" + s.toString().substring(8, s.length()));
+                    }
+                }
+                userinfoTel.setSelection(userinfoTel.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // 생략
+            }
+        });
 
 
 //------------------------------------------------눈 보이기------------------------------------------//
@@ -119,7 +163,7 @@ public class SignUpActivity extends Activity {
                 startActivityForResult(i, SEARCH_ADDRESS_ACTIVITY);
             }
         });
-    }
+    }//onCreate
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

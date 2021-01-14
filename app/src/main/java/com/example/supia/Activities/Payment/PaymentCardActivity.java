@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
+import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
 import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
@@ -58,9 +59,8 @@ public class PaymentCardActivity extends Activity {
 
 
         Intent intent = getIntent();
-        strItem = PaymentShareVar.payMethodItem;
-
         strWay = intent.getStringExtra("way");
+        strItem = PaymentShareVar.payMethodItem;
 
 
         btnNext = findViewById(R.id.btn_paymentNext_Cardpayment);
@@ -123,11 +123,9 @@ public class PaymentCardActivity extends Activity {
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-
             switch (v.getId()) {
                 case R.id.btn_paymentNext_Cardpayment:
-
+                    Log.d("배열확인", "눌렀냐?" + strWay);
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(new Date());
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -137,80 +135,82 @@ public class PaymentCardActivity extends Activity {
                         urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";//일반 결제 or 장바구니 결제
                     } else {
                         urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserRegularOrderInsert.jsp?";//정기결제
+                    }
+                    Log.d("배열확인", "눌렀냐?" + cardNumber.getText().toString().trim().length());
+                    if (cardNumber.getText().toString().trim().length() == 19) {
+                        new AlertDialog.Builder(PaymentCardActivity.this)
+                                .setTitle("구매")
+                                .setMessage("구매 하시겠습니까?")
+                                .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                                .setPositiveButton("아니오", null)
+                                .setNegativeButton("예", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (strWay.equals("basket")) {
+                                            listPayment = PaymentShareVar.list;
+                                            for (int i = 0; i < listPayment.size(); i++) {
+                                                String productId = String.valueOf(listPayment.get(i).getCartProductId());
+                                                String productName = String.valueOf(listPayment.get(i).getCartProductName());
+                                                String productQuantity = String.valueOf(listPayment.get(i).getCartProductQuantity());
+                                                String productPrice = String.valueOf(listPayment.get(i).getCartProductPrice());
+                                                int price = Integer.parseInt(String.valueOf(listPayment.get(i).getCartProductPrice()));
+                                                int quantity = Integer.parseInt(String.valueOf(listPayment.get(i).getCartProductQuantity()));
 
-
-                        if (cardNumber.getText().toString().trim().length() == 19) {
-                            new AlertDialog.Builder(PaymentCardActivity.this)
-                                    .setTitle("구매")
-                                    .setMessage("구매 하시겠습니까?")
-                                    .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
-                                    .setPositiveButton("아니오", null)
-                                    .setNegativeButton("예", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            if (strWay.equals("basket")) {
-                                                listPayment = PaymentShareVar.list;
-                                                for (int i = 0; i < listPayment.size(); i++) {
-                                                    String productId = String.valueOf(listPayment.get(i).getCartProductId());
-                                                    String productName = String.valueOf(listPayment.get(i).getCartProductName());
-                                                    String productQuantity = String.valueOf(listPayment.get(i).getCartProductQuantity());
-                                                    String productPrice = String.valueOf(listPayment.get(i).getCartProductPrice());
-                                                    int price = Integer.parseInt(String.valueOf(listPayment.get(i).getCartProductPrice()));
-                                                    int quantity = Integer.parseInt(String.valueOf(listPayment.get(i).getCartProductQuantity()));
-                                                    Log.d("배열확인", productId + "와" + productName);
-                                                    urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + productQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
-                                                            + "&orderPayment=" + "은행" + "&orderTotalPrice=" + (price * quantity) + "&userId=" + ShareVar.sharvarUserId + "&productId="
-                                                            + productId + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + productName + "&subscribeProductPrice=" + productPrice;
-                                                    connectInsertData();
-                                                    urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";
-                                                }
-
-
-                                            } else {
-                                                urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + PaymentShareVar.paymentProductQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
-                                                        + "&orderPayment=" + "은행" + "&orderTotalPrice=" + PaymentShareVar.totalPayment + "&userId=" + ShareVar.sharvarUserId + "&productId="
-                                                        + PaymentShareVar.paymentProductNo + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + PaymentShareVar.paymentProductName + "&subscribeProductPrice=" + PaymentShareVar.paymentProductPrice;
+                                                urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + productQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
+                                                        + "&orderPayment=" + "은행" + "&orderTotalPrice=" + (price * quantity) + "&userId=" + ShareVar.sharvarUserId + "&productId="
+                                                        + productId + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + productName + "&subscribeProductPrice=" + productPrice;
                                                 connectInsertData();
-
-
+                                                PaymentShareVar.paymentProductNo = listPayment.get(i).getCartProductId();
+                                                connectGetDataCateDelete();
+                                                urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";
                                             }
 
 
-                                            new AlertDialog.Builder(PaymentCardActivity.this)
-                                                    .setTitle("완료")
-                                                    .setMessage("구매가 완료 되었습니다.")
-                                                    .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
-                                                    .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            Intent intent = new Intent(PaymentCardActivity.this, MyOrderActivity.class);//
-                                                            startActivity(intent);
-                                                        }
-                                                    })
-                                                    .show();
+                                        } else {
+                                            urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + PaymentShareVar.paymentProductQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
+                                                    + "&orderPayment=" + "은행" + "&orderTotalPrice=" + PaymentShareVar.totalPayment + "&userId=" + ShareVar.sharvarUserId + "&productId="
+                                                    + PaymentShareVar.paymentProductNo + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + PaymentShareVar.paymentProductName + "&subscribeProductPrice=" + PaymentShareVar.paymentProductPrice;
+                                            connectInsertData();
+
+
                                         }
-                                    }).show();
 
 
-                            Log.d("수정및삭", "들어가나?");
-                            break;
-                        } else if (cardNumber.getText().toString().length() == 0) {
-                            new AlertDialog.Builder(PaymentCardActivity.this)
-                                    .setTitle("카드번호 오류")
-                                    .setMessage("카드번호를 입력해주세요.")
-                                    .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
-                                    .setPositiveButton("닫기", null)
-                                    .show();
-                        } else {
-                            new AlertDialog.Builder(PaymentCardActivity.this)
-                                    .setTitle("카드번호 오류")
-                                    .setMessage("유효한 카드번호를 입력해주세요.")
-                                    .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
-                                    .setPositiveButton("닫기", null)
-                                    .show();
+                                        new AlertDialog.Builder(PaymentCardActivity.this)
+                                                .setTitle("완료")
+                                                .setMessage("구매가 완료 되었습니다.")
+                                                .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                                                .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        Intent intent = new Intent(PaymentCardActivity.this, MyOrderActivity.class);//
+                                                        startActivity(intent);
+                                                    }
+                                                })
+                                                .show();
+                                    }
+                                }).show();
 
-                        }
+
+                        Log.d("수정및삭", "들어가나?");
+                        break;
+                    } else if (cardNumber.getText().toString().length() == 0) {
+                        new AlertDialog.Builder(PaymentCardActivity.this)
+                                .setTitle("카드번호 오류")
+                                .setMessage("카드번호를 입력해주세요.")
+                                .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                                .setPositiveButton("닫기", null)
+                                .show();
+                    } else {
+                        new AlertDialog.Builder(PaymentCardActivity.this)
+                                .setTitle("카드번호 오류")
+                                .setMessage("유효한 카드번호를 입력해주세요.")
+                                .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                                .setPositiveButton("닫기", null)
+                                .show();
+
                     }
+
             }
         }
 
@@ -244,6 +244,25 @@ public class PaymentCardActivity extends Activity {
 
     //---------------------------------------------------------------------------------------------//
 
+    /**
+     * 인우 추가
+     * 결제수단마다 결제될떄 삭제해주기
+     */
+    private void connectGetDataCateDelete() {
+
+        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecartpayment.jsp";
+        urlAddr = urlAddr + "?cartProductId=" + PaymentShareVar.paymentProductNo;
+
+        try {
+
+            NetworkTaskCart networkTask = new NetworkTaskCart(PaymentCardActivity.this, urlAddr, "like");
+            networkTask.execute().get();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
