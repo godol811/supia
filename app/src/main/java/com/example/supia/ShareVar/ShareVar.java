@@ -2,7 +2,7 @@ package com.example.supia.ShareVar;
 
 public class ShareVar {
 
-    public static String urlIp = "192.168.35.147";//핫팬츠
+//    public static String urlIp = "192.168.35.147";//핫팬츠
 //    public static String urlIp = "222.106.89.206";//불량감자
 //    public static String urlIp = "172.30.1.47";//고집불통
 //    public static String urlIp = "192.168.0.100";//김보츄
