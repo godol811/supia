@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
+import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
 import com.example.supia.ShareVar.PaymentShareVar;
 import com.example.supia.ShareVar.ShareVar;
@@ -57,6 +58,7 @@ public class PaymentBankActivity extends Activity {
         strItem = PaymentShareVar.payMethodItem;
 
         strWay = intent.getStringExtra("way");
+        bankNumber = findViewById(R.id.bankNumberEditText);
 
         btnNext = findViewById(R.id.btn_paymentNext_Bankpayment);
         btnNext.setOnClickListener(mOnclickListener);
@@ -87,7 +89,7 @@ public class PaymentBankActivity extends Activity {
                     } else {
                         urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserRegularOrderInsert.jsp?";//정기결제
                     }
-                    if (bankItem.getText().toString().trim().length() >= 10) {//임의로 10자리만큼 큰걸로
+                    if (bankNumber.getText().toString().trim().length() <= 14) {//임의로 10자리만큼 큰걸로
                         new AlertDialog.Builder(PaymentBankActivity.this)
                                 .setTitle("구매")
                                 .setMessage("구매 확정 하시겠습니까?")
@@ -110,6 +112,8 @@ public class PaymentBankActivity extends Activity {
                                                         + "&orderPayment=" + "은행" + "&orderTotalPrice=" + (price * quantity) + "&userId=" + ShareVar.sharvarUserId + "&productId="
                                                         + productId + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + productName + "&subscribeProductPrice=" + productPrice;
                                                 connectInsertData();
+                                                PaymentShareVar.paymentProductNo = listPayment.get(i).getCartProductId();
+                                                connectGetDataCateDelete();
                                                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";
                                             }
 
@@ -185,5 +189,27 @@ public class PaymentBankActivity extends Activity {
     }
 
     //---------------------------------------------------------------------------------------------//
+    /**
+     * 인우 추가
+     * 결제수단마다 결제될떄 삭제해주기
+     */
+    private void connectGetDataCateDelete() {
+
+        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecartpayment.jsp";
+        urlAddr = urlAddr + "?cartProductId=" + PaymentShareVar.paymentProductNo;
+
+        try {
+
+            NetworkTaskCart networkTask = new NetworkTaskCart(PaymentBankActivity.this, urlAddr,"like");
+            networkTask.execute().get();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

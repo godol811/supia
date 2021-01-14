@@ -119,7 +119,7 @@
         android:layout_weight="1"
         android:hint="핸드폰 번호"
         android:inputType="phone"
-        android:maxLength="20"
+        android:maxLength="13"
         android:maxLines="1"
         android:textColor="#000000" />
 

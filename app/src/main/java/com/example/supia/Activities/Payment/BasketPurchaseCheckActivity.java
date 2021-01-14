@@ -99,7 +99,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                 totalQuantity += quantity;
                 PaymentShareVar.paymentProductNo = list.get(i).getCartProductId();
                 Log.d(TAG,"내가 필요한것은 주문에 있는 상품 넘버다 " + PaymentShareVar.paymentProductNo);
-                connectGetDataCateDelete();
+
             }
 
             PaymentShareVar.totalPayment = totalPrice+2500;
@@ -173,32 +173,18 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                     PaymentShareVar.deliveryName = tvDeliveryName.getText().toString();
                     intentIndex();//0일경우엔 카드 1일경우엔 은행 2일경우엔 폰
                     if (intentIndex == 0) {
-
-
-
                         Intent intent2 = new Intent(BasketPurchaseCheckActivity.this, PaymentCardActivity.class);
                         intent2.putExtra("way", "basket");
-
                         startActivity(intent2);
                         break;
                     } else if (intentIndex == 1) {
-
-
-
                         Intent intent3 = new Intent(BasketPurchaseCheckActivity.this, PaymentBankActivity.class);
                         intent3.putExtra("way", "basket");
-
                         startActivity(intent3);
                         break;
                     } else if (intentIndex == 2) {
-
-
-
                         Intent intent4 = new Intent(BasketPurchaseCheckActivity.this, PaymentPhoneActivity.class);
                         intent4.putExtra("way", "basket");
-
-
-
                         startActivity(intent4);
                         break;
                     } else {
@@ -272,26 +258,7 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 인우 추가
-     * 결제수단마다 결제될떄 삭제해주기
-     */
-    private void connectGetDataCateDelete() {
 
-        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/deletecartpayment.jsp";
-        urlAddr = urlAddr + "?cartProductId=" + PaymentShareVar.paymentProductNo;
-
-        try {
-
-            NetworkTaskCart networkTask = new NetworkTaskCart(BasketPurchaseCheckActivity.this, urlAddr,"like");
-            networkTask.execute().get();
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
