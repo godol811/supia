@@ -15,10 +15,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/supia"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.MyPage.MyQnaListActivity"></activity>
-        <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity" />
-        <activity android:name=".Activities.Product.ProductDetailActivity" />
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity"/>
+        <activity android:name=".Activities.Product.ProductDetailActivity"/>
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
         <activity android:name=".Activities.Product.LikeActivity"/>
         <activity android:name=".Activities.MyPage.MyPageReviewInsertActivity"></activity>
@@ -33,9 +32,9 @@
         <activity android:name=".Activities.Product.CategoryActivity" />
         <activity android:name=".Activities.Product.SearchActivity" />
         <activity android:name=".Activities.Product.ProductMainActivity" />
+        <activity android:name=".Activities.Payment.BasketPurchaseCheckActivity"/>
         <activity android:name=".Activities.Product.WriteQnAActivity" />
         <activity android:name=".Activities.Payment.BasketDeliveryAddressListActivity" />
-        <activity android:name=".Activities.Payment.BasketPurchaseCheckActivity"/>
         <activity android:name=".Activities.Payment.PaymentModifyActivity" />
         <activity android:name=".Activities.Payment.PurchaseCheckActivity" />
         <activity android:name=".Activities.Payment.PaymentPhoneActivity" />

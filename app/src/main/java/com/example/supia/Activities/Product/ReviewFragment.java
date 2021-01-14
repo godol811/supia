@@ -33,6 +33,7 @@ public class ReviewFragment extends Fragment {
     RecyclerView.LayoutManager reviewLayoutManager = null;
 
     TextView tvBuycount;
+    TextView tvSatisfied; //추가
 
 
     public ReviewFragment(String urlIp, int productNo) {
@@ -51,6 +52,8 @@ public class ReviewFragment extends Fragment {
 
 
         tvBuycount = rootView.findViewById(R.id.buycount_fragmentqna);
+        tvSatisfied = rootView.findViewById(R.id.goodcount_fragmentqna); //추가
+
 
         list = new ArrayList<MyReviewDto>();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_review_fragmentqna);
@@ -61,6 +64,7 @@ public class ReviewFragment extends Fragment {
 
 
         connectGetDataBuy();
+        connectGetDataSatisfied();
         connectGetData();
         return rootView;
 
@@ -90,9 +94,28 @@ public class ReviewFragment extends Fragment {
             String buyUrl = "http://" + urlIp + ":8080/test/supiaBuyCount.jsp?productNo="+productNo;
             NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getContext(), buyUrl, "select");
             Object obj2 = networkTask2.execute().get();
-            Log.v("안들어오니?" ,"obj"+obj2);
+            Log.v("구매명수" ,"obj"+obj2);
             String cnt = (String) obj2;
             tvBuycount.setText(cnt);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//--------
+
+    //------ 몇명이 만족 했는지
+    private void connectGetDataSatisfied() {
+        try {
+
+            String buyUrl = "http://" + urlIp + ":8080/test/supiaSatisfiedCount.jsp?productNo="+productNo;
+            NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getContext(), buyUrl, "select");
+            Object obj2 = networkTask2.execute().get();
+            Log.v("만족" ,"obj"+obj2);
+            String cnt = (String) obj2;
+            tvSatisfied.setText(cnt);
 
 
 
