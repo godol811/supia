@@ -1,17 +1,30 @@
 package com.example.supia.Activities.MyPage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Adapter.MyPage.MyOrderListAdapter;
+import com.example.supia.Adapter.MyPage.MyQnaListAdapter;
+import com.example.supia.Adapter.MyPage.MySubOrderListAdapter;
+import com.example.supia.Dto.MyPage.MyOrderListDto;
+import com.example.supia.Dto.MyPage.MyQnaDto;
+import com.example.supia.Dto.MyPage.MyReviewDto;
+import com.example.supia.NetworkTask.MyPage.MyOrderListNetworkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
+
+import java.util.ArrayList;
 
 public class MyQnaListActivity extends AppCompatActivity {
 
@@ -21,12 +34,28 @@ public class MyQnaListActivity extends AppCompatActivity {
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
 
 
+    RecyclerView rvQna;
+    RecyclerView.LayoutManager qnaLayoutManager = null;
+    String urlIp = ShareVar.urlIp;
+    String userId = ShareVar.sharvarUserId;
+    ArrayList<MyQnaDto> qna;
+    String qnaUrl = "http://" + urlIp + ":8080/test/supiaMyQnaList.jsp?userId="+userId;
+    MyQnaListAdapter qnaAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_qna_list);
 
+        connectGetData();
+
+        //-----------For Recycler----------------//
+        qna = new ArrayList<MyQnaDto>();
+        rvQna = findViewById(R.id.rv_qnalist_myqna);
+        rvQna.setHasFixedSize(true);
+        qnaLayoutManager = new LinearLayoutManager(this);
+        rvQna.setLayoutManager(qnaLayoutManager);
+        //---------------------------------------//
 
         //----------header 아이디----------//
         ibtnBack = findViewById(R.id.ibtn_back_mypage_header); //뒤로가기
@@ -145,6 +174,23 @@ public class MyQnaListActivity extends AppCompatActivity {
         }
     };
     //------------------------------------------------------------------------------------//
+
+    //----------------------------------connectGetData2----------------------------------//
+    private void connectGetData() {
+        try {
+
+            MyOrderListNetworkTask networkTask1 = new MyOrderListNetworkTask(MyQnaListActivity.this, qnaUrl, "select");
+            Object obj = networkTask1.execute().get();
+            qna = (ArrayList<MyQnaDto>) obj;
+            qnaAdapter = new MyQnaListAdapter(MyQnaListActivity.this, R.layout.activity_my_qna_list, qna);
+            rvQna.setAdapter(qnaAdapter);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //----------------------------------------------------------------------------------//
 
 
 }//------------------끝
