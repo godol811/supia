@@ -145,6 +145,7 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
+        <include layout="@layout/bottom_bar" />
     </LinearLayout>
 
 
@@ -361,15 +362,15 @@
                     android:text="결제 정보 상세"
                     android:textStyle="bold" />
 
-
             </LinearLayout>
 
 
         </LinearLayout>
     </LinearLayout>
-
-
     <include layout="@layout/bottom_bar" />
+
+
+
 
 
 </LinearLayout>

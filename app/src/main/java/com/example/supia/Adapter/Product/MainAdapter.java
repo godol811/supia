@@ -139,6 +139,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder>{
 //                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                             intent.putExtra("likeCheck", likeCheck);
+                            intent.putExtra("check",1);
                             v.getContext().startActivity(intent);
                         }else {
 
@@ -148,6 +149,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder>{
                             Intent intent = new Intent(v.getContext(), LikeActivity.class);
                             intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                             intent.putExtra("likeCheck", "0");
+                            intent.putExtra("check",1);
                             v.getContext().startActivity(intent);
 
                         }else if (likeCheck.equals("0")){
@@ -157,6 +159,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder>{
                             intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                             intent.putExtra("likeCheck", "1");
+                            intent.putExtra("check",1);
                             v.getContext().startActivity(intent);
                         }
                     }
@@ -190,6 +193,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder>{
                     intent.putExtra("productPrice", productPrice);
                     intent.putExtra("productName", productName);
                     intent.putExtra("productImagePath", ProductImagePath);
+                    intent.putExtra("check",1);
                     v.getContext().startActivity(intent);
 
                 }

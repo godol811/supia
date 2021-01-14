@@ -3,6 +3,7 @@ package com.example.supia.Adapter.MyPage;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.supia.Activities.Product.CartInsertActivity;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
@@ -84,12 +86,49 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                 .override(120, 120)
                 .apply(new RequestOptions().circleCrop()).into(holder.productImagePath);//사진
 
-        holder.cart.setOnClickListener(new View.OnClickListener() { // 카드 눌렀을때 장바구니 추가
+        holder.cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new AlertDialog.Builder(mContext)
+                        .setIcon(R.mipmap.supia)
+                        .setTitle("알림")
+                        .setMessage("장바구니에 넣겠습니까?")
+                        .setCancelable(false)
+                        .setPositiveButton("취소",null)
+                        .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                /**
+                                 * 장바구니 클릭시 jsp 실행
+                                 * 넘겨줘야될값 : 상품 번호,수량,가격
+                                 */
+
+
+                                int productNo = data.get(position).getProductNo();
+
+
+                                int productPrice = data.get(position).getProductPrice();
+                                String productName = data.get(position).getProductName();
+                                String ProductImagePath = data.get(position).getProductImagePath();
+
+                                Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
+
+                                intent.putExtra("productNo", productNo);
+                                intent.putExtra("productPrice", productPrice);
+                                intent.putExtra("productName", productName);
+                                intent.putExtra("productImagePath", ProductImagePath);
+                                v.getContext().startActivity(intent);
+
+                            }
+                        }).show();
+
+
 
             }
         });
+
+
+
         holder.like.setOnClickListener(new View.OnClickListener() { // 눌려있는 하트 다시 눌렀을때 찜목록에서 삭제
             @Override
             public void onClick(View v) {
@@ -97,6 +136,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
 
                 new AlertDialog.Builder(mContext)
                         .setTitle("알림")
+                        .setIcon(R.mipmap.supia)
                         .setMessage("찜목록에서 삭제 하시겠습니까?")
                         .setCancelable(false)
                         .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
@@ -115,11 +155,6 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                         })
                         .setPositiveButton("취소",null)
                         .show();
-
-
-
-
-
 
 
             }

@@ -10,6 +10,16 @@
     <include layout="@layout/mypage_header"/>
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="QnA"
+        android:textSize="17dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_qnalist_myqna"

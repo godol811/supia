@@ -1,11 +1,14 @@
 package com.example.supia.Activities.Login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -153,17 +156,30 @@ public class SocialLoginActivity extends Activity {
             String strAddrDetail = userAddrDetail.getText().toString().trim();
 
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserSocialUpdate.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + strId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail ;
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail ;
 
             Log.v(TAG, urlAddr);
             try {
                 UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"insert");
                 insertworkTask.execute().get();
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";//배송지 주소록에도 넣기
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId+ "&deliveryTel=" + strTel +  "&deliveryAddr="+ strAddr + "&deliveryAddrDetail=" + strAddrDetail;
+
+
+            try {
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"insert");
+                insertworkTask.execute().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
+
             new AlertDialog.Builder(SocialLoginActivity.this)
                     .setTitle("추가정보 등록 완료!")
                     .setMessage("취향 선택 페이지로 넘어갈게요!")
@@ -208,6 +224,21 @@ public class SocialLoginActivity extends Activity {
         }
     }
 
+    //--------------------------------------애정 추가  배경 터치 시 키보드 사라지게----------------------------------//
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View view = getCurrentFocus();
+        InputMethodManager imm;
+        if (view != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) && view instanceof EditText && !view.getClass().getName().startsWith("android.webkit.")) {
+            int scrcoords[] = new int[2];
+            view.getLocationOnScreen(scrcoords);
+            float x = ev.getRawX() + view.getLeft() - scrcoords[0];
+            float y = ev.getRawY() + view.getTop() - scrcoords[1];
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom())
+                ((InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
+    //---------------------------------------------------------------------------------------------//
 }
 

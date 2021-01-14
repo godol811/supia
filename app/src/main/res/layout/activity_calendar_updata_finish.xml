@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="가장 최근의 \n월경 종료일을 입력해주세요."
+            android:text="가장 최근의 \n월경 종료일을 수정해주세요."
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -29,18 +29,33 @@
             android:outlineSpotShadowColor="#BAD23A"
 
             />
-        <Button
-            android:id="@+id/btn_next_question2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="다음"
-            android:backgroundTint="#BAD23A"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_back_mensupdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#BAD23A"
+                android:text="뒤로" />
+
+            <Button
+                android:id="@+id/btn_complite_mensupdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#BAD23A"
+                android:text="다음" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

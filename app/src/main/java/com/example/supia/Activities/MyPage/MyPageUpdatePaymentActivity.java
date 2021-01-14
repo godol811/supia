@@ -47,7 +47,7 @@ public class MyPageUpdatePaymentActivity extends Activity {
         setContentView(R.layout.activity_my_page_update_payment);
 
 
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         Intent intent = getIntent();
         strWay = intent.getStringExtra("way");
