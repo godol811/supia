@@ -44,18 +44,11 @@ public class mensUpdate2 extends Dialog {
         urlIp = ShareVar.urlIp;//아이피 받아옴
         urlAddr = "http://" + urlIp + ":8080/test/supiaCalendarUpdate.jsp?";
 
-        btnback = findViewById(R.id.btn_back_mensupdate);
         btncomplite = findViewById(R.id.btn_complite_mensupdate);
         datePicker = findViewById(R.id.maincalendar_mens_finish_update);
         btnx = findViewById(R.id.btn_cancle_datepicker_calendar2);
         String date = Integer.toString(datePicker.getYear())+"-"+Integer.toString(datePicker.getMonth()+1)+"-"+Integer.toString(datePicker.getDayOfMonth());
 
-        btnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         btnx.setOnClickListener(new View.OnClickListener() {
             @Override

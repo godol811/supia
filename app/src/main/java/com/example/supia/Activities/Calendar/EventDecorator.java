@@ -30,7 +30,6 @@ public class EventDecorator implements DayViewDecorator {
         this.dates = new HashSet<>(dates);
         drawable = context.getDrawable(R.drawable.line);
 
-
     }
 
     @Override
