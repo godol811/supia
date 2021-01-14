@@ -23,8 +23,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.ProductDetailActivity;
 import com.example.supia.Activities.Product.ProductDetilFragment;
 import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Adapter.MyPage.MyLikeListAdapter;
 import com.example.supia.Adapter.MyPage.MyOrderListAdapter;
 import com.example.supia.Adapter.MyPage.MyReviewListAdapter;
 import com.example.supia.Adapter.MyPage.MySubOrderListAdapter;
@@ -190,7 +192,35 @@ public class MySubscribeActivity extends Activity {
 
     }//----------------onCreate
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectGetData1();
+        /////////////////////////////////////////보람 추가 - 값 받아가요///////////////////////////////////////////////////////
+        subAdapter.setOnItemClickListener(new MySubOrderListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(MySubscribeActivity.this, ProductDetailActivity.class);
 
+                //-- fragment1로 값 전달
+
+                Log.v(TAG,""+members2.get(position).getProductPrice());
+                intent.putExtra("urlIp",ShareVar.urlIp);
+                intent.putExtra("productNo", members2.get(position).getProductNo());
+                intent.putExtra("productName", members2.get(position).getProductName());
+                intent.putExtra("productPrice", Integer.toString(members2.get(position).getProductPrice()));
+                intent.putExtra("productBrand", members2.get(position).getProductBrand());
+                intent.putExtra("productImagePath", members2.get(position).getProductImagePath());
+                intent.putExtra("productInfo", members2.get(position).getProductInfo());
+//                Log.v(TAG,"productName " + cart.get(position).getProductName());
+
+                startActivity(intent);
+
+            }
+        });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    }
     //-------------------------------------배송지 변경 클릭 이벤트---------------------------------------//
     View.OnClickListener changeAddrClickListener = new View.OnClickListener() {
         @Override

@@ -171,17 +171,21 @@ public class MyPageSubscribe2NetworkTask extends AsyncTask<Integer, String, Obje
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                int subscribeOrderQuantity = jsonObject1.getInt("subscribeOrderQuantity");
-                int subscribeProductPrice = jsonObject1.getInt("subscribeProductPrice");
                 String subscribeProductName = jsonObject1.getString("subscribeProductName");
+                int subscribeProductPrice = jsonObject1.getInt("subscribeProductPrice");
+                int subscribeOrderQuantity = jsonObject1.getInt("subscribeOrderQuantity");
                 String productImagePath = jsonObject1.getString("productImagePath");
                 int productNo = jsonObject1.getInt("productNo");
                 int productId = jsonObject1.getInt("productId");
+                String productBrand = jsonObject1.getString("productBrand");
+                String productInfo = jsonObject1.getString("productInfo");
+                int productPrice = jsonObject1.getInt("productPrice");
+                String productName = jsonObject1.getString("productName");
 
 
 
 
-                MySubscribeDto address = new MySubscribeDto(subscribeProductName,subscribeProductPrice,subscribeOrderQuantity,productImagePath,productNo,productId);
+                MySubscribeDto address = new MySubscribeDto(subscribeProductName,subscribeProductPrice,subscribeOrderQuantity,productImagePath,productNo,productId,productBrand,productInfo,productPrice,productName);
                 Address.add(address);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
