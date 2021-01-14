@@ -65,7 +65,7 @@ public class datePicker extends Dialog {
 
         checkDay(year, monthOfYear, dayOfMonth);//가져온 날짜에 하이픈을 첨가하여 "yyyy-mm-dd" 형태로 만듬
 
-        //myDBHelper = new myDBHelper(datePicker.getContext(), mContext);
+        myDBHelper = new myDBHelper(datePicker.getContext());
 
         datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
             checkDay(year, monthOfYear, dayOfMonth);
