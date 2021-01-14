@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MyPageSubscribe2NetworkTask extends AsyncTask<Integer, String, Object> {
 
-    final static String TAG = "네트워크타스크";
+    final static String TAG = "서브네트워크타스크2";
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;

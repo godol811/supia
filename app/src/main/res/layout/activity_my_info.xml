@@ -69,13 +69,6 @@
 
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="이름"
-                            android:textStyle="bold" />
-
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -105,12 +98,7 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_username_mypage_info"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/tv_userid_mypage_info"

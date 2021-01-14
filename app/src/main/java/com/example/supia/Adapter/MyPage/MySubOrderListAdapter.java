@@ -65,7 +65,7 @@ public class MySubOrderListAdapter extends RecyclerView.Adapter<MySubOrderListAd
 
 
 
-        Log.v(TAG,""+data.get(position).getProductName());
+
 
         holder.productPrice.setText(Integer.toString(data.get(position).getSubscribeProductPrice()));
 

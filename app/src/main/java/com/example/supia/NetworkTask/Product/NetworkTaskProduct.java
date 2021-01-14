@@ -176,6 +176,7 @@ public class NetworkTaskProduct extends AsyncTask<Integer, String, Object> {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+
                 int productNo = jsonObject1.getInt("productNo");
                 String productName = jsonObject1.getString("productName");
                 String productPrice = jsonObject1.getString("productPrice");

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +41,8 @@ import java.util.ArrayList;
 
 public class MySubscribeActivity extends Activity {
 
+    String TAG = "서브액티비티";
+
 
     //filed
     TextView tvMypage, tvSubscribe, tvOrder; // header
@@ -51,11 +54,15 @@ public class MySubscribeActivity extends Activity {
     RadioGroup rgSubscribe;
     RadioButton rbSubscribeSetting, rbSubscribeDetail;
     TextView tvProductPrice, tvPriceTotal, tvChangePayment, tvCxl;
-    TextView tvStartDate, tvState, tvAddr, tvPrice, tvPayment, tvNextPayDay;
+    TextView tvStartDate, tvState, tvAddrMyPage, tvPriceMyPage, tvPaymentMyPage, tvNextPayDay;
+
     TextView tvMySubProductName,tvMySubProductPrice,tvMySubProductQuantity;
     ImageView ivMySubProductImg;
+    TextView tvChangeArrd, tvStopSub;
 
-    ArrayList<MySubscribeDto> members;
+
+    ArrayList<MySubscribeDto> members; //구독관리
+    ArrayList<MySubscribeDto> members2; //구독내역
 
     String urlIp = ShareVar.urlIp;
     String userId = ShareVar.sharvarUserId;
@@ -82,6 +89,8 @@ public class MySubscribeActivity extends Activity {
         //---------------------------------------//
 
 
+        tvStopSub =findViewById(R.id.tv_stop_my_subscribe);
+        tvChangeArrd = findViewById(R.id.tv_changeaddr_my_subscribe);
         //----------------라디오 버튼-----------------//
         rgSubscribe = findViewById(R.id.toggle);
         rbSubscribeDetail = findViewById(R.id.rb_detail_my_subscribe);
@@ -98,9 +107,9 @@ public class MySubscribeActivity extends Activity {
 
         tvStartDate = findViewById(R.id.tv_startdate_my_subscribe);
         tvState = findViewById(R.id.tv_state_my_subscribe);
-        tvAddr = findViewById(R.id.tv_address_my_subscibe);
-        tvPrice = findViewById(R.id.tv_price_my_subscribe);
-        tvPayment = findViewById(R.id.tv_payment_my_subscribe);
+        tvAddrMyPage = findViewById(R.id.tv_address_my_subscibe);
+        tvPriceMyPage = findViewById(R.id.tv_price_my_subscribe);
+        tvPaymentMyPage = findViewById(R.id.tv_payment_my_subscribe);
         tvNextPayDay = findViewById(R.id.tv_next_payday_my_subscribe);
         paymentDetail = findViewById(R.id.tv_pay_detail_my_subscribe);
 
@@ -111,18 +120,15 @@ public class MySubscribeActivity extends Activity {
 
 
 
+
+
+
+
+
         connectGetData();
         connectGetData1();
 
-//        tvMySubProductName.setText(members.get(0).getSubscribeProductName());
-//        tvMySubProductPrice.setText(Integer.toString(members.get(0).getSubscribeProductPrice()));
-//        tvMySubProductQuantity.setText(Integer.toString(members.get(0).getSubscribeOrderQuantity()));
-
-
-
-
-
-
+        Log.v(TAG,"시작"+members.get(0).getSubscribeOrderDate());
         tvStartDate.setText(members.get(0).getSubscribeOrderDate());
 
         if (members.get(0).getProductId() == members.get(0).getProductNo()) {  //구독 여부
@@ -131,13 +137,21 @@ public class MySubscribeActivity extends Activity {
             tvState.setText("구독중이 아닙니다.");
         }
 
+        Log.v(TAG,"주소"+members.get(0).getSubscribeOrderAddr());
 
-        tvAddr.setText(members.get(0).getSubscribeOrderAddr());
-        tvPrice.setText(Integer.toString((members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity()) + 2500) + "원");
-        tvPayment.setText(members.get(0).getSubscribeOrderPayment());
+        tvAddrMyPage.setText(members.get(0).getSubscribeOrderAddr());
+
+        Log.v(TAG,"가격"+members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity());
+
+        tvPriceMyPage.setText(Integer.toString((members.get(0).getProductPrice() * members.get(0).getSubscribeOrderQuantity()) + 2500) + "원");
+
+        Log.v(TAG,"결제수단"+members.get(0).getSubscribeOrderPayment());
+
+        tvPaymentMyPage.setText(members.get(0).getSubscribeOrderPayment());
+        Log.v(TAG,"담달"+members.get(0).getSubscribeOrderDate());
         tvNextPayDay.setText(members.get(0).getSubscribeOrderDate());
-        productPriceDialog = members.get(0).getProductPrice();
-        productQuantity = members.get(0).getSubscribeOrderQuantity();
+        productPriceDialog = members.get(0).getProductPrice(); // 커스텀 다이얼로그
+        productQuantity = members.get(0).getSubscribeOrderQuantity(); // 커스텀 다이얼로그
 
 
 
@@ -165,6 +179,8 @@ public class MySubscribeActivity extends Activity {
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         rgSubscribe.setOnCheckedChangeListener(radioGroupClickListener); //라디오버튼
         paymentDetail.setOnClickListener(payMentDetailClickListener); // 결제상세 커스텀다이얼로그
+        tvChangeArrd.setOnClickListener(changeAddrClickListener);
+        tvStopSub.setOnClickListener(stopSubClickListener);
         //------------------------------------------//
 
         //------------------------------------사진 불러오기---------------------------------------//
@@ -177,8 +193,34 @@ public class MySubscribeActivity extends Activity {
 
 
 
-
     }//----------------onCreate
+
+
+    //-------------------------------------배송지 변경 클릭 이벤트---------------------------------------//
+    View.OnClickListener changeAddrClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
+
+    //-------------------------------------구독 취소 클릭 이벤트---------------------------------------//
+    View.OnClickListener stopSubClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
+
+
+
+
 
     //----------------------------------------결제상세정보 버튼 클릭 이벤트------------------------------------------//
     View.OnClickListener payMentDetailClickListener = new View.OnClickListener() {
@@ -321,10 +363,10 @@ public class MySubscribeActivity extends Activity {
     private void connectGetData1() {
         try {
 
-            MyPageSubscribe2NetworkTask networkTask = new MyPageSubscribe2NetworkTask(MySubscribeActivity.this, url2, "select");
-            Object obj = networkTask.execute().get();
-            members = (ArrayList<MySubscribeDto>) obj;
-            subAdapter = new MySubOrderListAdapter(MySubscribeActivity.this, R.layout.activity_my_subscribe, members);
+            MyPageSubscribe2NetworkTask networkTask2 = new MyPageSubscribe2NetworkTask(MySubscribeActivity.this, url2, "select");
+            Object obj = networkTask2.execute().get();
+            members2 = (ArrayList<MySubscribeDto>) obj;
+            subAdapter = new MySubOrderListAdapter(MySubscribeActivity.this, R.layout.activity_my_subscribe, members2);
             subscriveRv.setAdapter(subAdapter);
 
 

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.CartActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
@@ -30,7 +31,7 @@ public class MyPageMainActivity extends Activity {
     TextView tvMypage, tvSubscribe, tvOrder; // header
     ImageButton ibtnBack; // header
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
-    TextView tvUserIdMypage, tvUserNameMypage, tvMyInfoMypage;
+    TextView tvUserIdMypage, tvMyInfoMypage;
     LinearLayout llLikeList, llCartList, llNoticeList, llSnsList, llLogout;
     ArrayList<UserDto> userinfo;
     String userId = ShareVar.sharvarUserId;
@@ -60,7 +61,6 @@ public class MyPageMainActivity extends Activity {
 
 
         //-----------가운데 레이아웃 아이디----------//
-        tvUserNameMypage = findViewById(R.id.tv_username_mypagemain);
         tvUserIdMypage = findViewById(R.id.tv_userid_mypagemain);
         tvMyInfoMypage = findViewById(R.id.tv_myinfo_mypagemain);
         //-------------------------------------//
@@ -93,7 +93,6 @@ public class MyPageMainActivity extends Activity {
         connectGetData();
 
         //--------------텍스트뷰 값띄워주기------------//
-        tvUserNameMypage.setText(userinfo.get(0).getUserName());
         tvUserIdMypage.setText(userinfo.get(0).getUserId());
         //----------------------------------------//
 
@@ -158,7 +157,7 @@ public class MyPageMainActivity extends Activity {
     View.OnClickListener cartListClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent cart = new Intent(MyPageMainActivity.this, MyCartListActivity.class);
+            Intent cart = new Intent(MyPageMainActivity.this, CartActivity.class);
             startActivity(cart);
             overridePendingTransition(R.anim.hold, R.anim.hold);
         }

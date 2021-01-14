@@ -28,6 +28,22 @@ public class MySubscribeDto {
 
 
 
+
+
+    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
+        this.subscribeOrderDate = subscribeOrderDate;
+        this.subscribeOrderQuantity = subscribeOrderQuantity;
+        this.subscribeOrderAddr = subscribeOrderAddr;
+        this.subscribeOrderPayment = subscribeOrderPayment;
+        this.userId = userId;
+        this.productId = productId;
+        this.productNo = productNo;
+        this.productName = productName;
+        this.productImagePath = productImagePath;
+        this.productPrice = productPrice;
+    }
+
+
     public int getSubscribeProductPrice() {
         return subscribeProductPrice;
     }
@@ -49,21 +65,8 @@ public class MySubscribeDto {
 
     public MySubscribeDto(String subscribeOrderPayment, String userId) {
         this.subscribeOrderPayment = subscribeOrderPayment;
-        this.userId = userId;
-    }
+        this.userId = userId;}
 
-    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
-        this.subscribeOrderDate = subscribeOrderDate;
-        this.subscribeOrderQuantity = subscribeOrderQuantity;
-        this.subscribeOrderAddr = subscribeOrderAddr;
-        this.subscribeOrderPayment = subscribeOrderPayment;
-        this.userId = userId;
-        this.productId = productId;
-        this.productNo = productNo;
-        this.productName = productName;
-        this.productImagePath = productImagePath;
-        this.productPrice = productPrice;
-    }
 
     public String getSubscribeOrderDate() {
         return subscribeOrderDate;

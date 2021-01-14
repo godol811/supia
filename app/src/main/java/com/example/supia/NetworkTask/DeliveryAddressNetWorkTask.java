@@ -48,7 +48,7 @@ public class DeliveryAddressNetWorkTask extends AsyncTask<Integer, String, Objec
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setTitle("");
-        progressDialog.setMessage("주소록 불러오는중");
+        progressDialog.setMessage("로딩중");
         progressDialog.show();
 
     }
