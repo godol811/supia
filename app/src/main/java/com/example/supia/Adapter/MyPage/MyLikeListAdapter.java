@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -70,6 +72,11 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Log.v("이프의 이프안임유", "" + data.get(position).getLikeCheck());
+
+
+//      상품넘버 저장
+        ShareVar.productId = data.get(position).getProductNo();
+
 
 
         holder.productNameMypage.setText("" + data.get(position).getProductName());
@@ -194,6 +201,8 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
         TextView productPriceMypage;
         ImageButton cartBtn;
         ImageButton like;
+        LinearLayout llMyLikeList;
+
 
 
         public MyViewHolder(@NonNull View v) {
@@ -207,6 +216,8 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
             like = v.findViewById(R.id.ibm_like_mylikelist);
             productImagePath = v.findViewById(R.id.iv_productimg_mylikelist);
             cartBtn = v.findViewById(R.id.ibn_cart_mylikelist);
+            llMyLikeList = v.findViewById(R.id.ll_mylikelist);
+
 
 
 
