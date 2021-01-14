@@ -44,7 +44,7 @@ public class DeliveryAddressAddActivity extends AppCompatActivity {
         Intent intent = getIntent();
         strWay = intent.getStringExtra("way");
 
-        urlAddr = "http://" + ShareVar.sharvarUserId + ":8080/test/supiaDeliveryAddrInsert.jsp?";
+        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";
 
         deliveryAddr = findViewById(R.id.et_address_addradd);
         deliverAddrDetail = findViewById(R.id.et_address_detail_addradd);
