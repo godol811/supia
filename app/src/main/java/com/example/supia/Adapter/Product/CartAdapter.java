@@ -521,6 +521,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
     private void connectGetData() {
+
+
+
         try {
 
             NetworkTaskCart networkTask = new NetworkTaskCart(mContext, urlAddr,"like");

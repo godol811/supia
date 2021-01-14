@@ -98,21 +98,35 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG,"여기에 넣어줘야됨");
                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/cartlist.jsp";
                 urlAddr = urlAddr + "?cartUserId='" + ShareVar.sharvarUserId +"'";
 
-//              adapter.sendDate();
 
-                adapter.connectDeleteData();
-                connectGetData();
+                if (cart.size() != 0) {
 
+                    if (adapter.sendDate().size() == 0) {
 
-//                for (int i = 0; i < adapter.sendDate().size(); i++){
-//                    Log.d(TAG, "액티비티에서 메소드 사용 : " + String.valueOf(adapter.sendDate().get(i).getCartProductQuantity()));
-//                    Log.d(TAG, "액티비티에서 메소드 사용 : " + String.valueOf(adapter.sendDate().get(i).getCartProductName()));
-//                }
+                        new AlertDialog.Builder(CartActivity.this)
+                                .setTitle("알림")
+                                .setMessage("체크된 상품이 없습니다.")
+                                .setPositiveButton("확인", null)
+                                .setCancelable(true)
+                                .show();
+                    } else {
 
+                        adapter.connectDeleteData();
+                        connectGetData();
+
+                    }
+                } else {
+                    new AlertDialog.Builder(CartActivity.this)
+                            .setTitle("알림")
+                            .setMessage("삭제할 상품이 없습니다.")
+                            .setPositiveButton("확인", null)
+                            .setCancelable(true)
+                            .show();
+                    deleteBtn.setClickable(false);
+                }
 
             }
         });
