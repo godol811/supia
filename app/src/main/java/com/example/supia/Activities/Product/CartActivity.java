@@ -121,7 +121,7 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
          */
 
 
-        payment.setOnClickListener(new View.OnClickListener() {
+        paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
