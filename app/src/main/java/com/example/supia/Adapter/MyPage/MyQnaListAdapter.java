@@ -13,25 +13,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.supia.Dto.MyPage.MyQnaDto;
 import com.example.supia.Dto.MyPage.MySubscribeDto;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
 
-public class MyQnaListAdapter extends RecyclerView.Adapter<MyQnaListAdapter.MyViewHolder>{
+public class MyQnaListAdapter extends RecyclerView.Adapter<MyQnaListAdapter.MyViewHolder> {
     String TAG = "마이큐엔에이어댑터";
 
     private Context mContext = null;
     private int layout = 0;
-    private ArrayList<MySubscribeDto> data = null;
+    private ArrayList<MyQnaDto> data = null;
     private LayoutInflater inflater = null;
     private String urlIp = ShareVar.urlIp;
 
-    String urlAddr = "http://"+urlIp+":8080/pictures/";
+    String urlAddr = "http://" + urlIp + ":8080/pictures/";
 
 
-    public MyQnaListAdapter(Context mContext, int layout, ArrayList<MySubscribeDto> data) {
+    public MyQnaListAdapter(Context mContext, int layout, ArrayList<MyQnaDto> data) {
 
         Log.v(TAG, "첫뻔째 어댑터 ");
 
@@ -48,7 +49,7 @@ public class MyQnaListAdapter extends RecyclerView.Adapter<MyQnaListAdapter.MyVi
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.my_subscribe_layout, parent, false);
+        View view = inflater.inflate(R.layout.myqna_layout, parent, false);
         return new MyViewHolder(view);
 
     }
@@ -57,29 +58,13 @@ public class MyQnaListAdapter extends RecyclerView.Adapter<MyQnaListAdapter.MyVi
     public long getItemId(int position) {
         return position;
     }
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-
-
-
-
-        holder.productPrice.setText(Integer.toString(data.get(position).getSubscribeProductPrice()));
-
-        holder.subscribeQuantity.setText(Integer.toString(data.get(position).getSubscribeOrderQuantity()));
-        holder.productName.setText(data.get(position).getSubscribeProductName());
-
-        Glide.with(holder.productImagePath)
-                .load(urlAddr + data
-                        .get(position).getProductImagePath())
-//                .placeholder(R.drawable.noimg)
-                .override(120, 120)
-                .apply(new RequestOptions().circleCrop()).into(holder.productImagePath);//사진
-
-
+            holder.qnaProductNameMypage.setText(data.get(position).getProductName());
+            holder.qnaContentMypage.setText(data.get(position).getQnaContent());
 
     }
-
 
 
     public interface OnItemClickListener {
@@ -96,7 +81,6 @@ public class MyQnaListAdapter extends RecyclerView.Adapter<MyQnaListAdapter.MyVi
     }
 
 
-
     @Override
     public int getItemCount() {
         return data.size();
@@ -104,25 +88,16 @@ public class MyQnaListAdapter extends RecyclerView.Adapter<MyQnaListAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-
-        ImageView productImagePath;
-        TextView productName;
-        TextView productPrice;
-        TextView subscribeQuantity;
-
+        TextView qnaProductNameMypage;
+        TextView qnaContentMypage;
 
 
         public MyViewHolder(@NonNull View v) {
             super(v);
             Log.v(TAG, "마이 뷰홀더");
-            productName = v.findViewById(R.id.tv_productname_mysubscribe_detail);
-            productPrice = v.findViewById(R.id.tv_productprice_mysubscribe_detail);
-            productImagePath = v.findViewById(R.id.iv_product_mysubscribe_detail);
-            subscribeQuantity = v.findViewById(R.id.tv_productquantity_mysubscribe_detail);
 
-
-
-
+            qnaProductNameMypage = v.findViewById(R.id.tv_productname_myqna);
+            qnaContentMypage = v.findViewById(R.id.tv_content_myqna);
 
 
         }
