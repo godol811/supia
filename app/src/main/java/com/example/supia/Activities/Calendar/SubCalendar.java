@@ -119,12 +119,10 @@ public class SubCalendar extends FragmentActivity {
         materialCalendarView_sub.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_sub.addDecorator(new EventDecoratorDraw2(SubCalendar.this, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
 
-        materialCalendarView_sub.setSelectedDate(CalendarDay.from(intstayear, intstamonth, intstaday));
-        materialCalendarView_sub.addDecorator(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(intstayear, intstamonth, intstaday))));
-
-        materialCalendarView_sub.setSelectedDate(CalendarDay.from(intfinyear, intfinmonth, intfinday));
-        materialCalendarView_sub.addDecorator(new EventDecorator(Color.GREEN, Collections.singleton(CalendarDay.from(intfinyear, intfinmonth, intfinday))));
-
+        for (int i=intstaday; i<=intfinday; i++) {
+            materialCalendarView_sub.setSelectedDate(CalendarDay.from(intstayear, intstamonth, i));
+            materialCalendarView_sub.addDecorator(new EventDecorator(SubCalendar.this, Collections.singleton(CalendarDay.from(intstayear, intstamonth, i))));
+        }
 
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
