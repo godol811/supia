@@ -279,7 +279,6 @@ public class LoginActivity extends Activity {
                     startActivity(intent);
                 }
 
-                macIp = "192.168.35.147";
                 urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
                 urlAddr = urlAddr + "userId=" + personEmail + "&userPlatform=google";
                 socialUserInsert();

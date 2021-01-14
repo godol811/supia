@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,6 +62,49 @@ public class SocialLoginActivity extends Activity {
         Intent intent = getIntent();
         userId.setText(ShareVar.sharvarUserId);
 
+        userTel.addTextChangedListener(new TextWatcher() {//자동으로 "-" 생성해서 카드번호에 붙여주기
+            private int beforeLenght = 0;
+            private int afterLenght = 0;
+
+            //입력 혹은 삭제 전의 길이와 지금 길이를 비교하기 위해 beforeTextChanged에 저장
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                beforeLenght = s.length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //아무글자도 없는데 지우려고 하면 로그띄우기 에러방지
+                if (s.length() <= 0) {
+                    Log.d("addTextChangedListener", "onTextChanged: Intput text is wrong (Type : Length)");
+                    return;
+                }
+                //특수문자 입력 방지
+                char inputChar = s.charAt(s.length() - 1);
+                if (inputChar != '-' && (inputChar < '0' || inputChar > '9')) {
+                    userTel.getText().delete(s.length() - 1, s.length());
+                    Log.d("addTextChangedListener", "onTextChanged: Intput text is wrong (Type : Number)");
+                    return;
+                }
+                afterLenght = s.length();
+                String tel = String.valueOf(userTel.getText());
+                tel.substring(0, 1);
+                if (beforeLenght < afterLenght) {// 타자를 입력 중이면
+                    if (afterLenght == 3) { //subSequence로 지정된 문자열을 반환해서 "-"폰을 붙여주고 substring
+                        userTel.setText(s.toString().subSequence(0, 3) + "-" + s.toString().substring(3, s.length()));
+                    } else if (afterLenght == 8) {
+                        userTel.setText(s.toString().subSequence(0, 8) + "-" + s.toString().substring(8, s.length()));
+                    }
+                }
+                userTel.setSelection(userTel.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // 생략
+            }
+        });
+
 
         //---------------------------------------------------주소API--------------------------------------------//
         userAddr.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +129,7 @@ public class SocialLoginActivity extends Activity {
                 break;
         }
     }//end onCreate
+
 
     //----------------------------------------------------빈칸 체크--------------------------------------//
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
@@ -156,28 +202,26 @@ public class SocialLoginActivity extends Activity {
             String strAddrDetail = userAddrDetail.getText().toString().trim();
 
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserSocialUpdate.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail ;
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&userTel=" + strTel + "&userAddr=" + strAddr + "&userAddrDetail=" + strAddrDetail;
 
             Log.v(TAG, urlAddr);
             try {
-                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"insert");
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr, "insert");
                 insertworkTask.execute().get();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";//배송지 주소록에도 넣기
-            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId+ "&deliveryTel=" + strTel +  "&deliveryAddr="+ strAddr + "&deliveryAddrDetail=" + strAddrDetail;
+            urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId + "&deliveryTel=" + strTel + "&deliveryAddr=" + strAddr + "&deliveryAddrDetail=" + strAddrDetail;
 
 
             try {
-                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"insert");
+                UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr, "insert");
                 insertworkTask.execute().get();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
 
 
             new AlertDialog.Builder(SocialLoginActivity.this)
@@ -205,18 +249,17 @@ public class SocialLoginActivity extends Activity {
 
             urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
-            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr,"select");
+            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(SocialLoginActivity.this, urlAddr, "select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
             userDtos = (ArrayList<UserDto>) obj; //userInfoDtos 다시 풀기
 
 
             String strUserAddr = userDtos.get(0).getUserAddr();
-            Log.d(TAG,Integer.toString(strUserAddr.trim().length()));
-            if(!strUserAddr.equals("null")){
+            Log.d(TAG, Integer.toString(strUserAddr.trim().length()));
+            if (!strUserAddr.equals("null")) {
                 Intent intent = new Intent(SocialLoginActivity.this, UserDataQuestion1.class);
                 startActivity(intent);
             }
-
 
 
         } catch (Exception e) {
@@ -240,5 +283,7 @@ public class SocialLoginActivity extends Activity {
     }
 
     //---------------------------------------------------------------------------------------------//
+
+
 }
 
