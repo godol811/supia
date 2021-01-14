@@ -47,6 +47,7 @@ public class MyLikeListActivity extends Activity {
     RecyclerView.LayoutManager layoutManager = null;
     MyLikeListAdapter adapter = null;
 
+    ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
 
 
     String url = "http://"+urlIp+":8080/test/supiaLikeList.jsp?userId="+userId;
@@ -77,11 +78,24 @@ public class MyLikeListActivity extends Activity {
         tvOrder = findViewById(R.id.tv_order_mypage_header); //주문내역
         //-------------------------------------//
 
+
+
+        //----------bottom 아이디----------//
+        ibtnMall = findViewById(R.id.mall_bottom_bar);
+        ibtnHome = findViewById(R.id.home_bottom_bar);
+        ibtnMypage = findViewById(R.id.mypage_bottom_bar);
+        //----------------------------------//
+
+
+
         //---------------클릭이벤트--------------------//
         ibtnBack.setOnClickListener(backClickListener); //header 뒤로가기
         tvMypage.setOnClickListener(myPageClickListener); //header 마이페이지
         tvSubscribe.setOnClickListener(subscribeClickListener); //header 정기구독
         tvOrder.setOnClickListener(orderClickListener); //header 주문내역
+        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
 
         //------------------------------------------//
 
@@ -141,6 +155,44 @@ public class MyLikeListActivity extends Activity {
         }
     };
     //-----------------------------------------------------------------------------------//
+    //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoHomePage = new Intent(MyLikeListActivity.this, MainCalendar.class);
+            startActivity(gotoHomePage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+    //--------------------------------------바텀바 쇼핑몰 클릭 이벤트 애정추가----------------------------------//
+    View.OnClickListener bottomMallClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMallPage = new Intent(MyLikeListActivity.this, ProductMainActivity.class);
+            startActivity(gotoMallPage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
+
+
+
+
+    //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
+    View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent gotoMainMypage = new Intent(MyLikeListActivity.this, MyPageMainActivity.class);
+            startActivity(gotoMainMypage);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+    //---------------------------------------------------------------------------------------------//
 
 
 
