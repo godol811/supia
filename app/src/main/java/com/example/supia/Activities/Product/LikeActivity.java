@@ -24,6 +24,7 @@ public class LikeActivity extends Activity {
 
 
     int likeProductId;
+    int check;
     String likeCheck;
     ArrayList<ProductDto> product;
     ProductAdapter adapter = null;
@@ -39,10 +40,9 @@ public class LikeActivity extends Activity {
 
 
         recyclerView = findViewById(R.id.rl_product_category);
-
-
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
 
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
@@ -52,9 +52,11 @@ public class LikeActivity extends Activity {
 
 
         likeProductId = intent.getIntExtra("likeProductId",0);
+        check = intent.getIntExtra("check",0);
         likeCheck = intent.getStringExtra("likeCheck");
 
 
+        Log.d(TAG,"likeCheck : " + likeCheck);
 
         Log.d(TAG,"이거 likeProductId" + likeProductId);
         Log.d(TAG,"이거 likeCheck" + likeCheck);
@@ -70,9 +72,22 @@ public class LikeActivity extends Activity {
             connectUpdateData();
         }
 
-        intent = new Intent(LikeActivity.this, CategoryActivity.class);
-        intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
-        startActivity(intent);
+
+        if (check == 1){
+
+            Log.d(TAG,"메인에서는 일로가야해");
+            intent = new Intent(LikeActivity.this, ProductMainActivity.class);
+            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
+            startActivity(intent);
+
+        }else {
+
+            Log.d(TAG,"카테고에서는 일로가야해");
+            intent = new Intent(LikeActivity.this, CategoryActivity.class);
+            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
+            startActivity(intent);
+        }
+
 
 
     }
@@ -98,11 +113,7 @@ public class LikeActivity extends Activity {
         try {
             NetworkTaskProduct networkTaskLike = new NetworkTaskProduct(LikeActivity.this, urlAddr, "like");
             networkTaskLike.execute().get();
-            Object obj = networkTaskLike.execute().get();
 
-            product = (ArrayList<ProductDto>) obj;
-            adapter = new ProductAdapter(LikeActivity.this, R.layout.listlayout_cart, product);
-            recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,12 +127,6 @@ public class LikeActivity extends Activity {
             NetworkTaskProduct updateworkTask = new NetworkTaskProduct(LikeActivity.this, urlAddr, "like");
             updateworkTask.execute().get();
 
-            Object obj = updateworkTask.execute().get();
-
-
-            product = (ArrayList<ProductDto>) obj;
-            adapter = new ProductAdapter(LikeActivity.this, R.layout.listlayout_cart, product);
-            recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
             e.printStackTrace();

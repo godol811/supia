@@ -24,6 +24,7 @@ public class CartInsertActivity extends Activity {
 
     int productNo;
     int productQuantity;
+    int check;
     String productPrice;
     String productName;
     String productImagePath;
@@ -44,10 +45,12 @@ public class CartInsertActivity extends Activity {
         urlIp = ShareVar.urlIp;
 
         productNo = intent.getIntExtra("productNo",0);
+        check = intent.getIntExtra("check",0);
         productQuantity = 1;
         productPrice = intent.getStringExtra("productPrice");
         productName = intent.getStringExtra("productName");
         productImagePath = intent.getStringExtra("productImagePath");
+
 
 
         //insert하기전에 장바구니에 똑같은 물건이 있으면 다이얼로그 띄우기
@@ -58,9 +61,19 @@ public class CartInsertActivity extends Activity {
 
         connectGetData();
 
-        intent = new Intent(CartInsertActivity.this, CategoryActivity.class);
-        intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
-        startActivity(intent);
+
+
+
+        if (check == 0){
+            intent = new Intent(CartInsertActivity.this, CategoryActivity.class);
+            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
+            startActivity(intent);
+        }else {
+            intent = new Intent(CartInsertActivity.this, ProductMainActivity.class);
+//            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
+            startActivity(intent);
+        }
+
 
     }
 

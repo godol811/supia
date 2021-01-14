@@ -156,6 +156,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 //                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                         intent.putExtra("likeCheck", likeCheck);
+                        intent.putExtra("check",0);
                         v.getContext().startActivity(intent);
                     }else {
                         if (likeCheck.equals("1")){
@@ -164,6 +165,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                             Intent intent = new Intent(v.getContext(), LikeActivity.class);
                             intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                             intent.putExtra("likeCheck", "0");
+                            intent.putExtra("check",0);
                             v.getContext().startActivity(intent);
                         }else if (likeCheck.equals("0")){
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 0");
@@ -172,6 +174,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                             intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
                             intent.putExtra("likeCheck", "1");
+                            intent.putExtra("check",0);
                             v.getContext().startActivity(intent);
                         }
                     }
@@ -200,6 +203,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
                     Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
 
+
+                    intent.putExtra("check",0);
                     intent.putExtra("productNo", productNo);
                     intent.putExtra("productPrice", productPrice);
                     intent.putExtra("productName", productName);
