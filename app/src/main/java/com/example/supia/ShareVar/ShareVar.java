@@ -24,6 +24,7 @@ public class ShareVar {
     //inwoo 추가
     public static int productId;
     public static int productNo;
+    public static int CartTotalPrice;
     public static String strBtnCategory;
 
 
