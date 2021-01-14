@@ -15,6 +15,7 @@ import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
+import com.example.supia.NetworkTask.CalendarNetworkTaskForCheck;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -32,7 +33,7 @@ public class UserDataQuestion1 extends Activity {
     TextView tvSkip;
     String userId;
     private String urlAddr;
-    HashSet<CalendarDTO> calendarDtos;
+    ArrayList<CalendarDTO> calendarDtos;
     String date;
 
 
@@ -45,10 +46,7 @@ public class UserDataQuestion1 extends Activity {
         userId = ShareVar.sharvarUserId;
 
 
-        if (date.trim().length() != 0) {
-            Intent intent2 = new Intent(UserDataQuestion1.this, MainCalendar.class);//추후에는 참치 쪽으로 이동
-            startActivity(intent2);
-        }
+
 
 
         tvSkip = findViewById(R.id.tv_skip_question1);
@@ -95,12 +93,12 @@ public class UserDataQuestion1 extends Activity {
 
             urlAddr = urlAddr + "userId=" + ShareVar.sharvarUserId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
-            CalendarNetworkTask networkTask = new CalendarNetworkTask(UserDataQuestion1.this, urlAddr, "select");
+            CalendarNetworkTaskForCheck networkTask = new CalendarNetworkTaskForCheck(UserDataQuestion1.this, urlAddr, "select");
             Object obj = networkTask.execute().get(); //obj를 받아들여서
-            calendarDtos = (HashSet<CalendarDTO>) obj; //userInfoDtos 다시 풀기
-
-
-            if (!calendarDtos.isEmpty()) {
+            calendarDtos = (ArrayList<CalendarDTO>) obj; //userInfoDtos 다시 풀기
+            String check =  calendarDtos.get(0).getCalendarStartDate();
+            Log.d(TAG,check);
+            if (!check.equals("null")) {
                 Intent intent = new Intent(UserDataQuestion1.this, MainCalendar.class);
                 startActivity(intent);
 

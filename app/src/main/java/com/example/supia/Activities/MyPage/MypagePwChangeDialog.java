@@ -18,6 +18,9 @@ import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MypagePwChangeDialog extends Dialog {
 
 
@@ -89,21 +92,24 @@ public class MypagePwChangeDialog extends Dialog {
 
 
 
-            if(m.equals(n)){
+            if(m.equals(n) && isValidPassword(m)==true) {
 
-                    new AlertDialog.Builder(context)
-                            .setTitle("알림")
-                            .setMessage("비밀번호 변경이 완료되었습니다.")
-                            .show();
+                new AlertDialog.Builder(context)
+                        .setTitle("알림")
+                        .setMessage("비밀번호 변경이 완료되었습니다.")
+                        .show();
 
 
-                    connectUpdateData();
-                    Intent intent = new Intent(context, MyInfoActivity.class);
+                connectUpdateData();
+                Intent intent = new Intent(context, MyInfoActivity.class);
 //                    intent.putExtra("userId",userId);
-                    intent.putExtra("userPw",please);
-                    intent.putExtra("userTel",userTel);
-                    intent.putExtra("userName",userName);
-                    context.startActivity(intent);
+                intent.putExtra("userPw", please);
+                intent.putExtra("userTel", userTel);
+                intent.putExtra("userName", userName);
+                context.startActivity(intent);
+            }else if(isValidPassword(m)==false){
+                tv_check.setText("숫자와 문자 포함하여 6~12 자리의 암호를 입력해주세요.");
+                tv_check.setTextColor(0xE53935);
 
 
                 } else {
@@ -141,6 +147,17 @@ public class MypagePwChangeDialog extends Dialog {
         }
 
         return result;
+    }
+
+    public static boolean isValidPassword(String pw) {//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+        boolean err = false;
+        String regex =  "/^[A-Za-z0-9]{6,12}$/";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(pw);
+        if (m.matches()) {
+            err = true;
+        }
+        return err;
     }
 
 }//---------------

@@ -1,13 +1,11 @@
-package com.example.supia.NetworkTask;
+package com.example.supia.NetworkTask.Product;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.supia.Dto.CalendarDTO;
-import com.example.supia.ShareVar.ShareVar;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.example.supia.Dto.MyPage.MyOrderListDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,17 +16,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
 
-public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
+public class NetworkTaskPreference extends AsyncTask<Integer, String, String> {
 
-    final static String TAG = "캘린더네트워크타스크";
+    final static String TAG = "네트워크타스크";
+
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    HashSet<CalendarDTO> calendars;
-    ArrayList<CalendarDTO> calendarCheck;
+    ArrayList<MyOrderListDto> Cart;
+
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
     //
@@ -36,18 +33,18 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
     //  - NetworkTask를 검색, 입력, 수정, 삭제 구분없이 하나로 사용키 위해 생성자 변수 추가.
     //
     ///////////////////////////////////////////////////////////////////////////////////////
+
+
     String where = null;
 
-    public CalendarNetworkTask(Context context, String mAddr, String where) {
+    public NetworkTaskPreference(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.calendars = new HashSet<CalendarDTO>();
-        this.calendarCheck = new ArrayList<CalendarDTO>();
+        this.Cart = new ArrayList<MyOrderListDto>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
+
     }
-
-
 
 
     @Override
@@ -55,18 +52,21 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
         Log.v(TAG, "onPreExecute()");
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("");
+        progressDialog.setMessage("로딩중");
         progressDialog.show();
 
     }
 
     @Override
-    protected Object doInBackground(Integer... integers) {
+    protected String doInBackground(Integer... integers) {
         Log.v(TAG, "doInBackground()");
 
         StringBuffer stringBuffer = new StringBuffer();
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
+        Log.v(TAG, "doInBackground()1");
         ///////////////////////////////////////////////////////////////////////////////////////
         // Date : 2020.12.25
         //
@@ -75,6 +75,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
         //
         ///////////////////////////////////////////////////////////////////////////////////////
         String result = null;
+        String parser = null; //추가
         ///////////////////////////////////////////////////////////////////////////////////////
 
         try {
@@ -101,11 +102,13 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
                 //
                 ///////////////////////////////////////////////////////////////////////////////////////
                 if (where.equals("select")) {
-                    parserSelect(stringBuffer.toString());
+                    Log.v(TAG, "select");
+                    parser=parserSelect(stringBuffer.toString()); //변경
+                    Log.d(TAG,"select");
                 } else if (where.equals("like")) {//라이크로 들어오면 파싱하지 않음
 
                 } else {
-                    //result = parserAction(stringBuffer.toString());
+                    result = parserAction(stringBuffer.toString());
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -131,7 +134,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
         //
         ///////////////////////////////////////////////////////////////////////////////////////
         if (where.equals("select")) {
-            return calendars;
+            return parser; //변경
         } else {
             return result;
         }
@@ -140,7 +143,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
     }
 
     @Override
-    protected void onPostExecute(Object o) {
+    protected void onPostExecute(String o) {
         Log.v(TAG, "onPostExecute()");
         super.onPostExecute(o);
         progressDialog.dismiss();
@@ -160,39 +163,26 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
     //  - 검색후 json parsing
     //
     ///////////////////////////////////////////////////////////////////////////////////////
-    private void parserSelect(String s) {
+    private String parserSelect(String s) {
         Log.v(TAG, "parserSelect()");
-
+        String birth = null;
         try {
-
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("calendar"));
-            calendars.clear();
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("birth"));
+
             Log.v(TAG, "s" + s);
-
-
             for (int i = 0; i < jsonArray.length(); i++) {
-
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                String calendarStartDate = jsonObject1.getString("calendarStartDate");
-                String calendarFinishDate = jsonObject1.getString("calendarFinishDate");
-                String calendarDeliveryDate = jsonObject1.getString("calendarDeliveryDate");
-                String calendarBirthDate = jsonObject1.getString("calendarBirthDate");
 
+                birth = jsonObject1.getString("birth");
 
-                ShareVar.calendarsharvarStartdate = calendarStartDate;
-                ShareVar.calendarsharvarFinishdate = calendarFinishDate;
-                ShareVar.calendarsharvarDeliverydate = calendarDeliveryDate;
-                ShareVar.calendarsharvarBirthdate = calendarBirthDate;
-                Log.v(TAG, "파서셀렉트"+ ShareVar.calendarsharvarStartdate+ShareVar.calendarsharvarFinishdate+ShareVar.calendarsharvarDeliverydate+ShareVar.calendarsharvarBirthdate);
-
-                CalendarDTO calendarDTO = new CalendarDTO(calendarStartDate,calendarFinishDate,calendarDeliveryDate,calendarBirthDate);
-                calendars.add(calendarDTO);
+                // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return birth;
     }
     ///////////////////////////////////////////////////////////////////////////////////////
 

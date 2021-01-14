@@ -57,17 +57,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="암호"
+            android:hint="비밀번호(숫자와 문자 포함 6~12자리)"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
             android:textColor="#000000" />
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:src="@drawable/closedeye"
+            android:layout_marginTop="10dp"
             android:id="@+id/btn_password_refactor"
             android:tag="0"/>
+
 
 
     </LinearLayout>
@@ -83,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="암호 확인"
+            android:hint="비밀번호 재입력"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
