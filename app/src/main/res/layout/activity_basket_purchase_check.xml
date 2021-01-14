@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingTop="25dp"
-        android:paddingBottom="40dp"
+        android:paddingBottom="20dp"
         android:text="장바구니 결제"
         android:textColor="#bad23a"
         android:textSize="22dp"
@@ -267,25 +267,25 @@
 
             android:id="@+id/btn_payment_basket"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_long"
             android:backgroundTint="#bad23a"
             android:text="결제하기"
             android:textSize="20dp"
-            android:textStyle="bold"
+
 
             />
         <Button
             android:id="@+id/btn_back_basket"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_long"
             android:backgroundTint="#bad23a"
             android:text="뒤로가기"
             android:textSize="20dp"
-            android:textStyle="bold"
+
 
             />
 
