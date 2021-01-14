@@ -105,7 +105,7 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
                 } else if (where.equals("like")) {//라이크로 들어오면 파싱하지 않음
 
                 } else {
-                    result = parserAction(stringBuffer.toString());
+                    //result = parserAction(stringBuffer.toString());
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////
 

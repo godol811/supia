@@ -21,6 +21,9 @@ public class ShareVar {
     public static String calendarsharvarDeliverydate;
     public static String calendarsharvarBirthdate;
 
+    public static String updatemensstartdate;
+    public static String Updatemensfinishdate;
+
 
     //inwoo 추가
     public static int productId;
