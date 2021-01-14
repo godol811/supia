@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -259,6 +260,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     connectGetData();
                     mDataset.get(position).setCartProductQuantity(String.valueOf(Integer.parseInt((String) TextViewList.get(position).getText())));
                     Log.d(TAG,"바뀐 수량 확인 :" + mDataset.get(position).getCartProductQuantity());
+                }else {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("알림")
+                            .setMessage("최소 수량은 1개입니다.")
+                            .setPositiveButton("확인", null)
+                            .setCancelable(true)
+                            .show();
                 }
 
             }
