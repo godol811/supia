@@ -191,7 +191,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     /**
                      * 장바구니 클릭시 jsp 실행
                      * 넘겨줘야될값 : 상품 번호,수량,가격
+                     *
                      */
+
+
                     Log.d(TAG,"장바구니클릭시 값들어오지는지 확인");
 
                     int productNo = mDataset.get(position).getProductNo();

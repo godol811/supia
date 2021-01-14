@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
+import com.kakao.auth.helper.StartActivityWrapper;
 
 public class mensUpdate2 extends Dialog {
 
@@ -23,7 +25,10 @@ public class mensUpdate2 extends Dialog {
     public String urlAddr, urlIp, userId;
     private Context context;
     Button btnback, btncomplite;
+    String pickDate;
     DatePicker datePicker;
+    int year, month, dayOfMonth;
+    ImageButton btnx;
 
     public mensUpdate2(Context context) {
         super(context);
@@ -42,24 +47,38 @@ public class mensUpdate2 extends Dialog {
         btnback = findViewById(R.id.btn_back_mensupdate);
         btncomplite = findViewById(R.id.btn_complite_mensupdate);
         datePicker = findViewById(R.id.maincalendar_mens_finish_update);
+        btnx = findViewById(R.id.btn_cancle_datepicker_calendar2);
         String date = Integer.toString(datePicker.getYear())+"-"+Integer.toString(datePicker.getMonth()+1)+"-"+Integer.toString(datePicker.getDayOfMonth());
-
 
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onBackPressed();
             }
         });
+
+        btnx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
 
         btncomplite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareVar.Updatemensfinishdate= date;
+
+
+                year = datePicker.getYear();
+                month = datePicker.getMonth();
+                dayOfMonth = datePicker.getDayOfMonth();//데이트피커에서 날짜를 가져옴
+                checkDay(year, month, dayOfMonth);
+                dismiss();
+                ShareVar.Updatemensfinishdate= pickDate;
                 Log.v(TAG, ShareVar.Updatemensfinishdate);
-                dismiss();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                dismiss();
                 builder.setTitle("아래의 날짜가 맞습니까?");
                 builder.setMessage(ShareVar.updatemensstartdate+"~"+ShareVar.Updatemensfinishdate);
                 builder.setPositiveButton("예",
@@ -70,19 +89,24 @@ public class mensUpdate2 extends Dialog {
                                 urlAddr = urlAddr + "calendarStartDate="+ShareVar.updatemensstartdate+"&calendarFinishDate="+ShareVar.Updatemensfinishdate+"&userId=" + userId;
 
                                 connectUpdateData();
-                                ShareVar.updatemensstartdate = null;
                                 ShareVar.Updatemensfinishdate = null;
+                                ShareVar.updatemensstartdate = null;
+                                Intent intent = new Intent(context, MainCalendar.class);
+                                context.startActivity(intent);
                             }
                         });
                 builder.setNegativeButton("아니오",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                ShareVar.updatemensstartdate = null;
+                                Toast.makeText(context, "수정이 취소되었습니다.", Toast.LENGTH_SHORT).show();
                                 ShareVar.Updatemensfinishdate = null;
+                                ShareVar.updatemensstartdate = null;
                                 dismiss();
                             }
                         });
                 builder.show();
+
+
             }
         });
 
@@ -94,6 +118,11 @@ public class mensUpdate2 extends Dialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public String checkDay(int Year, int Month, int Day) {
+        pickDate = Year + "-" + (Month + 1) + "" + "-" + Day;
+        Log.v("TAG", "오오오" + pickDate);
+        return pickDate;
     }
 
 }
