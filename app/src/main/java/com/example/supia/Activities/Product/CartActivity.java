@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -57,6 +58,10 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+
+
+
 
 
 
@@ -151,11 +156,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
-//                intent.putExtra("cartData",adapter.sendDate());
-//                startActivity(intent);
-//                Log.d(TAG,"들어오나");
-
                 //장바구니 리스트에 상품이 있으면 Intent 없으면 알람띄우기
                 if (cart.size() != 0) {
 
@@ -220,7 +220,6 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
 
 
     private void connectGetData() {
-
 
 
         try {

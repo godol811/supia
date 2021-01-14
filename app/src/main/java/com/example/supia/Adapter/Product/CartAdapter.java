@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.supia.Activities.Product.CategoryActivity;
 import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
@@ -94,6 +95,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -126,10 +128,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-
         holder.onBind(mDataset.get(position));
 
-//        final int pos = position;
+
+
+        mDataset.get(position).getCartProductId();
+
+//      final int pos = position;
 
 
         Glide.with(holder.productImg)
@@ -405,7 +410,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             // 뷰홀더에서만 리스트 포지션값을 불러올 수 있음.
 
 
-//             cbSelect.setTag();
+//          cbSelect.setTag();
 
 
 
@@ -425,6 +430,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     }
                 }
             });
+
 
 
             cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -459,6 +465,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             /**
              * 상품 이름,가격
              */
+            Log.d(TAG,"조건 찾는중 : " + String.valueOf(cartDto.getCartNo()));
+
 
 
             productName.setText(cartDto.getCartProductName());

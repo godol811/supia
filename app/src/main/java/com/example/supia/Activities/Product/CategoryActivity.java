@@ -21,8 +21,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import com.example.supia.Adapter.Product.CartAdapter;
 import com.example.supia.Adapter.Product.ProductAdapter;
+import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.Dto.Product.ProductDto;
+import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.NetworkTask.Product.NetworkTaskProduct;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -51,7 +54,7 @@ public class CategoryActivity extends Activity {
 //    ArrayList<ProductDto> product;
     ArrayList<ProductDto> product;
     ProductAdapter adapter = null;
-
+    ArrayList<CartDto> cart;
 
     private RecyclerView recyclerView = null;
     private RecyclerView.LayoutManager layoutManager = null;
@@ -133,6 +136,13 @@ public class CategoryActivity extends Activity {
         Intent intent = getIntent();   //IP 받아오자
 
         strBtnCategory = intent.getStringExtra("strBtnCategory");//클릭한 카테고리값 받아오기
+
+
+
+
+
+
+
 
 //        urlAddr = "http://" + urlIp + ":8080/test/category.jsp";
 //
@@ -488,6 +498,11 @@ public class CategoryActivity extends Activity {
             e.printStackTrace();
         }
     }
+
+
+
+
+
 
 
     //배경 터치 시 키보드 사라지게

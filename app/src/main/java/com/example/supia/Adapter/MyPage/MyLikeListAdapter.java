@@ -45,13 +45,14 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
 
     String urlAddr = "http://"+urlIp+":8080/pictures/";
 
-    public MyLikeListAdapter(Context mContext, int layout, ArrayList<MyLikeListDto> data) {
+    public MyLikeListAdapter(Context mContext, int layout, ArrayList<MyLikeListDto> data,ArrayList<ProductDto>cart) {
         Log.v("여기", "첫뻔째 어댑터 ");
 
 
         this.mContext = mContext;
         this.layout = layout;
         this.data = data;
+        this.cart = cart;
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
