@@ -20,6 +20,7 @@ import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 import static com.example.supia.ShareVar.ShareVar.*;
@@ -84,6 +85,7 @@ public class MyPageMainActivity extends Activity {
         llLikeList.setOnClickListener(likeListClickListener); //찜목록
         llCartList.setOnClickListener(cartListClickListener); //장바구니
         llSnsList.setOnClickListener(snsListClickListener); // 소셜로그인
+        llNoticeList.setOnClickListener(qnaListClickListener);
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
@@ -99,7 +101,19 @@ public class MyPageMainActivity extends Activity {
     } //---onCreate
 
 
+    //-----------------------------------------고객센터 클릭 이벤트---------------------------------------// <--방금 추가된거에요 팬츠
+    View.OnClickListener qnaListClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent qnalist = new Intent(MyPageMainActivity.this,MyQnaListActivity.class);
+            startActivity(qnalist);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
 
+        }
+    };
+
+
+    //-----------------------------------------------------------------------------------------------//
 
     //--------------------------------------바텀바 홈 클릭 이벤트 애정추가----------------------------------//
     View.OnClickListener bottomHomeClickListener = new View.OnClickListener() {

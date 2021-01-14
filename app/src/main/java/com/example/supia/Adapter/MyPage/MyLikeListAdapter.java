@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
+import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -29,6 +30,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
     private Context mContext = null;
     private int layout = 0;
     private ArrayList<MyLikeListDto> data = null;
+    private ArrayList<CartDto> cart;
     private LayoutInflater inflater = null;
     String urlAddr1;
     String urlIp = ShareVar.urlIp;
@@ -82,7 +84,13 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                 .override(120, 120)
                 .apply(new RequestOptions().circleCrop()).into(holder.productImagePath);//사진
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        holder.cart.setOnClickListener(new View.OnClickListener() { // 카드 눌렀을때 장바구니 추가
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.like.setOnClickListener(new View.OnClickListener() { // 눌려있는 하트 다시 눌렀을때 찜목록에서 삭제
             @Override
             public void onClick(View v) {
 
