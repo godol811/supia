@@ -5,11 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class myDBHelper extends SQLiteOpenHelper {
     public static String TAG = "데이터베이스핼퍼_SQLite";
+
+    SQLiteDatabase db;
 
     public static final String DATABASE_NAME = "supia.db";
     public static final String T_1 = "supiamensterm";
@@ -20,12 +23,60 @@ public class myDBHelper extends SQLiteOpenHelper {
 //        SQLiteDatabase database = this.getWritableDatabase();
 //        Log.v(TAG, "생성자 호출");
 //    }
-//    public Cursor getAllDates() {
-//        SQLiteDatabase database = this.getWritableDatabase();
-//        Cursor cursor = database.rawQuery("select * from " + T_1, null);
-//        database.close();
-//        return cursor;
-//    }
+
+    void DBSearch(String tableName) {
+        Cursor cursor = null;
+
+        try {
+            cursor = db.query(tableName, null, null, null, null, null, null);
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    String id = cursor.getString(cursor.getColumnIndex("ID"));
+                    String name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    String age = cursor.getString(cursor.getColumnIndex("AGE"));
+                    String phone = cursor.getString(cursor.getColumnIndex("PHONE"));
+
+                    Log.d(TAG, "id: " + id + ", name: " + name + ", age: " + age + ", phone: " + phone);
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    // SELECT * FROM People WHERE age < "age" ORDER BY NAME
+    void DBSearch(String tableName, Integer age) {
+        Cursor cursor = null;
+
+        try {
+            cursor = db.query(tableName, null, "AGE" + " < ?", new String[]{age.toString()}, null, null, "NAME");
+
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    String id = cursor.getString(cursor.getColumnIndex("ID"));
+                    String name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    String age2 = cursor.getString(cursor.getColumnIndex("AGE"));
+                    String phone = cursor.getString(cursor.getColumnIndex("PHONE"));
+
+                    Log.d(TAG, "id: " + id + ", name: " + name + ", age: " + age2 + ", phone: " + phone);
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    public Cursor getAllDates() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + T_1, null);
+        database.close();
+        return cursor;
+    }
+
     public myDBHelper(Context context) {
         super(context, "supia", null, 1);
     }
@@ -41,4 +92,10 @@ public class myDBHelper extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+//    public void displayUsers() {
+//        Cursor cursor = myDBHelper.getAllDates(); //here's where the error keeps on happening
+//        if(cursor.getCount() == 0) {
+//            //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
