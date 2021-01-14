@@ -73,6 +73,11 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         mContext = this;
 
+        //캘린더 정보 초기화 //
+        ShareVar.calendarsharvarStartdate = null;
+        ShareVar.calendarsharvarFinishdate = null;
+        ShareVar.calendarsharvarDeliverydate = null;
+        ShareVar.calendarsharvarBirthdate = null;
 
         SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);
         userinfoId = sf.getString("userId", "");
