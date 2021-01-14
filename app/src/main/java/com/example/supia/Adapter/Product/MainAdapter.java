@@ -198,7 +198,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder>{
 
 
 
-
     //인터페이스 선언
     public interface OnItemClickListener {
         void onItemClick(View v, int position);

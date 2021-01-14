@@ -124,6 +124,8 @@ public class SubCalendar extends FragmentActivity {
             materialCalendarView_sub.addDecorator(new EventDecorator(SubCalendar.this, Collections.singleton(CalendarDay.from(intstayear, intstamonth, i))));
         }
 
+        materialCalendarView_sub.setSelectedDate(CalendarDay.today());
+
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

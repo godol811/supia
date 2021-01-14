@@ -1,8 +1,12 @@
 package com.example.supia.Activities.Calendar;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +25,9 @@ import com.example.supia.ShareVar.ShareVar;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 
 public class MainCalendar extends FragmentActivity {
@@ -47,7 +53,11 @@ public class MainCalendar extends FragmentActivity {
             intdelday, intstaday, intfinday, intbirday;
 
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
+    View drdeli;
+    Drawable drbirth;
+    Drawable drline;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +127,9 @@ public class MainCalendar extends FragmentActivity {
         for (int i=intstaday; i<=intfinday; i++) {
             materialCalendarView_main.setSelectedDate(CalendarDay.from(intstayear, intstamonth, i));
             materialCalendarView_main.addDecorator(new EventDecorator(MainCalendar.this, Collections.singleton(CalendarDay.from(intstayear, intstamonth, i))));
-        }
+        }//기념일 호출하여 배경 그리기
+
+        materialCalendarView_main.setSelectedDate(CalendarDay.today());
 
         gotosub.setOnClickListener(new View.OnClickListener() {//sub페이지로 이동
             @Override

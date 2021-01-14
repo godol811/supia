@@ -61,7 +61,7 @@
         android:layout_gravity="right"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:text="월경일 편집"
+        android:text="월경일 기록하기"
         android:textSize="10dp" />
 
 

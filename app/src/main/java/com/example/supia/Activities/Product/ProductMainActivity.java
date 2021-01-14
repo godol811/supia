@@ -1,5 +1,6 @@
 package com.example.supia.Activities.Product;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -67,7 +69,7 @@ public class ProductMainActivity extends Activity {
         ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
 
 
-
+        ActivityCompat.requestPermissions(ProductMainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
 
         recyclerView = findViewById(R.id.rl_product_main);
         recyclerView.setHasFixedSize(true);
@@ -144,9 +146,35 @@ public class ProductMainActivity extends Activity {
         connectGetData();
 
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectGetData();
+        /////////////////////////////////////////보람 추가 - 값 받아가요///////////////////////////////////////////////////////
+       adapter.setOnItemClickListener(new MainAdapter.OnItemClickListener() {
+           @Override
+           public void onItemClick(View v, int position) {
+               Intent intent = new Intent(ProductMainActivity.this, ProductDetailActivity.class);
 
+               Log.v(TAG,"전달 전");
+               //-- fragment1로 값 전달
 
+               intent.putExtra("urlIp",ShareVar.urlIp);
+               intent.putExtra("productNo", product.get(position).getProductNo());
+               intent.putExtra("productName", product.get(position).getProductName());
+               intent.putExtra("productPrice", product.get(position).getProductPrice());
+               intent.putExtra("productBrand", product.get(position).getProductBrand());
+               intent.putExtra("productImagePath", product.get(position).getProductImagePath());
+               intent.putExtra("productInfo", product.get(position).getProductInfo());
+               Log.v(TAG,"productName " + product.get(position).getProductName());
+
+               startActivity(intent);
+
+           }
+       });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
 
@@ -202,6 +230,10 @@ public class ProductMainActivity extends Activity {
             }
         }
     };
+
+
+
+
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
     View.OnClickListener bottomMypageClickListener = new View.OnClickListener() {
