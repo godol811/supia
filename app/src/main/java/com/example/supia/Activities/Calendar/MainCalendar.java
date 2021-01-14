@@ -1,6 +1,7 @@
 package com.example.supia.Activities.Calendar;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -40,6 +42,7 @@ public class MainCalendar extends FragmentActivity {
     public String Dday;
     public String CurrentStartDay,LastFinishDay;
 
+    myDBHelper databaseHelper;
 
     private HashSet<CalendarDay> dates;
 
@@ -75,7 +78,7 @@ public class MainCalendar extends FragmentActivity {
         gotosub = findViewById(R.id.btn_maincalendar_gotosub);
         materialCalendarView_main = findViewById(R.id.materialcalendar_maincalendar);
 
-        connectGetData();
+        connectGetData();//mySQL 연결
 
         strcalendarStratDate = ShareVar.calendarsharvarStartdate;
         strcalendarFinishDate = ShareVar.calendarsharvarFinishdate;
@@ -160,9 +163,12 @@ public class MainCalendar extends FragmentActivity {
             e.printStackTrace();
         }
     }
-
-
-
+//    public void displayUsers() {
+//        Cursor cursor = databaseHelper.getAllDates(); //here's where the error keeps on happening
+//        if(cursor.getCount() == 0) {
+//            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+//        }
+//    }
     //애정존-----------------------------------
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
