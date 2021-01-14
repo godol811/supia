@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Adapter.Banner.BannerAdapter;
 import com.example.supia.Adapter.Product.MainAdapter;
@@ -47,6 +49,7 @@ public class ProductMainActivity extends Activity {
 
 
     ImageButton ibtnSearchActivity,ibtnCartActivity;//검색버튼
+    TextView tvMore;
 
     Button btnCategory1,btnCategory2,btnCategory3;
 
@@ -102,7 +105,7 @@ public class ProductMainActivity extends Activity {
         btnCategory1 = findViewById(R.id.btn_category1_product);
         btnCategory2 = findViewById(R.id.btn_category2_product);
         btnCategory3 = findViewById(R.id.btn_category3_product);
-
+        tvMore =findViewById(R.id.tv_more_orederlist); //---애츄 추가 (더보기 클릭시 주문내역으로)
 
         //----------bottom bar 아이디(애정추가)----------//
         ibtnMall = findViewById(R.id.mall_bottom_bar);
@@ -116,6 +119,7 @@ public class ProductMainActivity extends Activity {
         btnCategory1.setOnClickListener(btnCategoryOnClickListener);
         btnCategory2.setOnClickListener(btnCategoryOnClickListener);
         btnCategory3.setOnClickListener(btnCategoryOnClickListener);
+        tvMore.setOnClickListener(tvMoreClickListener);
 
         //애정추가-----------------//
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
@@ -188,11 +192,23 @@ public class ProductMainActivity extends Activity {
 
     }
 
+    View.OnClickListener tvMoreClickListener = new View.OnClickListener() { // 더보기 클릭시 주문내역 페이지로 이동 (애츄추가)
+        @Override
+        public void onClick(View v) {
+
+            Intent more = new Intent(ProductMainActivity.this, MyOrderActivity.class);
+            startActivity(more);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
+
+        }
+    };
+
     View.OnClickListener searchOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
         }
     };
 
@@ -202,6 +218,7 @@ public class ProductMainActivity extends Activity {
         public void onClick(View v) {
             Intent intent1 = new Intent(ProductMainActivity.this, CartActivity.class);
             startActivity(intent1);
+            overridePendingTransition(R.anim.hold, R.anim.hold);
         }
     } ;
 
@@ -219,6 +236,7 @@ public class ProductMainActivity extends Activity {
 
                     intent.putExtra("strBtnCategory", strBtnCategory1);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.hold, R.anim.hold);
 
                     break;
 
@@ -228,6 +246,7 @@ public class ProductMainActivity extends Activity {
                     String strBtnCategory2 = (String)btnCategory2.getText();
                     intent1.putExtra("strBtnCategory", strBtnCategory2);
                     startActivity(intent1);
+                    overridePendingTransition(R.anim.hold, R.anim.hold);
                     break;
 
 
@@ -236,6 +255,7 @@ public class ProductMainActivity extends Activity {
                     String strBtnCategory3 = (String)btnCategory3.getText();
                     intent2.putExtra("strBtnCategory", strBtnCategory3);
                     startActivity(intent2);
+                    overridePendingTransition(R.anim.hold, R.anim.hold);
                     break;
             }
         }
