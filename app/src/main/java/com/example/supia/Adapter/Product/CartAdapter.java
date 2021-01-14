@@ -2,6 +2,7 @@ package com.example.supia.Adapter.Product;
 
 
 import android.content.Context;
+import android.media.MediaCodec;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -33,7 +34,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     final static String TAG = "카트어뎁터";
 
 
+
+
+
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
+
+
+
+
+
+
+
+
 
 
     public SparseBooleanArray array = new SparseBooleanArray();
@@ -79,13 +91,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         this.onChangeCheckedPrice =onChangeCheckedPrice;
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
-
-
-
-
-
-
 
 
 
@@ -290,11 +295,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         }
     }
 
-    public ArrayList<CartDto> checkBoxChecked(){
 
-        return checkBoxChecked();
 
-    }
+
+
 
 
     //인터페이스 선언
@@ -397,6 +401,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             // 뷰홀더에서만 리스트 포지션값을 불러올 수 있음.
 
 
+//             cbSelect.setTag();
 
 
 

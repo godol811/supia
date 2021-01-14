@@ -127,23 +127,47 @@ public class CartActivity extends Activity implements OnChangeCheckedPrice{
             @Override
             public void onClick(View v) {
 
-                if(cart.size() != 0) {
-                    Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
-                    intent.putExtra("cartData",adapter.sendDate());
-                    startActivity(intent);
-                    Log.d(TAG,"들어오나");
+//                Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
+//                intent.putExtra("cartData",adapter.sendDate());
+//                startActivity(intent);
+//                Log.d(TAG,"들어오나");
 
-                } else {
+                //장바구니 리스트에 상품이 있으면 Intent 없으면 알람띄우기
+                if (cart.size() != 0) {
 
-                    new AlertDialog.Builder(CartActivity.this)
+                    //
+                    if (adapter.sendDate().size() == 0) {
+
+                        new AlertDialog.Builder(CartActivity.this)
+                                .setTitle("알림")
+                                .setMessage("체크된 상품이 없습니다.")
+                                .setPositiveButton("확인", null)
+                                .setCancelable(true)
+                                .show();
+                    } else {
+//                        Toast.makeText(CartActivity.this, "구매 시작해주세요.", Toast.LENGTH_SHORT).show();
+//
+//                        new AlertDialog.Builder(CartActivity.this)
+//                                .setTitle("알림")
+//                                .setMessage("최소 구입 수량은 1개 입니다")
+//                                .setPositiveButton("확인", null)
+//                                .setCancelable(true)
+//                                .show();
+
+                        Intent intent = new Intent(CartActivity.this, BasketPurchaseCheckActivity.class);
+                        intent.putExtra("cartData", adapter.sendDate());
+                        startActivity(intent);
+
+                    }
+                    } else {
+                     new AlertDialog.Builder(CartActivity.this)
                             .setTitle("알림")
-                            .setMessage("장바구니에 선택된 상품이 없습니다!")
+                            .setMessage("장바구니에 상품이 없습니다.")
                             .setPositiveButton("확인", null)
                             .setCancelable(true)
                             .show();
-
-                    paymentBtn.setClickable(false);
-                }
+                paymentBtn.setClickable(false);
+            }
             }
         });
 
