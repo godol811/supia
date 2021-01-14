@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.supia.Activities.MyPage.MyCartListActivity;
 import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -82,6 +83,7 @@ public class MainCalendar extends FragmentActivity {
         strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
         Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
 
+
         String [] strarray = strcalendarStratDate.split("-");
         String [] strarray2 = strcalendarFinishDate.split("-");
         String [] strarray3 = strcalendarDeliveryDate.split("-");
@@ -134,7 +136,7 @@ public class MainCalendar extends FragmentActivity {
         btnedit.setOnClickListener(new View.OnClickListener() {//월경일 편집- datepicker
             @Override
             public void onClick(View v) {
-                MensEdit dialog = new MensEdit(MainCalendar.this);
+                datePicker dialog = new datePicker(MainCalendar.this);
                 dialog.show();
             }
         });
@@ -153,7 +155,7 @@ public class MainCalendar extends FragmentActivity {
             CalendarNetworkTask networkTask = new CalendarNetworkTask(MainCalendar.this, urlAddr, "select");
             Object obj = networkTask.execute().get();
             dates = (HashSet<CalendarDay>) obj;
-
+            strcalendarStratDate = dates.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -59,6 +59,11 @@ public class SubCalendar extends FragmentActivity {
 
         btnedit = findViewById(R.id.btn_edit_subcalendar);
 
+        //----------bottom bar 아이디(애정추가)----------//
+        ibtnMall = findViewById(R.id.mall_bottom_bar);
+        ibtnHome = findViewById(R.id.home_bottom_bar);
+        ibtnMypage = findViewById(R.id.mypage_bottom_bar);
+        //-------------------------------------------//
 
         connectGetData();
 
@@ -89,9 +94,9 @@ public class SubCalendar extends FragmentActivity {
         intfinmonth = Integer.parseInt(strarray4[1]) - 1;
         intfinday = Integer.parseInt(strarray4[2]);
         //애정추가-----------------//
-//        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
-//        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
-//        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
+        ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
+        ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
+        ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         //---------------------//
 
 
