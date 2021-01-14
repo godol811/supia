@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.R;
 
@@ -20,6 +21,10 @@ public class MyCartListActivity extends Activity {
     TextView tvMypage, tvSubscribe, tvOrder; // header
     ImageButton ibtnBack; // header
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar
+
+
+
+
 
 
     @Override
