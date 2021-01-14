@@ -32,6 +32,7 @@ public class mensUpdate extends Dialog {
 
         btnnext = findViewById(R.id.btn_next_mensupdate);
         datePicker = findViewById(R.id.maincalendar_mens_start_update);
+
         String date = Integer.toString(datePicker.getYear())+"-"+Integer.toString(datePicker.getMonth()+1)+"-"+Integer.toString(datePicker.getDayOfMonth());
         Log.v(TAG, date);
         btnnext.setOnClickListener(new View.OnClickListener() {
