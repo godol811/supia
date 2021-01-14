@@ -207,7 +207,6 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
             Log.v(TAG, s);
 
             JSONObject jsonObject = new JSONObject(s);
-            Log.v(TAG,"들어오라고 이자식아");
             returnValue = jsonObject.getString("result");
             Log.v(TAG, returnValue);
 

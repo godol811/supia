@@ -65,7 +65,7 @@ public class mensUpdate2 extends Dialog {
                 builder.setPositiveButton("예",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
                                 urlAddr = urlAddr + "calendarStartDate="+ShareVar.updatemensstartdate+"&calendarFinishDate="+ShareVar.Updatemensfinishdate+"&userId=" + userId;
 
@@ -89,8 +89,8 @@ public class mensUpdate2 extends Dialog {
     }
     private void connectUpdateData() {
         try {
-            CalendarNetworkTask updateworkTask = new CalendarNetworkTask(getContext(), urlAddr, "update");
-            updateworkTask.execute().get();
+            CalendarNetworkTask updatenetworkTask = new CalendarNetworkTask(getContext(), urlAddr, "update");
+            updatenetworkTask.execute().get();
         } catch (Exception e) {
             e.printStackTrace();
         }
