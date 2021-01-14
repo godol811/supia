@@ -25,6 +25,7 @@ import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.MyViewHolder> {
@@ -86,6 +87,8 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                         .get(position).getProductImagePath())
                 .override(120, 120)
                 .apply(new RequestOptions().circleCrop()).into(holder.productImagePath);//사진
+
+
 
         holder.cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,4 +240,10 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
 }//-------------------------

@@ -84,7 +84,10 @@ public class MySubscribeActivity extends Activity {
         subscriveRv = findViewById(R.id.rv_mysubscribe);
         subscriveRv.setHasFixedSize(true);
         subLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) subLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+
         subscriveRv.setLayoutManager(subLayoutManager);
+
         //---------------------------------------//
 
 
