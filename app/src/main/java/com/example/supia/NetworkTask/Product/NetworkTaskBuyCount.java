@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.supia.Dto.MyPage.MyOrderListDto;
-import com.example.supia.Dto.Product.CartDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,7 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
+public class NetworkTaskBuyCount extends AsyncTask<Integer, String, String> {
 
     final static String TAG = "네트워크타스크";
 
@@ -60,7 +59,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
     }
 
     @Override
-    protected Object doInBackground(Integer... integers) {
+    protected String doInBackground(Integer... integers) {
         Log.v(TAG, "doInBackground()");
 
         StringBuffer stringBuffer = new StringBuffer();
@@ -76,6 +75,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
         //
         ///////////////////////////////////////////////////////////////////////////////////////
         String result = null;
+        String parser = null; //추가
         ///////////////////////////////////////////////////////////////////////////////////////
 
         try {
@@ -103,7 +103,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
                 ///////////////////////////////////////////////////////////////////////////////////////
                 if (where.equals("select")) {
                     Log.v(TAG, "select");
-                    parserSelect(stringBuffer.toString());
+                    parser=parserSelect(stringBuffer.toString()); //변경
                     Log.d(TAG,"select");
                 } else if (where.equals("like")) {//라이크로 들어오면 파싱하지 않음
 
@@ -134,7 +134,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
         //
         ///////////////////////////////////////////////////////////////////////////////////////
         if (where.equals("select")) {
-            return Cart;
+            return parser; //변경
         } else {
             return result;
         }
@@ -143,7 +143,7 @@ public class NetworkTaskBuyCount extends AsyncTask<Integer, String, Object> {
     }
 
     @Override
-    protected void onPostExecute(Object o) {
+    protected void onPostExecute(String o) {
         Log.v(TAG, "onPostExecute()");
         super.onPostExecute(o);
         progressDialog.dismiss();

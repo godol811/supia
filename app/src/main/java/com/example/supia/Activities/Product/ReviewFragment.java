@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.supia.Adapter.Product.ProductReviewListAdapter;
 import com.example.supia.Dto.MyPage.MyReviewDto;
-import com.example.supia.NetworkTask.MyPage.MyReviewInsertNetworkTask;
 import com.example.supia.NetworkTask.Product.NetworkTaskBuyCount;
+import com.example.supia.NetworkTask.Product.ProductReviewInsertNetworkTask;
 import com.example.supia.R;
 
 import java.util.ArrayList;
@@ -65,12 +65,12 @@ public class ReviewFragment extends Fragment {
         return rootView;
 
     }
-
+//---리뷰
     private void connectGetData() {
         try {
 
             String reviewUrl = "http://" + urlIp + ":8080/test/supiaProductReviewList.jsp?productNo="+productNo;
-            MyReviewInsertNetworkTask networkTask1 = new MyReviewInsertNetworkTask(getActivity(), reviewUrl, "select");
+            ProductReviewInsertNetworkTask networkTask1 = new ProductReviewInsertNetworkTask(getActivity(), reviewUrl, "select");
             Object obj = networkTask1.execute().get();
             list = (ArrayList<MyReviewDto>) obj;
             adapter = new ProductReviewListAdapter(getContext(), R.layout.activity_my_order, list);
@@ -81,12 +81,14 @@ public class ReviewFragment extends Fragment {
             e.printStackTrace();
         }
     }
+//-----
 
+    //------ 몇명이 구매 했는지
     private void connectGetDataBuy() {
         try {
 
             String buyUrl = "http://" + urlIp + ":8080/test/supiaBuyCount.jsp?productNo="+productNo;
-            NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getActivity(), buyUrl, "select");
+            NetworkTaskBuyCount networkTask2 = new NetworkTaskBuyCount(getContext(), buyUrl, "select");
             Object obj2 = networkTask2.execute().get();
             Log.v("안들어오니?" ,"obj"+obj2);
             String cnt = (String) obj2;
@@ -98,6 +100,6 @@ public class ReviewFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
+//--------
 
 }//끄읕
