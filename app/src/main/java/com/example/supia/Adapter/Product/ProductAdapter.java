@@ -23,6 +23,8 @@ import com.example.supia.Activities.Product.CartInsertActivity;
 import com.example.supia.Activities.Product.LikeActivity;
 import com.example.supia.Activities.Product.OnChangeCheckedPrice;
 import com.example.supia.Dto.Product.ProductDto;
+import com.example.supia.NetworkTask.Product.NetworkTaskCart;
+import com.example.supia.NetworkTask.Product.NetworkTaskProduct;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
@@ -58,7 +60,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     private RecyclerView recyclerView = null;
 
-
+    ArrayList<ProductDto> product;
 
     String urlAddr = "http://"+ ShareVar.urlIp+":8080/pictures/";
 
@@ -105,6 +107,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
 
+        int likeProductId = mDataset.get(position).getProductNo();
+
+
 //      상품넘버 저장
         ShareVar.productId = mDataset.get(position).getProductNo();
 
@@ -113,7 +118,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
         likeCheck = mDataset.get(position).getLikeCheck();
 
-
+        Log.d(TAG, "likeCheck : " + likeCheck);
 
         if (likeCheck.equals("1")){
             Log.d(TAG, "1일떄" + mDataset.get(position).getLikeCheck());
@@ -130,7 +135,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 .placeholder(R.drawable.ic_launcher_foreground)//이미지가 로딩하는 동안 보여질 이미
                 .override(120, 120)//이미지 크기
                 .apply(new RequestOptions()).into(holder.productImg);//사진
-
 
 
 
@@ -153,29 +157,61 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     if (likeCheck.equals("null")){
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 null");
                             holder.likeListbtn.setImageResource(R.drawable.like_click);
-                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
+
+
+//                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
 //                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
-                            intent.putExtra("likeCheck", likeCheck);
-                            v.getContext().startActivity(intent);
+//                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
+
+//                            intent.putExtra("likeCheck", likeCheck);
+//                            v.getContext().startActivity(intent);
+
+                        urlAddr = "http://"+ ShareVar.urlIp +":8080/test/insertlike.jsp?";
+                        urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=1&likeUserId=" + ShareVar.sharvarUserId;
+                        connectGetData();
+
+//                        notifyItemChanged(holder.getAdapterPosition());
                         }else {
 
                         if (likeCheck.equals("1")){
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 1");
                             holder.likeListbtn.setImageResource(R.drawable.like);
-                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
-                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
-                            intent.putExtra("likeCheck", "0");
-                            v.getContext().startActivity(intent);
+
+
+
+                            Log.d(TAG, "1로들어왔을떄" + String.valueOf(likeCheck));
+
+
+                            urlAddr = "http://"+ ShareVar.urlIp +":8080/test/updatelike.jsp?";
+                            urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=" + 0 + "&likeUserId=" + ShareVar.sharvarUserId;
+                            connectUpdateData();
+
+//                            notifyItemChanged(holder.getAdapterPosition());      notifyItemChanged(holder.getAdapterPosition());
+//                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
+//                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
+//                            intent.putExtra("likeCheck", "0");
+//                            v.getContext().startActivity(intent);
+
+
 
                         }else if (likeCheck.equals("0")){
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 0");
                             holder.likeListbtn.setImageResource(R.drawable.like_click);
-                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
-                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
-                            intent.putExtra("likeCheck", "1");
-                            v.getContext().startActivity(intent);
+
+                            urlAddr = "http://"+ ShareVar.urlIp +":8080/test/updatelike.jsp?";
+                            urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=" + 1 + "&likeUserId=" + ShareVar.sharvarUserId;
+
+                            connectUpdateData();
+
+
+//                            Intent intent = new Intent(v.getContext(), LikeActivit
+//                            y.class);
+//                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
+//                            intent.putExtra("likeCheck", "1");
+//                            v.getContext().startActivity(intent);
+
+
                         }
                     }
 
@@ -253,6 +289,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     }
 
 
+
+    private void connectGetData() {
+
+        try {
+            NetworkTaskProduct networkTaskLike = new NetworkTaskProduct(mContext, urlAddr, "like");
+            networkTaskLike.execute().get();
+//            Object obj = networkTaskLike.execute().get();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private void connectUpdateData() {
+        try {
+            NetworkTaskProduct updateworkTask = new NetworkTaskProduct(mContext, urlAddr, "like");
+            updateworkTask.execute().get();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
     class MyViewHolder extends RecyclerView.ViewHolder {
         final static String TAG1 = "MyViewHolder";
         // each data item is just a string in this case
@@ -314,6 +381,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         }
+
+
+//        private void connectGetData() {
+//
+//
+//
+//            try {
+//
+//                NetworkTaskCart networkTask = new NetworkTaskCart(mContext, urlAddr,"like");
+//
+//                Object obj = networkTask.execute().get();
+//
+//
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
 
