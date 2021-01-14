@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView tvMinusBottomsheet, tvProductQuantityNumBottomsheet, tvPlusBottomsheet;
     Button btnCartAdd, btnBuy;
 
+    ImageButton ibtnSearchActivity;//검색버튼
+    ImageButton ibtnCartActivity;//장바구니버튼
 
     int productNo;
     int productQuantity;
@@ -89,6 +92,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvMinusBottomsheet.setOnClickListener(minusClick);
         tvPlusBottomsheet.setOnClickListener(plusClick);
         //---
+
+
+        //---헤더 검색,장바군 ㅣ버튼
+        ibtnSearchActivity = findViewById(R.id.search_header);//헤더 검색 버튼
+        ibtnCartActivity = findViewById(R.id.cart_header);
+        ibtnSearchActivity.setOnClickListener(ibtnOnClickListener);
+        ibtnCartActivity.setOnClickListener(ibtnOnClickListener);
+        //-----
 
 
 //-------바텀시트--------
@@ -170,16 +181,18 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener cartClick = new View.OnClickListener() {
+    View.OnClickListener cartClick = new View.OnClickListener() { //카트버튼
         @Override
         public void onClick(View v) {
 
             productQuantity = Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
 
-            urlAddr = "http://" + urlIp + ":8080/test/insertcart.jsp?";
-            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity + "&productPrice=" + productPrice + "&productName=" + productName
-                    + "&productImagePath=" + productImagePath;
+            //----여기 수정
+            urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
+            urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
+                    +"&productImagePath=" + productImagePath +"&cartUserId=" + ShareVar.sharvarUserId;
             connectGetData();
+            //--------
 
             Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
             startActivity(intent);
@@ -188,8 +201,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     };
 
-    //-------------------------01.13 새벽 추가 ----------------------------------------------------
-    View.OnClickListener buyClcick = new View.OnClickListener() {
+
+    View.OnClickListener buyClcick = new View.OnClickListener() { //구매하기 버튼
         @Override
         public void onClick(View v) {
             productQuantity = Integer.parseInt(tvProductQuantityNumBottomsheet.getText().toString());
@@ -226,17 +239,37 @@ public class ProductDetailActivity extends AppCompatActivity {
                     .show();
         }
     };
-    //-------------------------------------------------------------------
+
 
     private void connectGetData() {
         try {
-            NetworkTaskCart networkTaskCart = new NetworkTaskCart(ProductDetailActivity.this, urlAddr, "insert");
+            NetworkTaskCart networkTaskCart = new NetworkTaskCart(ProductDetailActivity.this, urlAddr, "like");
             networkTaskCart.execute().get();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    //----------1/14 추가 헤더 버튼 클릭---------
+    View.OnClickListener ibtnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.search_header:
+                    Intent intent = new Intent(ProductDetailActivity.this, SearchActivity.class);
+                    startActivity(intent);
+                    break;
+
+
+                case R.id.cart_header:
+
+
+                    Intent intent1 = new Intent(ProductDetailActivity.this, CartActivity.class);
+                    startActivity(intent1);
+                    break;
+            }
+        }
+    };
+//---------------------------------
 
 }//끄읕
