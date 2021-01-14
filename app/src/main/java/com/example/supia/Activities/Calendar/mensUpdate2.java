@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
-import com.kakao.auth.helper.StartActivityWrapper;
+
 
 public class mensUpdate2 extends Dialog {
 

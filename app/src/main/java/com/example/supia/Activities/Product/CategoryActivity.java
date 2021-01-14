@@ -505,6 +505,7 @@ public class CategoryActivity extends Activity {
 
 
 
+
     //배경 터치 시 키보드 사라지게
     public boolean dispatchTouchEvent(MotionEvent ev) {
         View view = getCurrentFocus();

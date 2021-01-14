@@ -123,7 +123,18 @@ public class MySubOrderListAdapter extends RecyclerView.Adapter<MySubOrderListAd
             productImagePath = v.findViewById(R.id.iv_product_mysubscribe_detail);
             subscribeQuantity = v.findViewById(R.id.tv_productquantity_mysubscribe_detail);
 
-
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();//어뎁터 포지션값
+                    // 뷰홀더에서 사라지면 NO_POSITION 을 리턴
+                    if (position != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onItemClick(v, position);
+                        }
+                    }
+                }
+            });
 
 
 

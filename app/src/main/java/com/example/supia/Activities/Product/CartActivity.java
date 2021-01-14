@@ -221,6 +221,7 @@ public class CartActivity extends Activity {
 
     private void connectGetData() {
 
+
         try {
 
             NetworkTaskCart networkTask = new NetworkTaskCart(CartActivity.this, urlAddr,"select");
