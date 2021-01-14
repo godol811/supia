@@ -1,24 +1,19 @@
 package com.example.supia.Activities.Calendar;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.supia.Activities.MyPage.MyCartListActivity;
 import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
-import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;

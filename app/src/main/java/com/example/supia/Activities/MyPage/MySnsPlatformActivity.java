@@ -49,7 +49,7 @@ public class MySnsPlatformActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sns_platform);
-
+        overridePendingTransition(R.anim.hold, R.anim.hold);
 
         //구글 SignInOptions 유도///////////////////////////////////////////////////////////////////
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

@@ -21,6 +21,7 @@ import com.example.supia.Dto.MyPage.MyOrderListDto;
 import com.example.supia.Dto.MyPage.MyQnaDto;
 import com.example.supia.Dto.MyPage.MyReviewDto;
 import com.example.supia.NetworkTask.MyPage.MyOrderListNetworkTask;
+import com.example.supia.NetworkTask.MyPage.MyQnaListNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
 
@@ -46,8 +47,7 @@ public class MyQnaListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_qna_list);
-
-        connectGetData();
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         //-----------For Recycler----------------//
         qna = new ArrayList<MyQnaDto>();
@@ -56,6 +56,7 @@ public class MyQnaListActivity extends AppCompatActivity {
         qnaLayoutManager = new LinearLayoutManager(this);
         rvQna.setLayoutManager(qnaLayoutManager);
         //---------------------------------------//
+        connectGetData();
 
         //----------header 아이디----------//
         ibtnBack = findViewById(R.id.ibtn_back_mypage_header); //뒤로가기
@@ -179,7 +180,7 @@ public class MyQnaListActivity extends AppCompatActivity {
     private void connectGetData() {
         try {
 
-            MyOrderListNetworkTask networkTask1 = new MyOrderListNetworkTask(MyQnaListActivity.this, qnaUrl, "select");
+            MyQnaListNetworkTask networkTask1 = new MyQnaListNetworkTask(MyQnaListActivity.this, qnaUrl, "select");
             Object obj = networkTask1.execute().get();
             qna = (ArrayList<MyQnaDto>) obj;
             qnaAdapter = new MyQnaListAdapter(MyQnaListActivity.this, R.layout.activity_my_qna_list, qna);
