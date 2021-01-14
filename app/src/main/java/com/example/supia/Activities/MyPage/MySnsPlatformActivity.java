@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -96,14 +97,17 @@ public class MySnsPlatformActivity extends Activity {
     View.OnClickListener googleClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            new AlertDialog.Builder(MySnsPlatformActivity.this)
-
-
-
-
-
-            signIn();
-
+            new AlertDialog.Builder(MySnsPlatformActivity.this)
+                    .setTitle("알림")
+                    .setIcon(R.mipmap.supia)
+                    .setMessage("\n  확인을 누르시면 로그아웃이되며 \n 구글연동 로그인페이지로 가게됩니다.")
+                    .setPositiveButton("취소",null)
+                    .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            signIn();
+                        }
+                    }).show();
 
         }
     };
@@ -114,13 +118,26 @@ public class MySnsPlatformActivity extends Activity {
         @Override
         public void onClick(View v) {
 
-            if (LoginClient.getInstance().isKakaoTalkLoginAvailable(MySnsPlatformActivity.this)) { //기기를 통한 카카오톡 로그인 가능한지
-                LoginClient.getInstance().loginWithKakaoTalk(MySnsPlatformActivity.this, callback);
-            } else {
-                LoginClient.getInstance().loginWithKakaoAccount(MySnsPlatformActivity.this, callback);//아니면 카카오톡 온라인
+            new AlertDialog.Builder(MySnsPlatformActivity.this)
+                    .setTitle("알림")
+                    .setIcon(R.mipmap.supia)
+                    .setMessage("\n  확인을 누르시면 로그아웃이되며 \n 카카오연동 로그인페이지로 가게됩니다.")
+                    .setPositiveButton("취소",null)
+                    .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (LoginClient.getInstance().isKakaoTalkLoginAvailable(MySnsPlatformActivity.this)) { //기기를 통한 카카오톡 로그인 가능한지
+                                LoginClient.getInstance().loginWithKakaoTalk(MySnsPlatformActivity.this, callback);
+                            } else {
+                                LoginClient.getInstance().loginWithKakaoAccount(MySnsPlatformActivity.this, callback);//아니면 카카오톡 온라인
 
-            }
-            updateKakaoLoginUi();
+                            }
+                            updateKakaoLoginUi();
+
+                        }
+                    }).show();
+
+
 
         }
     };
