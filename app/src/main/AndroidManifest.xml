@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/supia"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.MyPage.MyPageSubscribeDeliveryModifyActivity"></activity>
+        <activity android:name=".Activities.tutorial3"></activity>
+        <activity android:name=".Activities.tutorial2" />
+        <activity android:name=".Activities.tutorial1" />
+        <activity android:name=".Activities.MyPage.MyPageSubscribeDeliveryModifyActivity" />
         <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity" />
         <activity android:name=".Activities.Product.ProductDetailActivity" />
         <activity android:name=".Activities.MyPage.MyQnaListActivity" />
