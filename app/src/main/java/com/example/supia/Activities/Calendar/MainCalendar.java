@@ -25,10 +25,16 @@ import com.example.supia.ShareVar.ShareVar;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 public class MainCalendar extends FragmentActivity {
 
@@ -41,7 +47,7 @@ public class MainCalendar extends FragmentActivity {
     public String strcalendarStratDate, strcalendarFinishDate, strcalendarDeliveryDate, strcalendarBirthDate;
 
     public String Dday;
-    public String CurrentStartDay,LastFinishDay;
+    public String CurrentStartDay, LastFinishDay;
 
     myDBHelper databaseHelper;
 
@@ -87,10 +93,10 @@ public class MainCalendar extends FragmentActivity {
         strcalendarBirthDate = ShareVar.calendarsharvarBirthdate;
         Log.v(TAG, "쉐어바데이트" + strcalendarStratDate + strcalendarFinishDate + strcalendarDeliveryDate + strcalendarBirthDate);
 
-        String [] strarray = strcalendarStratDate.split("-");
-        String [] strarray2 = strcalendarFinishDate.split("-");
-        String [] strarray3 = strcalendarDeliveryDate.split("-");
-        String [] strarray4 = strcalendarBirthDate.split("-");
+        String[] strarray = strcalendarStratDate.split("-");
+        String[] strarray2 = strcalendarFinishDate.split("-");
+        String[] strarray3 = strcalendarDeliveryDate.split("-");
+        String[] strarray4 = strcalendarBirthDate.split("-");
 
         intstayear = Integer.parseInt(strarray[0]);
         intstamonth = Integer.parseInt(strarray[1]) - 1;
@@ -112,9 +118,26 @@ public class MainCalendar extends FragmentActivity {
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
         //---------------------//
+        Calendar calendar = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFinish = null;
+        try {
+            dateFinish = dateFormat.parse(strcalendarFinishDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.setTime(dateFinish);
+        calendar.add(Calendar.DAY_OF_MONTH, 28);
+        Date datePredictStart = calendar.getTime();
+        Date now = new Date();
 
-        Dday = "1";
-        tvDday.setText("월경   " + Dday + "   일전");
+        long diffInMillies = Math.abs(datePredictStart.getTime() - now.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+
+
+
+        tvDday.setText("월경   " + diff + "   일전");
 
         //materialCalendarView_main.setBackgroundResource(R.drawable.calendar_background_total);
 
@@ -124,7 +147,7 @@ public class MainCalendar extends FragmentActivity {
         materialCalendarView_main.setSelectedDate(CalendarDay.from(intbiryear, intbirmonth, intbirday));
         materialCalendarView_main.addDecorator(new EventDecoratorDraw2(MainCalendar.this, Collections.singleton(CalendarDay.from(intbiryear, intbirmonth, intbirday))));
 
-        for (int i=intstaday; i<=intfinday; i++) {
+        for (int i = intstaday; i <= intfinday; i++) {
             materialCalendarView_main.setSelectedDate(CalendarDay.from(intstayear, intstamonth, i));
             materialCalendarView_main.addDecorator(new EventDecorator(MainCalendar.this, Collections.singleton(CalendarDay.from(intstayear, intstamonth, i))));
         }//기념일 호출하여 배경 그리기
@@ -150,6 +173,9 @@ public class MainCalendar extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        for (int i = intstaday; i <= intfinday; i++) {
+            materialCalendarView_main.setSelectedDate(CalendarDay.today());
+        }//기념일 호출하여 배경 그리기
     }
 
     private void connectGetData() {
@@ -201,7 +227,6 @@ public class MainCalendar extends FragmentActivity {
         }
     };
     //---------------------------------------------------------------------------------------------//
-
 
 
 }

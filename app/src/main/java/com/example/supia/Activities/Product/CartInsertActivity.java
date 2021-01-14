@@ -3,6 +3,7 @@ package com.example.supia.Activities.Product;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,16 +47,25 @@ public class CartInsertActivity extends Activity {
         urlIp = ShareVar.urlIp;
 
         productNo = intent.getIntExtra("productNo",0);
-        check = intent.getIntExtra("check",0);
+
         productQuantity = 1;
         productPrice = intent.getStringExtra("productPrice");
         productName = intent.getStringExtra("productName");
         productImagePath = intent.getStringExtra("productImagePath");
 
+        check = intent.getIntExtra("check",0);
+
+        Log.d("마이라이크리스트어뎁터1",String.valueOf(productNo));
+        Log.d("마이라이크리스트어뎁터2",String.valueOf(productPrice));
+        Log.d("마이라이크리스트어뎁터3",productName);
+        Log.d("마이라이크리스트어뎁터4",productImagePath);
+
+
+
 
 
         //insert하기전에 장바구니에 똑같은 물건이 있으면 다이얼로그 띄우기
-//        if ()
+
         urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
         urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
                 +"&productImagePath=" + productImagePath +"&cartUserId=" + ShareVar.sharvarUserId;

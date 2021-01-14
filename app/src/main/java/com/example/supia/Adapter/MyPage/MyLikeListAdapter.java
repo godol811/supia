@@ -43,9 +43,11 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
     String userId = ShareVar.sharvarUserId;
 
 
-    String urlAddr = "http://" + urlIp + ":8080/pictures/";
 
-    public MyLikeListAdapter(Context mContext, int layout, ArrayList<MyLikeListDto> data, ArrayList<ProductDto> cart) {
+
+    String urlAddr = "http://"+urlIp+":8080/pictures/";
+
+    public MyLikeListAdapter(Context mContext, int layout, ArrayList<MyLikeListDto> data,ArrayList<ProductDto>cart) {
         Log.v("여기", "첫뻔째 어댑터 ");
 
 
@@ -132,8 +134,10 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
                         }).show();
 
 
+
             }
         });
+
 
 
         holder.like.setOnClickListener(new View.OnClickListener() { // 눌려있는 하트 다시 눌렀을때 찜목록에서 삭제
@@ -166,6 +170,7 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
 
             }
         });
+
 
 
     }
@@ -247,14 +252,9 @@ public class MyLikeListAdapter extends RecyclerView.Adapter<MyLikeListAdapter.My
             deleteworkTask.execute().get();
 
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
 }//-------------------------
