@@ -19,13 +19,13 @@
         <activity android:name=".Activities.MyPage.MyPageSubscribeDeliveryModifyActivity"></activity>
         <activity android:name=".Activities.RegualarDeliveryPayment.RegularDeliveryAddressListActivity" />
         <activity android:name=".Activities.Product.ProductDetailActivity" />
+        <activity android:name=".Activities.MyPage.MyQnaListActivity" />
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
         <activity android:name=".Activities.Product.LikeActivity" />
         <activity android:name=".Activities.MyPage.MyPageReviewInsertActivity" />
         <activity android:name=".Activities.MyPage.MyLikeListActivity" />
         <activity android:name=".Activities.MyPage.MySubscribeActivity" />
         <activity android:name=".Activities.MyPage.MyOrderActivity" />
-        <activity android:name=".Activities.MyPage.MyCartListActivity" />
         <activity android:name=".Activities.MyPage.MySnsPlatformActivity" />
         <activity android:name=".Activities.MyPage.MyPageMainActivity" />
         <activity android:name=".Activities.Product.CartInsertActivity" />

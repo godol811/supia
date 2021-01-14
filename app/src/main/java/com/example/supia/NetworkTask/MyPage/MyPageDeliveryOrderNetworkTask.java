@@ -172,7 +172,6 @@ public class MyPageDeliveryOrderNetworkTask extends AsyncTask<Integer, String, O
 
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
                 String deliveryAddr = jsonObject1.getString("deliveryAddr");
-                String deliveryAddrDetail = jsonObject1.getString("deliveryAddrDetail");
                 String deliveryTel = jsonObject1.getString("deliveryTel");
                 String deliveryName = jsonObject1.getString("deliveryName");
                 String userId = jsonObject1.getString("userId");

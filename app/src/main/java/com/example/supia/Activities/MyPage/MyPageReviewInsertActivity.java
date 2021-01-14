@@ -55,7 +55,7 @@ public class MyPageReviewInsertActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page_review_insert);
-
+        overridePendingTransition(R.anim.hold, R.anim.hold);
 
         Intent intent = getIntent();
 
