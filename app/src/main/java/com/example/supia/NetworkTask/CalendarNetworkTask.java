@@ -17,8 +17,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 
 public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
@@ -170,6 +173,16 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
             calendars.clear();
             Log.v(TAG, "s" + s);
 
+            //날짜가 없을경우에 터질걸 방해할 경우//
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            calendar.add(Calendar.DATE, -1);
+            String today = df.format(calendar.getTime());//파일에도 날짜를 넣기위한 메소드
+            calendar.add(Calendar.DATE, 2);
+            String tomorrow = df.format(calendar.getTime());//하루 추가
+            calendar.add(Calendar.DATE, 2);
+            String dayAfterTomorrow = df.format(calendar.getTime());//하루 추가
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -178,6 +191,19 @@ public class CalendarNetworkTask extends AsyncTask<Integer, String, Object> {
                 String calendarFinishDate = jsonObject1.getString("calendarFinishDate");
                 String calendarDeliveryDate = jsonObject1.getString("calendarDeliveryDate");
                 String calendarBirthDate = jsonObject1.getString("calendarBirthDate");
+
+                if(calendarStartDate.equals("null")){
+                    calendarStartDate = tomorrow;
+                }
+                if(calendarFinishDate.equals("null")){
+                    calendarFinishDate = dayAfterTomorrow;
+                }
+                if(calendarDeliveryDate.equals("null")){
+                    calendarDeliveryDate = "1990-12-28";
+                }
+                if(calendarBirthDate.equals("null")){
+                    calendarBirthDate = today;
+                }
 
 
                 ShareVar.calendarsharvarStartdate = calendarStartDate;
