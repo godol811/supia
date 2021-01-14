@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="17dp"
             android:elevation="10dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mysubscribe"

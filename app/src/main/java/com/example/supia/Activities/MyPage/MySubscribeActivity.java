@@ -104,6 +104,8 @@ public class MySubscribeActivity extends Activity {
         ivMySubProductImg = findViewById(R.id.iv_product_mysubscribe_detail);
 
 
+
+
         tvStartDate = findViewById(R.id.tv_startdate_my_subscribe);
         tvState = findViewById(R.id.tv_state_my_subscribe);
         tvAddrMyPage = findViewById(R.id.tv_address_my_subscribe);
