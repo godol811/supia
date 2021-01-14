@@ -49,7 +49,7 @@ public class MyLikeListActivity extends Activity {
         setContentView(R.layout.activity_my_like_list);
 
 
-        overridePendingTransition(R.anim.hold, R.anim.hold);
+        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
         Log.v("라이크리스트",url);
 
