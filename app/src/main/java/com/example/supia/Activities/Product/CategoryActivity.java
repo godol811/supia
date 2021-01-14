@@ -70,6 +70,7 @@ public class CategoryActivity extends Activity {
 
         ActivityCompat.requestPermissions(CategoryActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
         recyclerView = findViewById(R.id.rl_product_category);
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -211,7 +212,9 @@ public class CategoryActivity extends Activity {
                     case "높은가격순":
                         if(strBtnCategory.equals("생리대") || strBtnCategory.equals("생리컵") || strBtnCategory.equals("탐폰")) {
                             Log.d(TAG, "높은가격순일때");
+
                             array = "desc";
+
                             urlAddr = "http://" + urlIp + ":8080/test/categoryprice.jsp";
                             urlAddr = urlAddr + "?productCategory=" + strBtnCategory + "&array=" + array;
 
@@ -221,7 +224,9 @@ public class CategoryActivity extends Activity {
                     case "낮은가격순":
                         if(strBtnCategory.equals("생리대") || strBtnCategory.equals("생리컵") || strBtnCategory.equals("탐폰")) {
                             Log.d(TAG, "낮은가격일떄");
+
                             array = "asc";
+
                             urlAddr = "http://" + urlIp + ":8080/test/categoryprice.jsp";
                             urlAddr = urlAddr + "?productCategory=" + strBtnCategory + "&array=" + array;
 

@@ -1,12 +1,12 @@
-package com.example.supia.NetworkTask.Product;
+package com.example.supia.NetworkTask.MyPage;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.supia.Dto.Product.CartDto;
-
+import com.example.supia.Dto.MyPage.MySubscribeDto;
+import com.example.supia.Dto.Product.ProductDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,14 +18,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
+public class MyPagePaymentNetworkTask extends AsyncTask<Integer, String, Object> {
 
     final static String TAG = "네트워크타스크";
 
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<CartDto> Cart;
+    ArrayList<MySubscribeDto> payment;
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.12.25
@@ -38,10 +38,10 @@ public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
 
     String where = null;
 
-    public NetworkTaskCart(Context context, String mAddr, String where) {
+    public MyPagePaymentNetworkTask(Context context, String mAddr, String where) {
         this.context = context;
         this.mAddr = mAddr;
-        this.Cart = new ArrayList<CartDto>();
+        this.payment = new ArrayList<MySubscribeDto>();
         this.where = where;
         Log.v(TAG, "Start : " + mAddr);
 
@@ -134,7 +134,7 @@ public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
         //
         ///////////////////////////////////////////////////////////////////////////////////////
         if (where.equals("select")) {
-            return Cart;
+            return payment;
         } else {
             return result;
         }
@@ -168,31 +168,24 @@ public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
 
         try {
 
-
-            Log.v(TAG, "s" + s);
-
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("cart"));
-            Cart.clear();
-
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("subscribeOrder"));
+            payment.clear();
+            Log.v(TAG, "s" + s);
 
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                int catNo = jsonObject1.getInt("cartNo");
-                int cartProductId = jsonObject1.getInt("cartProductId");
-                String cartProductName = jsonObject1.getString("cartProductName");
-                String cartUserId = jsonObject1.getString("cartUserId");
-                String cartProductQuantity = jsonObject1.getString("cartProductQuantity");
-                String cartProductPrice = jsonObject1.getString("cartProductPrice");
-                String cartProductImagePath = jsonObject1.getString("cartProductImagePath");
+                String subscribeOrderPayment = jsonObject1.getString("subscribeOrderPayment");
+                String userId = jsonObject1.getString("userId");
 
 
-                CartDto cart = new CartDto(catNo,cartProductId,cartProductName,cartUserId,cartProductQuantity,cartProductPrice,cartProductImagePath);
 
-//                , likeUserId, likeProductId, likeCheck
+                MySubscribeDto paymentTotal = new MySubscribeDto(subscribeOrderPayment,userId);
 
-                Cart.add(cart);
+
+
+                payment.add(paymentTotal);
 
 
                 // Log.v(TAG, member.toString());
@@ -229,5 +222,4 @@ public class NetworkTaskCart extends AsyncTask<Integer, String, Object> {
     }
     ///////////////////////////////////////////////////////////////////////////////////////
 
-
-} // ------
+}

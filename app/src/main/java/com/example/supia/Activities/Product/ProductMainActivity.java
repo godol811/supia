@@ -10,12 +10,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Adapter.Banner.BannerAdapter;
+import com.example.supia.Adapter.Product.MainAdapter;
+import com.example.supia.Adapter.Product.ProductAdapter;
+import com.example.supia.Dto.Product.ProductDto;
+import com.example.supia.NetworkTask.Product.NetworkTaskProduct;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
 
 import java.util.ArrayList;
@@ -34,7 +41,7 @@ public class ProductMainActivity extends Activity {
     final long DELAY_MS = 1000;//작업실행전 시간
     final long PERIOD_MS = 3000; //배너사이 간격 시간
 
-    String urlIp = null;
+
     ImageButton ibtnSearchActivity,ibtnCartActivity;//검색버튼
 
     Button btnCategory1,btnCategory2,btnCategory3;
@@ -42,12 +49,29 @@ public class ProductMainActivity extends Activity {
 
     ImageButton ibtnMall, ibtnHome, ibtnMypage; // bottom bar (애정추가)
 
+    private RecyclerView recyclerView = null;
+    private RecyclerView.LayoutManager layoutManager = null;
+
+
+    String urlAddr = null;
+
+
+    ArrayList<ProductDto> product;
+    MainAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_main);
         ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
+
+
+
+
+        recyclerView = findViewById(R.id.rl_product_main);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
 
 
@@ -98,6 +122,7 @@ public class ProductMainActivity extends Activity {
             }
         };
 
+
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -105,6 +130,22 @@ public class ProductMainActivity extends Activity {
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
+
+
+
+
+
+
+        urlAddr = "http://" + ShareVar.urlIp + ":8080/test/recentlyorderlist.jsp";
+        urlAddr = urlAddr + "?userId=" + ShareVar.sharvarUserId;
+
+        connectGetData();
+
+
+
+
+
+
     }
 
     View.OnClickListener searchOnClickListener = new View.OnClickListener() {
@@ -195,7 +236,21 @@ public class ProductMainActivity extends Activity {
         }
     };
     //---------------------------------------------------------------------------------------------//
+    private void connectGetData() {
+        try {
 
+            NetworkTaskProduct networkTask = new NetworkTaskProduct(ProductMainActivity.this, urlAddr,"select");
+            Object obj = networkTask.execute().get();
+            product = (ArrayList<ProductDto>) obj;
+
+
+            adapter = new MainAdapter(ProductMainActivity.this, R.layout.listlayout_main, product);
+            recyclerView.setAdapter(adapter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

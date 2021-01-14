@@ -54,7 +54,7 @@ public class CartInsertActivity extends Activity {
 //        if ()
         urlAddr = "http://"+urlIp+":8080/test/insertcart.jsp?";
         urlAddr = urlAddr + "productNo=" + productNo + "&productQuantity=" + productQuantity+ "&productPrice=" + productPrice +"&productName=" + productName
-                +"&productImagePath=" + productImagePath;
+                +"&productImagePath=" + productImagePath +"&cartUserId=" + ShareVar.sharvarUserId;
 
         connectGetData();
 

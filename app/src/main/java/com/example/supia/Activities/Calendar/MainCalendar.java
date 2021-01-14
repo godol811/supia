@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +15,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.supia.Activities.MyPage.MyCartListActivity;
 import com.example.supia.Activities.MyPage.MyPageMainActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
+import com.example.supia.Dto.CalendarDTO;
 import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -55,7 +58,8 @@ public class MainCalendar extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_maincalendar);//xml연결
-        //displayUsers();
+
+
 
         //----------bottom bar 아이디(애정추가)----------//
         ibtnMall = findViewById(R.id.mall_bottom_bar);

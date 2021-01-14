@@ -62,11 +62,11 @@ public class LikeActivity extends Activity {
 
         if (likeCheck.equals("null")){
         urlAddr = "http://"+ ShareVar.urlIp +":8080/test/insertlike.jsp?";
-        urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=1";
+        urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=1&likeUserId=" + ShareVar.sharvarUserId;
         connectGetData();
         }else {
             urlAddr = "http://"+ ShareVar.urlIp +":8080/test/updatelike.jsp?";
-            urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=" + likeCheck;
+            urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=" + likeCheck + "&likeUserId=" + ShareVar.sharvarUserId;
             connectUpdateData();
         }
 
