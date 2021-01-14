@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Product.CategoryActivity;
+import com.example.supia.Activities.Product.ProductDetailActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Adapter.MyPage.MyLikeListAdapter;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
@@ -50,6 +52,7 @@ public class MyLikeListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_like_list);
 
+        ActivityCompat.requestPermissions(MyLikeListActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE); //사용자에게 사진 사용 권한 받기 (가장중요함)
 
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
 
@@ -93,6 +96,35 @@ public class MyLikeListActivity extends Activity {
 
     }//---------------------onCreate
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getdata();
+
+        adapter.setOnItemClickListener(new MyLikeListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(MyLikeListActivity.this, ProductDetailActivity.class);
+
+
+                //-- fragment1로 값 전달
+
+                intent.putExtra("urlIp",urlIp);
+                intent.putExtra("productNo", like.get(position).getProductNo());
+                intent.putExtra("productName", like.get(position).getProductName());
+                intent.putExtra("productPrice", like.get(position).getProductPrice());
+
+                intent.putExtra("productImagePath", like.get(position).getProductImagePath());
+
+
+
+                startActivity(intent);
+
+
+            }
+        });
+    }
 
     //----------------------------------뒤로가기 버튼 이벤트----------------------------------//
     View.OnClickListener backClickListener = new View.OnClickListener() {
