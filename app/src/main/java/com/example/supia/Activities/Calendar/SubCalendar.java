@@ -129,7 +129,7 @@ public class SubCalendar extends FragmentActivity {
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePicker dialog = new datePicker(SubCalendar.this);
+                MensEdit dialog = new MensEdit(SubCalendar.this);
                 dialog.show();
             }
         });
