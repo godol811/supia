@@ -32,7 +32,7 @@ public class ReviewFragment extends Fragment {
     private ArrayList<MyReviewDto> list;
     RecyclerView.LayoutManager reviewLayoutManager = null;
 
-    TextView Buycount;
+    TextView tvBuycount;
 
 
     public ReviewFragment(String urlIp, int productNo) {
@@ -50,7 +50,7 @@ public class ReviewFragment extends Fragment {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_review, container, false);
 
 
-        Buycount = rootView.findViewById(R.id.buycount_fragmentqna);
+        tvBuycount = rootView.findViewById(R.id.buycount_fragmentqna);
 
         list = new ArrayList<MyReviewDto>();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_review_fragmentqna);
@@ -92,7 +92,7 @@ public class ReviewFragment extends Fragment {
             Object obj2 = networkTask2.execute().get();
             Log.v("안들어오니?" ,"obj"+obj2);
             String cnt = (String) obj2;
-            Buycount.setText(cnt);
+            tvBuycount.setText(cnt);
 
 
 
