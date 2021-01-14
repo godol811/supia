@@ -21,8 +21,6 @@
         <activity android:name=".Activities.MyPage.MyInfoActivity" />
         <activity android:name=".Activities.Product.LikeActivity"/>
         <activity android:name=".Activities.MyPage.MyPageReviewInsertActivity"></activity>
-        <activity android:name=".Activities.Product.ProductDetailActivity"/>
-        <activity android:name=".Activities.MyPage.MyInfoActivity"></activity>
         <activity android:name=".Activities.MyPage.MyLikeListActivity" />
         <activity android:name=".Activities.MyPage.MySubscribeActivity" />
         <activity android:name=".Activities.MyPage.MyOrderActivity" />
@@ -34,10 +32,9 @@
         <activity android:name=".Activities.Product.CategoryActivity" />
         <activity android:name=".Activities.Product.SearchActivity" />
         <activity android:name=".Activities.Product.ProductMainActivity" />
-        <activity android:name=".Activities.Product.ProductDetailActivity" />
+        <activity android:name=".Activities.Payment.BasketPurchaseCheckActivity"/>
         <activity android:name=".Activities.Product.WriteQnAActivity" />
         <activity android:name=".Activities.Payment.BasketDeliveryAddressListActivity" />
-        <activity android:name=".Activities.Payment.BasketPurchaseCheckActivity"/>
         <activity android:name=".Activities.Payment.PaymentModifyActivity" />
         <activity android:name=".Activities.Payment.PurchaseCheckActivity" />
         <activity android:name=".Activities.Payment.PaymentPhoneActivity" />

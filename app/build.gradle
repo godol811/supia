@@ -61,7 +61,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-navi:2.2.0" // 카카오내비
 
     implementation 'com.google.android.gms:play-services-auth:19.0.0'//구글로그인 모듈
-
+    implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')

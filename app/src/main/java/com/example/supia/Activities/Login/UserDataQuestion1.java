@@ -47,7 +47,7 @@ public class UserDataQuestion1 extends Activity {
         date = sf.getString("date", "");
 
         if (date.trim().length() != 0) {
-            Intent intent2 = new Intent(UserDataQuestion1.this, ProductMainActivity.class);//추후에는 참치 쪽으로 이동
+            Intent intent2 = new Intent(UserDataQuestion1.this, MainCalendar.class);//추후에는 참치 쪽으로 이동
             startActivity(intent2);
         }
 

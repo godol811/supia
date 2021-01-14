@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
@@ -30,10 +32,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.kakao.auth.ApiErrorCode;
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.network.ErrorResult;
 import com.kakao.sdk.auth.LoginClient;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.util.exception.KakaoException;
 
 import java.util.ArrayList;
 
@@ -53,11 +63,14 @@ public class LoginActivity extends Activity {
     UserAdapter adapter;
     String macIp;
     String userinfoId, userinfoPw;
+    String kakaoNickName = "";
     String userIdCheck, userPwCheck;
     private GoogleSignInClient mGoogleSignInClient;
     public static final int RC_SIGN_IN = 1;
     private Context mContext;
     CheckBox cbAutoLogin;
+
+    //카카오 수정 0113 -종찬
 
 
     @Override
@@ -72,7 +85,9 @@ public class LoginActivity extends Activity {
         userinfoPw = sf.getString("userPw", "");
         Log.d(TAG, userinfoId);
 
-        if (userinfoId.trim().length() != 0) {//자동 로그인 되어있을경우에는 MainCalendar 액티비티로이동
+        if (userinfoId.trim().
+
+                length() != 0) {//자동 로그인 되어있을경우에는 MainCalendar 액티비티로이동
             ShareVar.sharvarUserId = userinfoId;
             Intent intent2 = new Intent(LoginActivity.this, MainCalendar.class);//
             startActivity(intent2);
@@ -89,12 +104,10 @@ public class LoginActivity extends Activity {
         ///// findViewID 유도///////////////////////////////////////////////////////////////////////
         cbAutoLogin = findViewById(R.id.cb_autologin_login);
         kakaoLoginButton = findViewById(R.id.kakaologin);
-
         loginButton = findViewById(R.id.login);
         findButton = findViewById(R.id.btn_find);
         signUpButton = findViewById(R.id.btnsignUp);
         googleLoginButton = findViewById(R.id.loginGoogle);
-
         userId = findViewById(R.id.userid);
         userPw = findViewById(R.id.userpw);
 
@@ -113,6 +126,7 @@ public class LoginActivity extends Activity {
 
     }//oncreate
 
+
     /////// 클릭 리스너 활성////////////////////////////////////////////////////////////////////////
     View.OnClickListener mOnclickListener = new View.OnClickListener() {
         @Override
@@ -121,11 +135,15 @@ public class LoginActivity extends Activity {
                 case R.id.kakaologin://카카오 로그인
                     if (LoginClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) { //기기를 통한 카카오톡 로그인 가능한지
                         LoginClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
+
+
                     } else {
                         LoginClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);//아니면 카카오톡 온라인
-
                     }
                     updateKakaoLoginUi();
+//                    kakaoLoginActive();
+
+
                     break;
 
                 case R.id.login://일반 로그인
@@ -155,6 +173,11 @@ public class LoginActivity extends Activity {
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
     //// 카카오 로그인 추가/////////////////////////////////////////////////////////////////////////
 
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
@@ -176,40 +199,18 @@ public class LoginActivity extends Activity {
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
             public Unit invoke(User user, Throwable throwable) {
+
                 if (user != null) {//로그인 상황일때
-                    Log.d(TAG, "invoke: email = " + user.getKakaoAccount().getEmail());
+                    kakaoNickName = user.getKakaoAccount().getProfile().getNickname();
+                    userId.setText(kakaoNickName);
+                    Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                    startActivity(intent);
 
-                    if (cbAutoLogin.isChecked()) {
-                        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
-                        SharedPreferences.Editor editor = sf.edit();
-                        editor.putString("userId", user.getKakaoAccount().getEmail());
-                        editor.putString("userPw", null);
-                        editor.commit();//자동로그인
-
-                        Intent intent = new Intent(LoginActivity.this, SocialLoginActivity.class);
-                        intent.putExtra("userId", user.getKakaoAccount().getEmail());//유저 이메일 주소 넘기기
-                        ShareVar.sharvarUserId = user.getKakaoAccount().getEmail();//쉐어바에 값 넣어버리기
-                        startActivity(intent);
-
-                    } else {
-
-                        Intent intent = new Intent(LoginActivity.this, SocialLoginActivity.class);
-                        intent.putExtra("userId", user.getKakaoAccount().getEmail());//유저 이메일 주소 넘기기
-                        ShareVar.sharvarUserId = user.getKakaoAccount().getEmail();//쉐어바에 값 넣어버리기
-                        startActivity(intent);
-                    }
-                    macIp = ShareVar.urlIp;
-                    urlAddr = "http:/" + macIp + ":8080/test/supiaUserinfoInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
-                    urlAddr = urlAddr + "userId=" + user.getKakaoAccount().getEmail() + "&userPlatform=kakao";
-                    try {
-                        UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "insert");
-                        insertworkTask.execute().get();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
 
                 } else {//로그아웃 상황일때.
+
+
                 }
                 return null;
             }
@@ -305,8 +306,6 @@ public class LoginActivity extends Activity {
     ////구글로그인 끝  /////////////////////////////////////////////////////////////////////////////
 
 
-
-
     ////일반로그인 메소드 //////////////////////////////////////////////////////////////////////////
     private void connectloginCheck() {
         Log.v(TAG, "connectGetData()");
@@ -376,7 +375,6 @@ public class LoginActivity extends Activity {
     }
 
 
-
     //--------------------------------------애정 추가  배경 터치 시 키보드 사라지게----------------------------------//
     public boolean dispatchTouchEvent(MotionEvent ev) {
         View view = getCurrentFocus();
@@ -391,10 +389,33 @@ public class LoginActivity extends Activity {
         }
         return super.dispatchTouchEvent(ev);
     }
+
     //---------------------------------------------------------------------------------------------//
+    private void kakaoLoginActive() {
+        Log.d("닉네임",kakaoNickName);
+        if (cbAutoLogin.isChecked()) {
+            SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
+            SharedPreferences.Editor editor = sf.edit();
+            editor.putString("userId", kakaoNickName);
+            editor.putString("userPw", null);
+            editor.commit();//자동로그인
+        } else {
+            Intent intent = new Intent(LoginActivity.this, SocialLoginActivity.class);
+            intent.putExtra("userId", kakaoNickName);//유저 이메일 주소 넘기기
+            ShareVar.sharvarUserId = kakaoNickName;//쉐어바에 값 넣어버리기
+            startActivity(intent);
+        }
+        macIp = ShareVar.urlIp;
+        urlAddr = "http:/" + macIp + ":8080/test/supiaUserinfoInsert.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+        urlAddr = urlAddr + "userId=" + kakaoNickName + "&userPlatform=kakao";
+        try {
+            UserInfoNetworkTask insertworkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "insert");
+            insertworkTask.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-
-
+    }
 
 }//--------
