@@ -84,7 +84,10 @@ public class MySubscribeActivity extends Activity {
         subscriveRv = findViewById(R.id.rv_mysubscribe);
         subscriveRv.setHasFixedSize(true);
         subLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) subLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+
         subscriveRv.setLayoutManager(subLayoutManager);
+
         //---------------------------------------//
 
 
@@ -102,6 +105,8 @@ public class MySubscribeActivity extends Activity {
         tvMySubProductPrice = findViewById(R.id.tv_productprice_mysubscribe_detail);
         tvMySubProductQuantity = findViewById(R.id.tv_productquantity_mysubscribe_detail);
         ivMySubProductImg = findViewById(R.id.iv_product_mysubscribe_detail);
+
+
 
 
         tvStartDate = findViewById(R.id.tv_startdate_my_subscribe);

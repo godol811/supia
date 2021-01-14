@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.supia.Activities.MyPage.MyLikeListActivity;
 import com.example.supia.Adapter.Product.CartAdapter;
 import com.example.supia.Dto.Product.CartDto;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
@@ -68,8 +69,12 @@ public class CartInsertActivity extends Activity {
             intent = new Intent(CartInsertActivity.this, CategoryActivity.class);
             intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
             startActivity(intent);
-        }else {
+        }else if (check == 1){
             intent = new Intent(CartInsertActivity.this, ProductMainActivity.class);
+//            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
+            startActivity(intent);
+        } else if (check == 2){
+            intent = new Intent(CartInsertActivity.this, MyLikeListActivity.class);
 //            intent.putExtra("strBtnCategory",ShareVar.strBtnCategory);
             startActivity(intent);
         }

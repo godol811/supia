@@ -306,7 +306,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             productName = v.findViewById(R.id.tv_productName_listlayout);
             productPrice = v.findViewById(R.id.tv_productPrice_listlayout);
             productImg = v.findViewById(R.id.iv_product_listlayout);
-
             likeListbtn = v.findViewById(R.id.btn_likelist_product);
             cartListbtn = v.findViewById(R.id.btn_cart_product);
 

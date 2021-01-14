@@ -20,6 +20,7 @@ import com.example.supia.Activities.Calendar.MainCalendar;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Adapter.MyPage.MyLikeListAdapter;
 import com.example.supia.Dto.MyPage.MyLikeListDto;
+import com.example.supia.Dto.Product.ProductDto;
 import com.example.supia.NetworkTask.MyPage.MyPageLikeListNetworkTask;
 import com.example.supia.R;
 import com.example.supia.ShareVar.ShareVar;
@@ -37,6 +38,7 @@ public class MyLikeListActivity extends Activity {
     //Recycler
     RecyclerView recyclerView;
     ArrayList<MyLikeListDto> like;
+    ArrayList<ProductDto> cart;
     RecyclerView.LayoutManager layoutManager = null;
     MyLikeListAdapter adapter = null;
 
@@ -152,7 +154,7 @@ public class MyLikeListActivity extends Activity {
             Object obj = networkTask.execute().get();
             like = (ArrayList<MyLikeListDto>) obj;
 
-            adapter = new MyLikeListAdapter(MyLikeListActivity.this, R.layout.activity_my_like_list, like);
+            adapter = new MyLikeListAdapter(MyLikeListActivity.this, R.layout.activity_my_like_list, like,cart);
             recyclerView.setAdapter(adapter); //리사이클러뷰 어댑터 연결
 
 
