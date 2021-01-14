@@ -374,15 +374,6 @@ public class CategoryActivity extends Activity {
                     break;
 
 
-//                case R.id.btn_cotton_product:
-//                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-//                    urlAddr = urlAddr + "?tag=" + btnCotton.getText().toString();
-//
-//                    break;
-
-
-
-
                 case R.id.btn_soft_product:
                     urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
                     urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
@@ -390,24 +381,24 @@ public class CategoryActivity extends Activity {
                     break;
                 case R.id.btn_hard_product:
                     urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
+                    urlAddr = urlAddr + "?tag=" + btnhard.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
 
                     break;
 
 
                 case R.id.btn_lite_product:
                     urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
+                    urlAddr = urlAddr + "?tag=" + btnlite.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
 
                     break;
                 case R.id.btn_regular_product:
                     urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
+                    urlAddr = urlAddr + "?tag=" + btnregular.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
 
                     break;
                 case R.id.btn_super_product:
                     urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
+                    urlAddr = urlAddr + "?tag=" + btnsuper.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
                     break;
 
 
