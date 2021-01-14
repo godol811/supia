@@ -173,6 +173,9 @@ public class MainCalendar extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        for (int i = intstaday; i <= intfinday; i++) {
+            materialCalendarView_main.setSelectedDate(CalendarDay.today());
+        }//기념일 호출하여 배경 그리기
     }
 
     private void connectGetData() {
