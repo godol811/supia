@@ -141,80 +141,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
 
         holder.likeListbtn.setTag(position);
-            holder.likeListbtn.setOnClickListener(new View.OnClickListener() {
+        holder.likeListbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"여기로도 들어오나? + TAG" + holder.likeListbtn.getTag());
-
                 Log.d(TAG, "position : " + position);
-
                 likeCheck = mDataset.get(position).getLikeCheck();
-
                 if (mSelectedItems.get(position,false)){
-
                 }else {
-
                     if (likeCheck.equals("null")){
-                            Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 null");
-                            holder.likeListbtn.setImageResource(R.drawable.like_click);
-
-
-//                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
+                        Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 null");
+                        holder.likeListbtn.setImageResource(R.drawable.like_click);
+                        Intent intent = new Intent(v.getContext(), LikeActivity.class);
 //                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-//                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
-
-//                            intent.putExtra("likeCheck", likeCheck);
-//                            v.getContext().startActivity(intent);
-
-                        urlAddr = "http://"+ ShareVar.urlIp +":8080/test/insertlike.jsp?";
-                        urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=1&likeUserId=" + ShareVar.sharvarUserId;
-                        connectGetData();
-
-//                        notifyItemChanged(holder.getAdapterPosition());
-                        }else {
-
+                        intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
+                        intent.putExtra("likeCheck", likeCheck);
+                        v.getContext().startActivity(intent);
+                    }else {
                         if (likeCheck.equals("1")){
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 1");
                             holder.likeListbtn.setImageResource(R.drawable.like);
-
-
-
-                            Log.d(TAG, "1로들어왔을떄" + String.valueOf(likeCheck));
-
-
-                            urlAddr = "http://"+ ShareVar.urlIp +":8080/test/updatelike.jsp?";
-                            urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=" + 0 + "&likeUserId=" + ShareVar.sharvarUserId;
-                            connectUpdateData();
-
-//                            notifyItemChanged(holder.getAdapterPosition());      notifyItemChanged(holder.getAdapterPosition());
-//                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
-//                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
-//                            intent.putExtra("likeCheck", "0");
-//                            v.getContext().startActivity(intent);
-
-
-
+                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
+                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
+                            intent.putExtra("likeCheck", "0");
+                            v.getContext().startActivity(intent);
                         }else if (likeCheck.equals("0")){
                             Log.d(TAG,"테이블에 아무것도 없을떄 어디로 들어가는지 확인해보자 0");
                             holder.likeListbtn.setImageResource(R.drawable.like_click);
-
-                            urlAddr = "http://"+ ShareVar.urlIp +":8080/test/updatelike.jsp?";
-                            urlAddr = urlAddr + "likeProductId=" + likeProductId + "&likeCheck=" + 1 + "&likeUserId=" + ShareVar.sharvarUserId;
-
-                            connectUpdateData();
-
-
-//                            Intent intent = new Intent(v.getContext(), LikeActivit
-//                            y.class);
-//                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-//                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
-//                            intent.putExtra("likeCheck", "1");
-//                            v.getContext().startActivity(intent);
-
-
+                            Intent intent = new Intent(v.getContext(), LikeActivity.class);
+                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("likeProductId", mDataset.get(position).getProductNo());
+                            intent.putExtra("likeCheck", "1");
+                            v.getContext().startActivity(intent);
                         }
                     }
-
                 }
             }
         });
