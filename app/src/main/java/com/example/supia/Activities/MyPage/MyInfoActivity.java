@@ -102,25 +102,21 @@ public class MyInfoActivity extends Activity {
     View.OnClickListener logoutClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-
-
             new AlertDialog.Builder(MyInfoActivity.this)
                     .setTitle("알림")
                     .setIcon(R.mipmap.supia)
                     .setMessage("확인을 누르시면 로그인 화면으로 돌아가게 됩니다.")
-                    .setPositiveButton("취소",null)
+                    .setPositiveButton("취소", null)
                     .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent logout = new Intent(MyInfoActivity.this, LoginActivity.class);
-                                      userId= null;
-                                      logout.putExtra("userId",userId);
-                                      startActivity(logout);
+                            ShareVar.sharvarUserId = null;
+                            logout.putExtra("userId", userId);
+                            startActivity(logout);
 
                         }
                     }).show();
-
 
 
         }
@@ -164,9 +160,6 @@ public class MyInfoActivity extends Activity {
         }
     };
     //---------------------------------------------------------------------------------------------//
-
-
-
 
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//

@@ -2,6 +2,8 @@ package com.example.supia.Activities.MyPage;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.graphics.Typeface;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.Login.LoginActivity;
 import com.example.supia.Activities.Product.CartActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Dto.UserDto;
@@ -38,7 +41,7 @@ public class MyPageMainActivity extends Activity {
     String userId = ShareVar.sharvarUserId;
     String urlIp = ShareVar.urlIp;
 
-    String url = "http://"+urlIp+":8080/test/supiaMypage.jsp?userId="+userId;
+    String url = "http://" + urlIp + ":8080/test/supiaMypage.jsp?userId=" + userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,7 @@ public class MyPageMainActivity extends Activity {
         llCartList.setOnClickListener(cartListClickListener); //장바구니
         llSnsList.setOnClickListener(snsListClickListener); // 소셜로그인
         llNoticeList.setOnClickListener(qnaListClickListener);
+        llLogout.setOnClickListener(logoutClickListener);
         ibtnMypage.setOnClickListener(bottomMypageClickListener); //bottombar 마이페이지
         ibtnHome.setOnClickListener(bottomHomeClickListener); // bottombar 홈
         ibtnMall.setOnClickListener(bottomMallClickListener); //bottombar 쇼핑몰
@@ -99,12 +103,35 @@ public class MyPageMainActivity extends Activity {
 
     } //---onCreate
 
+    //-----------------------------------------로그아웃 클릭 이벤트---------------------------------------//
+    View.OnClickListener logoutClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new AlertDialog.Builder(MyPageMainActivity.this)
+                    .setTitle("알림")
+                    .setIcon(R.mipmap.supia)
+                    .setMessage("확인을 누르시면 로그인 화면으로 돌아가게 됩니다.")
+                    .setPositiveButton("취소",null)
+                    .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent logout = new Intent(MyPageMainActivity.this, LoginActivity.class);
+                            ShareVar.sharvarUserId= null;
+                            logout.putExtra("userId",userId);
+                            startActivity(logout);
+
+                        }
+                    }).show();
+
+        }
+    };
+
 
     //-----------------------------------------고객센터 클릭 이벤트---------------------------------------//
     View.OnClickListener qnaListClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent qnalist = new Intent(MyPageMainActivity.this,MyQnaListActivity.class);
+            Intent qnalist = new Intent(MyPageMainActivity.this, MyQnaListActivity.class);
             startActivity(qnalist);
             overridePendingTransition(R.anim.hold, R.anim.hold);
 
@@ -137,8 +164,6 @@ public class MyPageMainActivity extends Activity {
         }
     };
     //---------------------------------------------------------------------------------------------//
-
-
 
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트----------------------------------//
