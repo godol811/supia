@@ -293,7 +293,7 @@ public class SignUpActivity extends Activity {
                         .setPositiveButton("닫기", null)
                         .show();
                 userinfoId.setFocusable(true);
-            } else if (isValidPassword(strPw) == false) {
+            } else if (isValidPassword(userinfoPw.getText().toString()) == false) {
                 new AlertDialog.Builder(SignUpActivity.this)
                         .setTitle("암호형식 확인")
                         .setMessage("숫자와 문자 포함하여 6~12 자리의 암호를 입력해주세요.")
@@ -331,7 +331,6 @@ public class SignUpActivity extends Activity {
         Log.v(TAG, "connectGetData()");
         try {
             String strId = userinfoId.getText().toString();
-            macIp = "192.168.35.147";
             urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
             urlAddr = urlAddr + "userId=" + strId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
@@ -347,7 +346,7 @@ public class SignUpActivity extends Activity {
                         .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
                         .setPositiveButton("닫기", null)
                         .show();
-                totalCheck = 1;
+                totalCheck = 0;
             } else if (userDtos.isEmpty()) {
                 new AlertDialog.Builder(SignUpActivity.this)
                         .setTitle("이메일 중복확인 결과!")
@@ -356,6 +355,7 @@ public class SignUpActivity extends Activity {
                         .setPositiveButton("닫기", null)
                         .show();
                 userinfoId.setFocusable(true);
+                totalCheck = 1;
             } else {
                 userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.
                 Log.d(TAG, userIdCheck);
@@ -396,7 +396,7 @@ public class SignUpActivity extends Activity {
             }
 
             urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaDeliveryAddrInsert.jsp?";//배송지 주소록에도 넣기
-            urlAddr = urlAddr + "userId=" + strId + "&deliveryTel=" + strTel + "&deliveryAddr=" + strAddr + "&deliveryAddrDetail=" + strAddrDetail;
+            urlAddr = urlAddr + "userId=" + strId + "&deliveryTel=" + strTel + "&deliveryAddr=" + strAddr + "&deliveryAddrDetail=" + strAddrDetail+"&deliveryName="+ " ";
 
 
             try {
@@ -457,7 +457,9 @@ public class SignUpActivity extends Activity {
      */
     public static boolean isValidEmail(String email) {
         boolean err = false;
-        String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+        String regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        ;
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(email);
         if (m.matches()) {
@@ -468,7 +470,7 @@ public class SignUpActivity extends Activity {
 
     public static boolean isValidPassword(String pw) {//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
         boolean err = false;
-        String regex = "/^[A-Za-z0-9]{6,12}$/";
+        String regex = "^[A-Za-z[0-9]]{6,12}$";;
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(pw);
         if (m.matches()) {

@@ -237,6 +237,10 @@ public class BasketPurchaseCheckActivity extends AppCompatActivity {
                 tvDeliveryAddress.setText(deliveryAddr);
                 tvDeliveryAddressDetail.setText(deliveryAddrDetail);
                 tvDeliveryTel.setText(deliveryTel);
+                if(deliveryName.equals("null")){
+                    deliveryName = "";
+                }
+
                 tvDeliveryName.setText(deliveryName);
 
             }

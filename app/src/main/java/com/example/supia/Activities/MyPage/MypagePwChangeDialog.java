@@ -151,7 +151,7 @@ public class MypagePwChangeDialog extends Dialog {
 
     public static boolean isValidPassword(String pw) {//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
         boolean err = false;
-        String regex =  "/^[A-Za-z0-9]{6,12}$/";
+        String regex = "^[A-Za-z[0-9]]{6,12}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(pw);
         if (m.matches()) {
@@ -159,5 +159,6 @@ public class MypagePwChangeDialog extends Dialog {
         }
         return err;
     }
+
 
 }//---------------

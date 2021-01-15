@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Dto.Product.CartDto;
+import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
@@ -62,7 +63,6 @@ public class PaymentPhoneActivity extends Activity {
         Intent intent = getIntent();
         strWay = intent.getStringExtra("way");
         strItem = PaymentShareVar.payMethodItem;
-
 
 
         phoneItem = findViewById(R.id.tv_itemselected_paymentPhone);
@@ -164,6 +164,7 @@ public class PaymentPhoneActivity extends Activity {
                                                 connectGetDataCateDelete();
                                                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";
                                             }
+                                            connectUpdateData();
 
 
                                         } else {
@@ -171,7 +172,7 @@ public class PaymentPhoneActivity extends Activity {
                                                     + "&orderPayment=" + "핸드폰" + "&orderTotalPrice=" + PaymentShareVar.totalPayment + "&userId=" + ShareVar.sharvarUserId + "&productId="
                                                     + PaymentShareVar.paymentProductNo + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + PaymentShareVar.paymentProductName + "&subscribeProductPrice=" + PaymentShareVar.paymentProductPrice;
                                             connectInsertData();
-
+                                            connectUpdateData();
 
                                         }
 
@@ -242,6 +243,7 @@ public class PaymentPhoneActivity extends Activity {
     }
 
     //---------------------------------------------------------------------------------------------//
+
     /**
      * 인우 추가
      * 결제수단마다 결제될떄 삭제해주기
@@ -253,14 +255,39 @@ public class PaymentPhoneActivity extends Activity {
 
         try {
 
-            NetworkTaskCart networkTask = new NetworkTaskCart(PaymentPhoneActivity.this, urlAddr,"like");
+            NetworkTaskCart networkTask = new NetworkTaskCart(PaymentPhoneActivity.this, urlAddr, "like");
             networkTask.execute().get();
-
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 종찬 추가
+     * 배송날짜 추가
+     */
+
+    private void connectUpdateData() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String today = df.format(calendar.getTime());//파일에도 날짜를 넣기위한 메소드
+        calendar.add(Calendar.DAY_OF_MONTH, 3);
+        String addMonth = df.format(calendar.getTime());//한달 추가
+
+
+        urlAddr = "http://" + urlIp + ":8080/test/supiaCalendarUpdate.jsp?";
+        urlAddr = urlAddr + "calendarDeliveryDate="+addMonth;
+
+        try {
+            CalendarNetworkTask updatenetworkTask = new CalendarNetworkTask(PaymentPhoneActivity.this, urlAddr, "update");
+            updatenetworkTask.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
