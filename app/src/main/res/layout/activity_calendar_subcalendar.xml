@@ -8,14 +8,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="135dp"
+        android:layout_height="150dp"
         android:background="@drawable/calendar_sub_upper_background">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_margin="25dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:id="@+id/tv_average_menscycle_sucalendar"

@@ -1,7 +1,9 @@
 package com.example.supia.Activities.Login;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -14,9 +16,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.example.supia.Activities.Calendar.MainCalendar;
+import com.example.supia.Activities.MyPage.MyInfoActivity;
 import com.example.supia.Activities.Product.ProductMainActivity;
 import com.example.supia.Activities.RegualarDeliveryPayment.RegularPurchaseCheckActivity;
 import com.example.supia.Adapter.UserAdapter;
@@ -149,7 +150,9 @@ public class LoginActivity extends Activity {
                     userinfoId = userId.getText().toString().trim();
                     userinfoPw = userPw.getText().toString().trim();
                     if (userinfoId.length() != 0 && userinfoPw.length() != 0) {//빈칸이 아닐경우
-                        connectloginCheck();//로그인 메소드 발동
+                        connectIdCheck();//로그인 메소드 발동
+                        connectloginCheck();
+
                     } else {//빈칸이 있을경우
 //                        Toast.makeText(LoginActivity.this, "빈칸을 채워주세요 ", Toast.LENGTH_SHORT).show();
 
@@ -202,9 +205,8 @@ public class LoginActivity extends Activity {
                 if (user != null) {//로그인 상황일때
                     kakaoNickName = user.getKakaoAccount().getProfile().getNickname();
                     userId.setText(kakaoNickName);
-                    Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                     startActivity(intent);
-
 
 
                 } else {//로그아웃 상황일때.
@@ -319,40 +321,54 @@ public class LoginActivity extends Activity {
 
             userIdCheck = userDtos.get(0).getUserId();//dto에서 0번째로 낚아 채기 (어짜피 한개 밖에 없음.
             userPwCheck = userDtos.get(0).getUserPw();
-//            Log.d(TAG,userIdCheck);
+            Log.d(TAG, userIdCheck);
 //            Log.d(TAG,userPwCheck);
+            if (userIdCheck.equals("null")) {
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setTitle("로그인 오류")
+                        .setIcon(R.mipmap.supia)
+                        .setMessage("이메일을 확인해주세요")
+                        .setNegativeButton("확인", null)
+                        .show();
+            } else {
 
-            if (userPwCheck.length() != 0) {//받아오는 암호값이 있으면 고고
-                if (userPwCheck.equals(userinfoPw)) {//암호가 같으면
-                    if (cbAutoLogin.isChecked()) {
-                        SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
-                        SharedPreferences.Editor editor = sf.edit();
-                        editor.putString("userId", userinfoId);
-                        editor.putString("userPw", userinfoPw);
-                        editor.commit();
-                        Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
-                        ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
-                        intent.putExtra("userId", userinfoId);
-                        Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
-                        ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
-                        intent.putExtra("userId", userinfoId);
-                        Toast.makeText(this, "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
+
+                if (userPwCheck.length() != 0) {//받아오는 암호값이 있으면 고고
+                    if (userPwCheck.equals(userinfoPw)) {//암호가 같으면
+                        if (cbAutoLogin.isChecked()) {
+                            SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
+                            SharedPreferences.Editor editor = sf.edit();
+                            editor.putString("userId", userinfoId);
+                            editor.putString("userPw", userinfoPw);
+                            editor.commit();
+                            Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
+                            ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
+                            intent.putExtra("userId", userinfoId);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(LoginActivity.this, UserDataQuestion1.class);
+                            ShareVar.sharvarUserId = userinfoId;//sharevar에 값 넣어버리기.
+                            intent.putExtra("userId", userinfoId);
+                            startActivity(intent);
+                        }
+
+
+                    } else {// 암호가 다르면 암호가 틀렸다고 메세지 띄우기
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setTitle("로그인 오류")
+                                .setIcon(R.mipmap.supia)
+                                .setMessage("비밀번호를 확인해주세요")
+                                .setNegativeButton("확인", null)
+                                .show();
+
                     }
 
 
-                } else {// 암호가 다르면 암호가 틀렸다고 메세지 띄우기
-                    Toast.makeText(LoginActivity.this, "암호가 틀립니다.", Toast.LENGTH_SHORT).show();
+
+
                 }
 
-
-            } else {//아이디가 없는값이라면 없는 아이디라 메세지 띄우고
-                Toast.makeText(this, "없는 아이디입니다.", Toast.LENGTH_SHORT).show();
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -390,7 +406,7 @@ public class LoginActivity extends Activity {
 
     //---------------------------------------------------------------------------------------------//
     private void kakaoLoginActive() {
-        Log.d("닉네임",kakaoNickName);
+        Log.d("닉네임", kakaoNickName);
         if (cbAutoLogin.isChecked()) {
             SharedPreferences sf = getSharedPreferences("auto", MODE_PRIVATE);//자동로그인 발동
             SharedPreferences.Editor editor = sf.edit();
@@ -414,6 +430,32 @@ public class LoginActivity extends Activity {
         }
 
 
+    }
+
+    private void connectIdCheck() {
+        Log.v(TAG, "connectGetData()");
+        try {
+            String strId = userId.getText().toString();
+            urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+            urlAddr = urlAddr + "userId=" + strId;//jsp에 ID값 Request할 수 있게 페이지 설정.
+            Log.v(TAG, urlAddr);
+            UserInfoNetworkTask networkTask = new UserInfoNetworkTask(LoginActivity.this, urlAddr, "select");
+            Object obj = networkTask.execute().get(); //obj를 받아들여서
+            userDtos = (ArrayList<UserDto>) obj; //userInfoDtos 다시 풀기
+
+            if (userDtos.isEmpty()) {
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setTitle("로그인 오류")
+                        .setMessage("유효한 이메일을 입력해주세요.")
+                        .setCancelable(false)//아무데나 눌렀을때 안꺼지게 하는거 (버튼을 통해서만 닫게)
+                        .setPositiveButton("닫기", null)
+                        .show();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }//--------

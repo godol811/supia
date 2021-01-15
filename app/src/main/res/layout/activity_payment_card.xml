@@ -6,25 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Payment.PaymentCardActivity"
     android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="주문/결제"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="30dp"
+        android:text="주문 / 결제"
+        android:textColor="#bad23a"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
         android:layout_marginTop="15dp"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:textColor="#bad23a"/>
-
+        android:layout_marginBottom="15dp"
+        android:background="#EBEBEB"
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:paddingLeft="11dp"
+        android:layout_marginLeft="12dp"
         >
         <TextView
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="카드 번호 입력"
@@ -35,9 +42,10 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:text="카드사"
-            android:background="#bad23a"
+            android:background="@drawable/button_round"
+            android:backgroundTint="@color/main"
             android:gravity="center"
             android:id="@+id/tv_itemselected_paymentCard"
             />
@@ -111,7 +119,7 @@
     </LinearLayout>
 
     <Button
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="240dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="확인"

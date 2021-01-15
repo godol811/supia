@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,7 @@ public class PaymentModifyActivity extends AppCompatActivity {
     Spinner spinnerBank, spinnerCard, spinnerPhone;
     RadioButton rbBank, rbCard, rbPhone;
     RadioGroup rgPayment;
-    Button btnBank, btnCard, btnPhone;
+    TextView btnBank, btnCard, btnPhone;
     LinearLayout llBank, llCard, llPhone;
     String strWay;
 

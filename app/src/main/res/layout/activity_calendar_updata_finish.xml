@@ -10,25 +10,29 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <ImageButton
-            android:id="@+id/btn_cancle_datepicker_calendar2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/calendar_cancle" />
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="가장 최근의 \n월경 종료일을 수정해주세요."
-            android:textSize="20dp"
-            android:textStyle="bold" />
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btn_cancle_datepicker_calendar2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/calendar_cancle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="가장 최근의 \n월경 종료일을 수정해주세요."
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
         <DatePicker
             android:id="@+id/maincalendar_mens_finish_update"
             android:layout_width="wrap_content"

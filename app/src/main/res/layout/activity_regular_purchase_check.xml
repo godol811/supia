@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingTop="25dp"
-        android:paddingBottom="40dp"
+        android:paddingBottom="30dp"
         android:text="정기 구독 결제"
         android:textColor="#bad23a"
         android:textSize="22dp"

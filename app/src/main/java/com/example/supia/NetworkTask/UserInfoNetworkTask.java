@@ -159,6 +159,7 @@ public class UserInfoNetworkTask extends AsyncTask<Integer, String, Object> {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
                 String userId = jsonObject1.getString("userId");
+                Log.v(TAG, userId);
                 String userPw = jsonObject1.getString("userPw");
                 String userAddr = jsonObject1.getString("userAddr");
                 String userTel = jsonObject1.getString("userTel");

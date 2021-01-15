@@ -152,7 +152,9 @@ public class MainCalendar extends FragmentActivity {
             materialCalendarView_main.addDecorator(new EventDecorator(MainCalendar.this, Collections.singleton(CalendarDay.from(intstayear, intstamonth, i))));
         }//기념일 호출하여 배경 그리기
 
-        materialCalendarView_main.setSelectedDate(CalendarDay.today());
+        materialCalendarView_main.setSelected(false);
+
+
 
         gotosub.setOnClickListener(new View.OnClickListener() {//sub페이지로 이동
             @Override
@@ -174,7 +176,7 @@ public class MainCalendar extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         for (int i = intstaday; i <= intfinday; i++) {
-            materialCalendarView_main.setSelectedDate(CalendarDay.today());
+            materialCalendarView_main.setSelectedDate(CalendarDay.from(2020, 01, 05));
         }//기념일 호출하여 배경 그리기
     }
 
