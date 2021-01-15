@@ -182,11 +182,12 @@ public class MyPageSubscribeNetworkTask extends AsyncTask<Integer, String, Objec
                 String productName = jsonObject1.getString("productName");
                 String productImagePath = jsonObject1.getString("productImagePath");
                 int productPrice = jsonObject1.getInt("productPrice");
+                String subscribeOrderNextDate = jsonObject1.getString("subscribeOrderNextDate");
 
 
 
 
-                MySubscribeDto address = new MySubscribeDto(subscribeOrderDate,subscribeOrderQuantity,subscribeOrderAddr,subscribeOrderAddrDetail,subscribeOrderPayment,userId,productId,productNo,productName,productImagePath,productPrice);
+                MySubscribeDto address = new MySubscribeDto(subscribeOrderDate,subscribeOrderQuantity,subscribeOrderAddr,subscribeOrderAddrDetail,subscribeOrderPayment,userId,productId,productNo,productName,productImagePath,productPrice,subscribeOrderNextDate);
                 Address.add(address);
                 // Log.v(TAG, member.toString());
                 Log.v(TAG, "----------------------------------");

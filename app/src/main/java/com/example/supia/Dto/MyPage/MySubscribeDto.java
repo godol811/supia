@@ -17,6 +17,8 @@ public class MySubscribeDto {
     private String subscribeProductName;
     private String productBrand;
     private String productInfo;
+    private String subscribeOrderNextDate;
+
 
 
 
@@ -37,17 +39,21 @@ public class MySubscribeDto {
         this.productInfo = productInfo;
         this.productPrice = productPrice;
         this.productName = productName;
+        this.subscribeOrderNextDate = subscribeOrderNextDate;
     }
 
-    public MySubscribeDto(String subscribeProductName, int subscribeProductPrice, int subscribeOrderQuantity, String productImagePath, int productNo, int productId) {
-        this.subscribeProductName = subscribeProductName;
-        this.subscribeProductPrice = subscribeProductPrice;
-        this.subscribeOrderQuantity = subscribeOrderQuantity;
-        this.productImagePath = productImagePath;
-        this.productNo = productNo;
-        this.productId = productId;
+
+
+
+
+
+    public String getSubscribeOrderNextDate() {
+        return subscribeOrderNextDate;
     }
 
+    public void setSubscribeOrderNextDate(String subscribeOrderNextDate) {
+        this.subscribeOrderNextDate = subscribeOrderNextDate;
+    }
 
     public void setSubscribeProductPrice(int subscribeProductPrice) {
         this.subscribeProductPrice = subscribeProductPrice;
@@ -69,7 +75,7 @@ public class MySubscribeDto {
         this.productInfo = productInfo;
     }
 
-    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderAddrDetail, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice) {
+    public MySubscribeDto(String subscribeOrderDate, int subscribeOrderQuantity, String subscribeOrderAddr, String subscribeOrderAddrDetail, String subscribeOrderPayment, String userId, int productId, int productNo, String productName, String productImagePath, int productPrice,String subscribeOrderNextDate) {
         this.subscribeOrderDate = subscribeOrderDate;
         this.subscribeOrderQuantity = subscribeOrderQuantity;
         this.subscribeOrderAddr = subscribeOrderAddr;
@@ -81,6 +87,7 @@ public class MySubscribeDto {
         this.productName = productName;
         this.productImagePath = productImagePath;
         this.productPrice = productPrice;
+        this.subscribeOrderNextDate = subscribeOrderNextDate;
     }
 
 

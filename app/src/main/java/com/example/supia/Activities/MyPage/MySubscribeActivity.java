@@ -128,7 +128,7 @@ public class MySubscribeActivity extends Activity {
         connectGetData();
         connectGetData1();
 
-        Log.v(TAG, "시작" + members.get(0).getSubscribeOrderDate());
+//        Log.v(TAG, "시작" + members.get(0).getSubscribeOrderDate());
         tvStartDate.setText(members.get(0).getSubscribeOrderDate());
 
         if (members.get(0).getProductId() == members.get(0).getProductNo()) {  //구독 여부
@@ -148,8 +148,8 @@ public class MySubscribeActivity extends Activity {
         Log.v(TAG, "결제수단" + members.get(0).getSubscribeOrderPayment());
 
         tvPaymentMyPage.setText(members.get(0).getSubscribeOrderPayment());
-        Log.v(TAG, "담달" + members.get(0).getSubscribeOrderDate());
-        tvNextPayDay.setText(members.get(0).getSubscribeOrderDate());
+        Log.v(TAG, "담달" + members.get(0).getSubscribeOrderNextDate());
+        tvNextPayDay.setText(members.get(0).getSubscribeOrderNextDate());
         productPriceDialog = members.get(0).getProductPrice(); // 커스텀 다이얼로그
         productQuantity = members.get(0).getSubscribeOrderQuantity(); // 커스텀 다이얼로그
 

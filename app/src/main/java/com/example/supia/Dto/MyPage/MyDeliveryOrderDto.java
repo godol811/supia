@@ -8,12 +8,16 @@ public class MyDeliveryOrderDto {
     private String userId;
 
 
+
+
     public MyDeliveryOrderDto(String deliveryAddr, String deliveryTel, String deliveryName, String userId) {
         this.deliveryAddr = deliveryAddr;
         this.deliveryTel = deliveryTel;
         this.deliveryName = deliveryName;
         this.userId = userId;
     }
+
+
 
 
     public String getDeliveryAddr() {
