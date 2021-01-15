@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.supia.Dto.UserDto;
 import com.example.supia.NetworkTask.UserInfoNetworkTask;
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 
 import java.util.ArrayList;
 
@@ -118,8 +119,7 @@ public class FindPWActivity extends AppCompatActivity {
         Log.v(TAG, "connectGetData()");
         try {
             userId = authEmail.getText().toString().trim();
-            macIp = "192.168.35.147";
-            urlAddr = "http:/" + macIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
+            urlAddr = "http:/" + ShareVar.urlIp + ":8080/test/supiaUserIdCheck.jsp?"; //localhost나  127.0.0.1을 넣을경우 LOOP가 생길 수 있으므로 할당된 IP 주소를 사용할것
 
             urlAddr = urlAddr + "userId=" + userId;//jsp에 ID값 Request할 수 있게 페이지 설정.
             Log.v(TAG, urlAddr);
