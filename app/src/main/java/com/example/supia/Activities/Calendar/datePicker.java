@@ -95,6 +95,7 @@ public class datePicker extends Dialog {
                             public void onClick(DialogInterface dialog, int which) {
                                 sqlDB = myDBHelper.getWritableDatabase();
                                 sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '" + menstruationStart + "' , '" + menstruationEnd + "');");
+                               // sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '2021-01-01', '2021-01-02');");
                                 sqlDB.close();
                                 Toast.makeText(context,"입력되었습니다.", Toast.LENGTH_SHORT).show();
                             }
