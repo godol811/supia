@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.supia.Activities.MyPage.MyOrderActivity;
 import com.example.supia.Dto.Product.CartDto;
+import com.example.supia.NetworkTask.CalendarNetworkTask;
 import com.example.supia.NetworkTask.DeliveryAddressNetWorkTask;
 import com.example.supia.NetworkTask.Product.NetworkTaskCart;
 import com.example.supia.R;
@@ -164,13 +165,14 @@ public class PaymentCardActivity extends Activity {
                                                 connectGetDataCateDelete();
                                                 urlAddr = "http://" + ShareVar.urlIp + ":8080/test/supiaUserOrderInsert.jsp?";
                                             }
-
+                                            connectUpdateData();
 
                                         } else {
                                             urlAddr = urlAddr + "orderDate=" + today + "&orderQuantity=" + PaymentShareVar.paymentProductQuantity + "&orderAddr=" + PaymentShareVar.deliveryAddr + "&orderAddrDetail=" + PaymentShareVar.deliveryAddrDetail
                                                     + "&orderPayment=" + "은행" + "&orderTotalPrice=" + PaymentShareVar.totalPayment + "&userId=" + ShareVar.sharvarUserId + "&productId="
                                                     + PaymentShareVar.paymentProductNo + "&orderTel=" + PaymentShareVar.deliveryTel + "&subscribeProductName=" + PaymentShareVar.paymentProductName + "&subscribeProductPrice=" + PaymentShareVar.paymentProductPrice;
                                             connectInsertData();
+                                            connectUpdateData();
 
 
                                         }
@@ -259,6 +261,31 @@ public class PaymentCardActivity extends Activity {
             networkTask.execute().get();
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 종찬 추가
+     * 배송날짜 추가
+     */
+
+    private void connectUpdateData() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String today = df.format(calendar.getTime());//파일에도 날짜를 넣기위한 메소드
+        calendar.add(Calendar.DAY_OF_MONTH, 3);
+        String addMonth = df.format(calendar.getTime());//한달 추가
+
+
+        urlAddr = "http://" + urlIp + ":8080/test/supiaCalendarUpdate.jsp?";
+        urlAddr = urlAddr + "calendarDeliveryDate="+addMonth;
+
+        try {
+            CalendarNetworkTask updatenetworkTask = new CalendarNetworkTask(PaymentCardActivity.this, urlAddr, "update");
+            updatenetworkTask.execute().get();
         } catch (Exception e) {
             e.printStackTrace();
         }

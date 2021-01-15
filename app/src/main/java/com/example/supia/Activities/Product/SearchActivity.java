@@ -2,6 +2,7 @@ package com.example.supia.Activities.Product;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -77,25 +78,7 @@ public class SearchActivity extends AppCompatActivity {
         registerForContextMenu(recyclerView);
 
         Log.v(TAG, "onResume");
-        adapter.setOnItemClickListener(new ProductAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
 
-//                Intent intent = new Intent(SearchActivity.this, ListviewActivity.class);//리스트 클릭시 리스트뷰 넘어가기
-//                intent.putExtra("urlIp", urlIp);//ip주소 보내기 ---종찬추가 12/30
-//                intent.putExtra("urlAddr", urlAddr);
-//                intent.putExtra("addrNo", members.get(position).getAddrNo());
-//                intent.putExtra("addrName", members.get(position).getAddrName());
-//                intent.putExtra("addrTag", members.get(position).getAddrTag());
-//                intent.putExtra("addrTel", members.get(position).getAddrTel());
-//                intent.putExtra("addrDetail", members.get(position).getAddrDetail());
-//                intent.putExtra("addrAddr", members.get(position).getAddrAddr());
-//                intent.putExtra("addrImagePath",members.get(position).getAddrImagePath());
-//                startActivity(intent);
-
-
-            }
-        });
     }
 
 
@@ -111,6 +94,30 @@ public class SearchActivity extends AppCompatActivity {
 
 
             connectGetData();
+
+            /////////////////////////////////////////보람 추가 - 값 받아가요///////////////////////////////////////////////////////
+            adapter.setOnItemClickListener(new ProductAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View v, int position) {
+                    Intent intent = new Intent(SearchActivity.this, ProductDetailActivity.class);
+
+                    Log.v(TAG,"전달 전");
+                    //-- fragment1로 값 전달
+
+                    intent.putExtra("urlIp",urlIp);
+                    intent.putExtra("productNo", product.get(position).getProductNo());
+                    intent.putExtra("productName", product.get(position).getProductName());
+                    intent.putExtra("productPrice", product.get(position).getProductPrice());
+                    intent.putExtra("productBrand", product.get(position).getProductBrand());
+                    intent.putExtra("productImagePath", product.get(position).getProductImagePath());
+                    intent.putExtra("productInfo", product.get(position).getProductInfo());
+                    Log.v(TAG,"productName " + product.get(position).getProductName());
+
+                    startActivity(intent);
+
+                }
+            });
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     };
 

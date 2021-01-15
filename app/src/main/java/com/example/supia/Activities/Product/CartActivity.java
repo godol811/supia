@@ -87,7 +87,7 @@ public class CartActivity extends Activity {
 
         deleteBtn = findViewById(R.id.btn_delete_cart);
         paymentBtn = findViewById(R.id.btn_payment_cart);
-        payment = findViewById(R.id.tv_payment_cart);
+       // payment = findViewById(R.id.tv_payment_cart);
         backBtn = findViewById(R.id.ibtn_back_mypage_header);
 
 
