@@ -67,6 +67,33 @@ public class SignUpActivity extends Activity {
 
 
         buttonSignUp.setOnClickListener(mOnclickListener);
+        //---------------------------------------------------암호체크용--------------------------------------------//
+        userinfoPwCheck.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String strUserinfoPw = userinfoPw.getText().toString();
+                Log.d("하하", s + "," + count + "," + strUserinfoPw);
+                if (s != null) {
+                    if (s.toString().equals(strUserinfoPw)) {//암호 확인 체크 하기
+
+                        pwCheckAlert.setText("암호가 일치합니다.");
+                    } else {
+
+                        pwCheckAlert.setText("암호가 일치하지 않습니다.");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
 
 //------------------------------------------------중복 아이디 체크------------------------------------------//
@@ -179,33 +206,7 @@ public class SignUpActivity extends Activity {
         }
 
 
-//---------------------------------------------------암호체크용--------------------------------------------//
-        userinfoPwCheck.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String strUserinfoPw = userinfoPw.getText().toString();
-                Log.d("하하", s + "," + count + "," + strUserinfoPw);
-                if (s != null) {
-                    if (s.toString().equals(strUserinfoPw)) {//암호 확인 체크 하기
-
-                        pwCheckAlert.setText("암호가 일치합니다.");
-                    } else {
-
-                        pwCheckAlert.setText("암호가 일치하지 않습니다.");
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
 //---------------------------------------------------암호체크용--------------------------------------------//
     }//onCreate
 
