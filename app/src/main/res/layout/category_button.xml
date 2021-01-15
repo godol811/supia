@@ -119,29 +119,6 @@
             android:visibility="gone"
             />
 
-        <Button
-            android:backgroundTint="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="소프트"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_round"
-            android:id="@+id/btn_soft_product"
-            android:visibility="gone"
-            />
-
-        <Button
-            android:backgroundTint="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="하드"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_round"
-            android:id="@+id/btn_hard_product"
-            android:visibility="gone"
-            />
 
     </LinearLayout>
     </HorizontalScrollView>

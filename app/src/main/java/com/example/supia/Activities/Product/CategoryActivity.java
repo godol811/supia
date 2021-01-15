@@ -99,9 +99,9 @@ public class CategoryActivity extends Activity {
 
 
 
-        //생리컵
-        btnsoft = findViewById(R.id.btn_soft_product);
-        btnhard = findViewById(R.id.btn_hard_product);
+//        //생리컵
+//        btnsoft = findViewById(R.id.btn_soft_product);
+//        btnhard = findViewById(R.id.btn_hard_product);
 
 
         //템폰
@@ -122,8 +122,8 @@ public class CategoryActivity extends Activity {
         btnLarge.setOnClickListener(btnOnClickListener);
         btnOverNight.setOnClickListener(btnOnClickListener);
         btnLiner.setOnClickListener(btnOnClickListener);
-        btnsoft.setOnClickListener(btnOnClickListener);
-        btnhard.setOnClickListener(btnOnClickListener);
+//        btnsoft.setOnClickListener(btnOnClickListener);
+//        btnhard.setOnClickListener(btnOnClickListener);
         btnlite.setOnClickListener(btnOnClickListener);
         btnregular.setOnClickListener(btnOnClickListener);
         btnsuper.setOnClickListener(btnOnClickListener);
@@ -174,16 +174,16 @@ public class CategoryActivity extends Activity {
                 break;
 
 
-            case "생리컵":
-                btnsoft.setVisibility(View.VISIBLE);
-                btnhard.setVisibility(View.VISIBLE);
-
-                soft = btnsoft.getText().toString();
-                hard = btnhard.getText().toString();
-
-
-                ShareVar.strBtnCategory = strBtnCategory;
-                break;
+//            case "생리컵":
+//                btnsoft.setVisibility(View.VISIBLE);
+//                btnhard.setVisibility(View.VISIBLE);
+//
+//                soft = btnsoft.getText().toString();
+//                hard = btnhard.getText().toString();
+//
+//
+//                ShareVar.strBtnCategory = strBtnCategory;
+//                break;
 
 
             case "탐폰":
@@ -384,16 +384,16 @@ public class CategoryActivity extends Activity {
                     break;
 
 
-                case R.id.btn_soft_product:
-                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
-
-                    break;
-                case R.id.btn_hard_product:
-                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
-                    urlAddr = urlAddr + "?tag=" + btnhard.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
-
-                    break;
+//                case R.id.btn_soft_product:
+//                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
+//                    urlAddr = urlAddr + "?tag=" + btnsoft.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
+//
+//                    break;
+//                case R.id.btn_hard_product:
+//                    urlAddr = "http://" + urlIp + ":8080/test/categorytag.jsp";
+//                    urlAddr = urlAddr + "?tag=" + btnhard.getText().toString()+"&likeUserId=" + ShareVar.sharvarUserId;
+//
+//                    break;
 
 
                 case R.id.btn_lite_product:
