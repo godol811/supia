@@ -8,21 +8,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.supia.R;
+import com.example.supia.ShareVar.ShareVar;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class MensEdit extends Dialog {
-    final static String TAG = "캘린더_월경일선택_material";
+    final static String TAG = "캘린더_SQLite 선택";
     private final Context context;
+    String userId;
     MaterialCalendarView materialCalendarView;
     TextView tvToday;
     Button btnInsert, btnUpdate, btnDelete;
@@ -30,6 +30,7 @@ public class MensEdit extends Dialog {
     String menstruationStart, menstruationEnd;
     public String CurrentStartDay, LastFinishDay;
     int year, month, dayOfMonth;
+    ArrayList pickDates;
     String pickDate;
 
     myDBHelper myDBHelper;
@@ -48,6 +49,7 @@ public class MensEdit extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_mens_edit);
+        userId = ShareVar.sharvarUserId;
 
         btnInsert = findViewById(R.id.btn_insert_mensedit_calendar);
         btnUpdate = findViewById(R.id.btn_update_mensedit_calendar);
@@ -55,7 +57,7 @@ public class MensEdit extends Dialog {
         btnCancle = findViewById(R.id.btn_cancle_mensedit_calendar);
         tvToday = findViewById(R.id.tv_today_mensedit_calendar);
 
-        tvToday.setText("");
+        tvToday.setText("TODAY");
 
         //year = Integer.parseInt(String.valueOf(CalendarDay.today()));
         year = 2021;
@@ -72,12 +74,12 @@ public class MensEdit extends Dialog {
         menstruationEnd = checkDay(year, month, dayOfMonth);
         Log.v(TAG, "오오오" + menstruationEnd);
 
-        myDBHelper = new myDBHelper(materialCalendarView.getContext());
+        //myDBHelper = new myDBHelper(materialCalendarView.getContext());
 
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+
             }
         });
         btnInsert.setOnClickListener(new View.OnClickListener() {
