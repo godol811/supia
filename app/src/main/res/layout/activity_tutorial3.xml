@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.tutorial3"
+    tools:context=".Activities.Login.tutorial3"
     android:background="@drawable/tutorial3"
     android:orientation="vertical">
 

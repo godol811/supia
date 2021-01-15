@@ -1,11 +1,10 @@
-package com.example.supia.Activities;
+package com.example.supia.Activities.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.supia.R;
