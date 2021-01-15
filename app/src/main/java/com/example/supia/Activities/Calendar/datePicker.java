@@ -98,6 +98,7 @@ public class datePicker extends Dialog {
                                // sqlDB.execSQL("INSERT INTO supiamensterm (mStart, mEnd)VALUES ( '2021-01-01', '2021-01-02');");
                                 sqlDB.close();
                                 Toast.makeText(context,"입력되었습니다.", Toast.LENGTH_SHORT).show();
+                                dismiss();
                             }
                         });
                 builder.setNegativeButton("아니오",

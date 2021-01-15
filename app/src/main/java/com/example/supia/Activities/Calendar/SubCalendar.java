@@ -159,11 +159,11 @@ public class SubCalendar extends FragmentActivity {
         }
     }
 
-    private void initLoadDB(){
-        DataAdapter mDBHelper = new DataAdapter(getApplicationContext());
-        mDBHelper.createDatabase();
-        mDBHelper.open();
-    }
+//    private void initLoadDB(){
+//        DataAdapter mDBHelper = new DataAdapter(getApplicationContext());
+//        //mDBHelper.createDatabase();
+//        mDBHelper.open();
+//    }
     //애정존-----------------------------------
 
     //--------------------------------------바텀바 마이페이지 클릭 이벤트 애정추가----------------------------------//
