@@ -146,7 +146,7 @@ public class ProductDetilFragment extends Fragment {
             NetworkTaskPreference networkTask2 = new NetworkTaskPreference(getContext(), buyUrl, "select");
             Object obj20 = networkTask2.execute().get();
             String birth = (String) obj20;
-            int birthData = Integer.parseInt(birth)*10;
+            int birthData = Integer.parseInt(birth)*5;
             String Preference20 = Integer.toString(birthData);
             text20.setText(Preference20); //json 파싱
             String inputStr20 = text20.getText().toString().trim(); //프로그래스바
@@ -167,7 +167,7 @@ public class ProductDetilFragment extends Fragment {
             NetworkTaskPreference networkTask2 = new NetworkTaskPreference(getContext(), buyUrl, "select");
             Object obj30 = networkTask2.execute().get();
             String birth = (String) obj30;
-            int birthData = Integer.parseInt(birth)*10;
+            int birthData = Integer.parseInt(birth)*2;
             String Preference30 = Integer.toString(birthData);
             text30.setText(Preference30); //json 파싱
             String inputStr30 = text30.getText().toString().trim(); //프로그래스바
