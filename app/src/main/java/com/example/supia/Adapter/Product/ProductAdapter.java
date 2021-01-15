@@ -1,7 +1,9 @@
 package com.example.supia.Adapter.Product;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.supia.Activities.Product.CartActivity;
 import com.example.supia.Activities.Product.CartInsertActivity;
 import com.example.supia.Activities.Product.LikeActivity;
 import com.example.supia.Activities.Product.OnChangeCheckedPrice;
@@ -188,6 +191,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 @Override
                 public void onClick(View v) {
 
+
                     /**
                      * 장바구니 클릭시 jsp 실행
                      * 넘겨줘야될값 : 상품 번호,수량,가격
@@ -204,17 +208,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     String productName = mDataset.get(position).getProductName();
                     String ProductImagePath = mDataset.get(position).getProductImagePath();
 
-                    Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
 
+                    Intent intent = new Intent(v.getContext(), CartInsertActivity.class);
 
                     intent.putExtra("check",0);
                     intent.putExtra("productNo", productNo);
                     intent.putExtra("productPrice", productPrice);
                     intent.putExtra("productName", productName);
                     intent.putExtra("productImagePath", ProductImagePath);
+
                     v.getContext().startActivity(intent);
 
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("알림")
+                            .setMessage("장바구니에 추가되었습니다.")
+                            .setIcon(R.mipmap.supia)
+                            .show();
                 }
+
+
+
+
+
             });
     }
 
