@@ -164,4 +164,4 @@ Link: [MYSQL Connector][my sql connector]
 
 ## 9.실행 영상.
 
-<iframe width="640" height="360" src="https://youtu.be/Jt5nEw3_bng" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+[![](http://img.youtube.com/vi/Jt5nEw3_bng/0.jpg)](http://www.youtube.com/watch?v=Jt5nEw3_bng "")
