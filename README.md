@@ -4,7 +4,7 @@
 
 ## 1.Build gradle에 추가를 한다.
 
-   
+```java 
     //켈린더 관련
         implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     //카드뷰 관련
@@ -35,13 +35,13 @@
         implementation files('libs/activation.jar')
         implementation files('libs/additionnal.jar')
         implementation files('libs/mail.jar')
-
+```
 ---
 
 ## 2.Andorid에 권한을 추가한다.
 
 1.Manifest에 아래코드를 추가한다.
-
+```xml
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -58,7 +58,7 @@
 이후 xml 폴더안에 network_security_config.xml 이라는 XML Resource File 을 생성한다.
 
 Network_security_config.xml 안에 이 코드를 삽입한다.
-
+```xml
     <?xml version="1.0" encoding="utf-8"?>
     <network-security-config>
     <base-config cleartextTrafficPermitted="true">
@@ -67,7 +67,7 @@ Network_security_config.xml 안에 이 코드를 삽입한다.
             </trust-anchors>
         </base-config>
     </network-security-config>
-
+```
 ---
 
 ## 3.Tomcat에 연동할 jsp 파일을 폴더에 넣는다.
@@ -127,6 +127,7 @@ Link: [MYSQL Connector][my sql connector]
 
 이를테면
 
+```java
     String stSearch =  request.getParameter("addrName");
 
     String url_mysql = "jdbc:mysql://이부분에 데이터베이스주소를 수정하세요/MYSQL스키마이름?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
@@ -134,16 +135,31 @@ Link: [MYSQL Connector][my sql connector]
     String id_mysql = "아이디";
 
     String pw_mysql = "암호";
+```
 
 한글로 적혀있는 부분은 각자 환경에 맞게 채우면 된다.
 
 ---
+## 7.데이터 베이스와 Tomcat 서버를 연동하기 위해 안드로이드 내부의 IP를 수정한다.
 
-## 7.SQL Table은 다음과 같다.
+방법은 project 내부의 com.example.supia.ShareVar package를 보면 ShareVar.class가 있다
+
+그 부분에서 
+
+```java
+ public static String urlIp = "172.20.10.3"; 
+
+```
+이부분에 Ip 주소를 본인의 Ip 주소로 변경한다.
+
+
+---
+## 8.SQL Table은 다음과 같다.
 
 | user        | product    | calendar     | cart     | liked  | orderlist |userDeliveryAddrList              | qna     | review | subscribeOrder 
 | ------------- | ----------- | ----------- | ------------ | ----------- | ---------------------- | ----------- | ------------- |----------- |----------- |
 | 사용자 정보 관련 | 제품 정보 관련 | 사용자 생리주기,배송날짜 관련 | 장바구니 관련 | 찜 목록 관련 | 일반주문 관련| 구독주문 관련 | 제품 QnA 관련 | 제품 리뷰 관련   |구매자 배송 리스트 관련
 
 ---
+
 
