@@ -52,7 +52,7 @@
 
         <uses-library android:name="org.apache.http.legacy"
             android:required="false"/>
-
+```
 2.Tomcat 서버와 연동하기 위해 src폴더안에 /xml 폴더를 만든다.
 
 이후 xml 폴더안에 network_security_config.xml 이라는 XML Resource File 을 생성한다.
