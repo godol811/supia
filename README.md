@@ -164,4 +164,6 @@ Link: [MYSQL Connector][my sql connector]
 
 ## 9.실행 영상.
 
+썸네일을 누르면 Youtube 페이지로 이동
+
 [![](http://img.youtube.com/vi/Jt5nEw3_bng/0.jpg)](http://www.youtube.com/watch?v=Jt5nEw3_bng "")
