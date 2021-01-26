@@ -166,3 +166,53 @@ Link: [MYSQL Connector][my sql connector]
 
 썸네일을 누르면 Youtube 페이지로 이동
 [![](http://img.youtube.com/vi/unRgWQw08sE/0.jpg)](http://www.youtube.com/watch?v=unRgWQw08sE "")
+
+
+## 개발 개요
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.001.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.002.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.003.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.004.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.005.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.006.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.007.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.008.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.009.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.0010.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.011.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.012.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.013.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.014.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.015.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.016.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.017.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.018.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.019.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.020.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.021.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.022.jpeg)
+
+![](https://github.com/AndroidMnS/supiaDocument/blob/main/android_supia_projectReport/%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3_%E1%84%89%E1%85%AE%E1%84%91%E1%85%B5%E1%84%8B%E1%85%A1.023.jpeg)
+
